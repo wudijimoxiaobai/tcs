@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:clickable="false"
+    android:orientation="vertical">
+
+    <com.csscaps.common.widget.PatternView
+        android:id="@+id/patternView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:pl_errorColor="@android:color/holo_red_dark"
+        app:pl_regularColor="@android:color/holo_blue_dark"
+        app:pl_successColor="@android:color/holo_green_dark"
+        app:theme="@style/PatternView" />
+
+    <TextView
+        android:id="@+id/pattern_forget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="34dp"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:text="@string/pattern_forget"
+        android:textColor="#6789a9"
+        android:textSize="14sp" />
+
+</FrameLayout>

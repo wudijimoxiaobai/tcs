@@ -1,0 +1,29 @@
+<resources xmlns:xliff="http://schemas.android.com/tools">
+    <string name="settings">设置</string>
+    <string name="help">帮助</string>
+    <string name="string_help_text">当前操作缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。\n\n最后点击两次后退按钮，即可返回。</string>
+    <string name="quit">取消</string>
+    <string name="err_server">服务器异常!</string>
+    <string name="err_network">网络不给力，请稍后再试！</string>
+
+    <string name="pattern_settings_start">请绘制手势!</string>
+    <string name="pattern_settings_repeat">请绘制上一次的手势!</string>
+    <string name="pattern_error_settings_different">与第一次手势不一致，请再次绘制!</string>
+    <string name="pattern_forget">忘记手势?</string>
+    <string name="pattern_error_wrong">手势错误!</string>
+    <string name="pattern_locked">手势已锁定!</string>
+    <string name="pattern_password">输入登录密码</string>
+    <string name="pattern_settings_enrolled">手势录入成功!</string>
+    <string name="pattern_error_at_least_4">最少连接4个点!</string>
+    <string name="loading">正在加载...</string>
+    <string name="no_more">没有更多数据...</string>
+    <string name="load_fail">加载失败请重试</string>
+    <string name="wait">请稍候</string>
+    <string name="empty_data">暂无数据</string>
+    <string name="net_err">网络出现异常</string>
+    <string name="pull_down">请下拉刷新界面</string>
+    <string name="pl_access_pattern_area">Pattern area.</string>
+    <string name="pl_access_pattern_cell_added">Cell added</string>
+    <string name="pl_access_pattern_cell_added_verbose">Cell <xliff:g example="3" id="cell_index">%1$d</xliff:g> added</string>
+    <string name="fail_connect">连接服务器失败，请检测网络！</string>
+</resources>
