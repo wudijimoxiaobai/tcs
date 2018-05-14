@@ -11,20 +11,20 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  * 用户表
  */
 @Table(database = TcsDatabase.class)
-public class User extends BaseModel{
+public class User extends BaseModel {
 
     @PrimaryKey(autoincrement = true)
     @Column
-    private int id;
+    int id;
 
     @Column
-    private String name;
+    String name;
 
     @Column
-    private String password;
+    String password;
 
     @Column
-    private String level;
+    String level;
 
     public int getId() {
         return id;

@@ -33,6 +33,11 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 
+    <style name="dialog_theme3" parent="base_dialog">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowSoftInputMode">stateAlwaysHidden</item>
+    </style>
+
     <style name="base_dialog" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFrame">@null</item>
         <!--边框-->

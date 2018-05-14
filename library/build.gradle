@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+/*
 
 apply plugin: 'maven'
 
@@ -16,6 +17,7 @@ uploadArchives {
         }
     }
 }
+*/
 
 android {
     compileSdkVersion 26

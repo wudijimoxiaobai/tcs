@@ -15,34 +15,34 @@ public class Customer extends BaseModel {
 
     @PrimaryKey
     @Column
-    private String tin;
+    String tin;
 
     @Column
-    private String name;
+    String name;
 
     @Column
-    private String nationalId;
+    String nationalId;
 
     @Column
-    private String passport;
+    String passport;
 
     @Column
-    private String tel;
+    String tel;
 
     @Column
-    private String email;
+    String email;
 
     @Column
-    private String address;
+    String address;
 
     @Column
-    private String city;
+    String city;
 
     @Column
-    private int state;
+    int state;
 
     @Column
-    private String remarks;
+    String remarks;
 
     public String getTin() {
         return tin;

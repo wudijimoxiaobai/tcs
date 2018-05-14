@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="language">
+        <item>English</item>
+        <item>Arabic</item>
+    </string-array>
+    <string-array name="language_no">
+        <item>en</item>
+        <item>ar</item>
+    </string-array>
+    <string-array name="weekday">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+    <string-array name="tab1">
+        <item>Tax Item</item>
+        <item>Customer Management</item>
+        <item>Product Management</item>
+    </string-array>
+</resources>

@@ -1,10 +1,10 @@
 package com.csscaps.common.base;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.csscaps.common.R;
 import com.csscaps.common.utils.ObserverActionUtils;
 
 import java.util.ArrayList;
@@ -53,6 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         initialize(savedInstanceState);
     }
 

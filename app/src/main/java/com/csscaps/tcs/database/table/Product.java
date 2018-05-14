@@ -2,8 +2,6 @@ package com.csscaps.tcs.database.table;
 
 import com.csscaps.tcs.database.TcsDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.NotNull;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
@@ -16,39 +14,37 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 public class Product extends BaseModel {
     @PrimaryKey(autoincrement = true)
     @Column
-    private int productId;
+    int productId;
 
     @Column
-    private String productName;
+    String productName;
 
     @Column
-    private String localName;
+    String localName;
 
     @Column
-    private String unit;
+    String unit;
 
     @Column
-    private float price;
+    float price;
 
     @Column
-    private String percentage;
+    String percentage;
 
     @Column
-    private String fixedAmount;
+    String fixedAmount;
 
     @Column
-    private String purchase;
+    String purchase;
 
     @Column
-    private String adjustment;
+    String adjustment;
 
     @Column
-    private String specification;
+    String specification;
 
-    @Column
-    @NotNull
-    @ForeignKey(saveForeignKeyModel = false)
-    private TaxItem mTaxItem;
+   @Column
+   String taxItemsString;
 
     public int getProductId() {
         return productId;
@@ -130,11 +126,11 @@ public class Product extends BaseModel {
         this.specification = specification;
     }
 
-    public TaxItem getTaxItem() {
-        return mTaxItem;
+    public String getTaxItemsString() {
+        return taxItemsString;
     }
 
-    public void setTaxItem(TaxItem taxItem) {
-        mTaxItem = taxItem;
+    public void setTaxItemsString(String taxItemsString) {
+        this.taxItemsString = taxItemsString;
     }
 }

@@ -1,3 +1,47 @@
 <resources>
     <string name="app_name">tcs</string>
+    <string name="tcs">Tax Control System</string>
+    <string name="user">User</string>
+    <string name="password">Password</string>
+    <string name="language">Language</string>
+    <string name="login">Login</string>
+    <string name="curr_user">Current user：%s</string>
+    <string name="exit">exit</string>
+    <string name="Invoice_Issuing">Invoice Issuing</string>
+    <string name="Invoice_Management">Invoice Management</string>
+    <string name="Invoice_Query">Invoice Query</string>
+    <string name="System_Configuration">System Configuration</string>
+    <string name="date_time" formatted="false">%s\n%s&#160;&#160;%s</string>
+    <string name="back">Back</string>
+    <string name="tax_item_list">Tax Item List</string>
+    <string name="name">Name</string>
+    <string name="code">Code</string>
+    <string name="description">Description</string>
+    <string name="parameter">Parameter</string>
+    <string name="tax_rate">Tax Rate</string>
+    <string name="formula_description">Formula Description</string>
+    <string name="unit">Unit</string>
+    <string name="customer_management">Customer Management</string>
+    <string name="product_management">Product Management</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="select">Select</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="no">No</string>
+    <string name="product_name">Product Name</string>
+    <string name="local_name">Local Name</string>
+    <string name="specification">Specification</string>
+    <string name="price">Price</string>
+    <string name="percentage">Percentage</string>
+    <string name="fixed_amount">Fixed Amount</string>
+    <string name="purchase">Purchase</string>
+    <string name="adjustment">Adjustment</string>
+    <string name="add_product">Add Product</string>
+    <string name="please_input">Please input...</string>
+    <string name="please_select">Please select</string>
+    <string name="related_tax_items">Related Tax Items</string>
+    <string name="remark">Remark</string>
+
+
 </resources>

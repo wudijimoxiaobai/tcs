@@ -34,6 +34,10 @@ public class AppSP {
         return sp.getInt(k,-1);
     }
 
+    public static int getInt(String k,int defValue){
+        return sp.getInt(k,defValue);
+    }
+
     public static void putBoolean(String k, boolean v){
         sp.edit().putBoolean(k,v).commit();
     }

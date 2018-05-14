@@ -75,6 +75,8 @@ public class DateUtils {
      */
     public static String format_yyyy_MM_dd_HH_mm_ss_24_EN = "yyyy-MM-dd HH:mm:ss";
 
+    public static String format_yyyyMMddHHmmss_24_EN = "yyyyMMddHHmmss";
+
     /**
      * 英文时分秒日期格式：2014-01-01 6:30:30
      */
@@ -586,6 +588,22 @@ public class DateUtils {
         mCalendar.setTime(dateIn);
         return mCalendar.get(Calendar.DAY_OF_MONTH);
     }
+
+    /**
+     * 获取日期是星期几
+     *
+     * @param dateIn
+     * @return
+     * @since v0.0.1
+     */
+    public static int getDayOfWeek(Date dateIn) {
+        Calendar target = Calendar.getInstance();
+        target.setTime(dateIn);
+        int dayForWeek = 0;
+        dayForWeek = target.get(Calendar.DAY_OF_WEEK);
+        return dayForWeek;
+    }
+
 
     /**
      * 获取日期是星期几

@@ -6,6 +6,43 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:screenOrientation">landscape</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:configChanges">keyboardHidden|orientation</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowSoftInputMode">adjustPan|stateAlwaysHidden</item>
+        <item name="editTextStyle">@style/EditTextStyle.Alignment</item>
+        <item name="android:textViewStyle">@style/TextViewStyle.TextDirection</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/launch_bg</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="myDropTheme" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textSize">@dimen/text</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:gravity">start</item>
+        <item name="android:textDirection">locale</item>
+    </style>
+
+    <style name="EditTextStyle.Alignment" parent="@android:style/Widget.EditText">
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:gravity">start</item>
+        <item name="android:textDirection">locale</item>
+    </style>
+
+    <style name="TextViewStyle.TextDirection" parent="android:Widget.TextView">
+        <item name="android:textDirection">locale</item>
+    </style>
+
+    <style name="text">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text</item>
     </style>
 
 </resources>
