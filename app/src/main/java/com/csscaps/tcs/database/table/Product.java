@@ -29,10 +29,10 @@ public class Product extends BaseModel {
     float price;
 
     @Column
-    String percentage;
+    float percentage;
 
     @Column
-    String fixedAmount;
+    float fixedAmount;
 
     @Column
     String purchase;
@@ -43,8 +43,11 @@ public class Product extends BaseModel {
     @Column
     String specification;
 
-   @Column
-   String taxItemsString;
+    @Column
+    String relatedTaxItemString;
+
+    @Column
+    String remark;
 
     public int getProductId() {
         return productId;
@@ -86,19 +89,19 @@ public class Product extends BaseModel {
         this.price = price;
     }
 
-    public String getPercentage() {
+    public float getPercentage() {
         return percentage;
     }
 
-    public void setPercentage(String percentage) {
+    public void setPercentage(float percentage) {
         this.percentage = percentage;
     }
 
-    public String getFixedAmount() {
+    public float getFixedAmount() {
         return fixedAmount;
     }
 
-    public void setFixedAmount(String fixedAmount) {
+    public void setFixedAmount(float fixedAmount) {
         this.fixedAmount = fixedAmount;
     }
 
@@ -126,11 +129,19 @@ public class Product extends BaseModel {
         this.specification = specification;
     }
 
-    public String getTaxItemsString() {
-        return taxItemsString;
+    public String getRelatedTaxItemString() {
+        return relatedTaxItemString;
     }
 
-    public void setTaxItemsString(String taxItemsString) {
-        this.taxItemsString = taxItemsString;
+    public void setRelatedTaxItemString(String relatedTaxItemString) {
+        this.relatedTaxItemString = relatedTaxItemString;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

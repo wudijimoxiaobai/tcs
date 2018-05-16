@@ -55,6 +55,7 @@
         android:singleLine="true"
         android:gravity="center_vertical"
         android:inputType="text"
+        android:visibility="gone"
         />
 
    <View

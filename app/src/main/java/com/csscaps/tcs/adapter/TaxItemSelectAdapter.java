@@ -1,6 +1,7 @@
 package com.csscaps.tcs.adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -19,12 +20,15 @@ import java.util.List;
 
 public class TaxItemSelectAdapter extends QuickAdapter<TaxItem> {
 
-    private int selectedPosition = -1;
+    private int mSelectedPosition = -1;
     private CheckBox mCheckBox;
     private TextView mTextView;
+    private Handler mHandler;
+    private String flag;
 
-    public TaxItemSelectAdapter(Context context, int layoutResId, List<TaxItem> data) {
+    public TaxItemSelectAdapter(Context context, int layoutResId, List<TaxItem> data, Handler handler) {
         super(context, layoutResId, data);
+        mHandler = handler;
     }
 
     @Override
@@ -61,7 +65,7 @@ public class TaxItemSelectAdapter extends QuickAdapter<TaxItem> {
             }
         });
 
-        if (position == selectedPosition) {
+        if (position == mSelectedPosition) {
             checkBox.setChecked(true);
             textView.setTextColor(ContextCompat.getColor(context, R.color.blue));
             mCheckBox = checkBox;
@@ -73,14 +77,37 @@ public class TaxItemSelectAdapter extends QuickAdapter<TaxItem> {
 
     }
 
+    public void initSelectedPosition(int selectedPosition) {
+        mSelectedPosition = selectedPosition;
+    }
+
     public void setSelectedPosition(int selectedPosition) {
-        this.selectedPosition = selectedPosition;
+
         if (selectedPosition != -1) {
             TaxItem taxItem = getData().get(selectedPosition);
+            if ("Y".equals(taxItem.getIs_leaf())) {
+                if (mSelectedPosition != -1) {
+                    TaxItem selectedTaxItem = getData().get(mSelectedPosition);
+                    mHandler.sendMessage(mHandler.obtainMessage(0, flag + "," + selectedTaxItem.getTaxable_item_uid() + "," + mSelectedPosition));
+                }
+                mHandler.sendMessage(mHandler.obtainMessage(1, flag + "," + taxItem.getTaxable_item_uid() + "," + selectedPosition));
+            }
+        } else {
+            TaxItem selectedTaxItem = getData().get(mSelectedPosition);
+            mHandler.sendMessage(mHandler.obtainMessage(0, flag + "," + selectedTaxItem.getTaxable_item_uid() + "," + mSelectedPosition));
         }
+        mSelectedPosition = selectedPosition;
     }
 
     public int getSelectedPosition() {
-        return selectedPosition;
+        return mSelectedPosition;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 }

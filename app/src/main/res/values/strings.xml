@@ -42,6 +42,6 @@
     <string name="please_select">Please select</string>
     <string name="related_tax_items">Related Tax Items</string>
     <string name="remark">Remark</string>
-
+    <string name="edit">Edit</string>
 
 </resources>
