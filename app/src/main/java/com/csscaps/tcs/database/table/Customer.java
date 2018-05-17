@@ -39,7 +39,7 @@ public class Customer extends BaseModel {
     String city;
 
     @Column
-    int state;
+    String state;
 
     @Column
     String remarks;
@@ -108,11 +108,11 @@ public class Customer extends BaseModel {
         this.city = city;
     }
 
-    public int getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(String state) {
         this.state = state;
     }
 

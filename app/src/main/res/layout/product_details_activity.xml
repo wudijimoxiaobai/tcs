@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+
               android:orientation="vertical"
     >
 
@@ -14,52 +14,35 @@
         >
 
         <TextView
-            android:id="@+id/cancel"
+            android:id="@+id/back"
             style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/cancel"
+            android:text="@string/back"
             />
 
 
         <TextView
-            android:id="@+id/title"
             style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/add_product"
+            android:text="@string/product_details"
             android:textSize="25sp"
             />
-
-
-        <TextView
-            android:id="@+id/save"
-            style="@style/text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:gravity="center"
-            android:paddingStart="15dp"
-            android:text="@string/save"
-            />
-
     </RelativeLayout>
-
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        >
+        android:layout_height="match_parent">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
             android:orientation="vertical"
-            android:padding="30dp"
             >
 
             <LinearLayout
@@ -76,29 +59,36 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/product_name"
-                    android:textStyle="bold"
                     />
 
-                <EditText
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lighter_gray"
+                    />
+
+                <TextView
                     android:id="@+id/product_name"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_weight="0.34"
-                    android:background="@drawable/edit_bg"
+                    android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
-                    android:hint="@string/please_input"
                     android:padding="10dp"
-                    android:imeOptions="flagNavigateNext"
-                    android:inputType="text"
-                    android:maxLines="1"
+
                     />
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lighter_gray"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 >
@@ -110,29 +100,37 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/local_name"
-                    android:textStyle="bold"
+
                     />
 
-                <EditText
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lighter_gray"
+                    />
+
+                <TextView
                     android:id="@+id/local_name"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_weight="0.34"
-                    android:background="@drawable/edit_bg"
+                    android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
-                    android:hint="@string/please_input"
                     android:padding="10dp"
-                    android:imeOptions="flagNavigateNext"
-                    android:inputType="text"
-                    android:maxLines="1"
+
                     />
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lighter_gray"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 >
@@ -144,29 +142,37 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/unit"
-                    android:textStyle="bold"
+
                     />
 
-                <EditText
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lighter_gray"
+                    />
+
+                <TextView
                     android:id="@+id/unit"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_weight="0.34"
-                    android:background="@drawable/edit_bg"
+                    android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
-                    android:hint="@string/please_input"
+
                     android:padding="10dp"
-                    android:imeOptions="flagNavigateNext"
-                    android:inputType="text"
-                    android:maxLines="1"
                     />
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lighter_gray"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 >
@@ -178,27 +184,37 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/price"
-                    android:textStyle="bold"
+
                     />
 
-                <EditText
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lighter_gray"
+                    />
+
+                <TextView
                     android:id="@+id/price"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_weight="0.345"
-                    android:background="@drawable/edit_bg"
+                    android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
-                    android:hint="@string/please_input"
-                    android:inputType="numberDecimal"
                     android:padding="10dp"
+
                     />
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lighter_gray"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 >
@@ -210,27 +226,37 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/percentage"
-                    android:textStyle="bold"
+
                     />
 
-                <EditText
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lighter_gray"
+                    />
+
+                <TextView
                     android:id="@+id/percentage"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_weight="0.34"
-                    android:background="@drawable/edit_bg"
+                    android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
-                    android:hint="@string/please_input"
-                    android:inputType="numberDecimal"
                     android:padding="10dp"
+
                     />
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lighter_gray"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 >
@@ -242,27 +268,37 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/fixed_amount"
-                    android:textStyle="bold"
+
                     />
 
-                <EditText
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lighter_gray"
+                    />
+
+                <TextView
                     android:id="@+id/fixed_amount"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_weight="0.34"
-                    android:background="@drawable/edit_bg"
+                    android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
-                    android:hint="@string/please_input"
-                    android:inputType="numberDecimal"
                     android:padding="10dp"
+
                     />
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lighter_gray"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 >
@@ -274,28 +310,36 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/purchase"
-                    android:textStyle="bold"
+
                     />
 
-                <EditText
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lighter_gray"
+                    />
+
+                <TextView
                     android:id="@+id/purchase"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_weight="0.34"
-                    android:background="@drawable/edit_bg"
+                    android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
-                    android:hint="@string/please_input"
+
                     android:padding="10dp"
-                    android:imeOptions="flagNavigateNext"
-                    android:inputType="text"
-                    android:maxLines="1"
                     />
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lighter_gray"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 >
@@ -307,28 +351,35 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/commission"
-                    android:textStyle="bold"
                     />
 
-                <EditText
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lighter_gray"
+                    />
+
+                <TextView
                     android:id="@+id/commission"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_weight="0.34"
-                    android:background="@drawable/edit_bg"
+                    android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
-                    android:hint="@string/please_input"
                     android:padding="10dp"
-                    android:inputType="numberDecimal"
-                    android:maxLines="1"
                     />
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lighter_gray"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 >
@@ -340,29 +391,37 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/adjustment"
-                    android:textStyle="bold"
+
                     />
 
-                <EditText
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lighter_gray"
+                    />
+
+                <TextView
                     android:id="@+id/adjustment"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_weight="0.34"
-                    android:background="@drawable/edit_bg"
+                    android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
-                    android:hint="@string/please_input"
+
                     android:padding="10dp"
-                    android:imeOptions="flagNavigateNext"
-                    android:inputType="text"
-                    android:maxLines="1"
                     />
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lighter_gray"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 >
@@ -374,27 +433,38 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/related_tax_items"
-                    android:textStyle="bold"
+
+                    />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lighter_gray"
                     />
 
                 <TextView
                     android:id="@+id/related_tax_items"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.34"
-                    android:background="@drawable/edit_bg"
+                    android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
-                    android:hint="@string/please_select"
                     android:minHeight="50dp"
                     android:padding="10dp"
+
                     />
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lighter_gray"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 >
@@ -406,22 +476,32 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/specification"
-                    android:textStyle="bold"
+
                     />
 
-                <EditText
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lighter_gray"
+                    />
+
+                <TextView
                     android:id="@+id/specification"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:layout_weight="0.34"
-                    android:background="@drawable/edit_bg"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.3"
                     android:gravity="start|top"
-                    android:hint="@string/please_input"
                     android:padding="10dp"
+
                     />
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lighter_gray"
+                />
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

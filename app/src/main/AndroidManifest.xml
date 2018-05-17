@@ -29,6 +29,7 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".activity.SystemConfigActivity"/>
         <service android:name=".service.SynchronizeService"/>
+        <activity android:name=".activity.ProductDetailsActivity"/>
     </application>
 
 </manifest>

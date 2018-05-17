@@ -6,6 +6,17 @@
     >
 
     <TextView
+        android:id="@+id/p_delete"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/delete"
+        android:textColor="@android:color/white"
+        />
+
+    <TextView
         android:id="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,13 +28,13 @@
         />
 
     <TextView
-        android:id="@+id/delete"
+        android:id="@+id/details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="5dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/delete"
+        android:text="@string/details"
         android:textColor="@android:color/white"
         />
 

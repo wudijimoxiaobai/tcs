@@ -42,8 +42,6 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.Observable;
-import rx.Subscriber;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 import static com.tax.fcr.library.utils.NetworkUtils.mContext;
@@ -283,16 +281,6 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
         relate.setTaxItemList(mTaxItemList);
         relate.setTaxTypeList(mTaxTypeList);
         ObserverActionUtils.subscribe(relate,AddProductDialog.class);
-
-        Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
-            @Override
-            public void call(Subscriber<? super String> subscriber) {
-                subscriber.onNext("Hello");
-                subscriber.onNext("Hi");
-                subscriber.onNext("Aloha");
-                subscriber.onCompleted();
-            }
-        });
     }
 
 

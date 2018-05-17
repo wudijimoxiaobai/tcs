@@ -38,10 +38,22 @@
     <string name="purchase">Purchase</string>
     <string name="adjustment">Adjustment</string>
     <string name="add_product">Add Product</string>
+    <string name="add_customer">Add Customer</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="edit_customer">Edit Customer</string>
     <string name="please_input">Please input...</string>
     <string name="please_select">Please select</string>
     <string name="related_tax_items">Related Tax Items</string>
     <string name="remark">Remark</string>
     <string name="edit">Edit</string>
-
+    <string name="details">Details</string>
+    <string name="product_details">Product Details</string>
+    <string name="commission">Commission</string>
+    <string name="tin">TIN</string>
+    <string name="tel">TEL</string>
+    <string name="city">City</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="region">Region</string>
+    <string name="remarks">Remarks</string>
 </resources>

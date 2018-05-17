@@ -1,27 +1,57 @@
 package com.csscaps.tcs.fragment;
 
-import android.os.Bundle;
+import android.view.View;
 
-import com.csscaps.common.base.BaseFragment;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.adapter.BaseManagementListAdapter;
+import com.csscaps.tcs.adapter.CustomerListAdapter;
+import com.csscaps.tcs.database.table.Customer;
+import com.csscaps.tcs.dialog.AddCustomerDialog;
+import com.csscaps.tcs.dialog.BaseAddDialog;
+
+import java.util.List;
+
+import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
 /**
  * Created by tl on 2018/5/8.
  */
 
-public class CustomerManagementFragment extends BaseFragment {
+public class CustomerManagementFragment extends BaseManagementListFragment<Customer> {
+
     @Override
     protected int getLayoutResId() {
         return R.layout.customer_mangement_fragment;
     }
 
     @Override
-    protected void onInitPresenters() {
-
+    protected List<Customer> getData() {
+        return select().from(Customer.class).queryList();
     }
 
     @Override
-    public void initView(Bundle savedInstanceState) {
+    protected BaseManagementListAdapter getAdapter(List<Customer> data) {
+        return new CustomerListAdapter(mContext,R.layout.customer_list_item,data);
+    }
 
+    @Override
+    protected BaseAddDialog getDialog() {
+        return new AddCustomerDialog();
+    }
+
+    @Override
+    protected int getPopupWindowLayout() {
+        return R.layout.product_popuwindow_layout;
+    }
+
+    @Override
+    public void onClick(View view) {
+        super.onClick(view);
+        switch (view.getId()) {
+            case R.id.search:
+
+                break;
+
+        }
     }
 }

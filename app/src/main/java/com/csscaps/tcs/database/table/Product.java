@@ -6,12 +6,14 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.io.Serializable;
+
 /**
  * Created by tl on 2018/5/3.
  * 商品表
  */
 @Table(database = TcsDatabase.class)
-public class Product extends BaseModel {
+public class Product extends BaseModel implements Serializable {
     @PrimaryKey(autoincrement = true)
     @Column
     int productId;
@@ -47,7 +49,7 @@ public class Product extends BaseModel {
     String relatedTaxItemString;
 
     @Column
-    String remark;
+    float commission;
 
     public int getProductId() {
         return productId;
@@ -137,11 +139,11 @@ public class Product extends BaseModel {
         this.relatedTaxItemString = relatedTaxItemString;
     }
 
-    public String getRemark() {
-        return remark;
+    public float getCommission() {
+        return commission;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setCommission(float commission) {
+        this.commission = commission;
     }
 }

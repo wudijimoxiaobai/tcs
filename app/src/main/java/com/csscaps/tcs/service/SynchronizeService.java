@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import com.alibaba.fastjson.JSON;
 import com.csscaps.common.utils.AppSP;
 import com.csscaps.common.utils.DateUtils;
+import com.csscaps.tcs.ServerConstants;
 import com.csscaps.tcs.database.TcsDatabase;
 import com.csscaps.tcs.database.table.InvoiceType;
 import com.csscaps.tcs.database.table.TaxItem;
@@ -57,14 +58,14 @@ public class SynchronizeService extends Service implements IPresenter {
      * 同步纳税人
      */
     private void synTaxpayer() {
-        synData("ATCS002");
+        synData(ServerConstants.ATCS002);
     }
 
     /**
      * 票种信息同步
      */
     private void synInvoiceType() {
-        synData("ATCS006");
+        synData(ServerConstants.ATCS006);
 
     }
 
@@ -72,14 +73,14 @@ public class SynchronizeService extends Service implements IPresenter {
      * 税种同步
      */
     private void synTaxType() {
-        synData("ATCS005");
+        synData(ServerConstants.ATCS005);
     }
 
     /**
      * 税目同步
      */
     private void synTaxItem() {
-        synData("ATCS004");
+        synData(ServerConstants.ATCS004);
     }
 
     private void synData(String funcId) {
@@ -96,10 +97,10 @@ public class SynchronizeService extends Service implements IPresenter {
     @Override
     public void onSuccess(String requestPath, String objectString) {
         switch (requestPath) {
-            case "ATCS002":
+            case ServerConstants.ATCS002:
                 AppSP.putString("Taxpayer", objectString);
                 break;
-            case "ATCS004":
+            case ServerConstants.ATCS004:
               long s= System.currentTimeMillis();
                 ReceiveTaxItem receiveTaxItem = JSON.parseObject(objectString, ReceiveTaxItem.class);
                 List<TaxItem> taxitems = receiveTaxItem.getTaxitem_info();
@@ -116,7 +117,7 @@ public class SynchronizeService extends Service implements IPresenter {
                 long e= System.currentTimeMillis();
                 Logger.i("批量："+(e-s));
                 break;
-            case "ATCS005":
+            case ServerConstants.ATCS005:
                 ReceiveTaxType receiveTaxType = JSON.parseObject(objectString, ReceiveTaxType.class);
                 List<TaxType> taxTypes = receiveTaxType.getTaxtype_info();
                 FlowManager.getDatabase(TcsDatabase.class)
@@ -130,7 +131,7 @@ public class SynchronizeService extends Service implements IPresenter {
                         .build()
                         .execute();
                 break;
-            case "ATCS006":
+            case ServerConstants.ATCS006:
                 ReceiveInvoiceType receiveInvoiceType = JSON.parseObject(objectString, ReceiveInvoiceType.class);
                 List<InvoiceType> invoiceTypes = receiveInvoiceType.getInvoice_type_info();
                 FlowManager.getDatabase(TcsDatabase.class)
