@@ -71,15 +71,18 @@ public class MainActivity extends BaseActivity {
         mHandler.sendEmptyMessage(0);
     }
 
-    @OnClick({R.id.exit, R.id.invoice_issuing, R.id.invoice_management, R.id.invoice_query, R.id.system_configuration})
+    @OnClick({R.id.syn,R.id.exit, R.id.invoice_issuing, R.id.invoice_management, R.id.invoice_query, R.id.system_configuration})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.exit:
                 finish();
                 System.exit(0);
                 break;
-            case R.id.invoice_issuing:
+            case R.id.syn:
                 startService(new Intent(this, SynchronizeService.class));
+                break;
+            case R.id.invoice_issuing:
+
                 break;
             case R.id.invoice_management:
                 break;
@@ -88,8 +91,14 @@ public class MainActivity extends BaseActivity {
             case R.id.system_configuration:
                 startActivity(new Intent(this, SystemConfigActivity.class));
                 break;
+
         }
     }
 
 
+
+
+    @OnClick(R.id.syn)
+    public void onClick() {
+    }
 }

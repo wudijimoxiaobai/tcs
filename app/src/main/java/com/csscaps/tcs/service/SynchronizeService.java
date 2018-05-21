@@ -42,7 +42,7 @@ public class SynchronizeService extends Service implements IPresenter {
 
     @Override
     public void onCreate() {
-        String str = AppSP.getString("Taxpayer");
+        String str = AppSP.getString("MyTaxpayer");
     }
 
     @Override
@@ -98,7 +98,7 @@ public class SynchronizeService extends Service implements IPresenter {
     public void onSuccess(String requestPath, String objectString) {
         switch (requestPath) {
             case ServerConstants.ATCS002:
-                AppSP.putString("Taxpayer", objectString);
+                AppSP.putString("MyTaxpayer", objectString);
                 break;
             case ServerConstants.ATCS004:
               long s= System.currentTimeMillis();

@@ -28,13 +28,13 @@ public class Product extends BaseModel implements Serializable {
     String unit;
 
     @Column
-    float price;
+    String price;
 
     @Column
-    float percentage;
+    String percentage;
 
     @Column
-    float fixedAmount;
+    String fixedAmount;
 
     @Column
     String purchase;
@@ -49,7 +49,7 @@ public class Product extends BaseModel implements Serializable {
     String relatedTaxItemString;
 
     @Column
-    float commission;
+    String commission;
 
     public int getProductId() {
         return productId;
@@ -83,28 +83,36 @@ public class Product extends BaseModel implements Serializable {
         this.unit = unit;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public float getPercentage() {
+    public String getPercentage() {
         return percentage;
     }
 
-    public void setPercentage(float percentage) {
+    public void setPercentage(String percentage) {
         this.percentage = percentage;
     }
 
-    public float getFixedAmount() {
+    public String getFixedAmount() {
         return fixedAmount;
     }
 
-    public void setFixedAmount(float fixedAmount) {
+    public void setFixedAmount(String fixedAmount) {
         this.fixedAmount = fixedAmount;
+    }
+
+    public String getCommission() {
+        return commission;
+    }
+
+    public void setCommission(String commission) {
+        this.commission = commission;
     }
 
     public String getPurchase() {
@@ -139,11 +147,5 @@ public class Product extends BaseModel implements Serializable {
         this.relatedTaxItemString = relatedTaxItemString;
     }
 
-    public float getCommission() {
-        return commission;
-    }
 
-    public void setCommission(float commission) {
-        this.commission = commission;
-    }
 }

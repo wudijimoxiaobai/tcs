@@ -10,6 +10,7 @@ import com.csscaps.tcs.R;
 import com.csscaps.tcs.fragment.CustomerManagementFragment;
 import com.csscaps.tcs.fragment.TaxItemFragment;
 import com.csscaps.tcs.fragment.ProductManagementFragment;
+import com.csscaps.tcs.fragment.TaxpayerInfoFragment;
 
 import butterknife.BindView;
 
@@ -22,7 +23,8 @@ public class SystemConfigActivity extends BaseActivity implements TabLayout.OnTa
     @BindView(R.id.tab_layout)
     TabLayout mTableLayout;
 
-    private TaxItemFragment mInvoiceItemFragment;
+    private TaxItemFragment mTaxItemFragment;
+    private TaxpayerInfoFragment mTaxpayerInfoFragment;
     private CustomerManagementFragment mCustomerManagementFragment;
     private ProductManagementFragment mProductManagementFragment;
 
@@ -38,7 +40,8 @@ public class SystemConfigActivity extends BaseActivity implements TabLayout.OnTa
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        mInvoiceItemFragment = new TaxItemFragment();
+        mTaxItemFragment = new TaxItemFragment();
+        mTaxpayerInfoFragment=new TaxpayerInfoFragment();
         mCustomerManagementFragment = new CustomerManagementFragment();
         mProductManagementFragment = new ProductManagementFragment();
         String tab[] = getResources().getStringArray(R.array.tab1);
@@ -50,7 +53,8 @@ public class SystemConfigActivity extends BaseActivity implements TabLayout.OnTa
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.content,mProductManagementFragment);
         transaction.add(R.id.content,mCustomerManagementFragment);
-        transaction.add(R.id.content,mInvoiceItemFragment);
+        transaction.add(R.id.content,mTaxpayerInfoFragment);
+        transaction.add(R.id.content,mTaxItemFragment);
         transaction.commit();
     }
 
@@ -62,17 +66,26 @@ public class SystemConfigActivity extends BaseActivity implements TabLayout.OnTa
             case 0:
                 transaction.hide(mCustomerManagementFragment);
                 transaction.hide(mProductManagementFragment);
-                transaction.show(mInvoiceItemFragment);
+                transaction.hide(mTaxpayerInfoFragment);
+                transaction.show(mTaxItemFragment);
                 break;
             case 1:
-                transaction.show(mCustomerManagementFragment);
+                transaction.hide(mCustomerManagementFragment);
                 transaction.hide(mProductManagementFragment);
-                transaction.hide(mInvoiceItemFragment);
+                transaction.hide(mTaxItemFragment);
+                transaction.show(mTaxpayerInfoFragment);
                 break;
             case 2:
+                transaction.show(mCustomerManagementFragment);
+                transaction.hide(mProductManagementFragment);
+                transaction.hide(mTaxpayerInfoFragment);
+                transaction.hide(mTaxItemFragment);
+                break;
+            case 3:
                 transaction.hide(mCustomerManagementFragment);
                 transaction.show(mProductManagementFragment);
-                transaction.hide(mInvoiceItemFragment);
+                transaction.hide(mTaxpayerInfoFragment);
+                transaction.hide(mTaxItemFragment);
                 break;
         }
         transaction.commit();

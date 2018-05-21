@@ -18,6 +18,18 @@
         />
 
     <TextView
+        android:id="@+id/syn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/exit"
+        android:text="@string/synchronize"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text"
+        android:layout_marginEnd="15dp"
+        />
+
+
+    <TextView
         android:id="@+id/exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

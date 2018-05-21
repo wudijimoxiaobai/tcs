@@ -19,6 +19,7 @@
     </string-array>
     <string-array name="tab1">
         <item>Tax Item</item>
+        <item>Taxpayer Information</item>
         <item>Customer Management</item>
         <item>Product Management</item>
     </string-array>

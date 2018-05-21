@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.csscaps.common.base.BaseActivity;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.database.table.Product;
 import com.csscaps.tcs.database.table.TaxItem;
@@ -21,7 +20,7 @@ import butterknife.OnClick;
  * Created by tl on 2018/5/17.
  */
 
-public class ProductDetailsActivity extends BaseActivity {
+public class ProductDetailsActivity extends BaseDetailsActivity<Product> {
 
     @BindView(R.id.back)
     TextView mBack;
@@ -67,16 +66,7 @@ public class ProductDetailsActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        mProductName.setText(mProduct.getProductName());
-        mLocalName.setText(mProduct.getLocalName());
-        mUnit.setText(mProduct.getUnit());
-        mPrice.setText(mProduct.getPrice() + "");
-        mPercentage.setText(mProduct.getPercentage() + "");
-        mFixedAmount.setText(mProduct.getFixedAmount() + "");
-        mPurchase.setText(mProduct.getPurchase());
-        mAdjustment.setText(mProduct.getAdjustment());
-        mSpecification.setText(mProduct.getSpecification());
-        mCommission.setText(mProduct.getCommission() + "");
+        tIntoTextView(mProduct);
         String str = mProduct.getRelatedTaxItemString();
         RelatedTaxItem relatedTaxItem = JSON.parseObject(str, RelatedTaxItem.class);
         StringBuffer stringBuffer = new StringBuffer();

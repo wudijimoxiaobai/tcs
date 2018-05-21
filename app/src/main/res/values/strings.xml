@@ -1,28 +1,28 @@
 <resources>
     <string name="app_name">tcs</string>
-    <string name="tcs">Tax Control System</string>
+    <string name="tcs">Tax&#160;Control&#160;System</string>
     <string name="user">User</string>
     <string name="password">Password</string>
     <string name="language">Language</string>
     <string name="login">Login</string>
-    <string name="curr_user">Current user：%s</string>
+    <string name="curr_user">Current&#160;user：%s</string>
     <string name="exit">exit</string>
-    <string name="Invoice_Issuing">Invoice Issuing</string>
-    <string name="Invoice_Management">Invoice Management</string>
+    <string name="Invoice_Issuing">Invoice&#160;Issuing</string>
+    <string name="Invoice_Management">Invoice&#160;Management</string>
     <string name="Invoice_Query">Invoice Query</string>
-    <string name="System_Configuration">System Configuration</string>
+    <string name="System_Configuration">System&#160;Configuration</string>
     <string name="date_time" formatted="false">%s\n%s&#160;&#160;%s</string>
     <string name="back">Back</string>
-    <string name="tax_item_list">Tax Item List</string>
+    <string name="tax_item_list">Tax&#160;Item&#160;List</string>
     <string name="name">Name</string>
     <string name="code">Code</string>
     <string name="description">Description</string>
     <string name="parameter">Parameter</string>
     <string name="tax_rate">Tax Rate</string>
-    <string name="formula_description">Formula Description</string>
+    <string name="formula_description">Formula&#160;Description</string>
     <string name="unit">Unit</string>
-    <string name="customer_management">Customer Management</string>
-    <string name="product_management">Product Management</string>
+    <string name="customer_management">Customer&#160;Management</string>
+    <string name="product_management">Product&#160;Management</string>
     <string name="cancel">Cancel</string>
     <string name="add">Add</string>
     <string name="select">Select</string>
@@ -49,6 +49,7 @@
     <string name="details">Details</string>
     <string name="product_details">Product Details</string>
     <string name="commission">Commission</string>
+    <string name="customer_details">Customer Details</string>
     <string name="tin">TIN</string>
     <string name="tel">TEL</string>
     <string name="city">City</string>
@@ -56,4 +57,10 @@
     <string name="address">Address</string>
     <string name="region">Region</string>
     <string name="remarks">Remarks</string>
+    <string name="national_id">National ID</string>
+    <string name="passport">Passport</string>
+    <string name="registered">Registered</string>
+    <string name="unregistered">Unregistered</string>
+    <string name="taxpayer_info">Taxpayer Information</string>
+    <string name="synchronize">Synchronize</string>
 </resources>

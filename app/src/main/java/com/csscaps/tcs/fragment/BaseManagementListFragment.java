@@ -204,9 +204,7 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
         }
     }
 
-    protected void toDetails(T t){
-
-    }
+    protected void toDetails(T t){}
 
     protected abstract int getPopupWindowLayout();
 
@@ -215,10 +213,5 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
     protected abstract BaseManagementListAdapter getAdapter(List<T> data);
 
     protected abstract BaseAddDialog getDialog();
-
-
-
-
-
 
 }

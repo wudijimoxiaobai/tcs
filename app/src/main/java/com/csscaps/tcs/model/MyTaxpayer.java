@@ -4,7 +4,7 @@ package com.csscaps.tcs.model;
  * Created by tl on 2018/5/9.
  */
 
-public class Taxpayer {
+public class MyTaxpayer {
 
     /**
      * funcid : BTCS002

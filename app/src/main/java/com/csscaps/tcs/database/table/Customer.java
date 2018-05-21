@@ -6,12 +6,14 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.io.Serializable;
+
 /**
  * Created by tl on 2018/5/3.
  * 客户表
  */
 @Table(database = TcsDatabase.class)
-public class Customer extends BaseModel {
+public class Customer extends BaseModel implements Serializable {
 
     @PrimaryKey
     @Column
@@ -43,6 +45,9 @@ public class Customer extends BaseModel {
 
     @Column
     String remarks;
+
+    @Column
+    boolean registered;
 
     public String getTin() {
         return tin;
@@ -122,5 +127,13 @@ public class Customer extends BaseModel {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public boolean isRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(boolean registered) {
+        this.registered = registered;
     }
 }
