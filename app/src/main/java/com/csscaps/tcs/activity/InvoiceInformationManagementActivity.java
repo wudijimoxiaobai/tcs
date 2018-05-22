@@ -18,7 +18,7 @@ import butterknife.BindView;
  * Created by tl on 2018/5/8.
  */
 
-public class SystemConfigActivity extends BaseActivity implements TabLayout.OnTabSelectedListener {
+public class InvoiceInformationManagementActivity extends BaseActivity implements TabLayout.OnTabSelectedListener {
 
     @BindView(R.id.tab_layout)
     TabLayout mTableLayout;
@@ -30,7 +30,7 @@ public class SystemConfigActivity extends BaseActivity implements TabLayout.OnTa
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.system_config_activity;
+        return R.layout.invoice_info_management;
     }
 
     @Override

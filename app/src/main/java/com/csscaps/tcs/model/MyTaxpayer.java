@@ -6,44 +6,6 @@ package com.csscaps.tcs.model;
 
 public class MyTaxpayer {
 
-    /**
-     * funcid : BTCS002
-     * sellerid : xxx
-     * devicesn : xxxxx
-     * taxpayer_uid : xxx
-     * tin : xxx
-     * name_in_english : xxx
-     * name_in_second_lang : xxx
-     * branch_id : xxx
-     * taxpayer_category : xxx
-     * taxpayer_type : xxx
-     * registered_magisterial_state : xxx
-     * tin_office : xxx
-     * state : xxx
-     * city : xxx
-     * locality : xxx
-     * id_type : xxx
-     * id_number : xxx
-     * telphone : xxx
-     * physical_address : xxx
-     * postal_address : xxx
-     * main_taxpable_activity : xxx
-     * preferred_language : xxx
-     * registration_office : xxx
-     * sys_registered_time : xxx
-     * turnoversize : xxx
-     * enterprise_scale_uid : xxx
-     * taxpayer_type_uid : xxx
-     * industry_uid : xxx
-     * is_completed : xxx
-     * allow_foreign_currency : xxx
-     * status : xxx
-     * is_deleted : xxx
-     * remark : xxx
-     * systime : xxxxx
-     * checkcode : xxxxx
-     */
-
     private String funcid;
     private String sellerid;
     private String devicesn;

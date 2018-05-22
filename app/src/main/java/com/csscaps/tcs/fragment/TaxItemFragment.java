@@ -91,7 +91,12 @@ public class TaxItemFragment extends BaseFragment implements AdapterView.OnItemC
         listViewW = DeviceUtils.dip2Px(getContext(), 250);
         mTaxTypeList = select().from(TaxType.class).queryList();
         mTaxItemList = select().from(TaxItem.class).queryList();
-        addTaxTypeList();
+        if(mTaxTypeList.size()>0){
+            addTaxTypeList();
+        }else{
+            mHScrollView.setVisibility(View.GONE);
+        }
+
     }
 
 

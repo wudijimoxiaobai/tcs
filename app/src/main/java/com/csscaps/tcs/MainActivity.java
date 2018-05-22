@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import com.csscaps.common.base.BaseActivity;
 import com.csscaps.common.utils.DateUtils;
-import com.csscaps.tcs.activity.SystemConfigActivity;
+import com.csscaps.tcs.activity.InvoiceInformationManagementActivity;
+import com.csscaps.tcs.activity.InvoiceIssuingActivity;
+import com.csscaps.tcs.activity.InvoiceManagementActivity;
 import com.csscaps.tcs.service.SynchronizeService;
 
 import butterknife.BindView;
@@ -71,7 +73,7 @@ public class MainActivity extends BaseActivity {
         mHandler.sendEmptyMessage(0);
     }
 
-    @OnClick({R.id.syn,R.id.exit, R.id.invoice_issuing, R.id.invoice_management, R.id.invoice_query, R.id.system_configuration})
+    @OnClick({R.id.syn, R.id.exit, R.id.invoice_information_management, R.id.invoice_issuing, R.id.invoice_management, R.id.statistics, R.id.declaration, R.id.system_management})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.exit:
@@ -82,23 +84,22 @@ public class MainActivity extends BaseActivity {
                 startService(new Intent(this, SynchronizeService.class));
                 break;
             case R.id.invoice_issuing:
-
+                startActivity(new Intent(this, InvoiceIssuingActivity.class));
                 break;
             case R.id.invoice_management:
+                startActivity(new Intent(this, InvoiceManagementActivity.class));
                 break;
-            case R.id.invoice_query:
+            case R.id.declaration:
                 break;
-            case R.id.system_configuration:
-                startActivity(new Intent(this, SystemConfigActivity.class));
+            case R.id.statistics:
                 break;
+            case R.id.system_management:
 
+                break;
+            case R.id.invoice_information_management:
+                startActivity(new Intent(this, InvoiceInformationManagementActivity.class));
+                break;
         }
     }
 
-
-
-
-    @OnClick(R.id.syn)
-    public void onClick() {
-    }
 }

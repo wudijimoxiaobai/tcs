@@ -23,4 +23,15 @@
         <item>Customer Management</item>
         <item>Product Management</item>
     </string-array>
+    <string-array name="objects">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+    </string-array>
+    <string-array name="tab2">
+        <item>Invoice Application</item>
+        <item>Request Invoice</item>
+        <item>Approve Invoice</item>
+        <item>Invoice Query</item>
+    </string-array>
 </resources>

@@ -7,9 +7,8 @@
     <string name="login">Login</string>
     <string name="curr_user">Current user：%s</string>
     <string name="exit">exit</string>
-    <string name="Invoice_Issuing">Invoice Issuing</string>
-    <string name="Invoice_Management">Invoice Management</string>
-    <string name="Invoice_Query">Invoice Query</string>
-    <string name="System_Configuration">System Configuration</string>
+    <string name="invoice_issuing">Invoice Issuing</string>
+    <string name="invoice_management">Invoice Management</string>
+    <string name="invoice_query">Invoice Query</string>
     <string name="date_time" formatted="false">%s\n%s&#160;&#160;%s</string>
 </resources>

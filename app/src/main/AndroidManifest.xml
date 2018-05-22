@@ -27,10 +27,12 @@
         </activity>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".activity.SystemConfigActivity"/>
+        <activity android:name=".activity.InvoiceInformationManagementActivity"/>
         <service android:name=".service.SynchronizeService"/>
         <activity android:name=".activity.ProductDetailsActivity"/>
         <activity android:name=".activity.CustomerDetailsActivity"/>
+        <activity android:name=".activity.InvoiceIssuingActivity"/>
+        <activity android:name=".activity.InvoiceManagementActivity"/>
     </application>
 
 </manifest>

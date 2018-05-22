@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/blue"
+        android:padding="15dp"
+        >
+
+        <TextView
+            android:id="@+id/back"
+            style="@style/text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/back"
+            />
+
+        <TextView
+            style="@style/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/invoice_issuing"
+            android:textSize="@dimen/text_title"
+            />
+
+        <TextView
+            android:id="@+id/next"
+            style="@style/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="@string/next"
+            />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="50dp"
+            >
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_bg"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="20dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/invoice_type"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/invoice_type"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/invoice_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="start"
+                        android:padding="10dp"
+                        android:spinnerMode="dropdown"
+                        android:textAlignment="viewStart"
+                        android:textColor="@android:color/black"
+                        android:textDirection="locale"
+                        android:theme="@style/myDropTheme"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/invoice_no_from"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/invoice_no_from"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center_vertical|start"
+                        android:padding="10dp"
+                        android:textColor="@android:color/black"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/remaining_invoice"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/remaining_invoice"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center_vertical|start"
+                        android:padding="10dp"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/object"
+                        android:textColor="@android:color/black"
+                        />
+
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/object"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.8"
+                        android:entries="@array/objects"
+                        android:gravity="start"
+                        android:spinnerMode="dropdown"
+                        android:textAlignment="viewStart"
+                        android:textColor="@android:color/black"
+                        android:textDirection="locale"
+                        android:theme="@style/myDropTheme"
+                        android:background="@drawable/edit_bg"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/language_in_invoice"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/language_in_invoice"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/edit_bg"
+                        android:entries="@array/language"
+                        android:gravity="start"
+                        android:spinnerMode="dropdown"
+                        android:textAlignment="viewStart"
+                        android:textColor="@android:color/black"
+                        android:textDirection="locale"
+                        android:theme="@style/myDropTheme"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:textColor="@android:color/black"
+                        android:visibility="invisible"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center_vertical|start"
+                        android:textColor="@android:color/black"
+                        android:visibility="invisible"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edit_bg"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="20dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/buyer_info"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/tin"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <EditText
+                        android:id="@+id/tin"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center_vertical|start"
+                        android:hint="@string/please_select"
+                        android:padding="10dp"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/name"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center_vertical|start"
+                        android:padding="10dp"
+                        android:textColor="@android:color/black"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/national_id"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/national_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center_vertical|start"
+                        android:padding="10dp"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/passport"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/passport"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center_vertical|start"
+                        android:padding="10dp"
+                        android:textColor="@android:color/black"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/address"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center_vertical|start"
+                        android:padding="10dp"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/tel"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/tel"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="center_vertical|start"
+                        android:padding="10dp"
+                        android:textColor="@android:color/black"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
