@@ -7,6 +7,7 @@ import java.util.List;
  */
 
 public class RequestInvoiceNo extends RequestData{
+    private List<InvoiceNoModel> invoice_type_info;
     public List<InvoiceNoModel> getInvoice_type_info() {
         return invoice_type_info;
     }
@@ -15,5 +16,5 @@ public class RequestInvoiceNo extends RequestData{
         this.invoice_type_info = invoice_type_info;
     }
 
-    private List<InvoiceNoModel> invoice_type_info;
+
 }

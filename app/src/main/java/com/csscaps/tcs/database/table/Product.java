@@ -51,6 +51,16 @@ public class Product extends BaseModel implements Serializable {
     @Column
     String commission;
 
+    String quantity;
+
+    String totalTax="0";
+
+    String eTax="0";
+
+    String iTax="0";
+
+    ProductModel mProductModel;
+
     public int getProductId() {
         return productId;
     }
@@ -147,5 +157,43 @@ public class Product extends BaseModel implements Serializable {
         this.relatedTaxItemString = relatedTaxItemString;
     }
 
+    public String getQuantity() {
+        return quantity;
+    }
 
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getTotalTax() {
+        return totalTax;
+    }
+
+    public void setTotalTax(String totalTax) {
+        this.totalTax = totalTax;
+    }
+
+    public String geteTax() {
+        return eTax;
+    }
+
+    public void seteTax(String eTax) {
+        this.eTax = eTax;
+    }
+
+    public String getiTax() {
+        return iTax;
+    }
+
+    public void setiTax(String iTax) {
+        this.iTax = iTax;
+    }
+
+    public ProductModel getProductModel() {
+        return mProductModel;
+    }
+
+    public void setProductModel(ProductModel productModel) {
+        mProductModel = productModel;
+    }
 }

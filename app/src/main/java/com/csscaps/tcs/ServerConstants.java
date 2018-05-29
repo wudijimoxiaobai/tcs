@@ -15,4 +15,10 @@ public interface ServerConstants {
     final String ATCS005 = "ATCS005";
     /*票种信息同步*/
     final String ATCS006 = "ATCS006";
+    /*票种税种关联*/
+    final String ATCS007 = "ATCS007";
+    /*计税公式*/
+    final String ATCS008 = "ATCS008";
+    /* 发票号段申请 */
+    final String ATCS010 = "ATCS010";
 }

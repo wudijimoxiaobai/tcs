@@ -7,6 +7,8 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by tl on 2018/5/22.
@@ -175,6 +177,10 @@ public class Invoice extends BaseModel implements Serializable {
     private String file_content;
     @Column
     private String goods;
+
+    private String  invoice_type_uid;
+
+    private List<Product> mProducts=new ArrayList<>();
 
     public String getInvoice_no() {
         return invoice_no;
@@ -584,11 +590,27 @@ public class Invoice extends BaseModel implements Serializable {
         this.file_content = file_content;
     }
 
+    public String getInvoice_type_uid() {
+        return invoice_type_uid;
+    }
+
+    public void setInvoice_type_uid(String invoice_type_uid) {
+        this.invoice_type_uid = invoice_type_uid;
+    }
+
     public String getGoods() {
         return goods;
     }
 
     public void setGoods(String goods) {
         this.goods = goods;
+    }
+
+    public List<Product> getProducts() {
+        return mProducts;
+    }
+
+    public void setProducts(List<Product> products) {
+        mProducts = products;
     }
 }

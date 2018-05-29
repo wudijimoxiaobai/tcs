@@ -44,7 +44,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
-import static com.tax.fcr.library.utils.NetworkUtils.mContext;
 
 /**
  * Created by tl on 2018/5/14.
@@ -112,16 +111,16 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
      * 添加税种
      */
     private void addTaxTypeList() {
-        ListView listView = (ListView) LayoutInflater.from(mContext).inflate(R.layout.tax_list_view, null);
+        ListView listView = (ListView) LayoutInflater.from(getContext()).inflate(R.layout.tax_list_view, null);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(listViewW, LinearLayout.LayoutParams.MATCH_PARENT);
         listView.setLayoutParams(lp);
-//        View view1 = new View(mContext);
-//        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(2, LinearLayout.LayoutParams.MATCH_PARENT);
-//        view1.setLayoutParams(lp2);
-//        view1.setBackgroundColor(Color.LTGRAY);
+        View view1 = new View(getContext());
+        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(2, LinearLayout.LayoutParams.MATCH_PARENT);
+        view1.setLayoutParams(lp2);
+        view1.setBackgroundColor(Color.LTGRAY);
         mListLayout.addView(listView);
-//        mListLayout.addView(view1);
-        TaxTypeSelectAdapter taxTypeAdapter = new TaxTypeSelectAdapter(mContext, R.layout.tax_item_select_layout, mTaxTypeList, mHandler);
+        mListLayout.addView(view1);
+        TaxTypeSelectAdapter taxTypeAdapter = new TaxTypeSelectAdapter(getContext(), R.layout.tax_item_select_layout, mTaxTypeList, mHandler);
         listView.setAdapter(taxTypeAdapter);
         listView.setOnItemClickListener(this);
     }
@@ -131,8 +130,8 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         int index = mListLayout.indexOfChild(adapterView);
         int count = mListLayout.getChildCount();
-        for (int j = index + 1; j < count; j++) {
-            mListLayout.removeViewAt(index + 1);
+        for (int j = index + 2; j < count; j++) {
+            mListLayout.removeViewAt(index + 2);
         }
         switch (index) {
             case 0://税种
@@ -167,16 +166,17 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
      * @param list
      */
     private void addTaxItemList(List<TaxItem> list, String flag) {
-        ListView listView = (ListView) LayoutInflater.from(mContext).inflate(R.layout.tax_list_view, null);
+        ListView listView = (ListView) LayoutInflater.from(getContext()).inflate(R.layout.tax_list_view, null);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(listViewW, LinearLayout.LayoutParams.MATCH_PARENT);
         listView.setLayoutParams(lp);
-        View view = new View(mContext);
+        listView.setDividerHeight(2);
+        View view = new View(getContext());
         LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(2, LinearLayout.LayoutParams.MATCH_PARENT);
         view.setLayoutParams(lp1);
         view.setBackgroundColor(Color.LTGRAY);
-        mListLayout.addView(view);
         mListLayout.addView(listView);
-        TaxItemSelectAdapter taxItemAdapter = new TaxItemSelectAdapter(mContext, R.layout.tax_item_select_layout, list, mHandler);
+        mListLayout.addView(view);
+        TaxItemSelectAdapter taxItemAdapter = new TaxItemSelectAdapter(getContext(), R.layout.tax_item_select_layout, list, mHandler);
         taxItemAdapter.setFlag(flag);
         String flags[] = flag.split(",");
         for (String str : listTax) {

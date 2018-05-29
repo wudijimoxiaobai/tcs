@@ -1,6 +1,7 @@
 package com.csscaps.common.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -33,6 +34,9 @@ public abstract class BaseFragment extends Fragment {
      * @return
      */
     protected abstract int getLayoutResId();
+
+    protected void parseArgumentsFromIntent(Intent argIntent) {
+    }
 
     //初始化presenters，
     protected abstract void onInitPresenters();
@@ -71,6 +75,9 @@ public abstract class BaseFragment extends Fragment {
         Bundle args = getArguments();
         if (args != null) {
             onCreateWithArguments(args);
+        }
+        if (getActivity().getIntent() != null) {
+            parseArgumentsFromIntent(getActivity().getIntent());
         }
         onInitPresenters();
         initView(savedInstanceState);

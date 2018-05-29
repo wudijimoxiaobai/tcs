@@ -33,7 +33,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onInitPresenters() {
-
+        startService(new Intent(this, SynchronizeService.class).putExtra("autoSyn",true));
     }
 
     @Override

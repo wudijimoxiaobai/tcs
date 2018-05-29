@@ -25,7 +25,7 @@ public class ProductListAdapter extends BaseManagementListAdapter<Product> {
         helper.setText(R.id.local_name, item.getLocalName());
         helper.setText(R.id.specification, item.getSpecification());
         helper.setText(R.id.unit, item.getUnit());
-        helper.setText(R.id.price, String.valueOf(item.getPrice()));
+        helper.setText(R.id.price, item.getPrice());
     }
 
 }

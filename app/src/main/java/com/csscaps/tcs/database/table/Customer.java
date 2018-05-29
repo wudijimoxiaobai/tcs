@@ -15,7 +15,10 @@ import java.io.Serializable;
 @Table(database = TcsDatabase.class)
 public class Customer extends BaseModel implements Serializable {
 
-    @PrimaryKey
+    @Column
+    @PrimaryKey(autoincrement = true)
+    int customerId;
+
     @Column
     String tin;
 

@@ -85,4 +85,22 @@
     <string name="invoice_code">Invoice Code</string>
     <string name="safety_value">Safety Value</string>
     <string name="remaining_qty">Remaining QTY</string>
+    <string name="select_customer">Select Customer</string>
+    <string name="select_product">Select Product</string>
+    <string name="product_list">Product List</string>
+    <string name="quantity">Quantity</string>
+    <string name="e_tax">Total Amount(Excl.Tax)</string>
+    <string name="i_tax">Total Amount(Incl.Tax)</string>
+    <string name="tax_Amount">Tax Amount</string>
+    <string name="confirm">Confirm</string>
+    <string name="calculate">Calculate</string>
+    <string name="purchase_information">Purchase Information</string>
+    <string name="preview">Preview</string>
+    <string name="print">Print</string>
+    <string name="total_vat">Total of VAT</string>
+    <string name="total_fees">Total of Fees</string>
+    <string name="total_bpt_f">Total of BPT Final</string>
+    <string name="total_bpt_p">Total of BPT Prepayment</string>
+    <string name="total_sdl">Total of Stamp Duty-Local</string>
+    <string name="total_sdf">Total of Stamp Duty-Federal</string>
 </resources>

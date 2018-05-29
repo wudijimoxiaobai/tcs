@@ -123,6 +123,7 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
         } else {
             if (t.save()) {
                 dismiss();
+                ObserverActionUtils.subscribe(t,SelectProductDialog.class);
                 ObserverActionUtils.subscribe(t, ProductManagementFragment.class);
             } else {
                 ToastUtil.showShort("保存失败！");

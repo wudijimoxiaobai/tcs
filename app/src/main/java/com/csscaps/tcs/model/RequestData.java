@@ -16,7 +16,7 @@ public class RequestData {
      */
 
     private String funcid;
-    private String sellerid="300000000440";
+    private String sellerid="300000000540";
     private String devicesn;
     private String last_update_time;
     private String systime;

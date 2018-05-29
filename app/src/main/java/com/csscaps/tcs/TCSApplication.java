@@ -1,6 +1,5 @@
 package com.csscaps.tcs;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 
@@ -9,7 +8,6 @@ import com.csscaps.common.utils.AppSP;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.database.TcsDatabase;
 import com.csscaps.tcs.database.table.Taxpayer;
-import com.csscaps.tcs.service.SynchronizeService;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
@@ -37,7 +35,6 @@ public class TCSApplication extends BaseApplication {
         TCSInvoice.init(this, BuildConfig.server);
         //dbflow 初始化
         FlowManager.init(new FlowConfig.Builder(this).build());
-        startService(new Intent(this, SynchronizeService.class));
         initData();
     }
 

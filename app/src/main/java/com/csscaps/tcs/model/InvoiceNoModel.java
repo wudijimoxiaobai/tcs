@@ -1,19 +1,10 @@
 package com.csscaps.tcs.model;
 
 /**
- * Created by tl on 2018/5/22.
+ * Created by tl on 2018/5/23.
  */
 
 public class InvoiceNoModel {
-    /**
-     * invoice_type_code : xxxxx
-     * control_method : xxxxx
-     * current_or_next_period : xxxxx
-     * invoice_header : xxxxx
-     * invoice_num_start : xxxxx
-     * invoice_num_end : xxxxx
-     * segment_cipher : xxx
-     */
 
     private String invoice_type_code;
     private String control_method;
@@ -22,6 +13,7 @@ public class InvoiceNoModel {
     private String invoice_num_start;
     private String invoice_num_end;
     private String segment_cipher;
+    private String warning_value;
 
     public String getInvoice_type_code() {
         return invoice_type_code;
@@ -79,6 +71,11 @@ public class InvoiceNoModel {
         this.segment_cipher = segment_cipher;
     }
 
+    public String getWarning_value() {
+        return warning_value;
+    }
 
-
+    public void setWarning_value(String warning_value) {
+        this.warning_value = warning_value;
+    }
 }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -55,6 +56,12 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
     EditText mRemarks;
     @BindView(R.id.tin_layout)
     LinearLayout mTinLayout;
+    @BindView(R.id.registered)
+    RadioButton mRegistered;
+    @BindView(R.id.unregistered)
+    RadioButton mUnregistered;
+
+    int invoiceObject = -1;
 
     @Override
     protected int getLayoutId() {
@@ -94,7 +101,7 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
                         } else {
                             ToastUtil.showShort("Tin不合法！");
                         }
-                    }else{
+                    } else {
                         ToastUtil.showShort("正在初始化数据，请稍后效验！");
                     }
 
@@ -102,6 +109,17 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
                 return false;
             }
         });
+
+        switch (invoiceObject) {
+            case 0:
+                mRadioGroup.check(R.id.registered);
+                mUnregistered.setVisibility(View.GONE);
+                break;
+            case 1:
+                mRadioGroup.check(R.id.unregistered);
+                mRegistered.setVisibility(View.GONE);
+                break;
+        }
     }
 
     @Override
@@ -140,12 +158,29 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
         }
         String tin = mTin.getText().toString().trim();
         Taxpayer taxpayer = select().from(Taxpayer.class).where(Taxpayer_Table.tin.eq(tin)).querySingle();
-        if (t.isRegistered() &&taxpayer == null) {
-            ToastUtil.showShort("Tin不合法！");
+        if (t.isRegistered() && taxpayer == null) {
+            ToastUtil.showShort("Tin未注册！");
             return;
         }
 
+
+
+
         editTextsIntoT();
+
+        if(!t.isRegistered()&&TextUtils.isEmpty(t.getName())){
+            ToastUtil.showShort("Name不能为空！");
+            return;
+        }
+        if(!t.isRegistered()&&TextUtils.isEmpty(t.getNationalId())&&TextUtils.isEmpty(t.getPassport())){
+            ToastUtil.showShort("National ID 或 Passport 不能为空！");
+            return;
+        }
+
+        if (TextUtils.isEmpty(tin)) {
+            t.setTin(null);
+        }
+
         if (edit) {
             if (t.update()) {
                 dismiss();
@@ -158,9 +193,15 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
             if (t.save()) {
                 dismiss();
                 ObserverActionUtils.subscribe(t, CustomerManagementFragment.class);
+                ObserverActionUtils.subscribe(t, SelectCustomerDialog.class);
             } else {
                 ToastUtil.showShort("保存失败！");
             }
         }
     }
+
+    public void setInvoiceObject(int invoiceObject) {
+        this.invoiceObject = invoiceObject;
+    }
+
 }

@@ -4,23 +4,30 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.alibaba.fastjson.JSON;
 import com.csscaps.common.utils.AppSP;
 import com.csscaps.common.utils.DateUtils;
+import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.ServerConstants;
 import com.csscaps.tcs.database.TcsDatabase;
+import com.csscaps.tcs.database.table.InvoiceTaxType;
 import com.csscaps.tcs.database.table.InvoiceType;
 import com.csscaps.tcs.database.table.TaxItem;
+import com.csscaps.tcs.database.table.TaxMethod;
 import com.csscaps.tcs.database.table.TaxType;
+import com.csscaps.tcs.model.ReceiveInvoiceTaxType;
 import com.csscaps.tcs.model.ReceiveInvoiceType;
 import com.csscaps.tcs.model.ReceiveTaxItem;
+import com.csscaps.tcs.model.ReceiveTaxMethod;
 import com.csscaps.tcs.model.ReceiveTaxType;
 import com.csscaps.tcs.model.RequestData;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
+import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 import com.tax.fcr.library.network.Api;
 import com.tax.fcr.library.network.IPresenter;
 import com.tax.fcr.library.network.RequestModel;
@@ -34,9 +41,12 @@ import java.util.List;
 
 public class SynchronizeService extends Service implements IPresenter {
 
+    boolean autoSyn;
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        autoSyn = intent.getBooleanExtra("autoSyn", false);
         return null;
     }
 
@@ -51,8 +61,12 @@ public class SynchronizeService extends Service implements IPresenter {
         synInvoiceType();
         synTaxType();
         synTaxItem();
+        synInvoiceTaxType();
+        synTaxMethod();
         return super.onStartCommand(intent, flags, startId);
     }
+
+
 
     /**
      * 同步纳税人
@@ -62,11 +76,10 @@ public class SynchronizeService extends Service implements IPresenter {
     }
 
     /**
-     * 票种信息同步
+     * 税目同步
      */
-    private void synInvoiceType() {
-        synData(ServerConstants.ATCS006);
-
+    private void synTaxItem() {
+        synData(ServerConstants.ATCS004);
     }
 
     /**
@@ -77,11 +90,27 @@ public class SynchronizeService extends Service implements IPresenter {
     }
 
     /**
-     * 税目同步
+     * 票种信息同步
      */
-    private void synTaxItem() {
-        synData(ServerConstants.ATCS004);
+    private void synInvoiceType() {
+        synData(ServerConstants.ATCS006);
     }
+
+    /**
+     * 票种税种关联关系
+     */
+    private void synInvoiceTaxType() {
+        synData(ServerConstants.ATCS007);
+    }
+
+    /**
+     * 同步计税方法
+     **/
+    private void synTaxMethod() {
+        synData(ServerConstants.ATCS008);
+    }
+
+
 
     private void synData(String funcId) {
         RequestData requestData = new RequestData();
@@ -101,7 +130,7 @@ public class SynchronizeService extends Service implements IPresenter {
                 AppSP.putString("MyTaxpayer", objectString);
                 break;
             case ServerConstants.ATCS004:
-              long s= System.currentTimeMillis();
+                long s = System.currentTimeMillis();
                 ReceiveTaxItem receiveTaxItem = JSON.parseObject(objectString, ReceiveTaxItem.class);
                 List<TaxItem> taxitems = receiveTaxItem.getTaxitem_info();
                 FlowManager.getDatabase(TcsDatabase.class)
@@ -114,8 +143,8 @@ public class SynchronizeService extends Service implements IPresenter {
                                 }).addAll(taxitems).build())
                         .build()
                         .execute();
-                long e= System.currentTimeMillis();
-                Logger.i("批量："+(e-s));
+                long e = System.currentTimeMillis();
+                Logger.i("批量：" + (e - s));
                 break;
             case ServerConstants.ATCS005:
                 ReceiveTaxType receiveTaxType = JSON.parseObject(objectString, ReceiveTaxType.class);
@@ -142,14 +171,60 @@ public class SynchronizeService extends Service implements IPresenter {
                                         model.save();
                                     }
                                 }).addAll(invoiceTypes).build())
+                        .success(new Transaction.Success() {
+                            @Override
+                            public void onSuccess(@NonNull Transaction transaction) {
+                                startService(new Intent(SynchronizeService.this, InvoiceNoService.class));
+                            }
+                        })
                         .build()
                         .execute();
                 break;
+            case ServerConstants.ATCS007:
+                ReceiveInvoiceTaxType receiveInvoiceTaxType=JSON.parseObject(objectString, ReceiveInvoiceTaxType.class);
+                List<InvoiceTaxType> invoice_tax_info=receiveInvoiceTaxType.getInvoice_tax_info();
+                FlowManager.getDatabase(TcsDatabase.class)
+                        .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
+                                new ProcessModelTransaction.ProcessModel<InvoiceTaxType>() {
+                                    @Override
+                                    public void processModel(InvoiceTaxType model, DatabaseWrapper wrapper) {
+                                        model.save();
+                                    }
+                                }).addAll(invoice_tax_info).build())
+                        .build()
+                        .execute();
+                break;
+            case ServerConstants.ATCS008:
+                ReceiveTaxMethod receiveTaxMethod=JSON.parseObject(objectString, ReceiveTaxMethod.class);
+                List<TaxMethod> calc_rule_info= receiveTaxMethod.getCalc_rule_info();
+                FlowManager.getDatabase(TcsDatabase.class)
+                        .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
+                                new ProcessModelTransaction.ProcessModel<TaxMethod>() {
+                                    @Override
+                                    public void processModel(TaxMethod model, DatabaseWrapper wrapper) {
+                                        model.save();
+                                    }
+                                }).addAll(calc_rule_info).build())
+                        .build()
+                        .execute();
+
+                break;
+
         }
     }
 
     @Override
     public void onFailure(String requestPath, String errorMes) {
+        if (autoSyn) {
+            switch (errorMes) {
+                case Api.ERR_NETWORK:
+                    ToastUtil.showShort("无法连接网络！");
+                    break;
+                case Api.FAIL_CONNECT:
+                    ToastUtil.showShort("网络异常！");
+                    break;
+            }
+        }
     }
 
     @Override

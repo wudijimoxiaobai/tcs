@@ -76,6 +76,8 @@ public class InvoiceType extends BaseModel {
     String last_mod_user_id;
     @Column
     String calculate_method;
+    @Column
+    int invoiceObject;
 
     public String getInvoice_type_uid() {
         return invoice_type_uid;
@@ -235,5 +237,13 @@ public class InvoiceType extends BaseModel {
 
     public void setCalculate_method(String calculate_method) {
         this.calculate_method = calculate_method;
+    }
+
+    public int getInvoiceObject() {
+        return invoiceObject;
+    }
+
+    public void setInvoiceObject(int invoiceObject) {
+        this.invoiceObject = invoiceObject;
     }
 }

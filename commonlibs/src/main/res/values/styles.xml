@@ -35,7 +35,7 @@
 
     <style name="dialog_theme3" parent="base_dialog">
         <item name="android:windowFullscreen">true</item>
-        <item name="android:windowSoftInputMode">stateAlwaysHidden</item>
+      <!--  <item name="android:windowSoftInputMode">stateAlwaysHidden|adjustPan</item>-->
     </style>
 
     <style name="base_dialog" parent="Theme.AppCompat.Light.NoActionBar">

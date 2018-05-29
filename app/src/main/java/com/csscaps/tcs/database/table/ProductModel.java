@@ -1,30 +1,80 @@
-package com.csscaps.tcs.model;
+package com.csscaps.tcs.database.table;
+
+import com.csscaps.tcs.database.TcsDatabase;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by tl on 2018/5/22.
  */
-
+@Table(database = TcsDatabase.class)
 public class ProductModel {
 
-    private String category;
-    private String line_no;
-    private String taxable_item_uid;
-    private String product_code;
-    private String currency_code;
-    private String exchange_rate;
-    private String item_name;
-    private String item_desc;
-    private String unit;
-    private String unit_price;
-    private String unit_price_tax_rate;
-    private String taxtype;
-    private String qty;
-    private String taxable_amount;
-    private String taxable_amount_org;
-    private String tax_due;
-    private String amount_inc;
-    private String unit_price_after_tax;
-    private String vat_amount;
+    @Column
+    @PrimaryKey
+    String invoice_no;
+    @Column
+    String category;
+    @Column
+    String line_no;
+    @Column
+    String taxable_item_uid;
+    @Column
+    String product_code;
+    @Column
+    String currency_code;
+    @Column
+    String exchange_rate;
+    @Column
+    String item_name;
+    @Column
+    String item_desc;
+    @Column
+    String unit;
+    @Column
+    String unit_price;
+    @Column
+    String unit_price_tax_rate;
+    @Column
+    String taxtype;
+    @Column
+    String qty;
+    @Column
+    String taxable_amount;
+    @Column
+    String taxable_amount_org;
+    @Column
+    String tax_due;
+    @Column
+    String amount_inc;
+    @Column
+    String unit_price_after_tax;
+    @Column
+    String vat_amount;
+    @Column
+    double vat;
+    @Column
+    double bpt_final;
+    @Column
+    double bpt_prepayment;
+    @Column
+    double stamp_duty_federal;
+    @Column
+    double stamp_duty_local;
+    @Column
+    double fees;
+    @Column
+    double e_tax;
+    @Column
+    double i_tax;
+
+
+    Map<String, Double> mapTax = new HashMap();
+
 
     public String getCategory() {
         return category;
@@ -176,5 +226,85 @@ public class ProductModel {
 
     public void setVat_amount(String vat_amount) {
         this.vat_amount = vat_amount;
+    }
+
+    public String getInvoice_no() {
+        return invoice_no;
+    }
+
+    public void setInvoice_no(String invoice_no) {
+        this.invoice_no = invoice_no;
+    }
+
+    public Map<String, Double> getMapTax() {
+        return mapTax;
+    }
+
+    public void setMapTax(Map<String, Double> mapTax) {
+        this.mapTax = mapTax;
+    }
+
+    public double getVat() {
+        return vat;
+    }
+
+    public void setVat(double vat) {
+        this.vat = vat;
+    }
+
+    public double getBpt_final() {
+        return bpt_final;
+    }
+
+    public void setBpt_final(double bpt_final) {
+        this.bpt_final = bpt_final;
+    }
+
+    public double getBpt_prepayment() {
+        return bpt_prepayment;
+    }
+
+    public void setBpt_prepayment(double bpt_prepayment) {
+        this.bpt_prepayment = bpt_prepayment;
+    }
+
+    public double getStamp_duty_federal() {
+        return stamp_duty_federal;
+    }
+
+    public void setStamp_duty_federal(double stamp_duty_federal) {
+        this.stamp_duty_federal = stamp_duty_federal;
+    }
+
+    public double getStamp_duty_local() {
+        return stamp_duty_local;
+    }
+
+    public void setStamp_duty_local(double stamp_duty_local) {
+        this.stamp_duty_local = stamp_duty_local;
+    }
+
+    public double getFees() {
+        return fees;
+    }
+
+    public void setFees(double fees) {
+        this.fees = fees;
+    }
+
+    public double getE_tax() {
+        return e_tax;
+    }
+
+    public void setE_tax(double e_tax) {
+        this.e_tax = e_tax;
+    }
+
+    public double getI_tax() {
+        return i_tax;
+    }
+
+    public void setI_tax(double i_tax) {
+        this.i_tax = i_tax;
     }
 }

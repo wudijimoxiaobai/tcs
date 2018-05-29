@@ -51,9 +51,14 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
     protected List<T> data;
     protected BaseManagementListAdapter mBaseManagementListAdapter;
     protected PopupWindow popupWindow;
+    /**
+     * 是否删除数据库数据
+     */
+    public boolean isDataBase = true;
 
     @Override
-    protected void onInitPresenters() {}
+    protected void onInitPresenters() {
+    }
 
     @Override
     public void initView(Bundle savedInstanceState) {
@@ -110,16 +115,18 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
                         break;
                     case 1://删除
                         List<T> list = mBaseManagementListAdapter.getCheckedList();
-                        FlowManager.getDatabase(TcsDatabase.class)
-                                .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
-                                        new ProcessModelTransaction.ProcessModel<T>() {
-                                            @Override
-                                            public void processModel(T model, DatabaseWrapper wrapper) {
-                                                model.delete();
-                                            }
-                                        }).addAll(list).build())
-                                .build()
-                                .execute();
+                        if (isDataBase) {
+                            FlowManager.getDatabase(TcsDatabase.class)
+                                    .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
+                                            new ProcessModelTransaction.ProcessModel<T>() {
+                                                @Override
+                                                public void processModel(T model, DatabaseWrapper wrapper) {
+                                                    model.delete();
+                                                }
+                                            }).addAll(list).build())
+                                    .build()
+                                    .execute();
+                        }
                         data.removeAll(list);
                         list.clear();
                         mBaseManagementListAdapter.notifyDataSetChanged();
@@ -128,31 +135,34 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
                 break;
             case R.id.p_delete:
                 popupWindow.dismiss();
-                T t= (T) view.getTag();
-                if (t.delete()) {
-                    data.remove(t);
-                    mBaseManagementListAdapter.notifyDataSetChanged();
+                T t = (T) view.getTag();
+                if (isDataBase) {
+                    t.delete();
                 }
+                data.remove(t);
+                mBaseManagementListAdapter.notifyDataSetChanged();
                 break;
             case R.id.add:
-                BaseAddDialog dialog= getDialog();
-                dialog.show(getChildFragmentManager(), dialog.getClass().getName());
+                BaseAddDialog dialog = getDialog();
+                if (dialog != null)
+                    dialog.show(getChildFragmentManager(), dialog.getClass().getName());
                 break;
             case R.id.edit:
                 popupWindow.dismiss();
-                T t1= (T) view.getTag();
-                BaseAddDialog dialog1= getDialog();
-                dialog1.edit(t1);
-                dialog1.show(getChildFragmentManager(), dialog1.getClass().getName());
+                T t1 = (T) view.getTag();
+                BaseAddDialog dialog1 = getDialog();
+                if (dialog1 != null) {
+                    dialog1.edit(t1);
+                    dialog1.show(getChildFragmentManager(), dialog1.getClass().getName());
+                }
                 break;
             case R.id.details:
                 popupWindow.dismiss();
-                T t2= (T) view.getTag();
+                T t2 = (T) view.getTag();
                 toDetails(t2);
                 break;
         }
     }
-
 
 
     @Override
@@ -175,7 +185,7 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
         AppTools.measureView(linearLayout);
 //        int w = linearLayout.getMeasuredWidth();
         int h = linearLayout.getMeasuredHeight();
-        int w= DeviceUtils.dip2px(mContext,200);
+        int w = DeviceUtils.dip2px(mContext, 200);
         final PopupWindow popupWindow = AppTools.getPopupWindow(linearLayout, w, h);
         popupWindow.showAsDropDown(view, (int) ((view.getWidth() - w) / 2f), (int) -(view.getHeight() + h * 3f / 5));
         return popupWindow;
@@ -204,7 +214,12 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
         }
     }
 
-    protected void toDetails(T t){}
+    public void setDataBase(boolean dataBase) {
+        isDataBase = dataBase;
+    }
+
+    protected void toDetails(T t) {
+    }
 
     protected abstract int getPopupWindowLayout();
 

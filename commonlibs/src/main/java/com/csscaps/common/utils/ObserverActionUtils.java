@@ -41,18 +41,21 @@ public class ObserverActionUtils {
     public static void subscribe(Class observableClass, Class actionClass) {
         Observable observable=   mapObservable.get(observableClass.toString());
         Action1 action1=mapAction.get(actionClass.toString());
+        if(action1==null) return;
         observable.subscribe(action1);
     }
 
     public static <T> void  subscribe(T t,Class actionClass){
         Observable observable=  Observable.just(t);
         Action1 action1=mapAction.get(actionClass.toString());
+        if(action1==null) return;
         observable.subscribe(action1);
     }
 
     public static <T> void  subscribe(T[] t,Class actionClass){
         Observable observable=  Observable.from(t);
         Action1 action1=mapAction.get(actionClass.toString());
+        if(action1==null) return;
         observable.subscribe(action1);
     }
 }

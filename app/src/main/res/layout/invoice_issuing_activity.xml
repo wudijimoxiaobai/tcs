@@ -165,20 +165,16 @@
                         />
 
 
-                    <android.support.v7.widget.AppCompatSpinner
+                    <TextView
                         android:id="@+id/object"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="0.8"
-                        android:entries="@array/objects"
-                        android:gravity="start"
-                        android:spinnerMode="dropdown"
-                        android:textAlignment="viewStart"
+                        android:gravity="start|center_vertical"
+                        android:padding="10dp"
                         android:textColor="@android:color/black"
-                        android:textDirection="locale"
-                        android:theme="@style/myDropTheme"
                         android:background="@drawable/edit_bg"
                         />
 
@@ -274,7 +270,7 @@
                         android:textColor="@android:color/black"
                         />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/tin"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"

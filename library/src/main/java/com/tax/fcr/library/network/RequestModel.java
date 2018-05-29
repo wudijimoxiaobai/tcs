@@ -11,7 +11,7 @@ public class RequestModel {
 
 
     private String funcid;
-    private String devicesn="80249001000175";
+    private String devicesn="80249001000048";
     private String device_type="TCS";
     private String data;
     private String checkcode;
