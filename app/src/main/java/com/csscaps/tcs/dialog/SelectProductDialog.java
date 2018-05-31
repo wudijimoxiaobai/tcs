@@ -22,6 +22,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscription;
 import rx.functions.Action1;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
@@ -82,7 +83,8 @@ public class SelectProductDialog extends DialogFragment implements Action1<Produ
             case R.id.confirm:
                 dismiss();
                 List<Product> checkedList  = adapter.getCheckedList();
-                ObserverActionUtils.subscribe(checkedList.toArray(), InvoiceProductListFragment.class);
+                Subscription subscription = ObserverActionUtils.subscribe(checkedList.toArray(), InvoiceProductListFragment.class);
+                if(subscription!=null)subscription.unsubscribe();
                 break;
             case R.id.add_product:
                 AddProductDialog addProductDialog=new AddProductDialog();

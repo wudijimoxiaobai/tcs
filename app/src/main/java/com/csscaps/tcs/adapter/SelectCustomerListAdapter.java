@@ -31,9 +31,9 @@ public class SelectCustomerListAdapter extends QuickAdapter<Customer> {
         helper.setText(R.id.national_id, item.getNationalId());
         helper.setText(R.id.passport, item.getPassport());
         if (position == selectedPosition) {
-            helper.setBackgroundColor(R.id.layout, ContextCompat.getColor(context,R.color.lighter_blue));
+            helper.setBackgroundColor(R.id.layout, ContextCompat.getColor(context,R.color.bg));
         } else {
-            helper.setBackgroundColor(R.id.layout, ContextCompat.getColor(context,R.color.white));
+            helper.setBackgroundColor(R.id.layout, ContextCompat.getColor(context,R.color.top_bg));
         }
     }
 

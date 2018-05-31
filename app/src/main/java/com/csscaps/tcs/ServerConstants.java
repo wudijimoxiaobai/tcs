@@ -21,4 +21,6 @@ public interface ServerConstants {
     final String ATCS008 = "ATCS008";
     /* 发票号段申请 */
     final String ATCS010 = "ATCS010";
+    /*上传发票*/
+    final String ATCS012 = "ATCS012";
 }

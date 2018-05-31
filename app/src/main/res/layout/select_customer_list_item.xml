@@ -18,6 +18,7 @@
         android:layout_weight="1.07"
         android:gravity="start|center_vertical"
         android:paddingStart="5dp"
+        android:textColor="@color/text"
         />
 
 
@@ -29,7 +30,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:text="@string/tin"
+        android:textColor="@color/text"
         />
 
     <TextView
@@ -40,6 +41,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
+        android:textColor="@color/text"
         />
 
     <TextView
@@ -50,6 +52,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
+        android:textColor="@color/text"
         />
 
 
@@ -61,6 +64,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
+        android:textColor="@color/text"
         />
 
     <TextView
@@ -71,6 +75,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
+        android:textColor="@color/text"
         />
 
     <TextView
@@ -81,6 +86,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
+        android:textColor="@color/text"
         />
 
 

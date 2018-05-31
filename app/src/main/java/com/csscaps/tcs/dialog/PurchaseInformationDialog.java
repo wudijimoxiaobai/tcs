@@ -1,6 +1,7 @@
 package com.csscaps.tcs.dialog;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -13,10 +14,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.csscaps.common.utils.DeviceUtils;
+import com.csscaps.tcs.MainActivity;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.action.IInvoiceIssuingAction;
+import com.csscaps.tcs.activity.InvoiceIssuingActivity;
 import com.csscaps.tcs.adapter.InvoiceProductListAdapter;
+import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.Product;
 import com.csscaps.tcs.database.table.ProductModel;
+import com.csscaps.tcs.presenter.InvoiceIssuingPresenter;
 
 import java.util.List;
 
@@ -29,7 +35,7 @@ import butterknife.OnClick;
  */
 
 @SuppressLint("ValidFragment")
-public class PurchaseInformationDialog extends DialogFragment {
+public class PurchaseInformationDialog extends DialogFragment implements IInvoiceIssuingAction {
 
     @BindView(R.id.list_view)
     ListView mListView;
@@ -51,6 +57,7 @@ public class PurchaseInformationDialog extends DialogFragment {
     TextView mITax;
 
     private List<Product> data;
+    private InvoiceIssuingPresenter presenter;
 
     public PurchaseInformationDialog(List<Product> data) {
         this.data = data;
@@ -78,7 +85,7 @@ public class PurchaseInformationDialog extends DialogFragment {
         Window dialogWindow = getDialog().getWindow();
         dialogWindow.setGravity(Gravity.CENTER);
         int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 0.9f);
-        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 0.8f);
+        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 0.9f);
         dialogWindow.setLayout(width, height);
         dialogWindow.setWindowAnimations(R.style.scale_anim);
     }
@@ -92,6 +99,8 @@ public class PurchaseInformationDialog extends DialogFragment {
             case R.id.preview:
                 break;
             case R.id.print:
+                presenter = new InvoiceIssuingPresenter(this, getContext());
+                presenter.issuingInvoice(data);
                 break;
         }
     }
@@ -111,15 +120,45 @@ public class PurchaseInformationDialog extends DialogFragment {
             etax += productModel.getE_tax();
             itax += productModel.getI_tax();
         }
-        mTotalVat.setText(String.format("%.2f", vat));
-        mTotalBptF.setText(String.format("%.2f",bptf));
-        mTotalBptP.setText(String.format("%.2f",bptp));
-        mTotalSdl.setText(String.format("%.2f",sdl));
-        mTotalSdf.setText(String.format("%.2f",sdf));
-        mTotalFees.setText(String.format("%.2f",fees));
-        mETax.setText(String.format("%.2f",etax));
-        mITax.setText(String.format("%.2f",itax));
+        Invoice invoice = InvoiceIssuingActivity.mInvoice;
+        invoice.setTotal_vat(String.format("%.2f", vat));
+        invoice.setTotal_bpt(String.format("%.2f", bptf));
+        invoice.setTotal_final(String.format("%.2f", sdf));
+        invoice.setTotal_stamp(String.format("%.2f", sdl));
+        invoice.setTotal_bpt_preypayment(String.format("%.2f", bptp));
+        invoice.setTotal_fee(String.format("%.2f", fees));
+        invoice.setTotal_taxable_amount(String.format("%.2f", etax));
+        invoice.setTotal_all(String.format("%.2f", itax));
+        invoice.setTotal_tax_due(String.format("%.2f", itax - etax));
+
+        mTotalVat.setText(invoice.getTotal_vat());
+        mTotalBptF.setText(invoice.getTotal_bpt());
+        mTotalBptP.setText(invoice.getTotal_bpt_preypayment());
+        mTotalSdl.setText(invoice.getTotal_stamp());
+        mTotalSdf.setText(invoice.getTotal_final());
+        mTotalFees.setText(invoice.getTotal_fee());
+        mETax.setText(String.format("%.2f", etax));
+        mITax.setText(String.format("%.2f", itax));
     }
 
 
+    @Override
+    public void complete(boolean success) {
+        if (success) {
+            InvoiceIssuingActivity.mInvoice.setUploadStatus(Invoice.SUCCESS);
+        } else {
+            InvoiceIssuingActivity.mInvoice.setUploadStatus(Invoice.FAILURE);
+        }
+        InvoiceIssuingActivity.mInvoice.save();
+        dismiss();
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (presenter != null) presenter.onDetach();
+    }
 }

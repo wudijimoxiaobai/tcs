@@ -1,5 +1,6 @@
 package com.csscaps.tcs.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -91,13 +92,16 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
                     case 1://取消
                         mBack.setTag(0);
                         mSelect.setTag(0);
-                        mBack.setText(getString(R.string.back));
+//                        mBack.setText(getString(R.string.back));
                         mSelect.setText((getString(R.string.select)));
+                        Drawable drawable = ContextCompat.getDrawable(mContext,R.mipmap.select);
+                        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                        mSelect.setCompoundDrawables(drawable,null,null,null);
                         mAllSelect.setButtonDrawable(ContextCompat.getDrawable(mContext, android.R.color.transparent));
                         mBaseManagementListAdapter.setShowCheckBox(false);
                         mAllSelect.setText(getString(R.string.no));
                         mAllSelect.setChecked(false);
-                        mAdd.setVisibility(View.VISIBLE);
+//                        mAdd.setVisibility(View.VISIBLE);
                         break;
                 }
                 break;
@@ -106,12 +110,15 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
                     case 0://选择
                         mBack.setTag(1);
                         mSelect.setTag(1);
-                        mBack.setText(getString(R.string.cancel));
+//                        mBack.setText(getString(R.string.cancel));
                         mSelect.setText((getString(R.string.delete)));
+                        Drawable drawable = ContextCompat.getDrawable(mContext,R.mipmap.delete);
+                        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                        mSelect.setCompoundDrawables(drawable,null,null,null);
                         mAllSelect.setButtonDrawable(ContextCompat.getDrawable(mContext, R.drawable.cb_check_selector));
                         mAllSelect.setText(null);
                         mBaseManagementListAdapter.setShowCheckBox(true);
-                        mAdd.setVisibility(View.INVISIBLE);
+//                        mAdd.setVisibility(View.INVISIBLE);
                         break;
                     case 1://删除
                         List<T> list = mBaseManagementListAdapter.getCheckedList();

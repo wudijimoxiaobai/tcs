@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue"
+        android:background="@mipmap/top_bg"
         android:padding="15dp"
         >
 
@@ -15,9 +15,9 @@
             android:id="@+id/back"
             style="@style/text"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/back"
             android:gravity="center_vertical"
-            android:text="@string/back"
             />
 
         <TextView
@@ -36,14 +36,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:text="@string/next"
+            android:background="@mipmap/next"
             />
 
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,16 +58,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edit_bg"
+                android:background="@drawable/bg1"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
-                android:padding="20dp"
+                android:padding="30dp"
                 >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/invoice_type"
+                    android:textColor="#0492fd"
                     />
 
                 <LinearLayout
@@ -81,25 +84,40 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/invoice_type"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/invoice_type"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="0.8"
-                        android:background="@drawable/edit_bg"
-                        android:gravity="start"
-                        android:padding="10dp"
-                        android:spinnerMode="dropdown"
-                        android:textAlignment="viewStart"
-                        android:textColor="@android:color/black"
-                        android:textDirection="locale"
-                        android:theme="@style/myDropTheme"
-                        />
+                        >
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/invoice_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/bg2"
+                            android:gravity="start"
+                            android:padding="10dp"
+                            android:spinnerMode="dropdown"
+                            android:textAlignment="viewStart"
+                            android:textDirection="locale"
+                            android:theme="@style/myDropTheme"
+                            />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:background="@mipmap/arrow_down"
+                            />
+
+                    </RelativeLayout>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -107,7 +125,7 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/invoice_no_from"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                     <TextView
@@ -117,10 +135,10 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="0.8"
-                        android:background="@drawable/edit_bg"
+                        android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -139,7 +157,7 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/remaining_invoice"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                     <TextView
@@ -149,10 +167,10 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="0.8"
-                        android:background="@drawable/edit_bg"
+                        android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                     <TextView
@@ -161,7 +179,7 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/object"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
 
@@ -172,10 +190,10 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="0.8"
+                        android:background="@drawable/bg2"
                         android:gravity="start|center_vertical"
                         android:padding="10dp"
-                        android:textColor="@android:color/black"
-                        android:background="@drawable/edit_bg"
+                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -194,32 +212,46 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/language_in_invoice"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/language_in_invoice"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="0.8"
-                        android:background="@drawable/edit_bg"
-                        android:entries="@array/language"
-                        android:gravity="start"
-                        android:spinnerMode="dropdown"
-                        android:textAlignment="viewStart"
-                        android:textColor="@android:color/black"
-                        android:textDirection="locale"
-                        android:theme="@style/myDropTheme"
-                        />
+                        >
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/language_in_invoice"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/bg2"
+                            android:entries="@array/language"
+                            android:gravity="start"
+                            android:spinnerMode="dropdown"
+                            android:textAlignment="viewStart"
+                            android:textDirection="locale"
+                            android:theme="@style/myDropTheme"
+                            />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:background="@mipmap/arrow_down"
+                            />
+                    </RelativeLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         android:visibility="invisible"
                         />
 
@@ -229,9 +261,9 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="0.8"
-                        android:background="@drawable/edit_bg"
+                        android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         android:visibility="invisible"
                         />
 
@@ -242,16 +274,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/edit_bg"
+                android:background="@drawable/bg1"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
-                android:padding="20dp"
+                android:padding="30dp"
                 >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/buyer_info"
+                    android:textColor="#0492fd"
                     />
 
                 <LinearLayout
@@ -267,7 +300,7 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/tin"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                     <TextView
@@ -277,11 +310,12 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="0.8"
-                        android:background="@drawable/edit_bg"
+                        android:background="@drawable/bg2"
+                        android:drawableEnd="@mipmap/tin"
                         android:gravity="center_vertical|start"
                         android:hint="@string/please_select"
                         android:padding="10dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                     <TextView
@@ -290,7 +324,7 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/name"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                     <TextView
@@ -300,10 +334,10 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="0.8"
-                        android:background="@drawable/edit_bg"
+                        android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -322,7 +356,7 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/national_id"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                     <TextView
@@ -332,10 +366,10 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="0.8"
-                        android:background="@drawable/edit_bg"
+                        android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                     <TextView
@@ -344,7 +378,7 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/passport"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                     <TextView
@@ -354,10 +388,10 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="0.8"
-                        android:background="@drawable/edit_bg"
+                        android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -376,7 +410,7 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/address"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                     <TextView
@@ -386,10 +420,10 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="0.8"
-                        android:background="@drawable/edit_bg"
+                        android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                     <TextView
@@ -398,7 +432,7 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/tel"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                     <TextView
@@ -408,10 +442,10 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="0.8"
-                        android:background="@drawable/edit_bg"
+                        android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>

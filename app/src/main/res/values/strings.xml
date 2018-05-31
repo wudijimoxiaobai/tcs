@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">tcs</string>
+    <string name="app_name">e-Invoicing</string>
     <string name="tcs">Tax&#160;Control&#160;System</string>
     <string name="user">User</string>
     <string name="password">Password</string>
     <string name="language">Language</string>
     <string name="login">Login</string>
     <string name="curr_user">Current&#160;user：%s</string>
-    <string name="exit">exit</string>
+    <string name="exit">Exit</string>
     <string name="invoice_issuing">Invoice&#160;Issuing</string>
     <string name="invoice_management">Invoice&#160;Management</string>
     <string name="invoice_query">Invoice Query</string>
@@ -28,7 +28,7 @@
     <string name="select">Select</string>
     <string name="delete">Delete</string>
     <string name="save">Save</string>
-    <string name="no">No</string>
+    <string name="no">No.</string>
     <string name="product_name">Product Name</string>
     <string name="local_name">Local Name</string>
     <string name="specification">Specification</string>
@@ -103,4 +103,11 @@
     <string name="total_bpt_p">Total of BPT Prepayment</string>
     <string name="total_sdl">Total of Stamp Duty-Local</string>
     <string name="total_sdf">Total of Stamp Duty-Federal</string>
+    <string name="invoice_no">Invoice No</string>
+    <string name="issuing_date_time">Issuing Date&amp;Time</string>
+    <string name="issued_by">Issued by</string>
+    <string name="upload_status">Upload Status</string>
+    <string name="upload">Upload</string>
+    <string name="search">Search</string>
+    <string name="e_invoice">E-Invoice</string>
 </resources>

@@ -1,15 +1,14 @@
 package com.csscaps.tcs.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.csscaps.common.base.BaseFragment;
@@ -68,7 +67,7 @@ public class TaxItemFragment extends BaseFragment implements AdapterView.OnItemC
     @BindView(R.id.unit)
     TextView mUnit;
     @BindView(R.id.tax_item_details_layout)
-    ScrollView mTaxItemDetailsLayout;
+    LinearLayout mTaxItemDetailsLayout;
     @BindView(R.id.list_layout)
     LinearLayout mListLayout;
 
@@ -121,7 +120,7 @@ public class TaxItemFragment extends BaseFragment implements AdapterView.OnItemC
         View view1 = new View(mContext);
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(2, LinearLayout.LayoutParams.MATCH_PARENT);
         view1.setLayoutParams(lp2);
-        view1.setBackgroundColor(Color.LTGRAY);
+        view1.setBackgroundColor(ContextCompat.getColor(mContext,R.color.divider));
         mListLayout.addView(listView);
         mListLayout.addView(view1);
         TaxTypeAdapter taxTypeAdapter = new TaxTypeAdapter(mContext, R.layout.tax_item_layout, mTaxTypeList);
@@ -193,7 +192,7 @@ public class TaxItemFragment extends BaseFragment implements AdapterView.OnItemC
         View view = new View(mContext);
         LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(2, LinearLayout.LayoutParams.MATCH_PARENT);
         view.setLayoutParams(lp1);
-        view.setBackgroundColor(Color.LTGRAY);
+        view.setBackgroundColor(ContextCompat.getColor(mContext,R.color.divider));
         mListLayout.addView(listView);
         mListLayout.addView(view);
         TaxItemAdapter taxItemAdapter = new TaxItemAdapter(mContext, R.layout.tax_item_layout, list);

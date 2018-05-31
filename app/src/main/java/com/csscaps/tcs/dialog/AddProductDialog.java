@@ -19,6 +19,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Subscription;
 import rx.functions.Action1;
 
 /**
@@ -115,7 +116,8 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
         if (edit) {
             if (t.update()) {
                 dismiss();
-                ObserverActionUtils.subscribe(t, ProductManagementFragment.class);
+                Subscription subscription =ObserverActionUtils.subscribe(t, ProductManagementFragment.class);
+                if(subscription!=null)subscription.unsubscribe();
             } else {
                 ToastUtil.showShort("编辑失败！");
             }
@@ -123,8 +125,10 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
         } else {
             if (t.save()) {
                 dismiss();
-                ObserverActionUtils.subscribe(t,SelectProductDialog.class);
-                ObserverActionUtils.subscribe(t, ProductManagementFragment.class);
+                Subscription subscription =ObserverActionUtils.subscribe(t,SelectProductDialog.class);
+                Subscription subscription1 =ObserverActionUtils.subscribe(t, ProductManagementFragment.class);
+                if(subscription!=null)subscription.unsubscribe();
+                if(subscription1!=null)subscription1.unsubscribe();
             } else {
                 ToastUtil.showShort("保存失败！");
             }

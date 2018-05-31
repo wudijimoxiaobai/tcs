@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="58dp"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
+
+    <CheckBox
+        android:id="@+id/no"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_weight="1.1"
+        android:button="@null"
+        android:focusable="false"
+        android:gravity="start|center_vertical"
+        android:paddingStart="5dp"
+        android:textColor="@color/text"
+        />
+
+    <TextView
+        android:id="@+id/invoice_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/text"
+        />
+
+    <TextView
+        android:id="@+id/invoice_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/text"
+        />
+
+    <TextView
+        android:id="@+id/issuing_date_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/text"
+        />
+
+    <TextView
+        android:id="@+id/issued_by"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/text"
+        />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/text"
+        />
+
+    <TextView
+        android:id="@+id/tax_Amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/text"
+        />
+
+    <TextView
+        android:id="@+id/i_tax"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/text"
+        />
+
+    <TextView
+        android:id="@+id/upload_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/text"
+        />
+</LinearLayout>

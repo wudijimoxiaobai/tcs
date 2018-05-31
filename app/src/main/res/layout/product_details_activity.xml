@@ -8,17 +8,18 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue"
-        android:padding="15dp"
+        android:background="@mipmap/top_bg"
+        android:paddingStart="15dp"
         >
 
         <TextView
             android:id="@+id/back"
             style="@style/text"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/back"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/back"
+            android:gravity="center_vertical"
             />
 
 
@@ -32,15 +33,24 @@
             />
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg"
+        android:padding="30dp"
+        >
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg1"
+        android:paddingBottom="10dp"
+        >
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
             android:orientation="vertical"
             >
 
@@ -58,12 +68,13 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/product_name"
+                    android:textColor="@color/text1"
                     />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lighter_gray"
+                    android:background="@color/divider"
                     />
 
                 <TextView
@@ -73,7 +84,7 @@
                     android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
                     android:padding="10dp"
-
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -81,7 +92,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lighter_gray"
+                android:background="@color/divider"
                 />
 
             <LinearLayout
@@ -99,13 +110,13 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/local_name"
-
+                    android:textColor="@color/text1"
                     />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lighter_gray"
+                    android:background="@color/divider"
                     />
 
                 <TextView
@@ -115,7 +126,7 @@
                     android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
                     android:padding="10dp"
-
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -123,7 +134,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lighter_gray"
+                android:background="@color/divider"
                 />
 
             <LinearLayout
@@ -141,13 +152,13 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/unit"
-
+                    android:textColor="@color/text1"
                     />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lighter_gray"
+                    android:background="@color/divider"
                     />
 
                 <TextView
@@ -156,7 +167,7 @@
                     android:layout_height="50dp"
                     android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
-
+                    android:textColor="@color/text"
                     android:padding="10dp"
                     />
 
@@ -165,7 +176,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lighter_gray"
+                android:background="@color/divider"
                 />
 
             <LinearLayout
@@ -183,13 +194,13 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/price"
-
+                    android:textColor="@color/text1"
                     />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lighter_gray"
+                    android:background="@color/divider"
                     />
 
                 <TextView
@@ -199,7 +210,7 @@
                     android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
                     android:padding="10dp"
-
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -207,7 +218,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lighter_gray"
+                android:background="@color/divider"
                 />
 
             <LinearLayout
@@ -225,13 +236,13 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/percentage"
-
+                    android:textColor="@color/text1"
                     />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lighter_gray"
+                    android:background="@color/divider"
                     />
 
                 <TextView
@@ -241,7 +252,7 @@
                     android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
                     android:padding="10dp"
-
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -249,7 +260,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lighter_gray"
+                android:background="@color/divider"
                 />
 
             <LinearLayout
@@ -267,13 +278,13 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/fixed_amount"
-
+                    android:textColor="@color/text1"
                     />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lighter_gray"
+                    android:background="@color/divider"
                     />
 
                 <TextView
@@ -283,7 +294,7 @@
                     android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
                     android:padding="10dp"
-
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -291,7 +302,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lighter_gray"
+                android:background="@color/divider"
                 />
 
             <LinearLayout
@@ -309,13 +320,13 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/purchase"
-
+                    android:textColor="@color/text1"
                     />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lighter_gray"
+                    android:background="@color/divider"
                     />
 
                 <TextView
@@ -324,7 +335,7 @@
                     android:layout_height="50dp"
                     android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
-
+                    android:textColor="@color/text"
                     android:padding="10dp"
                     />
 
@@ -333,7 +344,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lighter_gray"
+                android:background="@color/divider"
                 />
 
             <LinearLayout
@@ -350,12 +361,13 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/commission"
+                    android:textColor="@color/text1"
                     />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lighter_gray"
+                    android:background="@color/divider"
                     />
 
                 <TextView
@@ -365,6 +377,7 @@
                     android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
                     android:padding="10dp"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -372,7 +385,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lighter_gray"
+                android:background="@color/divider"
                 />
 
             <LinearLayout
@@ -390,13 +403,13 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/adjustment"
-
+                    android:textColor="@color/text1"
                     />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lighter_gray"
+                    android:background="@color/divider"
                     />
 
                 <TextView
@@ -405,7 +418,7 @@
                     android:layout_height="50dp"
                     android:layout_weight="0.3"
                     android:gravity="start|center_vertical"
-
+                    android:textColor="@color/text"
                     android:padding="10dp"
                     />
 
@@ -414,7 +427,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lighter_gray"
+                android:background="@color/divider"
                 />
 
             <LinearLayout
@@ -432,13 +445,13 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/related_tax_items"
-
+                    android:textColor="@color/text1"
                     />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lighter_gray"
+                    android:background="@color/divider"
                     />
 
                 <TextView
@@ -449,7 +462,7 @@
                     android:gravity="start|center_vertical"
                     android:minHeight="50dp"
                     android:padding="10dp"
-
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -457,7 +470,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lighter_gray"
+                android:background="@color/divider"
                 />
 
             <LinearLayout
@@ -475,13 +488,13 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/specification"
-
+                    android:textColor="@color/text1"
                     />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/lighter_gray"
+                    android:background="@color/divider"
                     />
 
                 <TextView
@@ -491,7 +504,7 @@
                     android:layout_weight="0.3"
                     android:gravity="start|top"
                     android:padding="10dp"
-
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -499,8 +512,9 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lighter_gray"
+                android:background="@color/divider"
                 />
         </LinearLayout>
     </ScrollView>
+    </LinearLayout>
 </LinearLayout>

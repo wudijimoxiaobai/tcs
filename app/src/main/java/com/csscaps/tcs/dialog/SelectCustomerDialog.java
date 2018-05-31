@@ -26,6 +26,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscription;
 import rx.functions.Action1;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
@@ -76,20 +77,21 @@ public class SelectCustomerDialog extends DialogFragment implements AdapterView.
         dialogWindow.setWindowAnimations(R.style.scale_anim);
     }
 
-    @OnClick({R.id.cancel, R.id.select,R.id.add_customer})
+    @OnClick({R.id.cancel, R.id.select, R.id.add_customer})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cancel:
                 dismiss();
                 break;
             case R.id.add_customer:
-                AddCustomerDialog addCustomerDialog=new AddCustomerDialog();
+                AddCustomerDialog addCustomerDialog = new AddCustomerDialog();
                 addCustomerDialog.setInvoiceObject(invoiceObject);
-                addCustomerDialog.show(getFragmentManager(),"AddCustomerDialog");
+                addCustomerDialog.show(getFragmentManager(), "AddCustomerDialog");
                 break;
             case R.id.select:
                 if (customer != null) {
-                    ObserverActionUtils.subscribe(customer, InvoiceIssuingActivity.class);
+                    Subscription subscription = ObserverActionUtils.subscribe(customer, InvoiceIssuingActivity.class);
+                    if(subscription!=null)subscription.unsubscribe();
                     dismiss();
                 } else {
                     ToastUtil.showShort("请选择一个！");
@@ -128,7 +130,7 @@ public class SelectCustomerDialog extends DialogFragment implements AdapterView.
 
     @Override
     public void call(Customer customer) {
-        data.add(0,customer);
+        data.add(0, customer);
         adapter.notifyDataSetChanged();
     }
 

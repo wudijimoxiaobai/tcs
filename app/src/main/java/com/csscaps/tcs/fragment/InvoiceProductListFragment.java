@@ -85,7 +85,11 @@ public class InvoiceProductListFragment extends BaseManagementListFragment<Produ
     @Override
     public void onDestroy() {
         super.onDestroy();
-        InvoiceIssuingActivity.mInvoice.getProducts().clear();
-        InvoiceIssuingActivity.mInvoice.getProducts().addAll(data);
+        try {
+            InvoiceIssuingActivity.mInvoice.getProducts().clear();
+            InvoiceIssuingActivity.mInvoice.getProducts().addAll(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

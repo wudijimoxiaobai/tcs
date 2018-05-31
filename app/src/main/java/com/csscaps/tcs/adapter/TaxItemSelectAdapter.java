@@ -48,10 +48,10 @@ public class TaxItemSelectAdapter extends QuickAdapter<TaxItem> {
 
                 if (b && position != getSelectedPosition()) {
                     setSelectedPosition(position);
-                    textView.setTextColor(ContextCompat.getColor(context, R.color.blue));
+                    textView.setTextColor(ContextCompat.getColor(context, R.color.blue1));
                     if (mCheckBox != null) mCheckBox.setChecked(false);
                     if (mTextView != null)
-                        mTextView.setTextColor(ContextCompat.getColor(context, android.R.color.black));
+                        mTextView.setTextColor(ContextCompat.getColor(context, R.color.text1));
                     mCheckBox = checkBox;
                     mTextView = textView;
                 }
@@ -60,19 +60,19 @@ public class TaxItemSelectAdapter extends QuickAdapter<TaxItem> {
                     mCheckBox = null;
                     mTextView = null;
                     setSelectedPosition(-1);
-                    textView.setTextColor(ContextCompat.getColor(context, android.R.color.black));
+                    textView.setTextColor(ContextCompat.getColor(context, R.color.text1));
                 }
             }
         });
 
         if (position == mSelectedPosition) {
             checkBox.setChecked(true);
-            textView.setTextColor(ContextCompat.getColor(context, R.color.blue));
+            textView.setTextColor(ContextCompat.getColor(context, R.color.blue1));
             mCheckBox = checkBox;
             mTextView = textView;
         } else {
             checkBox.setChecked(false);
-            textView.setTextColor(ContextCompat.getColor(context, android.R.color.black));
+            textView.setTextColor(ContextCompat.getColor(context,R.color.text1));
         }
 
     }

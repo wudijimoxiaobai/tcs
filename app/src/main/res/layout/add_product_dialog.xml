@@ -7,8 +7,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue"
+        android:layout_height="74dp"
+        android:background="@drawable/bg10"
         android:padding="15dp"
         >
 
@@ -17,8 +17,10 @@
             style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:drawableStart="@mipmap/cancel"
+            android:gravity="center_vertical"
             android:text="@string/cancel"
+            android:textColor="@color/text2"
             />
 
 
@@ -30,6 +32,7 @@
             android:layout_centerInParent="true"
             android:text="@string/add_product"
             android:textSize="25sp"
+            android:textColor="@color/text2"
             />
 
 
@@ -43,6 +46,7 @@
             android:gravity="center"
             android:paddingStart="15dp"
             android:text="@string/save"
+            android:textColor="@color/text2"
             />
 
     </RelativeLayout>
@@ -51,7 +55,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@drawable/bg12"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
         >
 
         <LinearLayout
@@ -59,6 +65,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="30dp"
+            android:background="@color/top_bg"
             >
 
             <LinearLayout
@@ -76,6 +83,7 @@
                     android:padding="10dp"
                     android:text="@string/product_name"
                     android:textStyle="bold"
+                    android:textColor="@color/text1"
                     />
 
                 <EditText
@@ -90,6 +98,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -110,6 +119,7 @@
                     android:padding="10dp"
                     android:text="@string/local_name"
                     android:textStyle="bold"
+                    android:textColor="@color/text1"
                     />
 
                 <EditText
@@ -124,6 +134,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -144,6 +155,7 @@
                     android:padding="10dp"
                     android:text="@string/unit"
                     android:textStyle="bold"
+                    android:textColor="@color/text1"
                     />
 
                 <EditText
@@ -158,6 +170,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -178,6 +191,7 @@
                     android:padding="10dp"
                     android:text="@string/price"
                     android:textStyle="bold"
+                    android:textColor="@color/text1"
                     />
 
                 <EditText
@@ -190,6 +204,7 @@
                     android:hint="@string/please_input"
                     android:inputType="numberDecimal"
                     android:padding="10dp"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -210,6 +225,7 @@
                     android:padding="10dp"
                     android:text="@string/percentage"
                     android:textStyle="bold"
+                    android:textColor="@color/text1"
                     />
 
                 <EditText
@@ -222,6 +238,7 @@
                     android:hint="@string/please_input"
                     android:inputType="numberDecimal"
                     android:padding="10dp"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -242,6 +259,7 @@
                     android:padding="10dp"
                     android:text="@string/fixed_amount"
                     android:textStyle="bold"
+                    android:textColor="@color/text1"
                     />
 
                 <EditText
@@ -254,6 +272,7 @@
                     android:hint="@string/please_input"
                     android:inputType="numberDecimal"
                     android:padding="10dp"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -274,6 +293,7 @@
                     android:padding="10dp"
                     android:text="@string/purchase"
                     android:textStyle="bold"
+                    android:textColor="@color/text1"
                     />
 
                 <EditText
@@ -288,6 +308,7 @@
                     android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -308,6 +329,7 @@
                     android:padding="10dp"
                     android:text="@string/commission"
                     android:textStyle="bold"
+                    android:textColor="@color/text1"
                     />
 
                 <EditText
@@ -321,6 +343,7 @@
                     android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -341,6 +364,7 @@
                     android:padding="10dp"
                     android:text="@string/adjustment"
                     android:textStyle="bold"
+                    android:textColor="@color/text1"
                     />
 
                 <EditText
@@ -355,6 +379,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -375,6 +400,7 @@
                     android:padding="10dp"
                     android:text="@string/related_tax_items"
                     android:textStyle="bold"
+                    android:textColor="@color/text1"
                     />
 
                 <TextView
@@ -387,6 +413,8 @@
                     android:hint="@string/please_select"
                     android:minHeight="50dp"
                     android:padding="10dp"
+                    android:textColor="@color/text"
+                    android:drawableEnd="@mipmap/tin"
                     />
 
             </LinearLayout>
@@ -407,6 +435,7 @@
                     android:padding="10dp"
                     android:text="@string/specification"
                     android:textStyle="bold"
+                    android:textColor="@color/text1"
                     />
 
                 <EditText
@@ -418,6 +447,7 @@
                     android:gravity="start|top"
                     android:hint="@string/please_input"
                     android:padding="10dp"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>

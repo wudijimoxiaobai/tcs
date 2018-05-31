@@ -2,14 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@android:color/white"
               android:orientation="vertical"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue"
+        android:layout_height="74dp"
+        android:background="@drawable/bg10"
         android:padding="15dp"
         >
 
@@ -18,8 +17,10 @@
             style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:drawableStart="@mipmap/cancel"
             android:gravity="center_vertical"
             android:text="@string/cancel"
+            android:textColor="@color/text2"
             />
 
         <TextView
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/tax_item_list"
+            android:textColor="@color/text2"
             android:textSize="@dimen/text_title"
             />
 
@@ -39,46 +41,62 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:text="@string/select"
+            android:textColor="@color/text2"
             />
 
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/search"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/edit_bg"
-        android:drawableStart="@android:drawable/ic_menu_search"
-        android:imeOptions="actionSearch"
-        android:paddingStart="10dp"
-        android:singleLine="true"
-        android:gravity="center_vertical"
-        android:inputType="text"
-        android:visibility="gone"
-        />
+        android:layout_height="1dp"
+        android:background="@color/divider"/>
 
-   <View
-       android:layout_width="match_parent"
-       android:layout_height="1dp"
-       android:background="@android:color/darker_gray"
-       />
-
-    <HorizontalScrollView
-        android:id="@+id/h_scroll_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.6"
+        android:background="@drawable/bg12"
+        android:orientation="vertical"
+        android:paddingTop="36dp"
         >
 
-        <LinearLayout
-            android:id="@+id/list_layout"
+        <EditText
+            android:id="@+id/search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="45dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/edit_bg"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:gravity="center_vertical"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingStart="10dp"
+            android:singleLine="true"
+            android:visibility="gone"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            />
+
+        <HorizontalScrollView
+            android:id="@+id/h_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:background="@color/top_bg"
+            android:layout_marginBottom="36dp"
             >
-        </LinearLayout>
 
-    </HorizontalScrollView>
+            <LinearLayout
+                android:id="@+id/list_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+            </LinearLayout>
 
+        </HorizontalScrollView>
+    </LinearLayout>
 </LinearLayout>

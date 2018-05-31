@@ -21,6 +21,7 @@ import com.csscaps.tcs.database.table.Taxpayer_Table;
 import com.csscaps.tcs.fragment.CustomerManagementFragment;
 
 import butterknife.BindView;
+import rx.Subscription;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
@@ -184,7 +185,8 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
         if (edit) {
             if (t.update()) {
                 dismiss();
-                ObserverActionUtils.subscribe(t, CustomerManagementFragment.class);
+                Subscription subscription =ObserverActionUtils.subscribe(t, CustomerManagementFragment.class);
+                if(subscription!=null)subscription.unsubscribe();
             } else {
                 ToastUtil.showShort("编辑失败！");
             }
@@ -192,8 +194,10 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
         } else {
             if (t.save()) {
                 dismiss();
-                ObserverActionUtils.subscribe(t, CustomerManagementFragment.class);
-                ObserverActionUtils.subscribe(t, SelectCustomerDialog.class);
+                Subscription subscription =ObserverActionUtils.subscribe(t, CustomerManagementFragment.class);
+                Subscription subscription1 =ObserverActionUtils.subscribe(t, SelectCustomerDialog.class);
+                if(subscription!=null)subscription.unsubscribe();
+                if(subscription1!=null)subscription1.unsubscribe();
             } else {
                 ToastUtil.showShort("保存失败！");
             }

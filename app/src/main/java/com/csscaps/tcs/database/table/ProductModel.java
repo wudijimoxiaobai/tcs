@@ -4,18 +4,18 @@ import com.csscaps.tcs.database.TcsDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 
 /**
  * Created by tl on 2018/5/22.
  */
 @Table(database = TcsDatabase.class)
-public class ProductModel {
+public class ProductModel extends BaseModel{
 
+    @PrimaryKey(autoincrement = true)
     @Column
-    @PrimaryKey
+    int id;
+    @Column
     String invoice_no;
     @Column
     String category;
@@ -71,9 +71,6 @@ public class ProductModel {
     double e_tax;
     @Column
     double i_tax;
-
-
-    Map<String, Double> mapTax = new HashMap();
 
 
     public String getCategory() {
@@ -234,14 +231,6 @@ public class ProductModel {
 
     public void setInvoice_no(String invoice_no) {
         this.invoice_no = invoice_no;
-    }
-
-    public Map<String, Double> getMapTax() {
-        return mapTax;
-    }
-
-    public void setMapTax(Map<String, Double> mapTax) {
-        this.mapTax = mapTax;
     }
 
     public double getVat() {

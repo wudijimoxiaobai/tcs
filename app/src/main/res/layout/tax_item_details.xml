@@ -2,17 +2,18 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tax_item_details_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="invisible"
+    android:background="@drawable/bg16"
     >
 
 
     <LinearLayout
+        android:id="@+id/tax_item_details_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:visibility="invisible"
         >
 
         <LinearLayout
@@ -31,7 +32,7 @@
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:text="@string/name"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text1"
                 android:textStyle="bold"
                 />
 
@@ -39,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text1"
                 android:textStyle="bold"
                 />
 
@@ -50,7 +51,7 @@
                 android:layout_weight="0.5"
                 android:gravity="start"
                 android:padding="20dp"
-
+                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -72,7 +73,7 @@
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:text="@string/code"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text1"
 
                 android:textStyle="bold"
                 />
@@ -81,8 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textColor="@android:color/black"
-
+                android:textColor="@color/text1"
                 android:textStyle="bold"
                 />
 
@@ -93,7 +93,7 @@
                 android:layout_weight="0.5"
                 android:gravity="start"
                 android:padding="20dp"
-
+                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -114,8 +114,7 @@
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:text="@string/description"
-                android:textColor="@android:color/black"
-
+                android:textColor="@color/text1"
                 android:textStyle="bold"
                 />
 
@@ -123,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text1"
 
                 android:textStyle="bold"
                 />
@@ -135,7 +134,7 @@
                 android:layout_weight="0.5"
                 android:gravity="start"
                 android:padding="20dp"
-
+                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -156,7 +155,7 @@
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:text="@string/parameter"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text1"
 
                 android:textStyle="bold"
                 />
@@ -165,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text1"
 
                 android:textStyle="bold"
                 />
@@ -177,7 +176,7 @@
                 android:layout_weight="0.5"
                 android:gravity="start"
                 android:padding="20dp"
-
+                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -198,7 +197,7 @@
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:text="@string/tax_rate"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text1"
 
                 android:textStyle="bold"
                 />
@@ -207,7 +206,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text1"
 
                 android:textStyle="bold"
                 />
@@ -219,7 +218,7 @@
                 android:layout_weight="0.5"
                 android:gravity="start"
                 android:padding="20dp"
-
+                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -240,7 +239,7 @@
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:text="@string/formula_description"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text1"
                 android:textStyle="bold"
                 />
 
@@ -248,7 +247,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text1"
                 android:textStyle="bold"
                 />
 
@@ -259,6 +258,7 @@
                 android:layout_weight="0.5"
                 android:gravity="start"
                 android:padding="20dp"
+                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -279,7 +279,7 @@
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:text="@string/unit"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text1"
                 android:textStyle="bold"
                 />
 
@@ -287,7 +287,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textColor="@android:color/black"
+                android:textColor="@color/text1"
                 android:textStyle="bold"
                 />
 
@@ -298,7 +298,7 @@
                 android:layout_weight="0.5"
                 android:gravity="start"
                 android:padding="20dp"
-
+                android:textColor="@color/text"
                 />
         </LinearLayout>
 

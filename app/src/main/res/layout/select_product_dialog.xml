@@ -2,14 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@android:color/white"
               android:orientation="vertical"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue"
+        android:layout_height="74dp"
+        android:background="@drawable/bg10"
         android:padding="15dp"
         >
 
@@ -18,8 +17,10 @@
             style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:drawableStart="@mipmap/cancel"
             android:gravity="center_vertical"
             android:text="@string/cancel"
+            android:textColor="@color/text2"
             />
 
         <TextView
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/select_product"
+            android:textColor="@color/text2"
             android:textSize="@dimen/text_title"
             />
 
@@ -39,95 +41,122 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:text="@string/confirm"
+            android:textColor="@color/text2"
             />
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/lighter_gray"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="10dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg12"
+        android:orientation="vertical"
+        android:paddingTop="36dp"
         >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/top_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            >
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.27"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/product_name"
+                android:textColor="@color/text1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/specification"
+                android:textColor="@color/text1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.22"
+                android:gravity="center"
+                android:text="@string/unit"
+                android:textColor="@color/text1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/quantity"
+                android:textColor="@color/text1"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/price"
+                android:textColor="@color/text1"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.27"
-            />
+            android:layout_height="1dp"
+            android:background="@color/divider"/>
 
-        <TextView
+        <ListView
+            android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/product_name"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
+            android:background="@color/top_bg"
+            android:divider="@color/divider"
+            android:dividerHeight="1dp"
+            android:listSelector="@android:color/transparent"
+            android:layout_marginBottom="36dp"
             />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"/>
 
         <TextView
+            android:id="@+id/add_product"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:text="@string/specification"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
+            android:text="@string/add_product"
+            android:textSize="@dimen/text_title"
+            android:textColor="@color/text2"
+            android:background="@drawable/bg13"
             />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.22"
-            android:gravity="center"
-            android:text="@string/unit"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/quantity"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/price"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            />
-
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:dividerHeight="1dp"
-        android:listSelector="@android:color/transparent"
-        />
-
-    <TextView
-        android:id="@+id/add_product"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="@string/add_product"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_title"
-        android:background="@color/lighter_blue"
-        />
 </LinearLayout>

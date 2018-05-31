@@ -23,6 +23,7 @@ import com.csscaps.tcs.database.table.InvoiceNo_Table;
 import com.csscaps.tcs.database.table.InvoiceType;
 import com.csscaps.tcs.database.table.InvoiceType_Table;
 import com.csscaps.tcs.database.table.Product;
+import com.csscaps.tcs.database.table.User;
 import com.csscaps.tcs.dialog.SelectCustomerDialog;
 import com.csscaps.tcs.model.MyTaxpayer;
 import com.raizlabs.android.dbflow.structure.database.FlowCursor;
@@ -85,6 +86,8 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
     @Override
     public void initView(Bundle savedInstanceState) {
         mInvoice = new Invoice();
+        User user = JSON.parseObject(AppSP.getString("user"), User.class);
+        mInvoice.setDrawer_name(user.getName());
         String myTaxpayerString = AppSP.getString("MyTaxpayer");
         myTaxpayer = JSON.parseObject(myTaxpayerString, MyTaxpayer.class);
         if (myTaxpayer != null) {
@@ -129,7 +132,7 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
                     ToastUtil.showShort("选择的客户不合法！");
                     return;
                 }
-                if(pObject == 2 && TextUtils.isEmpty(mInvoice.getPurchaser_id_number())&&TextUtils.isEmpty(mInvoice.getPurchaser_tin())){
+                if (pObject == 2 && TextUtils.isEmpty(mInvoice.getPurchaser_id_number()) && TextUtils.isEmpty(mInvoice.getPurchaser_tin())) {
                     ToastUtil.showShort("选择的客户不合法！");
                     return;
                 }
@@ -233,6 +236,6 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mInvoice=null;
+        mInvoice = null;
     }
 }

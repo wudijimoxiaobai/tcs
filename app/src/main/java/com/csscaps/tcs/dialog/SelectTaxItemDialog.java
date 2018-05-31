@@ -1,12 +1,12 @@
 package com.csscaps.tcs.dialog;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -44,6 +44,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
+import static com.tax.fcr.library.utils.NetworkUtils.mContext;
 
 /**
  * Created by tl on 2018/5/14.
@@ -117,7 +118,7 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
         View view1 = new View(getContext());
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(2, LinearLayout.LayoutParams.MATCH_PARENT);
         view1.setLayoutParams(lp2);
-        view1.setBackgroundColor(Color.LTGRAY);
+        view1.setBackgroundColor(ContextCompat.getColor(mContext,R.color.divider));
         mListLayout.addView(listView);
         mListLayout.addView(view1);
         TaxTypeSelectAdapter taxTypeAdapter = new TaxTypeSelectAdapter(getContext(), R.layout.tax_item_select_layout, mTaxTypeList, mHandler);
@@ -173,7 +174,7 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
         View view = new View(getContext());
         LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(2, LinearLayout.LayoutParams.MATCH_PARENT);
         view.setLayoutParams(lp1);
-        view.setBackgroundColor(Color.LTGRAY);
+        view.setBackgroundColor(ContextCompat.getColor(mContext,R.color.divider));
         mListLayout.addView(listView);
         mListLayout.addView(view);
         TaxItemSelectAdapter taxItemAdapter = new TaxItemSelectAdapter(getContext(), R.layout.tax_item_select_layout, list, mHandler);

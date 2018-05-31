@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import rx.Observable;
+import rx.Subscription;
 import rx.functions.Action1;
 
 /**
@@ -16,46 +17,50 @@ public class ObserverActionUtils {
     public static Map<String, Action1> mapAction = new HashMap<>();
     public static Map<String, Observable> mapObservable = new HashMap<>();
 
-    public static void addAction(Action1 action1){
-        mapAction.put(action1.getClass().toString(),action1);
+    public static void addAction(Action1 action1) {
+        mapAction.put(action1.getClass().toString(), action1);
     }
 
-    public static void removeAction(Action1 action1){
+    public static void removeAction(Action1 action1) {
         mapAction.remove(action1.getClass().toString());
     }
 
 
-    public static void addObservable(Observable observable){
-        mapObservable.put(observable.getClass().toString(),observable);
+    public static void addObservable(Observable observable) {
+        mapObservable.put(observable.getClass().toString(), observable);
     }
 
-    public static void removeObservable(Observable observable){
+    public static void removeObservable(Observable observable) {
         mapObservable.remove(observable.getClass().toString());
     }
 
     /**
      * 订阅
-     * @param observableClass  被观察者
-     * @param actionClass 观察者
+     *
+     * @param observableClass 被观察者
+     * @param actionClass     观察者
      */
-    public static void subscribe(Class observableClass, Class actionClass) {
-        Observable observable=   mapObservable.get(observableClass.toString());
-        Action1 action1=mapAction.get(actionClass.toString());
-        if(action1==null) return;
-        observable.subscribe(action1);
+    public static Subscription subscribe(Class observableClass, Class actionClass) {
+        Observable observable = mapObservable.get(observableClass.toString());
+        Action1 action1 = mapAction.get(actionClass.toString());
+        if (action1 == null) return null;
+        Subscription subscriber = observable.subscribe(action1);
+        return subscriber;
     }
 
-    public static <T> void  subscribe(T t,Class actionClass){
-        Observable observable=  Observable.just(t);
-        Action1 action1=mapAction.get(actionClass.toString());
-        if(action1==null) return;
-        observable.subscribe(action1);
+    public static <T> Subscription subscribe(T t, Class actionClass) {
+        Observable observable = Observable.just(t);
+        Action1 action1 = mapAction.get(actionClass.toString());
+        if (action1 == null) return null;
+        Subscription subscriber = observable.subscribe(action1);
+        return subscriber;
     }
 
-    public static <T> void  subscribe(T[] t,Class actionClass){
-        Observable observable=  Observable.from(t);
-        Action1 action1=mapAction.get(actionClass.toString());
-        if(action1==null) return;
-        observable.subscribe(action1);
+    public static <T> Subscription subscribe(T[] t, Class actionClass) {
+        Observable observable = Observable.from(t);
+        Action1 action1 = mapAction.get(actionClass.toString());
+        if (action1 == null) return null;
+        Subscription subscriber = observable.subscribe(action1);
+        return subscriber;
     }
 }

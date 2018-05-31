@@ -73,11 +73,11 @@ public class TaxTypeSelectAdapter extends QuickAdapter<TaxType> {
         });
 
         if (position == mSelectedPosition) {
-            textView.setTextColor(ContextCompat.getColor(context, R.color.blue));
+            textView.setTextColor(ContextCompat.getColor(context, R.color.blue1));
 //            mCheckBox = checkBox;
 //            mTextView = textView;
         } else {
-            textView.setTextColor(ContextCompat.getColor(context, android.R.color.black));
+            textView.setTextColor(ContextCompat.getColor(context, R.color.text1));
         }
 
         if (list.contains(String.valueOf(position))) {

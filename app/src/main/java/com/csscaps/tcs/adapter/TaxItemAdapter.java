@@ -27,9 +27,9 @@ public class TaxItemAdapter extends QuickAdapter<TaxItem> {
         helper.setText(R.id.text,item.getItem_name_in_english());
 
         if(position==selectedPosition){
-            helper.setTextColor(R.id.text, ContextCompat.getColor(context,R.color.blue));
+            helper.setTextColor(R.id.text, ContextCompat.getColor(context,R.color.blue1));
         }else{
-            helper.setTextColor(R.id.text, ContextCompat.getColor(context,android.R.color.black));
+            helper.setTextColor(R.id.text, ContextCompat.getColor(context,R.color.text1));
         }
 
     }

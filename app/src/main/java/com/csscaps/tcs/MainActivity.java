@@ -33,7 +33,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onInitPresenters() {
-        startService(new Intent(this, SynchronizeService.class).putExtra("autoSyn",true));
+        startService(new Intent(this, SynchronizeService.class).putExtra("autoSyn", true));
     }
 
     @Override
@@ -43,8 +43,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        String currUser = getResources().getString(R.string.curr_user);
-        mUser.setText(String.format(currUser, name));
+        mUser.setText(name);
         mHandler.sendEmptyMessage(0);
     }
 
@@ -56,7 +55,8 @@ public class MainActivity extends BaseActivity {
             int mWeekday = DateUtils.getDayOfWeek(DateUtils.getDateNow());
             String week = getResources().getStringArray(R.array.weekday)[mWeekday - 1];
             String format = getResources().getString(R.string.date_time);
-            mTimeDate.setText(String.format(format, time, date, week));
+//            mTimeDate.setText(String.format(format, time, date, week));
+            mTimeDate.setText(date + " " + week);
             sendEmptyMessageDelayed(0, 1000);
         }
     };

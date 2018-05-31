@@ -1,132 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue"
-    android:padding="25dp"
+    android:orientation="vertical"
     >
 
-    <TextView
-        android:id="@+id/user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/text"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:background="@mipmap/top_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
 
-    <TextView
-        android:id="@+id/syn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/exit"
-        android:text="@string/synchronize"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/text"
-        android:layout_marginEnd="15dp"
-        />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="20dp"
+            android:background="@mipmap/logo_bg"
+            android:padding="10dp"
+            android:src="@mipmap/ic_launcher"
+            />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:text="@string/e_invoice"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_title"
+            />
 
-    <TextView
-        android:id="@+id/exit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:text="@string/exit"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/text"
-        />
+        <TextView
+            android:id="@+id/time_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:textColor="@android:color/white"
+            />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#7a95b3"
+            />
+
+        <TextView
+            android:id="@+id/user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@mipmap/c_user"
+            android:gravity="center_vertical"
+            android:minWidth="188dp"
+            android:padding="20dp"
+            android:textColor="@android:color/white"
+            />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#7a95b3"
+            />
+
+        <ImageView
+            android:id="@+id/syn"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/synchronize"
+            />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#7a95b3"
+            />
+
+        <ImageView
+            android:id="@+id/exit"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/exit"
+            android:textColor="@android:color/white"
+            />
+    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="600dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg"
+        android:gravity="center"
         android:orientation="vertical"
         >
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             >
 
-            <Button
-                android:id="@+id/invoice_issuing"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="@string/invoice_issuing"
-                />
-            <Button
-                android:id="@+id/statistics"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1.15"
-                android:text="@string/statistics"
-                />
-            <Button
-                android:id="@+id/invoice_information_management"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1.15"
-                android:text="@string/invoice_information_management"
-                />
+            <LinearLayout
+                android:layout_width="800dp"
+                android:layout_height="204dp"
+                android:orientation="horizontal"
+                >
 
+                <TextView
+                    android:id="@+id/invoice_issuing"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="0.25"
+                    android:background="@drawable/bg4"
+                    android:gravity="center_horizontal|bottom"
+                    android:paddingBottom="30dp"
+                    android:text="@string/invoice_issuing"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text"
+                    />
+
+                <TextView
+                    android:id="@+id/statistics"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.375"
+                    android:background="@drawable/bg5"
+                    android:gravity="center_horizontal|bottom"
+                    android:paddingBottom="30dp"
+                    android:text="@string/statistics"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text"
+                    />
+
+                <TextView
+                    android:id="@+id/invoice_information_management"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.375"
+                    android:background="@drawable/bg6"
+                    android:gravity="center_horizontal|bottom"
+                    android:paddingBottom="20dp"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:text="@string/invoice_information_management"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="800dp"
+                android:layout_height="204dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/invoice_management"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="0.35"
+                    android:background="@drawable/bg7"
+                    android:gravity="center_horizontal|bottom"
+                    android:paddingBottom="30dp"
+                    android:text="@string/invoice_management"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text"
+                    />
+
+                <TextView
+                    android:id="@+id/declaration"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.325"
+                    android:background="@drawable/bg8"
+                    android:gravity="center_horizontal|bottom"
+                    android:paddingBottom="30dp"
+                    android:text="@string/declaration"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text"
+                    />
+
+                <TextView
+                    android:id="@+id/system_management"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.35"
+                    android:background="@drawable/bg9"
+                    android:gravity="center_horizontal|bottom"
+                    android:paddingBottom="30dp"
+                    android:text="@string/system_management"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text"
+                    />
+            </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            >
-
-            <Button
-                android:id="@+id/invoice_management"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="@string/invoice_management"
-                />
-
-            <Button
-                android:id="@+id/declaration"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1"
-                android:text="@string/declaration"
-                />
-
-            <Button
-                android:id="@+id/system_management"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:text="@string/system_management"
-                android:layout_weight="1"
-                />
-        </LinearLayout>
-
-
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/time_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:gravity="center_horizontal"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/text"
-        />
-</RelativeLayout>
+
+</LinearLayout>

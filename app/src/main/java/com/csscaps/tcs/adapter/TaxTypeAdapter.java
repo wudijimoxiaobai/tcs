@@ -26,9 +26,9 @@ public class TaxTypeAdapter extends QuickAdapter<TaxType> {
     protected void convert(BaseAdapterHelper helper, TaxType item, int position) {
         helper.setText(R.id.text, item.getTaxtype_name());
         if(position==selectedPosition){
-            helper.setTextColor(R.id.text, ContextCompat.getColor(context,R.color.blue));
+            helper.setTextColor(R.id.text, ContextCompat.getColor(context,R.color.blue1));
         }else{
-            helper.setTextColor(R.id.text, ContextCompat.getColor(context,android.R.color.black));
+            helper.setTextColor(R.id.text, ContextCompat.getColor(context,R.color.text1));
         }
     }
 

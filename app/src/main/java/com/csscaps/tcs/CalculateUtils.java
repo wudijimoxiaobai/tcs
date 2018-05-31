@@ -55,16 +55,15 @@ public class CalculateUtils {
      */
     public static ProductModel calculateProductTax(Product item) {
         ProductModel productModel = new ProductModel();
-//        Map mapTax = productModel.getMapTax();
         String relateTaxItemString = item.getRelatedTaxItemString();
         RelatedTaxItem relatedTaxItem = JSON.parseObject(relateTaxItemString, RelatedTaxItem.class);
         List<TaxItem> mTaxItemList = relatedTaxItem.getTaxItemList();
         StringBuffer sb = new StringBuffer();
         String priceStr = item.getPrice();
         String quantityStr = item.getQuantity();
-        float price = TextUtils.isEmpty(priceStr) ? 0 : Float.valueOf(priceStr);
-        float quantity = TextUtils.isEmpty(quantityStr) ? 0 : Float.valueOf(quantityStr);
-        float amount = price * quantity;
+        double price = TextUtils.isEmpty(priceStr) ? 0 : Double.valueOf(priceStr);
+        double quantity = TextUtils.isEmpty(quantityStr) ? 0 : Double.valueOf(quantityStr);
+        double amount = price * quantity;
         double totalTax = 0;
         for (TaxItem taxItem : mTaxItemList) {
             String taxTypeUid = taxItem.getTaxtype_uid();
@@ -101,7 +100,7 @@ public class CalculateUtils {
             }
         }
         productModel.setE_tax(amount);
-        productModel.setI_tax(amount + totalTax);
+        productModel.setI_tax(Double.valueOf(String.format("%.2f",Math.round((amount + totalTax) * 100) * 0.01d)));
         sb.delete(0, 1);
         productModel.setQty(item.getQuantity());
         productModel.setUnit_price(item.getPrice());
@@ -110,7 +109,7 @@ public class CalculateUtils {
         productModel.setUnit(item.getUnit());
         productModel.setTax_due(String.valueOf(totalTax));
         productModel.setTaxable_amount(String.valueOf( amount));
-        productModel.setAmount_inc(String.valueOf( amount + totalTax));
+        productModel.setAmount_inc(String.format("%.2f",Math.round((amount + totalTax) * 100) * 0.01d));
         item.setTotalTax(productModel.getTax_due());
         item.seteTax(productModel.getTaxable_amount());
         item.setiTax(productModel.getAmount_inc());

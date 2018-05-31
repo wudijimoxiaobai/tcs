@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="45dp"
+              android:layout_height="58dp"
               android:background="@android:color/white"
               android:gravity="center_vertical"
               android:orientation="horizontal"
@@ -17,6 +17,7 @@
         android:gravity="start|center_vertical"
         android:paddingStart="5dp"
         android:focusable="false"
+        android:textColor="@color/text"
         />
 
 
@@ -26,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1.1"
         android:gravity="center"
-        android:text="@string/product_name"
+        android:textColor="@color/text"
         />
 
     <TextView
@@ -35,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1.1"
         android:gravity="center"
-        android:text="@string/specification"
+        android:textColor="@color/text"
         />
 
     <TextView
@@ -44,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1.2"
         android:gravity="center"
+        android:textColor="@color/text"
         />
 
     <TextView
@@ -54,7 +56,7 @@
         android:paddingStart="5dp"
         android:layout_weight="1.2"
         android:gravity="center"
-
+        android:textColor="@color/text"
         />
 
     <EditText
@@ -68,6 +70,7 @@
         android:background="@drawable/edit_bg"
         android:inputType="numberDecimal"
         android:visibility="gone"
+        android:textColor="@color/text"
         />
 
     <TextView
@@ -78,6 +81,7 @@
         android:paddingStart="5dp"
         android:layout_weight="1.2"
         android:gravity="center"
+        android:textColor="@color/text"
         />
 
     <EditText
@@ -91,6 +95,7 @@
         android:background="@drawable/edit_bg"
         android:inputType="numberDecimal"
         android:visibility="gone"
+        android:textColor="@color/text"
        />
 
     <TextView
@@ -99,6 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1.18"
         android:gravity="center"
+        android:textColor="@color/text"
         />
 
     <TextView
@@ -108,6 +114,7 @@
         android:layout_weight="1.2"
         android:gravity="center"
         android:visibility="gone"
+        android:textColor="@color/text"
         />
 
     <TextView
@@ -116,6 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1.2"
         android:gravity="center"
+        android:textColor="@color/text"
         />
 
     <TextView
@@ -124,6 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1.18"
         android:gravity="center"
+        android:textColor="@color/text"
         />
 
 </LinearLayout>

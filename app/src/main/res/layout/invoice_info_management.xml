@@ -19,7 +19,7 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue"
+        android:background="@mipmap/top_bg"
         app:tabIndicatorHeight="0dp"
         app:tabSelectedTextColor="@android:color/white"
         app:tabTextColor="@android:color/darker_gray"

@@ -16,171 +16,126 @@ import java.util.List;
 @Table(database = TcsDatabase.class)
 public class Invoice extends BaseModel implements Serializable {
 
-
-    /**
-     * invoice_no : xxx
-     * invoice_short_code : xxx
-     * invoice_made_by : xxx
-     * invoice_from : xxx
-     * invoice_type_code : xxx
-     * invoice_type_name : xxx
-     * drawer_name : xxx
-     * client_invoice_datetime : xxx
-     * purchaser_tin : xxx
-     * purchaser_name : xxx
-     * purchaser_address : xxx
-     * purchaser_phone : xxx
-     * purchaser_id_type : xxx
-     * purchaser_id_number : xxx
-     * seller_tin : xxx
-     * seller_name : xxx
-     * seller_address : xxx
-     * seller_phone : xxx
-     * seller_branch_addr : xxx
-     * is_local_currency : xxx
-     * currency_code : xxx
-     * exchange_rate : xxx
-     * total_final : xxx
-     * total_vat : xxx
-     * total_stamp : xxx
-     * total_bpt : xxx
-     * total_tax1 : xxx
-     * total_tax2 : xxx
-     * total_tax3 : xxx
-     * total_tax4 : xxx
-     * total_tax5 : xxx
-     * total_taxable_amount_org : xxx
-     * total_taxable_amount : xxx
-     * total_tax_due : xxx
-     * total_all : xxx
-     * remark : xxx
-     * negative_flag : xxx
-     * deduction_status : xxx
-     * applied_negative_total_amount : xxx
-     * org_invoice_uid : xxx
-     * original_invoice_type_code : xxx
-     * original_invoice_no : xxx
-     * invalid_flag : xxx
-     * invalid_datetime : xxx
-     * invalid_user_name : xxx
-     * invalid_remark : xxx
-     * sign : xxx
-     * print_flag : xxx
-     * is_deductable : xxx
-     * file_name : xxx
-     * file_content : xxx
-     * goods :
-     */
+    public static final String SUCCESS="1";
+    public static final String FAILURE="0";
 
     @Column
     @PrimaryKey
-    private String invoice_no;
+    String invoice_no;
     @Column
-    private String invoice_short_code;
+    String invoice_short_code;
     @Column
-    private String invoice_made_by;
+    String invoice_made_by = "S";
     @Column
-    private String invoice_from;
+    String invoice_from;
     @Column
-    private String invoice_type_code;
+    String invoice_type_code;
     @Column
-    private String invoice_type_name;
+    String invoice_type_name;
     @Column
-    private String drawer_name;
+    String drawer_name;
     @Column
-    private String client_invoice_datetime;
+    String client_invoice_datetime;
     @Column
-    private String purchaser_tin;
+    String purchaser_tin;
     @Column
-    private String purchaser_name;
+    String purchaser_name;
     @Column
-    private String purchaser_address;
+    String purchaser_address;
     @Column
-    private String purchaser_phone;
+    String purchaser_phone;
     @Column
-    private String purchaser_id_type;
+    String purchaser_id_type;
     @Column
-    private String purchaser_id_number;
+    String purchaser_id_number;
     @Column
-    private String seller_tin;
+    String seller_tin;
     @Column
-    private String seller_name;
+    String seller_name;
     @Column
-    private String seller_address;
+    String seller_address;
     @Column
-    private String seller_phone;
+    String seller_phone;
     @Column
-    private String seller_branch_addr;
+    String seller_branch_addr;
     @Column
-    private String is_local_currency;
+    String is_local_currency;
     @Column
-    private String currency_code;
+    String currency_code;
     @Column
-    private String exchange_rate;
+    String exchange_rate;
     @Column
-    private String total_final;
+    String total_final;
     @Column
-    private String total_vat;
+    String total_vat;
     @Column
-    private String total_stamp;
+    String total_stamp;
     @Column
-    private String total_bpt;
+    String total_bpt;
     @Column
-    private String total_tax1;
+    String  total_bpt_preypayment;
     @Column
-    private String total_tax2;
+    String total_fee;
     @Column
-    private String total_tax3;
+    String total_tax1;
     @Column
-    private String total_tax4;
+    String total_tax2;
     @Column
-    private String total_tax5;
+    String total_tax3;
     @Column
-    private String total_taxable_amount_org;
+    String total_tax4;
     @Column
-    private String total_taxable_amount;
+    String total_tax5;
     @Column
-    private String total_tax_due;
+    String total_taxable_amount_org;
     @Column
-    private String total_all;
+    String total_taxable_amount;
     @Column
-    private String remark;
+    String total_tax_due;
     @Column
-    private String negative_flag;
+    String total_all;
     @Column
-    private String deduction_status;
+    String remark;
     @Column
-    private String applied_negative_total_amount;
+    String negative_flag;
     @Column
-    private String org_invoice_uid;
+    String deduction_status;
     @Column
-    private String original_invoice_type_code;
+    String applied_negative_total_amount;
     @Column
-    private String original_invoice_no;
+    String org_invoice_uid;
     @Column
-    private String invalid_flag;
+    String original_invoice_type_code;
     @Column
-    private String invalid_datetime;
+    String original_invoice_no;
     @Column
-    private String invalid_user_name;
+    String invalid_flag;
     @Column
-    private String invalid_remark;
+    String invalid_datetime;
     @Column
-    private String sign;
+    String invalid_user_name;
     @Column
-    private String print_flag;
+    String invalid_remark;
     @Column
-    private String is_deductable;
+    String sign;
     @Column
-    private String file_name;
+    String print_flag;
     @Column
-    private String file_content;
+    String is_deductable;
     @Column
-    private String goods;
+    String file_name;
+    @Column
+    String file_content;
+    @Column
+    String uploadStatus;
+    @Column
+    String status;
 
-    private String  invoice_type_uid;
+    List<ProductModel> goods;
 
-    private List<Product> mProducts=new ArrayList<>();
+    String invoice_type_uid;
+
+    List<Product> mProducts = new ArrayList<>();
 
     public String getInvoice_no() {
         return invoice_no;
@@ -598,11 +553,11 @@ public class Invoice extends BaseModel implements Serializable {
         this.invoice_type_uid = invoice_type_uid;
     }
 
-    public String getGoods() {
+    public List<ProductModel> getGoods() {
         return goods;
     }
 
-    public void setGoods(String goods) {
+    public void setGoods(List<ProductModel> goods) {
         this.goods = goods;
     }
 
@@ -612,5 +567,37 @@ public class Invoice extends BaseModel implements Serializable {
 
     public void setProducts(List<Product> products) {
         mProducts = products;
+    }
+
+    public String getUploadStatus() {
+        return uploadStatus;
+    }
+
+    public void setUploadStatus(String uploadStatus) {
+        this.uploadStatus = uploadStatus;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getTotal_bpt_preypayment() {
+        return total_bpt_preypayment;
+    }
+
+    public void setTotal_bpt_preypayment(String total_bpt_preypayment) {
+        this.total_bpt_preypayment = total_bpt_preypayment;
+    }
+
+    public String getTotal_fee() {
+        return total_fee;
+    }
+
+    public void setTotal_fee(String total_fee) {
+        this.total_fee = total_fee;
     }
 }
