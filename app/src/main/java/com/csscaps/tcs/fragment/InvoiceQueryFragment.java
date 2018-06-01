@@ -9,6 +9,7 @@ import com.csscaps.tcs.R;
 import com.csscaps.tcs.adapter.BaseManagementListAdapter;
 import com.csscaps.tcs.adapter.InvoiceQueryListAdapter;
 import com.csscaps.tcs.database.table.Invoice;
+import com.csscaps.tcs.database.table.Invoice_Table;
 import com.csscaps.tcs.dialog.BaseAddDialog;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class InvoiceQueryFragment extends BaseManagementListFragment<Invoice> {
 
     @Override
     protected List<Invoice> getData() {
-        return select().from(Invoice.class).queryList();
+        return select().from(Invoice.class).orderBy(Invoice_Table.client_invoice_datetime,false).queryList();
     }
 
     @Override
@@ -104,8 +105,6 @@ public class InvoiceQueryFragment extends BaseManagementListFragment<Invoice> {
                 }
                 break;
             case R.id.search:
-
-
                 break;
         }
     }

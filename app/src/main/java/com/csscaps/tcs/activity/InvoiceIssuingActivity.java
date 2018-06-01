@@ -140,8 +140,12 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
                 startActivity(intent);
                 break;
             case R.id.tin:
-                SelectCustomerDialog selectCustomerDialog = new SelectCustomerDialog(invoiceType.getInvoiceObject());
-                selectCustomerDialog.show(getSupportFragmentManager(), "SelectCustomerDialog");
+                try {
+                    SelectCustomerDialog selectCustomerDialog = new SelectCustomerDialog(invoiceType.getInvoiceObject());
+                    selectCustomerDialog.show(getSupportFragmentManager(), "SelectCustomerDialog");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
@@ -186,7 +190,7 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
             mInvoice.setInvoice_no(invoice_num);
             mRemainingInvoice.setText((flowCursor.getCount() - 1) + "");
         } else {
-            ToastUtil.showShort("请申请发票！");
+            ToastUtil.showShort("请先申请发票！");
         }
         flowCursor.close();
         int cObject = invoiceType.getInvoiceObject();

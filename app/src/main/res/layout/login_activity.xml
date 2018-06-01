@@ -91,8 +91,8 @@
                 android:maxLines="1"
                 android:paddingEnd="5dp"
                 android:paddingStart="5dp"
-                android:textColorHint="@color/hit"
                 android:textColor="@color/text"
+                android:textColorHint="@color/hit"
                 />
 
             <RelativeLayout
@@ -110,6 +110,16 @@
                     android:textAlignment="viewStart"
                     android:textDirection="locale"
                     android:theme="@style/myDropTheme"
+                    android:paddingStart="30dp"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:background="@mipmap/language"
                     />
 
                 <ImageView

@@ -110,4 +110,6 @@
     <string name="upload">Upload</string>
     <string name="search">Search</string>
     <string name="e_invoice">E-Invoice</string>
+    <string name="network_config">Network Configuration</string>
+    <string name="user_management">User Management</string>
 </resources>

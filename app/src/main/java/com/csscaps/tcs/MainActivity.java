@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity {
             case R.id.statistics:
                 break;
             case R.id.system_management:
-
+//                startActivity(new Intent(this, SystemManagementActivity.class));
                 break;
             case R.id.invoice_information_management:
                 startActivity(new Intent(this, InvoiceInformationManagementActivity.class));

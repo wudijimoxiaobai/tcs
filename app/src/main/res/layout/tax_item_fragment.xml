@@ -69,9 +69,10 @@
                     android:id="@+id/hit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="暂无数据！"
+
                     android:textSize="@dimen/text_title"
                     android:background="@drawable/bg15"
+
                     />
 
                 <HorizontalScrollView

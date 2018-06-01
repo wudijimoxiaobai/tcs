@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@mipmap/top_bg"
+        android:paddingStart="15dp"
+        >
+
+        <TextView
+            android:id="@+id/back"
+            style="@style/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/back"
+            android:gravity="center"
+            />
+
+
+        <TextView
+            style="@style/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/user_management"
+            android:textSize="25sp"
+            />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@+id/add"
+            android:background="#7a95b3"
+            />
+
+        <TextView
+            android:id="@+id/add"
+            style="@style/text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/select"
+            android:drawableStart="@mipmap/add"
+            android:gravity="center"
+            android:minWidth="126dp"
+            android:paddingEnd="25dp"
+            android:paddingStart="25dp"
+            android:text="@string/add"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@+id/select"
+            android:background="#7a95b3"
+            />
+
+        <TextView
+            android:id="@+id/select"
+            style="@style/text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:drawableStart="@mipmap/select"
+            android:gravity="center"
+            android:minWidth="126dp"
+            android:padding="20dp"
+            android:text="@string/select"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:background="@drawable/bg10"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                >
+
+                <CheckBox
+                    android:id="@+id/all_select"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1.07"
+                    android:button="@null"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="5dp"
+                    android:text="@string/no"
+                    android:textColor="@color/text1"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider"/>
+
+            <ListView
+                android:id="@+id/list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg11"
+                android:divider="@color/divider"
+                android:dividerHeight="1dp"
+                android:listSelector="@android:color/transparent"
+                android:paddingBottom="10dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

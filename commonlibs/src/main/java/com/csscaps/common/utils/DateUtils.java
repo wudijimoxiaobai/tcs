@@ -1238,6 +1238,24 @@ public class DateUtils {
         return returnDate;
     }
 
+
+    /**
+     * 将指定格式字符串转成日期
+     * @param stringValue
+     * @param format 格式
+     * @return
+     */
+    public static Date getStringToDate(String stringValue,String format) {
+        SimpleDateFormat StringToDate = new SimpleDateFormat(format);
+        Date returnDate = new Date();
+        try {
+            returnDate = StringToDate.parse(stringValue);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return returnDate;
+    }
+
     // TODO:日期转化各种字符串格式的处理
     /*************************************** 日期转化各种字符串格式的处理 ***************************************/
     /**

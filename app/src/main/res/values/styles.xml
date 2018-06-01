@@ -46,6 +46,9 @@
         <item name="android:textSize">@dimen/text</item>
     </style>
 
-
-
+    <style name="TextAppearance.Design.Tab" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">@dimen/text</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="textAllCaps">false</item>
+    </style>
 </resources>

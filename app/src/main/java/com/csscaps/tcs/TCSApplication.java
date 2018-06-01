@@ -128,7 +128,7 @@ public class TCSApplication extends BaseApplication {
                             ToastUtil.showShort("正在初始化数据...");
                             break;
                         case 1:
-                            ToastUtil.showShort("正在初始化数据已完成！");
+                            ToastUtil.showShort("初始化数据已完成！");
                             break;
                     }
         }

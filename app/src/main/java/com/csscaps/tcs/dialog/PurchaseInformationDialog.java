@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.csscaps.common.utils.DeviceUtils;
+import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.MainActivity;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.action.IInvoiceIssuingAction;
@@ -154,6 +155,7 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
+        ToastUtil.showShort("开票完成！");
     }
 
     @Override

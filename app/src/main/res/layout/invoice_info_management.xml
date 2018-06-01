@@ -22,7 +22,7 @@
         android:background="@mipmap/top_bg"
         app:tabIndicatorHeight="0dp"
         app:tabSelectedTextColor="@android:color/white"
-        app:tabTextColor="@android:color/darker_gray"
+        app:tabTextColor="@color/text"
         app:tabMaxWidth="0dp"
         app:tabGravity="fill"
         app:tabMode="fixed"
