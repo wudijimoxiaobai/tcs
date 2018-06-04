@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.csscaps.common.base.BaseFragment;
 import com.csscaps.common.utils.AppTools;
-import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.adapter.BaseManagementListAdapter;
@@ -94,9 +93,9 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
                         mSelect.setTag(0);
 //                        mBack.setText(getString(R.string.back));
                         mSelect.setText((getString(R.string.select)));
-                        Drawable drawable = ContextCompat.getDrawable(mContext,R.mipmap.select);
+                        Drawable drawable = ContextCompat.getDrawable(mContext, R.mipmap.select);
                         drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-                        mSelect.setCompoundDrawables(drawable,null,null,null);
+                        mSelect.setCompoundDrawables(drawable, null, null, null);
                         mAllSelect.setButtonDrawable(ContextCompat.getDrawable(mContext, android.R.color.transparent));
                         mBaseManagementListAdapter.setShowCheckBox(false);
                         mAllSelect.setText(getString(R.string.no));
@@ -112,9 +111,9 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
                         mSelect.setTag(1);
 //                        mBack.setText(getString(R.string.cancel));
                         mSelect.setText((getString(R.string.delete)));
-                        Drawable drawable = ContextCompat.getDrawable(mContext,R.mipmap.delete);
+                        Drawable drawable = ContextCompat.getDrawable(mContext, R.mipmap.delete);
                         drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-                        mSelect.setCompoundDrawables(drawable,null,null,null);
+                        mSelect.setCompoundDrawables(drawable, null, null, null);
                         mAllSelect.setButtonDrawable(ContextCompat.getDrawable(mContext, R.drawable.cb_check_selector));
                         mAllSelect.setText(null);
                         mBaseManagementListAdapter.setShowCheckBox(true);
@@ -190,9 +189,9 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
     protected PopupWindow getPopupWindow(View view, int layout) {
         LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(mContext).inflate(layout, null);
         AppTools.measureView(linearLayout);
-//        int w = linearLayout.getMeasuredWidth();
+        int w = linearLayout.getMeasuredWidth();
         int h = linearLayout.getMeasuredHeight();
-        int w = DeviceUtils.dip2px(mContext, 200);
+//        int w = DeviceUtils.dip2px(mContext, 200);
         final PopupWindow popupWindow = AppTools.getPopupWindow(linearLayout, w, h);
         popupWindow.showAsDropDown(view, (int) ((view.getWidth() - w) / 2f), (int) -(view.getHeight() + h * 3f / 5));
         return popupWindow;
@@ -206,6 +205,8 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
         TextView edit = contentView.findViewById(R.id.edit);
         TextView pDelete = contentView.findViewById(R.id.p_delete);
         TextView details = contentView.findViewById(R.id.details);
+        TextView changePassword = contentView.findViewById(R.id.change_password);
+        TextView active = contentView.findViewById(R.id.active);
         if (edit != null) {
             edit.setTag(t);
             edit.setOnClickListener(this);
@@ -218,6 +219,15 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
         if (details != null) {
             details.setTag(t);
             details.setOnClickListener(this);
+        }
+        if (changePassword != null) {
+            changePassword.setTag(t);
+            changePassword.setOnClickListener(this);
+        }
+
+        if (active != null) {
+            active.setTag(t);
+            active.setOnClickListener(this);
         }
     }
 

@@ -31,7 +31,7 @@ public abstract class BaseDetailsActivity<T> extends BaseActivity {
                     Object str = method.invoke(t);
                     Method setText = editTextClass.getMethod("setText", CharSequence.class);
                     Object object = field.get(this);
-                    setText.invoke(object, String.valueOf(str));
+                    setText.invoke(object, String.valueOf(str.equals("null")?"":str));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

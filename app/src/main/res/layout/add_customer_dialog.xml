@@ -29,8 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/add_customer"
-            android:textSize="25sp"
             android:textColor="@color/text2"
+            android:textSize="25sp"
             />
 
 
@@ -54,16 +54,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg12"
-        android:paddingTop="30dp"
         android:paddingBottom="30dp"
+        android:paddingTop="30dp"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/top_bg"
             android:orientation="vertical"
             android:padding="30dp"
-            android:background="@color/top_bg"
             >
 
             <LinearLayout
@@ -121,8 +121,8 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/tin"
-                    android:textStyle="bold"
                     android:textColor="@color/text1"
+                    android:textStyle="bold"
                     />
 
                 <EditText
@@ -133,8 +133,8 @@
                     android:background="@drawable/edit_bg"
                     android:gravity="start|center_vertical"
                     android:hint="@string/please_input"
-                    android:imeOptions="actionDone"
                     android:imeActionLabel="添加"
+                    android:imeOptions="actionDone"
                     android:inputType="number"
                     android:maxLines="1"
                     android:padding="10dp"
@@ -158,8 +158,8 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/name"
-                    android:textStyle="bold"
                     android:textColor="@color/text1"
+                    android:textStyle="bold"
                     />
 
                 <EditText
@@ -194,8 +194,8 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/national_id"
-                    android:textStyle="bold"
                     android:textColor="@color/text1"
+                    android:textStyle="bold"
                     />
 
                 <EditText
@@ -207,10 +207,10 @@
                     android:gravity="start|center_vertical"
                     android:hint="@string/please_input"
                     android:imeOptions="flagNavigateNext"
-                    android:textColor="@color/text"
                     android:inputType="number"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -230,8 +230,8 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/passport"
-                    android:textStyle="bold"
                     android:textColor="@color/text1"
+                    android:textStyle="bold"
                     />
 
                 <EditText
@@ -243,10 +243,10 @@
                     android:gravity="start|center_vertical"
                     android:hint="@string/please_input"
                     android:imeOptions="flagNavigateNext"
-                  android:textColor="@color/text"
                     android:inputType="number"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -266,8 +266,8 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/tel"
-                    android:textStyle="bold"
                     android:textColor="@color/text1"
+                    android:textStyle="bold"
                     />
 
                 <EditText
@@ -281,7 +281,7 @@
                     android:inputType="number"
                     android:maxLines="1"
                     android:padding="10dp"
-                  android:textColor="@color/text"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -301,8 +301,8 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/email"
-                    android:textStyle="bold"
                     android:textColor="@color/text1"
+                    android:textStyle="bold"
                     />
 
                 <EditText
@@ -317,7 +317,7 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:padding="10dp"
-                  android:textColor="@color/text"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -337,8 +337,8 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/address"
-                    android:textStyle="bold"
                     android:textColor="@color/text1"
+                    android:textStyle="bold"
                     />
 
                 <EditText
@@ -353,7 +353,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
-                  android:textColor="@color/text"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -373,8 +373,8 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/city"
-                    android:textStyle="bold"
                     android:textColor="@color/text1"
+                    android:textStyle="bold"
                     />
 
                 <EditText
@@ -389,7 +389,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
-                  android:textColor="@color/text"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -409,8 +409,8 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/region"
-                    android:textStyle="bold"
                     android:textColor="@color/text1"
+                    android:textStyle="bold"
                     />
 
                 <EditText
@@ -425,7 +425,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
-                  android:textColor="@color/text"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -445,8 +445,8 @@
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/remarks"
-                    android:textStyle="bold"
                     android:textColor="@color/text1"
+                    android:textStyle="bold"
                     />
 
                 <EditText
@@ -460,7 +460,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
-                  android:textColor="@color/text"
+                    android:textColor="@color/text"
                     />
 
             </LinearLayout>

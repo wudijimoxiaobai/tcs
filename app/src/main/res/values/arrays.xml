@@ -28,6 +28,10 @@
         <item>B</item>
         <item>C</item>
     </string-array>
+    <string-array name="role">
+        <item>Administrator</item>
+        <item>Operator</item>
+    </string-array>
     <string-array name="tab2">
         <item>Invoice Application</item>
         <item>Request Invoice</item>
@@ -35,7 +39,7 @@
         <item>Invoice Query</item>
     </string-array>
     <string-array name="tab3">
-        <item>Network Configuration</item>
+      <!--  <item>Network Configuration</item>-->
         <item>User Management</item>
     </string-array>
 </resources>

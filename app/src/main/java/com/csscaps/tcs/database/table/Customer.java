@@ -50,7 +50,7 @@ public class Customer extends BaseModel implements Serializable {
     String remarks;
 
     @Column
-    boolean registered;
+    boolean registered=true;
 
     public String getTin() {
         return tin;

@@ -6,25 +6,51 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.io.Serializable;
+
 /**
  * Created by tl on 2018/5/2.
  * 用户表
  */
 @Table(database = TcsDatabase.class)
-public class User extends BaseModel {
+public class User extends BaseModel implements Serializable {
 
     @PrimaryKey(autoincrement = true)
     @Column
     int id;
 
     @Column
-    String name;
+    String userName;
 
     @Column
-    String password;
+    String password="12345678";
 
     @Column
-    String level;
+    int role;
+
+    @Column
+    String tel;
+
+    @Column
+    String email;
+
+    @Column
+    String address;
+
+    @Column
+    String remarks;
+
+    @Column
+    int gender;
+
+    @Column
+    String realName;
+
+    @Column
+    String code;
+
+    @Column
+    int status=1;
 
     public int getId() {
         return id;
@@ -34,12 +60,12 @@ public class User extends BaseModel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -50,12 +76,75 @@ public class User extends BaseModel {
         this.password = password;
     }
 
-    public String getLevel() {
-        return level;
+    public int getRole() {
+        return role;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
+    public void setRole(int role) {
+        this.role = role;
     }
 
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }

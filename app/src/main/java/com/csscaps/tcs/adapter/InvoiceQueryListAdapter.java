@@ -30,6 +30,6 @@ public class InvoiceQueryListAdapter extends BaseManagementListAdapter<Invoice> 
         helper.setText(R.id.tax_Amount, item.getTotal_tax_due());
         helper.setText(R.id.i_tax, item.getTotal_all());
         helper.setText(R.id.upload_status, item.getUploadStatus().equals("1") ? "Y" : "N");
-        helper.setText(R.id.issuing_date_time, DateUtils.dateToStr(DateUtils.getStringToDate(item.getClient_invoice_datetime(), DateUtils.format_yyyyMMddHHmmss_24_EN), DateUtils.format_yyyy_MM_dd_HH_mm_ss_12_EN));
+        helper.setText(R.id.issuing_date_time, DateUtils.dateToStr(DateUtils.getStringToDate(item.getClient_invoice_datetime(), DateUtils.format_yyyyMMddHHmmss_24_EN), DateUtils.format_yyyy_MM_dd_HH_mm_ss_24_EN));
     }
 }

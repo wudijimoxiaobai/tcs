@@ -33,6 +33,7 @@
             />
 
         <View
+            android:id="@+id/add_line"
             android:layout_width="1px"
             android:layout_height="match_parent"
             android:layout_toStartOf="@+id/add"
@@ -54,6 +55,7 @@
             android:text="@string/add"/>
 
         <View
+            android:id="@+id/select_line"
             android:layout_width="1px"
             android:layout_height="match_parent"
             android:layout_toStartOf="@+id/select"

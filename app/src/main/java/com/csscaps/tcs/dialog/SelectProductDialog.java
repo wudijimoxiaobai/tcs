@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.TCSApplication;
 import com.csscaps.tcs.adapter.SelectProductListAdapter;
 import com.csscaps.tcs.database.table.Product;
 import com.csscaps.tcs.fragment.InvoiceProductListFragment;
@@ -35,6 +37,8 @@ public class SelectProductDialog extends DialogFragment implements Action1<Produ
 
     @BindView(R.id.list_view)
     ListView mListView;
+    @BindView(R.id.add_product)
+    TextView mAddProduct;
 
     List<Product> data;
     SelectProductListAdapter adapter;
@@ -68,6 +72,9 @@ public class SelectProductDialog extends DialogFragment implements Action1<Produ
     }
 
     private void initView() {
+        if (TCSApplication.currentUser.getRole() == 1) {
+            mAddProduct.setVisibility(View.GONE);
+        }
         ObserverActionUtils.addAction(this);
         data = select().from(Product.class).queryList();
         adapter = new SelectProductListAdapter(getContext(), R.layout.select_product_list_item_layout, data);
@@ -82,13 +89,13 @@ public class SelectProductDialog extends DialogFragment implements Action1<Produ
                 break;
             case R.id.confirm:
                 dismiss();
-                List<Product> checkedList  = adapter.getCheckedList();
+                List<Product> checkedList = adapter.getCheckedList();
                 Subscription subscription = ObserverActionUtils.subscribe(checkedList.toArray(), InvoiceProductListFragment.class);
-                if(subscription!=null)subscription.unsubscribe();
+                if (subscription != null) subscription.unsubscribe();
                 break;
             case R.id.add_product:
-                AddProductDialog addProductDialog=new AddProductDialog();
-                addProductDialog.show(getChildFragmentManager(),"AddProductDialog");
+                AddProductDialog addProductDialog = new AddProductDialog();
+                addProductDialog.show(getChildFragmentManager(), "AddProductDialog");
                 break;
         }
     }
@@ -101,7 +108,7 @@ public class SelectProductDialog extends DialogFragment implements Action1<Produ
 
     @Override
     public void call(Product product) {
-        data.add(0,product);
+        data.add(0, product);
         adapter.notifyDataSetChanged();
     }
 }

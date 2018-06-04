@@ -26,7 +26,7 @@ public class SystemManagementActivity extends BaseActivity implements TabLayout.
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.invoice_management_activity;
+        return R.layout.system_management_activity;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class SystemManagementActivity extends BaseActivity implements TabLayout.
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.content, mUserManagementFragment);
-        transaction.add(R.id.content, mNetworkConfigurationFragment);
+//        transaction.add(R.id.content, mNetworkConfigurationFragment);
         transaction.commit();
     }
 
@@ -64,6 +64,7 @@ public class SystemManagementActivity extends BaseActivity implements TabLayout.
                 transaction.show(mUserManagementFragment);
                 break;
         }
+        transaction.commit();
     }
 
     @Override

@@ -37,6 +37,8 @@
         <activity android:name=".activity.InvoiceManagementActivity"/>
         <activity android:name=".activity.ProductListActivity"/>
         <activity android:name=".activity.SystemManagementActivity"/>
+        <activity android:name=".activity.UserDetailsActivity"/>
+        <activity android:name=".activity.ChangePasswordActivity"/>
     </application>
 
 </manifest>

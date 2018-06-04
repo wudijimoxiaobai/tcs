@@ -36,9 +36,10 @@ public class LaunchActivity extends Activity {
         List<User> list= SQLite.select().from(User.class).queryList();
         if(list.size()==0){
             User admin=new User();
-            admin.setName("admin");
-            admin.setPassword("123456");
-            admin.setLevel("1");
+            admin.setUserName("admin");
+            admin.setPassword("12345678");
+            admin.setRole(0);
+            admin.setStatus(0);
             admin.save();
         }
         new Handler().postDelayed(new Runnable() {

@@ -16,6 +16,7 @@ import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.TCSApplication;
 import com.csscaps.tcs.database.table.Customer;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.InvoiceNo;
@@ -23,7 +24,6 @@ import com.csscaps.tcs.database.table.InvoiceNo_Table;
 import com.csscaps.tcs.database.table.InvoiceType;
 import com.csscaps.tcs.database.table.InvoiceType_Table;
 import com.csscaps.tcs.database.table.Product;
-import com.csscaps.tcs.database.table.User;
 import com.csscaps.tcs.dialog.SelectCustomerDialog;
 import com.csscaps.tcs.model.MyTaxpayer;
 import com.raizlabs.android.dbflow.structure.database.FlowCursor;
@@ -86,8 +86,7 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
     @Override
     public void initView(Bundle savedInstanceState) {
         mInvoice = new Invoice();
-        User user = JSON.parseObject(AppSP.getString("user"), User.class);
-        mInvoice.setDrawer_name(user.getName());
+        mInvoice.setDrawer_name(TCSApplication.currentUser.getUserName());
         String myTaxpayerString = AppSP.getString("MyTaxpayer");
         myTaxpayer = JSON.parseObject(myTaxpayerString, MyTaxpayer.class);
         if (myTaxpayer != null) {

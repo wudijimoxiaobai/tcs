@@ -12,6 +12,7 @@ import com.csscaps.common.utils.DateUtils;
 import com.csscaps.tcs.activity.InvoiceInformationManagementActivity;
 import com.csscaps.tcs.activity.InvoiceIssuingActivity;
 import com.csscaps.tcs.activity.InvoiceManagementActivity;
+import com.csscaps.tcs.activity.SystemManagementActivity;
 import com.csscaps.tcs.service.SynchronizeService;
 
 import butterknife.BindView;
@@ -94,7 +95,7 @@ public class MainActivity extends BaseActivity {
             case R.id.statistics:
                 break;
             case R.id.system_management:
-//                startActivity(new Intent(this, SystemManagementActivity.class));
+                startActivity(new Intent(this, SystemManagementActivity.class));
                 break;
             case R.id.invoice_information_management:
                 startActivity(new Intent(this, InvoiceInformationManagementActivity.class));

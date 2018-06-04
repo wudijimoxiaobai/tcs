@@ -8,6 +8,7 @@ import com.csscaps.common.utils.AppSP;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.database.TcsDatabase;
 import com.csscaps.tcs.database.table.Taxpayer;
+import com.csscaps.tcs.database.table.User;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
@@ -28,6 +29,7 @@ import java.util.List;
 
 public class TCSApplication extends BaseApplication {
 
+    public static User currentUser;
 
     @Override
     public void onCreate() {

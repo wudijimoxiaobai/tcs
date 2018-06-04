@@ -178,7 +178,7 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
             return;
         }
 
-        if (TextUtils.isEmpty(tin)) {
+        if (TextUtils.isEmpty(tin)||!t.isRegistered()) {
             t.setTin(null);
         }
 

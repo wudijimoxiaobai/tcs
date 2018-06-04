@@ -8,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.csscaps.common.base.BaseActivity;
 import com.csscaps.common.utils.AppSP;
 import com.csscaps.common.utils.AppTools;
@@ -42,7 +41,8 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
     }
 
     @Override
-    protected void onInitPresenters() {}
+    protected void onInitPresenters() {
+    }
 
     @Override
     public void initView(Bundle savedInstanceState) {
@@ -54,15 +54,19 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
 
     @OnClick(R.id.login)
     public void onClick() {
-        mUser.setText("admin");
-        mPassword.setText("123456");
-        String name=mUser.getText().toString().trim();
-        String password=mPassword.getText().toString().trim();
-        User user = SQLite.select().from(User.class).where(User_Table.name.eq(name)).and(User_Table.password.eq(password)).querySingle();
+//        mUser.setText("admin");
+//        mPassword.setText("12345678");
+        String name = mUser.getText().toString().trim();
+        String password = mPassword.getText().toString().trim();
+        User user = SQLite.select().from(User.class).where(User_Table.userName.eq(name)).and(User_Table.password.eq(password)).querySingle();
         if (user != null) {
-            AppSP.putString("user", JSON.toJSONString(user));
-            Intent intent=new Intent(this, MainActivity.class);
-            intent.putExtra("name",name);
+            if(user.getStatus()==1){
+                ToastUtil.showShort("此用户未激活，请联系管理员！");
+                return;
+            }
+            TCSApplication.currentUser = user;
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("name", name);
             startActivity(intent);
             finish();
         } else {
@@ -84,5 +88,6 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {}
+    public void onNothingSelected(AdapterView<?> adapterView) {
+    }
 }

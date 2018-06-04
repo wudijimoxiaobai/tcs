@@ -32,6 +32,7 @@
             />
 
         <View
+            android:id="@+id/add_line"
             android:layout_width="1px"
             android:layout_height="match_parent"
             android:layout_toStartOf="@+id/add"
@@ -53,6 +54,7 @@
             android:text="@string/add"/>
 
         <View
+            android:id="@+id/select_line"
             android:layout_width="1px"
             android:layout_height="match_parent"
             android:layout_toStartOf="@+id/select"
@@ -109,6 +111,76 @@
                     android:text="@string/no"
                     android:textColor="@color/text1"
                     android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/name"
+                    android:textColor="@color/text"
+                    />
+
+                <TextView
+                    android:id="@+id/code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/code"
+                    android:textColor="@color/text"
+                    />
+
+                <TextView
+                    android:id="@+id/role"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/role"
+                    android:textColor="@color/text"
+                    />
+
+                <TextView
+                    android:id="@+id/tel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/tel"
+                    android:textColor="@color/text"
+                    />
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/email"
+                    android:textColor="@color/text"
+                    />
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/address"
+                    android:textColor="@color/text"
+                    />
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/status"
+                    android:textColor="@color/text"
                     />
             </LinearLayout>
 
