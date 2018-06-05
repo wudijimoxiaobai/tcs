@@ -59,7 +59,7 @@ public class UserDetailsActivity extends BaseDetailsActivity<User> {
         tIntoTextView(mUser);
         mGender.setText(mUser.getGender() == 0 ? getString(R.string.male) : getString(R.string.female));
         mRole.setText(mUser.getRole() == 0 ? getString(R.string.admin) : getString(R.string.operator));
-        mStatus.setText(mUser.getStatus() == 0 ? getString(R.string.active) : getString(R.string.not_active));
+        mStatus.setText(mUser.getStatus() == 0 ? getString(R.string.active) : getString(R.string.inactive));
     }
 
 

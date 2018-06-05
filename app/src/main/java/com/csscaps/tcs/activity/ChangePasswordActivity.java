@@ -69,25 +69,25 @@ public class ChangePasswordActivity extends BaseActivity {
                 String newPassword = mNewPassword.getText().toString().trim();
                 String confirmPassword = mConfirmPassword.getText().toString().trim();
                 if (TextUtils.isEmpty(oldPassword)) {
-                    ToastUtil.showShort("Old Password 不能为空！");
+                    ToastUtil.showShort(getString(R.string.hit32));
                     return;
                 } else {
                     if (!oldPwd.equals(oldPassword)) {
-                        ToastUtil.showShort("Old Password 输入有误！");
+                        ToastUtil.showShort(getString(R.string.hit27));
                         return;
                     }
                 }
 
                 if (TextUtils.isEmpty(newPassword)) {
-                    ToastUtil.showShort("New Password 不能为空！");
+                    ToastUtil.showShort(getString(R.string.hit33));
                     return;
                 }
                 if (TextUtils.isEmpty(confirmPassword)) {
-                    ToastUtil.showShort("Confirm Password 不能为空！");
+                    ToastUtil.showShort(getString(R.string.hit34));
                     return;
                 } else {
                     if (!confirmPassword.equals(newPassword)) {
-                        ToastUtil.showShort("Confirm Password 和 New Password 不一致！");
+                        ToastUtil.showShort(getString(R.string.hit28));
                         return;
                     }
                 }

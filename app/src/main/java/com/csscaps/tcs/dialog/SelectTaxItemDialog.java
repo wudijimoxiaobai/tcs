@@ -252,9 +252,9 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
                 break;
             case R.id.select:
                 if (listTax.size() > map.keySet().size()) {
-                    ToastUtil.showShort("每一个税种下只能选一个税目！");
+                    ToastUtil.showShort(getString(R.string.hit25));
                 } else if (listTax.size() == 0) {
-                    ToastUtil.showShort("至少关联一个税种！");
+                    ToastUtil.showShort(getString(R.string.hit26));
                 } else {
                     relate();
                     dismiss();

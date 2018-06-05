@@ -61,7 +61,7 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
         User user = SQLite.select().from(User.class).where(User_Table.userName.eq(name)).and(User_Table.password.eq(password)).querySingle();
         if (user != null) {
             if(user.getStatus()==1){
-                ToastUtil.showShort("此用户未激活，请联系管理员！");
+                ToastUtil.showShort(getString(R.string.hit35));
                 return;
             }
             TCSApplication.currentUser = user;
@@ -70,7 +70,7 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
             startActivity(intent);
             finish();
         } else {
-            ToastUtil.showShort("用户名或密码错误！");
+            ToastUtil.showShort(getString(R.string.hit1));
         }
     }
 

@@ -16,10 +16,13 @@ import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.TCSApplication;
 import com.csscaps.tcs.database.table.User;
+import com.csscaps.tcs.database.table.User_Table;
 import com.csscaps.tcs.fragment.UserManagementFragment;
 
 import butterknife.BindView;
 import rx.Subscription;
+
+import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
 /**
  * Created by tl on 2018/6/4.
@@ -74,6 +77,11 @@ public class AddUserDialog extends BaseAddDialog<User> implements AdapterView.On
                 mRoleSpinner.setEnabled(false);
                 mNo.setVisibility(View.GONE);
             }
+            if(t.getId()==TCSApplication.currentUser.getId()){
+                mRoleSpinner.setEnabled(false);
+                mYes.setEnabled(false);
+                mNo.setEnabled(false);
+            }
 
             mTitle.setText(getString(R.string.edit_user));
             tIntoEditText();
@@ -104,16 +112,20 @@ public class AddUserDialog extends BaseAddDialog<User> implements AdapterView.On
     @Override
     protected void save() {
         if (TextUtils.isEmpty(mUserName.getText().toString().trim())) {
-            ToastUtil.showShort("UserName不能为空！");
+            ToastUtil.showShort(getString(R.string.hit30));
             return;
         }
         if (TextUtils.isEmpty(mTel.getText().toString().trim())) {
-            ToastUtil.showShort("Tel不能为空！");
+            ToastUtil.showShort(getString(R.string.hit31));
             return;
         }
-
         editTextsIntoT();
+        User user= select().from(User.class).where(User_Table.userName.eq(t.getUserName())).querySingle();
         if (edit) {
+             if(user!=null&&t.getId()!=user.getId()){
+                 ToastUtil.showShort(getString(R.string.hit37));
+                 return;
+             }
             if (t.update()) {
                 if (TCSApplication.currentUser.getId() == t.getId()) {
                     TCSApplication.currentUser = t;
@@ -122,16 +134,20 @@ public class AddUserDialog extends BaseAddDialog<User> implements AdapterView.On
                 Subscription subscription = ObserverActionUtils.subscribe(t, UserManagementFragment.class);
                 if (subscription != null) subscription.unsubscribe();
             } else {
-                ToastUtil.showShort("编辑失败！");
+                ToastUtil.showShort(getString(R.string.hit9));
             }
 
         } else {
+            if(user!=null){
+                ToastUtil.showShort(getString(R.string.hit37));
+                return;
+            }
             if (t.save()) {
                 dismiss();
                 Subscription subscription = ObserverActionUtils.subscribe(t, UserManagementFragment.class);
                 subscription.unsubscribe();
             } else {
-                ToastUtil.showShort("保存失败！");
+                ToastUtil.showShort(getString(R.string.hit10));
             }
 
         }
@@ -141,10 +157,6 @@ public class AddUserDialog extends BaseAddDialog<User> implements AdapterView.On
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         t.setRole(i);
-        if (i == 0) {
-            mYes.setChecked(true);
-            t.setStatus(0);
-        }
     }
 
     @Override

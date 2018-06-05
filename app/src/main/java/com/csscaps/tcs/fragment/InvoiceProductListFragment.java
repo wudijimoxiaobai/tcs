@@ -72,7 +72,7 @@ public class InvoiceProductListFragment extends BaseManagementListFragment<Produ
                 break;
             case R.id.calculate:
                 if(data.size()==0){
-                    ToastUtil.showShort("请添加商品！");
+                    ToastUtil.showShort(getString(R.string.hit21));
                     break;
                 }
                 PurchaseInformationDialog purchaseInformationDialog=new PurchaseInformationDialog(data);

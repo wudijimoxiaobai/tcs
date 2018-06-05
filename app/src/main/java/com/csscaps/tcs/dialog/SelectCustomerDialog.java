@@ -94,7 +94,7 @@ public class SelectCustomerDialog extends DialogFragment implements AdapterView.
                     if(subscription!=null)subscription.unsubscribe();
                     dismiss();
                 } else {
-                    ToastUtil.showShort("请选择一个！");
+                    ToastUtil.showShort(getString(R.string.hit12));
                 }
                 break;
         }

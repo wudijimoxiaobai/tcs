@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.TCSApplication;
 import com.csscaps.tcs.activity.ProductDetailsActivity;
@@ -79,21 +78,11 @@ public class ProductManagementFragment extends BaseManagementListFragment<Produc
 
     @Override
     public void onClick(View view) {
+        super.onClick(view);
         switch (view.getId()) {
-            case R.id.add:
-            case R.id.edit:
-            case R.id.p_delete:
-            case R.id.select:
-                if (TCSApplication.currentUser.getRole() == 1) {
-                    ToastUtil.showShort("此用户无权限！");
-                    return;
-                }
-                break;
             case R.id.search:
                 break;
         }
-        super.onClick(view);
-
     }
 
 

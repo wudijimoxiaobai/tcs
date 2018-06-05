@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSON;
 import com.csscaps.common.utils.AppSP;
 import com.csscaps.common.utils.DateUtils;
 import com.csscaps.common.utils.ToastUtil;
+import com.csscaps.tcs.R;
 import com.csscaps.tcs.ServerConstants;
 import com.csscaps.tcs.database.TcsDatabase;
 import com.csscaps.tcs.database.table.InvoiceTaxType;
@@ -218,10 +219,10 @@ public class SynchronizeService extends Service implements IPresenter {
         if (autoSyn) {
             switch (errorMes) {
                 case Api.ERR_NETWORK:
-                    ToastUtil.showShort("无法连接网络！");
+                    ToastUtil.showShort(getString(R.string.hit3));
                     break;
                 case Api.FAIL_CONNECT:
-                    ToastUtil.showShort("网络异常！");
+                    ToastUtil.showShort(getString(R.string.hit4));
                     break;
             }
         }

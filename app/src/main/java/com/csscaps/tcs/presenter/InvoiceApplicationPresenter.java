@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSON;
 import com.csscaps.common.base.BasePresenter;
 import com.csscaps.common.utils.AppSP;
 import com.csscaps.common.utils.ToastUtil;
+import com.csscaps.tcs.R;
 import com.csscaps.tcs.ServerConstants;
 import com.csscaps.tcs.action.IInvoiceApplicationAction;
 import com.csscaps.tcs.database.TcsDatabase;
@@ -68,7 +69,7 @@ public class InvoiceApplicationPresenter extends BasePresenter<IInvoiceApplicati
             requestModel.setData(JSON.toJSONString(requestInvoiceNo));
             Api.post(this, requestModel);
         } else {
-            if (refresh) ToastUtil.showShort("没有小于安全值的发票不能申请！");
+            if (refresh) ToastUtil.showShort(mContext.getString(R.string.hit11));
         }
     }
 
@@ -116,10 +117,10 @@ public class InvoiceApplicationPresenter extends BasePresenter<IInvoiceApplicati
         if (refresh) {
             switch (errorMes) {
                 case Api.ERR_NETWORK:
-                    ToastUtil.showShort("无法连接网络！");
+                    ToastUtil.showShort(mContext.getString(R.string.hit3));
                     break;
                 case Api.FAIL_CONNECT:
-                    ToastUtil.showShort("网络异常！");
+                    ToastUtil.showShort(mContext.getString(R.string.hit4));
                     break;
             }
         }

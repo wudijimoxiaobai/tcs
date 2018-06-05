@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.TCSApplication;
 import com.csscaps.tcs.activity.ChangePasswordActivity;
@@ -54,9 +55,27 @@ public class UserManagementFragment extends BaseManagementListFragment<User> {
 
     @Override
     protected int getPopupWindowLayout() {
+        //普通操作员
         if (TCSApplication.currentUser.getRole() == 1) {
             return R.layout.user_list_popuwindow1_layout;
         }
+        //当前用户
+        if (user.getId() == TCSApplication.currentUser.getId()) {
+            return R.layout.user_list_popuwindow3_layout;
+        }
+        // 点击admin  非admin用户登录
+        if (user.getId() == 1 && TCSApplication.currentUser.getId() != 1) {
+            return R.layout.user_list_popuwindow4_layout;
+        }
+        // 点击admin  admin用户登录
+        if (user.getId() == 1 && TCSApplication.currentUser.getId() == 1) {
+            return R.layout.user_list_popuwindow5_layout;
+        }
+        // 点击已激活用户
+        if (user.getStatus() == 0 && user.getId() != TCSApplication.currentUser.getId()) {
+            return R.layout.user_list_popuwindow2_layout;
+        }
+        // 点击未激活用户
         return R.layout.user_list_popuwindow_layout;
     }
 
@@ -98,8 +117,21 @@ public class UserManagementFragment extends BaseManagementListFragment<User> {
             case R.id.active:
                 popupWindow.dismiss();
                 User user = (User) view.getTag();
-                user.setStatus(0);
+                user.setStatus(Math.abs(user.getStatus() - 1));
                 user.update();
+                mBaseManagementListAdapter.notifyDataSetChanged();
+                break;
+            case R.id.p_delete:
+                popupWindow.dismiss();
+                User t = (User) view.getTag();
+                if (t.getId() == 1 || TCSApplication.currentUser.getId() == t.getId()) {
+                    ToastUtil.showShort(getString(R.string.hit36));
+                    return;
+                }
+                if (isDataBase) {
+                    t.delete();
+                }
+                data.remove(t);
                 mBaseManagementListAdapter.notifyDataSetChanged();
                 break;
         }
@@ -108,6 +140,7 @@ public class UserManagementFragment extends BaseManagementListFragment<User> {
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        user = data.get(i);
         super.onItemClick(adapterView, view, i, l);
 
     }

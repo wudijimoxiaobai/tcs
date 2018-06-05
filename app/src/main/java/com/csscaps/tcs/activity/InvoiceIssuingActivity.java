@@ -109,7 +109,7 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
         mInvoiceType.setOnItemSelectedListener(this);
         mLanguageInInvoice.setOnItemSelectedListener(this);
         if (mInvoiceTypes.size() == 0) {
-            ToastUtil.showShort("请先同步数据！");
+            ToastUtil.showShort(getString(R.string.hit22));
         }
         ObserverActionUtils.addAction(this);
 
@@ -124,15 +124,15 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
                 break;
             case R.id.next:
                 if (pObject == 0 && TextUtils.isEmpty(mInvoice.getPurchaser_tin())) {
-                    ToastUtil.showShort("选择的客户不合法！");
+                    ToastUtil.showShort(getString(R.string.hit23));
                     return;
                 }
                 if (pObject == 1 && TextUtils.isEmpty(mInvoice.getPurchaser_id_number())) {
-                    ToastUtil.showShort("选择的客户不合法！");
+                    ToastUtil.showShort(getString(R.string.hit23));
                     return;
                 }
                 if (pObject == 2 && TextUtils.isEmpty(mInvoice.getPurchaser_id_number()) && TextUtils.isEmpty(mInvoice.getPurchaser_tin())) {
-                    ToastUtil.showShort("选择的客户不合法！");
+                    ToastUtil.showShort(getString(R.string.hit23));
                     return;
                 }
                 Intent intent = new Intent(this, ProductListActivity.class);
@@ -189,7 +189,7 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
             mInvoice.setInvoice_no(invoice_num);
             mRemainingInvoice.setText((flowCursor.getCount() - 1) + "");
         } else {
-            ToastUtil.showShort("请先申请发票！");
+            ToastUtil.showShort(getString(R.string.hit24));
         }
         flowCursor.close();
         int cObject = invoiceType.getInvoiceObject();

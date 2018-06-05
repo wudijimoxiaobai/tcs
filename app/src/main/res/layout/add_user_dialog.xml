@@ -381,7 +381,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:checked="true"
-                        android:text="@string/not_active"
+                        android:text="@string/inactive"
                         />
 
                 </RadioGroup>

@@ -127,10 +127,10 @@ public class TCSApplication extends BaseApplication {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                         case 0:
-                            ToastUtil.showShort("正在初始化数据...");
+                            ToastUtil.showShort(getString(R.string.hit19));
                             break;
                         case 1:
-                            ToastUtil.showShort("初始化数据已完成！");
+                            ToastUtil.showShort(getString(R.string.hit20));
                             break;
                     }
         }

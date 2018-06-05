@@ -94,21 +94,21 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
         String productName = mProductName.getText().toString().trim();
         String unit = mUnit.getText().toString().trim();
         if (TextUtils.isEmpty(productName)) {
-            ToastUtil.showShort("ProductName不能为空！");
+            ToastUtil.showShort(getString(R.string.hit6));
             return;
         } else {
             t.setProductName(productName);
         }
 
         if (TextUtils.isEmpty(unit)) {
-            ToastUtil.showShort("Unit不能为空！");
+            ToastUtil.showShort(getString(R.string.hit7));
             return;
         } else {
             t.setUnit(unit);
         }
 
         if (TextUtils.isEmpty(t.getRelatedTaxItemString())) {
-            ToastUtil.showShort("未关联税目！");
+            ToastUtil.showShort(getString(R.string.hit8));
             return;
         }
       editTextsIntoT();
@@ -119,7 +119,7 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
                 Subscription subscription =ObserverActionUtils.subscribe(t, ProductManagementFragment.class);
                 if(subscription!=null)subscription.unsubscribe();
             } else {
-                ToastUtil.showShort("编辑失败！");
+                ToastUtil.showShort(getString(R.string.hit9));
             }
 
         } else {
@@ -130,7 +130,7 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
                 if(subscription!=null)subscription.unsubscribe();
                 if(subscription1!=null)subscription1.unsubscribe();
             } else {
-                ToastUtil.showShort("保存失败！");
+                ToastUtil.showShort(getString(R.string.hit10));
             }
         }
 

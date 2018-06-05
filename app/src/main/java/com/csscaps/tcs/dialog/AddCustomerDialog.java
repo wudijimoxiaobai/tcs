@@ -100,10 +100,10 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
                             mState.setText(taxpayer.getState());
                             t.setRegistered(true);
                         } else {
-                            ToastUtil.showShort("Tin不合法！");
+                            ToastUtil.showShort(getString(R.string.hit13));
                         }
                     } else {
-                        ToastUtil.showShort("正在初始化数据，请稍后效验！");
+                        ToastUtil.showShort(getString(R.string.hit14));
                     }
 
                 }
@@ -154,13 +154,13 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
     @Override
     protected void save() {
         if (t.isRegistered() && TextUtils.isEmpty(mTin.getText().toString().trim())) {
-            ToastUtil.showShort("Tin不能为空！");
+            ToastUtil.showShort(getString(R.string.hit15));
             return;
         }
         String tin = mTin.getText().toString().trim();
         Taxpayer taxpayer = select().from(Taxpayer.class).where(Taxpayer_Table.tin.eq(tin)).querySingle();
         if (t.isRegistered() && taxpayer == null) {
-            ToastUtil.showShort("Tin未注册！");
+            ToastUtil.showShort(getString(R.string.hit16));
             return;
         }
 
@@ -170,11 +170,11 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
         editTextsIntoT();
 
         if(!t.isRegistered()&&TextUtils.isEmpty(t.getName())){
-            ToastUtil.showShort("Name不能为空！");
+            ToastUtil.showShort(getString(R.string.hit17));
             return;
         }
         if(!t.isRegistered()&&TextUtils.isEmpty(t.getNationalId())&&TextUtils.isEmpty(t.getPassport())){
-            ToastUtil.showShort("National ID 或 Passport 不能为空！");
+            ToastUtil.showShort(getString(R.string.hit18));
             return;
         }
 
@@ -188,7 +188,7 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
                 Subscription subscription =ObserverActionUtils.subscribe(t, CustomerManagementFragment.class);
                 if(subscription!=null)subscription.unsubscribe();
             } else {
-                ToastUtil.showShort("编辑失败！");
+                ToastUtil.showShort(getString(R.string.hit9));
             }
 
         } else {
@@ -199,7 +199,7 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
                 if(subscription!=null)subscription.unsubscribe();
                 if(subscription1!=null)subscription1.unsubscribe();
             } else {
-                ToastUtil.showShort("保存失败！");
+                ToastUtil.showShort(getString(R.string.hit10));
             }
         }
     }

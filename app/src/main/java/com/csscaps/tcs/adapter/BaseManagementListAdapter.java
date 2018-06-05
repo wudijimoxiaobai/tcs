@@ -23,11 +23,11 @@ import static com.tax.fcr.library.utils.NetworkUtils.mContext;
 public abstract class BaseManagementListAdapter<T> extends QuickAdapter<T> {
 
     /*是否显示行 选择框*/
-    private boolean isShowCheckBox;
+    protected boolean isShowCheckBox;
     /*是否全选*/
-    private boolean mAllSelect;
+    protected boolean mAllSelect;
     /*已选数据*/
-    private List<T> checkedTList;
+    protected List<T> checkedTList;
 
     public BaseManagementListAdapter(Context context, int layoutResId, List<T> data) {
         super(context, layoutResId, data);
@@ -75,6 +75,7 @@ public abstract class BaseManagementListAdapter<T> extends QuickAdapter<T> {
 
     public void setShowCheckBox(boolean showCheckBox) {
         isShowCheckBox = showCheckBox;
+        if(!showCheckBox)checkedTList.clear();
         notifyDataSetChanged();
     }
 

@@ -155,7 +155,7 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
-        ToastUtil.showShort("开票完成！");
+        ToastUtil.showShort(getString(R.string.hit5));
     }
 
     @Override
