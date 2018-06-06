@@ -2,6 +2,7 @@ package com.csscaps.tcs;
 
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 
 import com.csscaps.common.base.BaseApplication;
 import com.csscaps.common.utils.AppSP;
@@ -13,8 +14,9 @@ import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
-import com.tax.fcr.library.TCSInvoice;
+import com.tax.fcr.library.network.Api;
 import com.tax.fcr.library.utils.Logger;
+import com.tax.fcr.library.utils.NetworkUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,12 +36,27 @@ public class TCSApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        TCSInvoice.init(this, BuildConfig.server);
+        setNetworkConfig();
         //dbflow 初始化
         FlowManager.init(new FlowConfig.Builder(this).build());
         initData();
     }
 
+    /**
+     * 设置网络配置
+     */
+    private void setNetworkConfig() {
+        NetworkUtils.mContext = this;
+        String serverAddress = AppSP.getString("serverAddress");
+        String serverPort = AppSP.getString("serverPort");
+        if (TextUtils.isEmpty(serverAddress) || TextUtils.isEmpty(serverPort)) return;
+        String url = String.format(getString(R.string.url_format), serverAddress, serverPort);
+        Api.setBaseUrl(url);
+    }
+
+    /**
+     * 初始化数据
+     */
     private void initData() {
         boolean initData = AppSP.getBoolean("initData", false);
         if (!initData) {
@@ -60,7 +77,7 @@ public class TCSApplication extends BaseApplication {
                         int i = 0;
                         while ((line = br.readLine()) != null) {
                             i++;
-                           line= line.replaceAll("\"","");
+                            line = line.replaceAll("\"", "");
                             String[] str = line.split(",");
                             try {
                                 Taxpayer taxpayer = new Taxpayer();
@@ -84,7 +101,7 @@ public class TCSApplication extends BaseApplication {
                         taxpayerList.clear();
                         long e = System.currentTimeMillis();
                         Logger.i(" time1  " + (e - s));
-                        AppSP.putBoolean("initData",true);
+                        AppSP.putBoolean("initData", true);
                         mHandler.sendEmptyMessage(1);
                         br.close();
                         isr.close();
@@ -122,17 +139,17 @@ public class TCSApplication extends BaseApplication {
     }
 
 
-    private Handler mHandler=new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                        case 0:
-                            ToastUtil.showShort(getString(R.string.hit19));
-                            break;
-                        case 1:
-                            ToastUtil.showShort(getString(R.string.hit20));
-                            break;
-                    }
+                case 0:
+                    ToastUtil.showShort(getString(R.string.hit19));
+                    break;
+                case 1:
+                    ToastUtil.showShort(getString(R.string.hit20));
+                    break;
+            }
         }
     };
 

@@ -13,6 +13,7 @@ public class ServiceFactory {
     private final Retrofit retrofit;
     private DefaultService defaultService;
     private DownloadService downloadService;
+    private static  ServiceFactory INSTANCE;
 
     private ServiceFactory() {
         retrofit = new Retrofit.Builder()
@@ -24,12 +25,14 @@ public class ServiceFactory {
                 .build();
     }
 
-    private static class SingletonHolder {
-        private static final ServiceFactory INSTANCE = new ServiceFactory();
+
+    public static void setINSTANCE(ServiceFactory INSTANCE) {
+        ServiceFactory.INSTANCE = INSTANCE;
     }
 
     public static ServiceFactory getInstance() {
-        return SingletonHolder.INSTANCE;
+        if(INSTANCE!=null) return INSTANCE;
+        return INSTANCE=new ServiceFactory();
     }
 
     public DefaultService getDefaultService() {

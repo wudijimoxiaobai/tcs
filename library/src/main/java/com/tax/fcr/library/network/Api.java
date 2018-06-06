@@ -2,6 +2,7 @@ package com.tax.fcr.library.network;
 
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
@@ -35,6 +36,7 @@ public abstract class Api {
 
     public static void setBaseUrl(@NonNull String url) {
         BASE_URL = url;
+        ServiceFactory.setINSTANCE(null);
     }
 
     public static String getBaseUrl() {
@@ -43,6 +45,7 @@ public abstract class Api {
 
 
     public static void post(final IPresenter presenter, RequestModel requestParam) {
+        if (TextUtils.isEmpty(BASE_URL)) return;
         if (NetworkUtils.netWorkJudge()) {
             Observable<ResponseModel> observable = ServiceFactory.getInstance()
                     .getDefaultService().postService(requestParam);
@@ -54,6 +57,7 @@ public abstract class Api {
     }
 
     public static void get(final IPresenter presenter, final String requestPath) {
+        if (TextUtils.isEmpty(BASE_URL)) return;
         if (NetworkUtils.netWorkJudge()) {
             Observable<ResponseModel> observable = ServiceFactory.getInstance()
                     .getDefaultService().getService(requestPath);
@@ -64,6 +68,7 @@ public abstract class Api {
     }
 
     public static void upload(final IPresenter presenter, String requestPath, File file) {
+        if (TextUtils.isEmpty(BASE_URL)) return;
         RequestBody fileBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), fileBody);
         if (NetworkUtils.netWorkJudge()) {
@@ -109,7 +114,7 @@ public abstract class Api {
                        /* if (e instanceof SocketTimeoutException)
                             errorCode = FAIL_CONNECT;
                         else*/
-                            errorCode = ERR_NETWORK;
+                        errorCode = ERR_NETWORK;
 
                         presenter.onFailure(requestPath, errorCode);
                     }
@@ -118,6 +123,7 @@ public abstract class Api {
 
 
     public static void download(@NonNull String url, final @NonNull File file, @NonNull final OnDownloadCompletedListener listener) {
+        if (TextUtils.isEmpty(BASE_URL)) return;
         ServiceFactory.getInstance()
                 .getDownloadService().download(url)
                 .enqueue(new Callback<ResponseBody>() {

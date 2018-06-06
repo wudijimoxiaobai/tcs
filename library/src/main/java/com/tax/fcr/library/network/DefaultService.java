@@ -8,6 +8,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Url;
 import rx.Observable;
 
@@ -25,6 +26,9 @@ public interface DefaultService {
     @POST("tcs.front/bizWndUrl")
     Observable<ResponseModel> postService(@Body() RequestModel requestParam);
 
+
+    @POST("{path}")
+    Observable<ResponseModel> postService(@Path("path") String path, @Body() RequestModel requestParam);
 
     /**
      * 通用接口调用 get

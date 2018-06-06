@@ -133,7 +133,7 @@
                     android:background="@drawable/edit_bg"
                     android:gravity="start|center_vertical"
                     android:hint="@string/please_input"
-                    android:imeActionLabel="添加"
+                    android:imeActionLabel="@string/verify"
                     android:imeOptions="actionDone"
                     android:inputType="number"
                     android:maxLines="1"

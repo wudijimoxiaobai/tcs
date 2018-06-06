@@ -4,7 +4,6 @@ import android.support.annotation.IdRes;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -87,7 +86,7 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
         mTin.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
+//                if (actionId == EditorInfo.IME_ACTION_DONE) {
                     String tin = mTin.getText().toString().trim();
                     boolean initData = AppSP.getBoolean("initData", false);
                     if (initData) {
@@ -106,7 +105,7 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
                         ToastUtil.showShort(getString(R.string.hit14));
                     }
 
-                }
+//                }
                 return false;
             }
         });

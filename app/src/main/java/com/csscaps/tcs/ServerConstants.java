@@ -5,6 +5,8 @@ package com.csscaps.tcs;
  */
 
 public interface ServerConstants {
+    /*网络连接测试*/
+    final String A000="A000";
     /*同步纳税人*/
     final String ATCS002 = "ATCS002";
 

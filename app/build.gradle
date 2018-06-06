@@ -11,7 +11,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 //        buildConfigField 'String', 'server', '"https://192.168.1.142:9180/"'
-        buildConfigField 'String', 'server', '"https://219.145.93.245:9180/"'
+//        buildConfigField 'String', 'server', '"https://219.145.93.245:9180/"'
     }
 
     signingConfigs {

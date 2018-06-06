@@ -31,7 +31,26 @@
             android:text="@string/product_management"
             android:textSize="25sp"
             />
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@+id/search"
+            android:background="#7a95b3"
+            />
 
+        <TextView
+            android:id="@+id/search"
+            style="@style/text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/add"
+            android:drawableStart="@mipmap/search"
+            android:gravity="center"
+            android:minWidth="126dp"
+            android:paddingEnd="25dp"
+            android:paddingStart="25dp"
+            android:text="@string/search"/>
         <View
             android:id="@+id/add_line"
             android:layout_width="1px"

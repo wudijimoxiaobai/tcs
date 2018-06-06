@@ -39,7 +39,7 @@
         <item>Invoice Query</item>
     </string-array>
     <string-array name="tab3">
-      <!--  <item>Network Configuration</item>-->
+        <item>Network Configuration</item>
         <item>User Management</item>
     </string-array>
 </resources>

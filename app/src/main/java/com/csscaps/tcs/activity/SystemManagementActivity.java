@@ -46,7 +46,7 @@ public class SystemManagementActivity extends BaseActivity implements TabLayout.
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.content, mUserManagementFragment);
-//        transaction.add(R.id.content, mNetworkConfigurationFragment);
+        transaction.add(R.id.content, mNetworkConfigurationFragment);
         transaction.commit();
     }
 

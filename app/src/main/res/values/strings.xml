@@ -133,6 +133,14 @@
     <string name="new_password">New Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="reset_password">Reset Password</string>
+    <string name="server_address">Server Address</string>
+    <string name="server_port">Server Port</string>
+    <string name="upload_address">Upload Address</string>
+    <string name="test">Test</string>
+    <string name="verify">Verify</string>
+    <string name="type">Type</string>
+    <string name="url_format" formatted="false">https://%s:%s/</string>
+
     <string name="hit1">The username or password is not correct!</string>
     <string name="hit2">Please add product(s)!</string>
     <string name="hit3">Cannot connect to the internet!</string>
@@ -170,4 +178,9 @@
     <string name="hit35">This user is not activated, please contact the administrator!</string>
     <string name="hit36">This user can\'t delete!</string>
     <string name="hit37">This username has already existed!</string>
+    <string name="hit38">The server address cannot be empty!</string>
+    <string name="hit39">The server port cannot be empty!</string>
+    <string name="hit40">Test success</string>
+    <string name="hit41">The upload address cannot be empty!</string>
+    <string name="hit42">Port illegality</string>
 </resources>
