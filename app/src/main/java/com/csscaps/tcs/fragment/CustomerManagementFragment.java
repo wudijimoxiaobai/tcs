@@ -1,6 +1,8 @@
 package com.csscaps.tcs.fragment;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 
 import com.csscaps.tcs.R;
@@ -10,8 +12,11 @@ import com.csscaps.tcs.adapter.CustomerListAdapter;
 import com.csscaps.tcs.database.table.Customer;
 import com.csscaps.tcs.dialog.AddCustomerDialog;
 import com.csscaps.tcs.dialog.BaseAddDialog;
+import com.csscaps.tcs.model.SearchCustomerCondition;
 
 import java.util.List;
+
+import butterknife.OnClick;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
@@ -33,7 +38,7 @@ public class CustomerManagementFragment extends BaseManagementListFragment<Custo
 
     @Override
     protected BaseManagementListAdapter getAdapter(List<Customer> data) {
-        return new CustomerListAdapter(mContext,R.layout.customer_list_item,data);
+        return new CustomerListAdapter(mContext, R.layout.customer_list_item, data);
     }
 
     @Override
@@ -54,13 +59,22 @@ public class CustomerManagementFragment extends BaseManagementListFragment<Custo
     }
 
     @Override
+    @OnClick({R.id.search})
     public void onClick(View view) {
         super.onClick(view);
         switch (view.getId()) {
             case R.id.search:
-
+//                SearchCustomerDialog searchCustomerDialog = new SearchCustomerDialog(mHandler);
+//                searchCustomerDialog.show(getChildFragmentManager(), "SearchCustomerDialog");
                 break;
-
         }
     }
+
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            SearchCustomerCondition searchCustomerCondition= (SearchCustomerCondition) msg.obj;
+        }
+    };
+
 }

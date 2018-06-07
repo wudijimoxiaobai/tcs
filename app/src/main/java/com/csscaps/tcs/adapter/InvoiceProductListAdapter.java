@@ -2,12 +2,14 @@ package com.csscaps.tcs.adapter;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.csscaps.common.DecimalDigitsInputFilter;
 import com.csscaps.common.baseadapter.BaseAdapterHelper;
 import com.csscaps.tcs.CalculateUtils;
 import com.csscaps.tcs.R;
@@ -21,10 +23,13 @@ import java.util.List;
 
 public class InvoiceProductListAdapter extends BaseManagementListAdapter<Product> {
 
+    private InputFilter inputFilter[]=new InputFilter[]{new DecimalDigitsInputFilter(2)};
     private int editPosition = -1;
+    private int count;
 
     public InvoiceProductListAdapter(Context context, int layoutResId, List<Product> data) {
         super(context, layoutResId, data);
+        count=this.data.size();
     }
 
     @Override
@@ -43,6 +48,8 @@ public class InvoiceProductListAdapter extends BaseManagementListAdapter<Product
         final TextView quantityTextView = helper.getView(R.id.quantity_tv);
         final EditText quantityEditText = helper.getView(R.id.quantity);
         final EditText priceEditText = helper.getView(R.id.price);
+        quantityEditText.setFilters(inputFilter);
+        priceEditText.setFilters(inputFilter);
 
         quantityEditText.setText(item.getQuantity());
         priceEditText.setText(item.getPrice());
@@ -118,5 +125,10 @@ public class InvoiceProductListAdapter extends BaseManagementListAdapter<Product
         this.editPosition = editPosition;
     }
 
-
+    @Override
+    public void notifyDataSetChanged() {
+        if(data.size()!=count) setEditPosition(-1);
+        super.notifyDataSetChanged();
+        count=this.data.size();
+    }
 }

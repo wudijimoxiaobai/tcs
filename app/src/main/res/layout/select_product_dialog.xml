@@ -37,9 +37,10 @@
             android:id="@+id/confirm"
             style="@style/text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:gravity="center"
             android:text="@string/confirm"
             android:textColor="@color/text2"
             />

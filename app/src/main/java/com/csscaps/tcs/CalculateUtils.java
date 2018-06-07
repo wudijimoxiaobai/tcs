@@ -3,6 +3,7 @@ package com.csscaps.tcs;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
+import com.csscaps.common.utils.AppSP;
 import com.csscaps.tcs.activity.InvoiceIssuingActivity;
 import com.csscaps.tcs.database.table.InvoiceTaxType;
 import com.csscaps.tcs.database.table.InvoiceTaxType_Table;
@@ -12,6 +13,7 @@ import com.csscaps.tcs.database.table.TaxItem;
 import com.csscaps.tcs.database.table.TaxMethod;
 import com.csscaps.tcs.database.table.TaxMethod_Table;
 import com.csscaps.tcs.database.table.TaxType;
+import com.csscaps.tcs.model.MyTaxpayer;
 import com.csscaps.tcs.model.RelatedTaxItem;
 
 import java.util.HashMap;
@@ -100,7 +102,19 @@ public class CalculateUtils {
                     break;
             }
         }
-        productModel.setE_tax(amount);
+
+        String myTaxpayerString = AppSP.getString("MyTaxpayer");
+        MyTaxpayer myTaxpayer = JSON.parseObject(myTaxpayerString, MyTaxpayer.class);
+        if("Y".equals(myTaxpayer.getWithholding())){
+            totalTax-=productModel.getBpt_prepayment();
+            double bptp=(productModel.getBpt_final()+productModel.getFees()+productModel.getStamp_duty_local()+productModel.getStamp_duty_federal()+productModel.getVat())*0.01f;
+            totalTax=totalTax+bptp;
+            productModel.setBpt_prepayment(bptp);
+        }else{
+            totalTax-=productModel.getBpt_prepayment();
+            productModel.setBpt_prepayment(0);
+        }
+        productModel.setE_tax(Double.valueOf(String.format("%.2f", Math.round((amount) * 100) * 0.01d)));
         productModel.setI_tax(Double.valueOf(String.format("%.2f", Math.round((amount + totalTax) * 100) * 0.01d)));
         sb.delete(0, 1);
         productModel.setQty(item.getQuantity());
@@ -108,8 +122,8 @@ public class CalculateUtils {
         productModel.setTaxtype(sb.toString());
         productModel.setItem_name(item.getProductName());
         productModel.setUnit(item.getUnit());
-        productModel.setTax_due(String.valueOf(totalTax));
-        productModel.setTaxable_amount(String.valueOf(amount));
+        productModel.setTax_due(String.format("%.2f", Math.round((totalTax) * 100) * 0.01d));
+        productModel.setTaxable_amount(String.format("%.2f", Math.round((amount) * 100) * 0.01d));
         productModel.setAmount_inc(String.format("%.2f", Math.round((amount + totalTax) * 100) * 0.01d));
         item.setTotalTax(productModel.getTax_due());
         item.seteTax(productModel.getTaxable_amount());
@@ -149,7 +163,7 @@ public class CalculateUtils {
         double tax = 0;
         switch (taxedMethod) {
             case ITEM:
-                tax = getTaxByITEM(taxTypeCode,amtQtyMode, isTaxIn, price, quantity, purchase, p, c, r, percentage, commission, fixedAmount);
+                tax = getTaxByITEM(taxTypeCode, amtQtyMode, isTaxIn, price, quantity, purchase, p, c, r, percentage, commission, fixedAmount);
                 break;
             case AMT:
                 if (isTaxIn) {
@@ -179,19 +193,36 @@ public class CalculateUtils {
      * @param fixedAmount 定额
      * @return
      */
-    private static double getTaxByITEM( String taxTypeCode,String amtQtyMode, boolean isTaxIn, float price, float quantity, float purchase, float p, float c, float r, float percentage, float commission, float fixedAmount) {
+    private static double getTaxByITEM(String taxTypeCode, String amtQtyMode, boolean isTaxIn, float price, float quantity, float purchase, float p, float c, float r, float percentage, float commission, float fixedAmount) {
         float tax = 0;
         switch (amtQtyMode) {
             case AMT:
-                if (isTaxIn) {
-                    tax = (price * quantity + p) * c * r / (1 + r);
+                switch (taxTypeCode) {
+                    case SDF:
+                    case SDL:
+                         tax=price * quantity*percentage/100;
+                        break;
+                    default:
+                        if (isTaxIn) {
+                            tax = (price * quantity + p) * c * r / (1 + r);
 
-                } else {
-                    tax = (price * quantity + p) * c * r;
+                        } else {
+                            tax = (price * quantity + p) * c * r;
+                        }
+                        break;
                 }
+
                 break;
             case QTY:
-                tax = (quantity + p) * c * r;
+                switch (taxTypeCode) {
+                    case SDF:
+                    case SDL:
+                         tax=quantity*fixedAmount;
+                        break;
+                    default:
+                        tax = (quantity + p) * c * r;
+                        break;
+                }
                 break;
             case COMMISSION:
                 tax = (price - purchase) * c * r;
@@ -200,7 +231,6 @@ public class CalculateUtils {
                 tax = 0;
                 break;
         }
-
         return tax;
     }
 

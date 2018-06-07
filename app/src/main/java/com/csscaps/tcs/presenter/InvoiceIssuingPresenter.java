@@ -68,6 +68,7 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
         uploadInvoice.getInvoice_data().add(invoice);
         RequestModel requestModel = new RequestModel();
         requestModel.setFuncid(uploadInvoice.getFuncid());
+        uploadInvoice.setDevicesn(requestModel.getDevicesn());
         requestModel.setData(JSON.toJSONString(uploadInvoice));
         Api.post(this, requestModel);
 

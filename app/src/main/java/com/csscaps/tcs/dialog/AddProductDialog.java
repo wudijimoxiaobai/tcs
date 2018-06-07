@@ -1,11 +1,13 @@
 package com.csscaps.tcs.dialog;
 
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.csscaps.common.DecimalDigitsInputFilter;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
@@ -61,6 +63,12 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
     }
 
     protected void initView() {
+        InputFilter inputFilter[]=new InputFilter[]{new DecimalDigitsInputFilter(2)};
+        mPrice.setFilters(inputFilter);
+        mFixedAmount.setFilters(inputFilter);
+        mPurchase.setFilters(inputFilter);
+        mCommission.setFilters(inputFilter);
+
         if (t == null) t = new Product();
         ObserverActionUtils.addAction(this);
         if (edit) {
@@ -111,13 +119,13 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
             ToastUtil.showShort(getString(R.string.hit8));
             return;
         }
-      editTextsIntoT();
+        editTextsIntoT();
 
         if (edit) {
             if (t.update()) {
                 dismiss();
-                Subscription subscription =ObserverActionUtils.subscribe(t, ProductManagementFragment.class);
-                if(subscription!=null)subscription.unsubscribe();
+                Subscription subscription = ObserverActionUtils.subscribe(t, ProductManagementFragment.class);
+                if (subscription != null) subscription.unsubscribe();
             } else {
                 ToastUtil.showShort(getString(R.string.hit9));
             }
@@ -125,10 +133,10 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
         } else {
             if (t.save()) {
                 dismiss();
-                Subscription subscription =ObserverActionUtils.subscribe(t,SelectProductDialog.class);
-                Subscription subscription1 =ObserverActionUtils.subscribe(t, ProductManagementFragment.class);
-                if(subscription!=null)subscription.unsubscribe();
-                if(subscription1!=null)subscription1.unsubscribe();
+                Subscription subscription = ObserverActionUtils.subscribe(t, SelectProductDialog.class);
+                Subscription subscription1 = ObserverActionUtils.subscribe(t, ProductManagementFragment.class);
+                if (subscription != null) subscription.unsubscribe();
+                if (subscription1 != null) subscription1.unsubscribe();
             } else {
                 ToastUtil.showShort(getString(R.string.hit10));
             }

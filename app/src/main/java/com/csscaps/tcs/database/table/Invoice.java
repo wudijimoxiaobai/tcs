@@ -119,9 +119,9 @@ public class Invoice extends BaseModel implements Serializable {
     @Column
     String sign;
     @Column
-    String print_flag;
+    String print_flag="N";
     @Column
-    String is_deductable;
+    String is_deductable="N";
     @Column
     String file_name;
     @Column

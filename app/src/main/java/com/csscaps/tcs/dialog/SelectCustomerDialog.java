@@ -104,10 +104,10 @@ public class SelectCustomerDialog extends DialogFragment implements AdapterView.
         ObserverActionUtils.addAction(this);
         switch (invoiceObject) {
             case 0:
-                data = select().from(Customer.class).where(Customer_Table.tin.isNotNull()).queryList();
+                data = select().from(Customer.class).where(Customer_Table.tin.isNull()).queryList();
                 break;
             case 1:
-                data = select().from(Customer.class).where(Customer_Table.tin.isNull()).queryList();
+                data = select().from(Customer.class).where(Customer_Table.tin.isNotNull()).queryList();
                 break;
             case 2:
                 data = select().from(Customer.class).queryList();

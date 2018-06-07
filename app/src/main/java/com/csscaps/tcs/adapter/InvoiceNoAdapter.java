@@ -33,10 +33,10 @@ public class InvoiceNoAdapter extends QuickAdapter<InvoiceType> {
         helper.setText(R.id.remaining_qty,count+"");
         switch (item.getInvoiceObject()) {
             case 0:
-                helper.setText(R.id.object,"A");
+                helper.setText(R.id.object,"B");
                 break;
             case 1:
-                helper.setText(R.id.object,"B");
+                helper.setText(R.id.object,"A");
                 break;
             case 2:
                 helper.setText(R.id.object,"C");

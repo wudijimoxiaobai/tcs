@@ -182,5 +182,6 @@
     <string name="hit39">The server port cannot be empty!</string>
     <string name="hit40">Test success</string>
     <string name="hit41">The upload address cannot be empty!</string>
-    <string name="hit42">Port illegality</string>
+    <string name="hit42">The server port illegality</string>
+    <string name="hit43">The server address illegality</string>
 </resources>

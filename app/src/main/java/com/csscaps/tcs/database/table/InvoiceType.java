@@ -77,7 +77,7 @@ public class InvoiceType extends BaseModel {
     @Column
     String calculate_method;
     @Column
-    int invoiceObject;
+    int invoiceObject;//0:非注册纳税人 1:注册纳税人 2:两者都可以
 
     public String getInvoice_type_uid() {
         return invoice_type_uid;

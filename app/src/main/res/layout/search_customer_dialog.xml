@@ -36,9 +36,9 @@
             android:id="@+id/tin_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:layout_marginTop="20dp"
             >
 
             <TextView
@@ -56,6 +56,8 @@
                 android:id="@+id/tin"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="0.34"
                 android:background="@drawable/bg2"
                 android:gravity="start|center_vertical"
@@ -66,8 +68,6 @@
                 android:maxLines="1"
                 android:padding="10dp"
                 android:textColor="@color/text"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="10dp"
                 />
 
         </LinearLayout>
@@ -95,6 +95,8 @@
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="0.34"
                 android:background="@drawable/bg2"
                 android:gravity="start|center_vertical"
@@ -104,8 +106,6 @@
                 android:maxLines="1"
                 android:padding="10dp"
                 android:textColor="@color/text"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="10dp"
                 />
 
         </LinearLayout>
@@ -138,11 +138,11 @@
                 >
 
                 <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/language_in_invoice"
+                    android:id="@+id/customer_type_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/bg2"
-                    android:entries="@array/language"
+                    android:entries="@array/customer_type"
                     android:gravity="start"
                     android:spinnerMode="dropdown"
                     android:textAlignment="viewStart"
@@ -173,24 +173,25 @@
                 android:id="@+id/cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg17"
+                android:gravity="center"
                 android:text="@string/cancel"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text"
-                android:background="@drawable/bg17"
-                android:gravity="center"
-                android:layout_weight="1"
                 />
+
             <TextView
                 android:id="@+id/confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_marginStart="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg18"
+                android:gravity="center"
                 android:text="@string/confirm"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text"
-                android:background="@drawable/bg18"
-                android:gravity="center"
-                android:layout_weight="1"
                 />
         </LinearLayout>
 

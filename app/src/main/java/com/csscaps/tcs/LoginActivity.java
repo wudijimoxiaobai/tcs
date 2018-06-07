@@ -54,8 +54,8 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
 
     @OnClick(R.id.login)
     public void onClick() {
-        mUser.setText("admin");
-        mPassword.setText("12345678");
+//        mUser.setText("admin");
+//        mPassword.setText("12345678");
         String name = mUser.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
         User user = SQLite.select().from(User.class).where(User_Table.userName.eq(name)).and(User_Table.password.eq(password)).querySingle();

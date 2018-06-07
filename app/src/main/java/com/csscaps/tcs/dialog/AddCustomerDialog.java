@@ -112,12 +112,12 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
 
         switch (invoiceObject) {
             case 0:
-                mRadioGroup.check(R.id.registered);
-                mUnregistered.setVisibility(View.GONE);
-                break;
-            case 1:
                 mRadioGroup.check(R.id.unregistered);
                 mRegistered.setVisibility(View.GONE);
+                break;
+            case 1:
+                mRadioGroup.check(R.id.registered);
+                mUnregistered.setVisibility(View.GONE);
                 break;
         }
     }

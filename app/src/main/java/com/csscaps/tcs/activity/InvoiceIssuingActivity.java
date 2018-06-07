@@ -123,11 +123,11 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
                 finish();
                 break;
             case R.id.next:
-                if (pObject == 0 && TextUtils.isEmpty(mInvoice.getPurchaser_tin())) {
+                if (pObject == 0 && TextUtils.isEmpty(mInvoice.getPurchaser_id_number())) {
                     ToastUtil.showShort(getString(R.string.hit23));
                     return;
                 }
-                if (pObject == 1 && TextUtils.isEmpty(mInvoice.getPurchaser_id_number())) {
+                if (pObject == 1 &&TextUtils.isEmpty(mInvoice.getPurchaser_tin()) ) {
                     ToastUtil.showShort(getString(R.string.hit23));
                     return;
                 }
@@ -172,10 +172,10 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
         mInvoice.setInvoice_type_uid(invoiceType.getInvoice_type_uid());
         switch (invoiceType.getInvoiceObject()) {
             case 0:
-                mObject.setText("A");
+                mObject.setText("B");
                 break;
             case 1:
-                mObject.setText("B");
+                mObject.setText("A");
                 break;
             case 2:
                 mObject.setText("C");

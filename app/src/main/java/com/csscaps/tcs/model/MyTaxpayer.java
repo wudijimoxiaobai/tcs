@@ -41,6 +41,10 @@ public class MyTaxpayer {
     private String remark;
     private String systime;
     private String checkcode;
+    private String withholding;
+    private String invoice_property;
+    private String tin_office_code;
+    private String tin_office_name;
 
     public String getFuncid() {
         return funcid;
@@ -320,5 +324,37 @@ public class MyTaxpayer {
 
     public void setCheckcode(String checkcode) {
         this.checkcode = checkcode;
+    }
+
+    public String getWithholding() {
+        return withholding;
+    }
+
+    public void setWithholding(String withholding) {
+        this.withholding = withholding;
+    }
+
+    public String getInvoice_property() {
+        return invoice_property;
+    }
+
+    public void setInvoice_property(String invoice_property) {
+        this.invoice_property = invoice_property;
+    }
+
+    public String getTin_office_code() {
+        return tin_office_code;
+    }
+
+    public void setTin_office_code(String tin_office_code) {
+        this.tin_office_code = tin_office_code;
+    }
+
+    public String getTin_office_name() {
+        return tin_office_name;
+    }
+
+    public void setTin_office_name(String tin_office_name) {
+        this.tin_office_name = tin_office_name;
     }
 }

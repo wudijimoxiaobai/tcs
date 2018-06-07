@@ -2,14 +2,17 @@ package com.csscaps.tcs.adapter;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import com.csscaps.common.DecimalDigitsInputFilter;
 import com.csscaps.common.baseadapter.BaseAdapterHelper;
 import com.csscaps.common.baseadapter.QuickAdapter;
+import com.csscaps.common.utils.AppTools;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.database.table.Product;
 
@@ -23,6 +26,7 @@ import java.util.List;
 public class SelectProductListAdapter extends QuickAdapter<Product> implements TextWatcher {
 
     private List<Product> checkedList = new ArrayList<>();
+    private InputFilter inputFilter[]=new InputFilter[]{new DecimalDigitsInputFilter(2)};
     private CheckBox mCheckBox;
 
     public SelectProductListAdapter(Context context, int layoutResId, List<Product> data) {
@@ -38,6 +42,9 @@ public class SelectProductListAdapter extends QuickAdapter<Product> implements T
         final EditText quantity = helper.getView(R.id.quantity);
         final EditText price = helper.getView(R.id.price);
         final CheckBox checkBox = helper.getView(R.id.checkbox);
+        AppTools.expandViewTouchDelegate(checkBox,100,100,100,100);
+        quantity.setFilters(inputFilter);
+        price.setFilters(inputFilter);
         quantity.setText(item.getQuantity());
         price.setText(item.getPrice());
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

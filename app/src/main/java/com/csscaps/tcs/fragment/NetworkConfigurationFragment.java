@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import com.csscaps.common.base.BaseFragment;
 import com.csscaps.common.utils.AppSP;
+import com.csscaps.common.utils.RegexUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.ServerConstants;
@@ -71,6 +72,11 @@ public class NetworkConfigurationFragment extends BaseFragment implements IPrese
         if (TextUtils.isEmpty(serverAddress)) {
             ToastUtil.showShort(getString(R.string.hit38));
             return;
+        }else{
+            if(!RegexUtils.isIP(serverAddress)){
+                ToastUtil.showShort(getString(R.string.hit43));
+                return;
+            }
         }
 
         if (TextUtils.isEmpty(serverPort)) {
