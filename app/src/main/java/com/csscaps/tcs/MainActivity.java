@@ -9,16 +9,19 @@ import android.widget.TextView;
 
 import com.csscaps.common.base.BaseActivity;
 import com.csscaps.common.utils.DateUtils;
+import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.tcs.activity.InvoiceInformationManagementActivity;
 import com.csscaps.tcs.activity.InvoiceIssuingActivity;
 import com.csscaps.tcs.activity.InvoiceManagementActivity;
 import com.csscaps.tcs.activity.SystemManagementActivity;
+import com.csscaps.tcs.dialog.SynDataDialog;
 import com.csscaps.tcs.service.SynchronizeService;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements Action1<Object> {
 
     @BindView(R.id.user)
     TextView mUser;
@@ -26,6 +29,7 @@ public class MainActivity extends BaseActivity {
     TextView mTimeDate;
 
     private String name;
+    private SynDataDialog mSynDataDialog = new SynDataDialog();
 
     @Override
     protected int getLayoutResId() {
@@ -46,6 +50,7 @@ public class MainActivity extends BaseActivity {
     public void initView(Bundle savedInstanceState) {
         mUser.setText(name);
         mHandler.sendEmptyMessage(0);
+        ObserverActionUtils.addAction(this);
     }
 
     Handler mHandler = new Handler() {
@@ -83,6 +88,7 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.syn:
                 startService(new Intent(this, SynchronizeService.class));
+                mSynDataDialog.show(getSupportFragmentManager(), "SynDataDialog");
                 break;
             case R.id.invoice_issuing:
                 startActivity(new Intent(this, InvoiceIssuingActivity.class));
@@ -103,4 +109,8 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void call(Object o) {
+        mSynDataDialog.dismiss();
+    }
 }

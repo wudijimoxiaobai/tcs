@@ -2,6 +2,9 @@ package com.csscaps.tcs.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.csscaps.tcs.R;
@@ -10,12 +13,17 @@ import com.csscaps.tcs.activity.ProductDetailsActivity;
 import com.csscaps.tcs.adapter.BaseManagementListAdapter;
 import com.csscaps.tcs.adapter.ProductListAdapter;
 import com.csscaps.tcs.database.table.Product;
+import com.csscaps.tcs.database.table.Product_Table;
 import com.csscaps.tcs.dialog.AddProductDialog;
 import com.csscaps.tcs.dialog.BaseAddDialog;
+import com.csscaps.tcs.dialog.SearchProductDialog;
+import com.csscaps.tcs.model.SearchProductCondition;
+import com.raizlabs.android.dbflow.sql.language.Where;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
@@ -77,13 +85,35 @@ public class ProductManagementFragment extends BaseManagementListFragment<Produc
     }
 
     @Override
+    @OnClick({R.id.search})
     public void onClick(View view) {
         super.onClick(view);
         switch (view.getId()) {
             case R.id.search:
+                SearchProductDialog searchProductDialog=new SearchProductDialog(mHandler);
+                searchProductDialog.show(getChildFragmentManager(),"SearchProductDialog");
                 break;
         }
     }
 
+    Handler mHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            SearchProductCondition mSearchProductCondition= (SearchProductCondition) msg.obj;
+            Where where=select().from(Product.class).where();
+            if(!TextUtils.isEmpty(mSearchProductCondition.getProductName())){
+                where=where.and(Product_Table.productName.like(String.format(format,mSearchProductCondition.getProductName())));
+            }
+
+            if(!TextUtils.isEmpty(mSearchProductCondition.getLocalName())){
+                where=where.and(Product_Table.localName.like(String.format(format,mSearchProductCondition.getLocalName())));
+            }
+            data.clear();
+            List list = where.queryList();
+            data.addAll(list);
+            mBaseManagementListAdapter.notifyDataSetChanged();
+        }
+    };
 
 }

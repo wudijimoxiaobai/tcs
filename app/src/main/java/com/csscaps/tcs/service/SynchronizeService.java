@@ -10,7 +10,9 @@ import android.support.annotation.Nullable;
 import com.alibaba.fastjson.JSON;
 import com.csscaps.common.utils.AppSP;
 import com.csscaps.common.utils.DateUtils;
+import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
+import com.csscaps.tcs.MainActivity;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.ServerConstants;
 import com.csscaps.tcs.database.TcsDatabase;
@@ -36,18 +38,20 @@ import com.tax.fcr.library.utils.Logger;
 
 import java.util.List;
 
+import rx.Subscription;
+
 /**
  * Created by tl on 2018/5/9.
  */
 
 public class SynchronizeService extends Service implements IPresenter {
 
-    boolean autoSyn;
+    private boolean autoSyn;
+    public int c;
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        autoSyn = intent.getBooleanExtra("autoSyn", false);
         return null;
     }
 
@@ -58,15 +62,16 @@ public class SynchronizeService extends Service implements IPresenter {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        autoSyn = intent.getBooleanExtra("autoSyn", false);
         synTaxpayer();
         synInvoiceType();
         synTaxType();
         synTaxItem();
         synInvoiceTaxType();
         synTaxMethod();
+        c = 0;
         return super.onStartCommand(intent, flags, startId);
     }
-
 
 
     /**
@@ -110,7 +115,6 @@ public class SynchronizeService extends Service implements IPresenter {
     private void synTaxMethod() {
         synData(ServerConstants.ATCS008);
     }
-
 
 
     private void synData(String funcId) {
@@ -182,8 +186,8 @@ public class SynchronizeService extends Service implements IPresenter {
                         .execute();
                 break;
             case ServerConstants.ATCS007:
-                ReceiveInvoiceTaxType receiveInvoiceTaxType=JSON.parseObject(objectString, ReceiveInvoiceTaxType.class);
-                List<InvoiceTaxType> invoice_tax_info=receiveInvoiceTaxType.getInvoice_tax_info();
+                ReceiveInvoiceTaxType receiveInvoiceTaxType = JSON.parseObject(objectString, ReceiveInvoiceTaxType.class);
+                List<InvoiceTaxType> invoice_tax_info = receiveInvoiceTaxType.getInvoice_tax_info();
                 FlowManager.getDatabase(TcsDatabase.class)
                         .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
                                 new ProcessModelTransaction.ProcessModel<InvoiceTaxType>() {
@@ -196,8 +200,8 @@ public class SynchronizeService extends Service implements IPresenter {
                         .execute();
                 break;
             case ServerConstants.ATCS008:
-                ReceiveTaxMethod receiveTaxMethod=JSON.parseObject(objectString, ReceiveTaxMethod.class);
-                List<TaxMethod> calc_rule_info= receiveTaxMethod.getCalc_rule_info();
+                ReceiveTaxMethod receiveTaxMethod = JSON.parseObject(objectString, ReceiveTaxMethod.class);
+                List<TaxMethod> calc_rule_info = receiveTaxMethod.getCalc_rule_info();
                 FlowManager.getDatabase(TcsDatabase.class)
                         .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
                                 new ProcessModelTransaction.ProcessModel<TaxMethod>() {
@@ -212,11 +216,13 @@ public class SynchronizeService extends Service implements IPresenter {
                 break;
 
         }
+        c++;
+        complete();
     }
 
     @Override
     public void onFailure(String requestPath, String errorMes) {
-        if (autoSyn) {
+        if (!autoSyn) {
             switch (errorMes) {
                 case Api.ERR_NETWORK:
                     ToastUtil.showShort(getString(R.string.hit3));
@@ -225,6 +231,16 @@ public class SynchronizeService extends Service implements IPresenter {
                     ToastUtil.showShort(getString(R.string.hit4));
                     break;
             }
+        }
+        c++;
+        complete();
+    }
+
+    private void complete() {
+        if (c == 6 && !autoSyn) {
+            Subscription subscription = ObserverActionUtils.subscribe(0, MainActivity.class);
+            subscription.unsubscribe();
+            c = 0;
         }
     }
 

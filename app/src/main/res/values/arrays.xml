@@ -26,9 +26,19 @@
         <item>Administrator</item>
         <item>Operator</item>
     </string-array>
+    <string-array name="role_condition">
+        <item>All</item>
+        <item>Administrator</item>
+        <item>Operator</item>
+    </string-array>
+    <string-array name="status">
+        <item>All</item>
+        <item>Active</item>
+        <item>Inactive</item>
+    </string-array>
 
     <string-array name="customer_type">
-        <item></item>
+        <item>All</item>
         <item>Registered</item>
         <item>Unregistered</item>
     </string-array>

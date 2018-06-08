@@ -3,6 +3,9 @@ package com.csscaps.tcs.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -17,10 +20,14 @@ import com.csscaps.tcs.database.table.User;
 import com.csscaps.tcs.database.table.User_Table;
 import com.csscaps.tcs.dialog.AddUserDialog;
 import com.csscaps.tcs.dialog.BaseAddDialog;
+import com.csscaps.tcs.dialog.SearchUserDialog;
+import com.csscaps.tcs.model.SearchUserCondition;
+import com.raizlabs.android.dbflow.sql.language.Where;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
@@ -105,6 +112,7 @@ public class UserManagementFragment extends BaseManagementListFragment<User> {
     }
 
     @Override
+    @OnClick({R.id.search})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.change_password:
@@ -134,6 +142,10 @@ public class UserManagementFragment extends BaseManagementListFragment<User> {
                 data.remove(t);
                 mBaseManagementListAdapter.notifyDataSetChanged();
                 break;
+            case R.id.search:
+                SearchUserDialog searchUserDialog=new SearchUserDialog(mHandler);
+                searchUserDialog.show(getChildFragmentManager(),"SearchUserDialog");
+                break;
         }
         super.onClick(view);
     }
@@ -155,5 +167,29 @@ public class UserManagementFragment extends BaseManagementListFragment<User> {
         }
     }
 
+    Handler mHandler=new Handler(){
+
+        @Override
+        public void handleMessage(Message msg) {
+            SearchUserCondition searchUserCondition= (SearchUserCondition) msg.obj;
+            Where where=select().from(User.class).where();
+            if(!TextUtils.isEmpty(searchUserCondition.getUserName())){
+                where=where.and(User_Table.userName.like(String.format(format,searchUserCondition.getUserName())));
+            }
+
+            if(searchUserCondition.getRole()!=-1){
+                where=where.and(User_Table.role.is(searchUserCondition.getRole()));
+            }
+
+            if(searchUserCondition.getStatus()!=-1){
+                where=where.and(User_Table.status.is(searchUserCondition.getStatus()));
+            }
+
+            data.clear();
+            List list = where.queryList();
+            data.addAll(list);
+            mBaseManagementListAdapter.notifyDataSetChanged();
+        }
+    };
 
 }

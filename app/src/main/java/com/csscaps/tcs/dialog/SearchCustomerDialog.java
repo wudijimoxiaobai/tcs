@@ -65,7 +65,7 @@ public class SearchCustomerDialog extends DialogFragment implements AdapterView.
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
         dialogWindow.setGravity(Gravity.CENTER);
-        int width = (int) (DeviceUtils.dip2Px(getContext(), 600));
+        int width = DeviceUtils.dip2Px(getContext(), 570);
         dialogWindow.setLayout(width, -2);
         dialogWindow.setWindowAnimations(R.style.scale_anim);
     }
@@ -85,7 +85,7 @@ public class SearchCustomerDialog extends DialogFragment implements AdapterView.
             case R.id.confirm:
                 dismiss();
                 searchCustomerCondition.setTin(mTin.getText().toString().trim());
-                searchCustomerCondition.setTin(mName.getText().toString().trim());
+                searchCustomerCondition.setName(mName.getText().toString().trim());
                 mHandler.sendMessage(mHandler.obtainMessage(0, searchCustomerCondition));
                 break;
         }
@@ -93,17 +93,7 @@ public class SearchCustomerDialog extends DialogFragment implements AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        switch (i) {
-            case 0:
-
-                break;
-            case 1:
-
-                break;
-            case 2:
-
-                break;
-        }
+        searchCustomerCondition.setType(i);
     }
 
     @Override

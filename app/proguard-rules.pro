@@ -246,3 +246,6 @@
 #dbflow
 -keep class * extends com.raizlabs.android.dbflow.config.DatabaseHolder { *; }
 
+
+-keep class com.csscaps.tcs.model.**{*; }
+-keep class com.csscaps.tcs.database.table.**{*; }

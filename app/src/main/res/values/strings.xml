@@ -121,8 +121,8 @@
     <string name="admin">administrator</string>
     <string name="operator">operator</string>
     <string name="change_password">Change Password</string>
-    <string name="active">active</string>
-    <string name="inactive">inactive</string>
+    <string name="active">Active</string>
+    <string name="inactive">Inactive</string>
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>

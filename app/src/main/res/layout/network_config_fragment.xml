@@ -94,6 +94,7 @@
                     android:maxLines="1"
                     android:padding="10dp"
                     android:textColor="@color/text"
+                    android:layout_marginEnd="10dp"
                     />
 
             </LinearLayout>
@@ -130,6 +131,7 @@
                     android:maxLines="1"
                     android:padding="10dp"
                     android:textColor="@color/text"
+                    android:layout_marginEnd="10dp"
                     />
 
             </LinearLayout>
@@ -166,6 +168,7 @@
                     android:maxLines="1"
                     android:padding="10dp"
                     android:textColor="@color/text"
+                    android:layout_marginEnd="10dp"
                     />
 
             </LinearLayout>

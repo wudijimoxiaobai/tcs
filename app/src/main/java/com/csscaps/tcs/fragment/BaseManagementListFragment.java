@@ -51,6 +51,7 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
     protected List<T> data;
     protected BaseManagementListAdapter mBaseManagementListAdapter;
     protected PopupWindow popupWindow;
+    protected String format="%%%s%%";
     /**
      * 是否删除数据库数据
      */

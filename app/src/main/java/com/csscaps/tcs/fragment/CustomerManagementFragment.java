@@ -3,6 +3,7 @@ package com.csscaps.tcs.fragment;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.csscaps.tcs.R;
@@ -10,9 +11,12 @@ import com.csscaps.tcs.activity.CustomerDetailsActivity;
 import com.csscaps.tcs.adapter.BaseManagementListAdapter;
 import com.csscaps.tcs.adapter.CustomerListAdapter;
 import com.csscaps.tcs.database.table.Customer;
+import com.csscaps.tcs.database.table.Customer_Table;
 import com.csscaps.tcs.dialog.AddCustomerDialog;
 import com.csscaps.tcs.dialog.BaseAddDialog;
+import com.csscaps.tcs.dialog.SearchCustomerDialog;
 import com.csscaps.tcs.model.SearchCustomerCondition;
+import com.raizlabs.android.dbflow.sql.language.Where;
 
 import java.util.List;
 
@@ -64,8 +68,8 @@ public class CustomerManagementFragment extends BaseManagementListFragment<Custo
         super.onClick(view);
         switch (view.getId()) {
             case R.id.search:
-//                SearchCustomerDialog searchCustomerDialog = new SearchCustomerDialog(mHandler);
-//                searchCustomerDialog.show(getChildFragmentManager(), "SearchCustomerDialog");
+                SearchCustomerDialog searchCustomerDialog = new SearchCustomerDialog(mHandler);
+                searchCustomerDialog.show(getChildFragmentManager(), "SearchCustomerDialog");
                 break;
         }
     }
@@ -73,7 +77,28 @@ public class CustomerManagementFragment extends BaseManagementListFragment<Custo
     Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            SearchCustomerCondition searchCustomerCondition= (SearchCustomerCondition) msg.obj;
+            SearchCustomerCondition searchCustomerCondition = (SearchCustomerCondition) msg.obj;
+            Where where = select().from(Customer.class).where();
+            if (!TextUtils.isEmpty(searchCustomerCondition.getTin())) {
+                where = where.and(Customer_Table.tin.like(String.format(format,searchCustomerCondition.getTin())));
+            }
+
+            if (!TextUtils.isEmpty(searchCustomerCondition.getName())) {
+                where = where.and(Customer_Table.name.like(String.format(format,searchCustomerCondition.getName())));
+            }
+
+            switch (searchCustomerCondition.getType()) {
+                case 1:
+                    where = where.and(Customer_Table.registered.is(true));
+                    break;
+                case 2:
+                    where = where.and(Customer_Table.registered.is(false));
+                    break;
+            }
+            data.clear();
+            List list = where.queryList();
+            data.addAll(list);
+            mBaseManagementListAdapter.notifyDataSetChanged();
         }
     };
 
