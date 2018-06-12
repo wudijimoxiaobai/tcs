@@ -16,8 +16,8 @@ import java.util.List;
 @Table(database = TcsDatabase.class)
 public class Invoice extends BaseModel implements Serializable {
 
-    public static final String SUCCESS="1";
-    public static final String FAILURE="0";
+    public static final String SUCCESS = "1";
+    public static final String FAILURE = "0";
 
     @Column
     @PrimaryKey
@@ -73,7 +73,7 @@ public class Invoice extends BaseModel implements Serializable {
     @Column
     String total_bpt;
     @Column
-    String  total_bpt_preypayment;
+    String total_bpt_preypayment;
     @Column
     String total_fee;
     @Column
@@ -119,9 +119,9 @@ public class Invoice extends BaseModel implements Serializable {
     @Column
     String sign;
     @Column
-    String print_flag="N";
+    String print_flag = "N";
     @Column
-    String is_deductable="N";
+    String is_deductable = "N";
     @Column
     String file_name;
     @Column
@@ -129,7 +129,12 @@ public class Invoice extends BaseModel implements Serializable {
     @Column
     String uploadStatus;
     @Column
-    String status;
+    String status = "AVL";//AVL:normal, DISA:cancelled, NEG:negative, WRO:wrote off, IVLD:invalid, IRR:illegal
+    @Column
+    String approveFlag;//0:通过 1：拒绝 -1：审批中
+    @Column
+    String reason;
+
 
     List<ProductModel> goods;
 
@@ -599,5 +604,21 @@ public class Invoice extends BaseModel implements Serializable {
 
     public void setTotal_fee(String total_fee) {
         this.total_fee = total_fee;
+    }
+
+    public String getApproveFlag() {
+        return approveFlag;
+    }
+
+    public void setApproveFlag(String approveFlag) {
+        this.approveFlag = approveFlag;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

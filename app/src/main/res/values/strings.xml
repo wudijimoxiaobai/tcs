@@ -140,6 +140,15 @@
     <string name="verify">Verify</string>
     <string name="type">Type</string>
     <string name="url_format" formatted="false">https://%s:%s/</string>
+    <string name="select_invoice">Select Invoice</string>
+    <string name="reason">Reason</string>
+    <string name="application_type">Application Type</string>
+    <string name="normal">normal</string>
+    <string name="cancelled">cancelled</string>
+    <string name="negative">negative</string>
+    <string name="wrote_off">wrote off</string>
+    <string name="invalid">invalid</string>
+    <string name="illegal">illegal</string>
 
     <string name="hit1">The username or password is not correct!</string>
     <string name="hit2">Please add product(s)!</string>
@@ -184,4 +193,7 @@
     <string name="hit41">The upload address cannot be empty!</string>
     <string name="hit42">The server port illegality</string>
     <string name="hit43">The server address illegality</string>
+    <string name="hit44">The invoice code cannot be empty!</string>
+    <string name="hit45">The invoice no cannot be empty!</string>
+    <string name="hit46">没有符合条件的发票！</string>
 </resources>

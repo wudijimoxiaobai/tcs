@@ -62,7 +62,7 @@ public class SynchronizeService extends Service implements IPresenter {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        autoSyn = intent.getBooleanExtra("autoSyn", false);
+        if (intent != null) autoSyn = intent.getBooleanExtra("autoSyn", false);
         synTaxpayer();
         synInvoiceType();
         synTaxType();
@@ -239,7 +239,7 @@ public class SynchronizeService extends Service implements IPresenter {
     private void complete() {
         if (c == 6 && !autoSyn) {
             Subscription subscription = ObserverActionUtils.subscribe(0, MainActivity.class);
-            subscription.unsubscribe();
+            if (subscription != null) subscription.unsubscribe();
             c = 0;
         }
     }

@@ -26,10 +26,31 @@ public class InvoiceQueryListAdapter extends BaseManagementListAdapter<Invoice> 
         helper.setText(R.id.invoice_code, item.getInvoice_type_code());
         helper.setText(R.id.invoice_no, item.getInvoice_no());
         helper.setText(R.id.issued_by, item.getDrawer_name());
-        helper.setText(R.id.status, item.getStatus());
         helper.setText(R.id.tax_Amount, item.getTotal_tax_due());
         helper.setText(R.id.i_tax, item.getTotal_all());
         helper.setText(R.id.upload_status, item.getUploadStatus().equals("1") ? "Y" : "N");
         helper.setText(R.id.issuing_date_time, DateUtils.dateToStr(DateUtils.getStringToDate(item.getClient_invoice_datetime(), DateUtils.format_yyyyMMddHHmmss_24_EN), DateUtils.format_yyyy_MM_dd_HH_mm_ss_24_EN));
+        //AVL:normal, DISA:cancelled, NEG:negative, WRO:wrote off, IVLD:invalid, IRR:illegal
+        switch (item.getStatus()) {
+            case "AVL":
+                helper.setText(R.id.status, context.getResources().getString(R.string.normal));
+                break;
+            case "DISA":
+                helper.setText(R.id.status, context.getResources().getString(R.string.cancelled));
+                break;
+            case "NEG":
+                helper.setText(R.id.status, context.getResources().getString(R.string.negative));
+                break;
+            case "WRO":
+                helper.setText(R.id.status, context.getResources().getString(R.string.wrote_off));
+                break;
+            case "IVLD":
+                helper.setText(R.id.status, context.getResources().getString(R.string.invalid));
+                break;
+            case "IRR":
+                helper.setText(R.id.status, context.getResources().getString(R.string.illegal));
+                break;
+
+        }
     }
 }

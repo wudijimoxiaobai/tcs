@@ -43,6 +43,21 @@
         <item>Unregistered</item>
     </string-array>
 
+    <string-array name="application_type">
+        <item>Invoice Cancellation Application</item>
+        <item>Negative Invoice Application</item>
+    </string-array>
+
+    <string-array name="invoice_status">
+        <item>All</item>
+        <item>Normal</item>
+        <item>Cancelled</item>
+        <item>Negative</item>
+        <item>Wrote off</item>
+        <item>Invalid</item>
+        <item>Illegal</item>
+    </string-array>
+
     <string-array name="tab1">
         <item>Tax Item</item>
         <item>Taxpayer Information</item>
