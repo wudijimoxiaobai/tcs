@@ -249,3 +249,16 @@
 
 -keep class com.csscaps.tcs.model.**{*; }
 -keep class com.csscaps.tcs.database.table.**{*; }
+
+#ofd_view
+-dontwarn com.suwell.bc.**
+-keep class com.suwell.bc.** { *; }
+-dontwarn com.suwell.ofd.nativ.**
+-keep class com.suwell.ofd.nativ.** { *; }
+-dontwarn com.suwell.ofd.gmt.**
+-keep class com.suwell.ofd.gmt.** { *; }
+-keep class com.suwell.ofd.render.** { *; }
+-keep class com.suwell.ofdreader.model.** {
+    <fields>;
+    <methods>;
+}

@@ -131,10 +131,10 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
                     ToastUtil.showShort(getString(R.string.hit23));
                     return;
                 }
-                if (pObject == 2 && TextUtils.isEmpty(mInvoice.getPurchaser_id_number()) && TextUtils.isEmpty(mInvoice.getPurchaser_tin())) {
-                    ToastUtil.showShort(getString(R.string.hit23));
-                    return;
-                }
+//                if (pObject == 2 && TextUtils.isEmpty(mInvoice.getPurchaser_id_number()) && TextUtils.isEmpty(mInvoice.getPurchaser_tin())) {
+//                    ToastUtil.showShort(getString(R.string.hit23));
+//                    return;
+//                }
                 Intent intent = new Intent(this, ProductListActivity.class);
                 startActivity(intent);
                 break;

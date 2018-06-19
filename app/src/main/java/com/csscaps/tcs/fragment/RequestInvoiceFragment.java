@@ -13,8 +13,10 @@ import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.TCSApplication;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.Invoice_Table;
+import com.csscaps.tcs.dialog.InvoiceDetailsDialog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,6 +41,8 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
 
     private int status;
     private final String AVL = "AVL";
+    private final String DISA = "DISA";
+    private final String NEG = "NEG";
     private Invoice invoice;
 
     @Override
@@ -108,24 +112,35 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
                         ToastUtil.showShort(getString(R.string.hit46));
                         return;
                     }
-                    invoice.setStatus("DISA");
+                    invoice.setStatus(DISA);
                     break;
                 case 1://负数
-                    if (DateUtils.compareDate(dateNow, dateTime, DateUtils.format_yyyy_MM_EN) != 1) {
+                    dateTime = TextUtils.substring(dateTime, 0, 6);
+                    if (DateUtils.compareDate(dateNow, dateTime, DateUtils.format_yyyyMM) != 1) {
                         ToastUtil.showShort(getString(R.string.hit46));
                         return;
                     }
-                    invoice.setStatus("NEG");
+                    invoice.setStatus(NEG);
                     break;
             }
-            invoice.setApproveFlag("-1");
+            invoice.setApproveFlag("2");
         }
         invoice.setReason(mReason.getText().toString().trim());
         this.invoice = invoice;
+//        Intent intent = new Intent(mContext, InvoiceDetailsActivity.class);
+//        intent.putExtra("invoice", invoice);
+//        startActivity(intent);
+        InvoiceDetailsDialog invoiceDetailsDialog=new InvoiceDetailsDialog();
+        invoiceDetailsDialog.setFlag(0);
+        invoiceDetailsDialog.show(getFragmentManager(),"InvoiceDetailsDialog");
     }
 
     @Override
     public void call(Object o) {
-        if (invoice != null) invoice.update();
+        if (invoice != null) {
+            invoice.setRequestBy(TCSApplication.currentUser.getUserName());
+            invoice.setRequestDate(DateUtils.getDateToString_YYYY_MM_DD_HH_MM_SS_EN(DateUtils.getDateNow()));
+            invoice.update();
+        }
     }
 }

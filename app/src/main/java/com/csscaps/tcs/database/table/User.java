@@ -26,7 +26,7 @@ public class User extends BaseModel implements Serializable {
     String password="12345678";
 
     @Column
-    int role;
+    int role;//0: administrator 1:operator
 
     @Column
     String tel;

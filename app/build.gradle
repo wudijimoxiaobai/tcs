@@ -34,6 +34,12 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 def dbflow_version = "4.0.3"
 dependencies {
@@ -49,4 +55,5 @@ dependencies {
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+    compile(name: 'ofd_view', ext: 'aar')
 }

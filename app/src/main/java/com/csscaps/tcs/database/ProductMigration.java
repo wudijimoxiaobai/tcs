@@ -2,7 +2,6 @@ package com.csscaps.tcs.database;
 
 import com.csscaps.tcs.database.table.Invoice;
 import com.raizlabs.android.dbflow.annotation.Migration;
-import com.raizlabs.android.dbflow.sql.SQLiteType;
 import com.raizlabs.android.dbflow.sql.migration.AlterTableMigration;
 
 /**
@@ -19,6 +18,7 @@ public class ProductMigration extends AlterTableMigration<Invoice> {
     @Override
     public void onPreMigrate() {
         super.onPreMigrate();
-        addColumn(SQLiteType.TEXT,"reason");
+//        addColumn(SQLiteType.TEXT,"requestBy");
+//        addColumn(SQLiteType.TEXT,"requestDate");
     }
 }

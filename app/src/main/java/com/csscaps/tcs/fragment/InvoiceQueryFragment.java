@@ -108,4 +108,13 @@ public class InvoiceQueryFragment extends BaseManagementListFragment<Invoice> {
                 break;
         }
     }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            data=select().from(Invoice.class).where(Invoice_Table.status.eq("DISA")).or(Invoice_Table.status.eq("NEG")).queryList();
+            mBaseManagementListAdapter.setData(data);
+        }
+    }
 }

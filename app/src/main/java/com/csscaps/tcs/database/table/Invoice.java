@@ -131,9 +131,13 @@ public class Invoice extends BaseModel implements Serializable {
     @Column
     String status = "AVL";//AVL:normal, DISA:cancelled, NEG:negative, WRO:wrote off, IVLD:invalid, IRR:illegal
     @Column
-    String approveFlag;//0:通过 1：拒绝 -1：审批中
+    String approveFlag;//0:通过 1：拒绝 2：待确认 3：内部拒绝 4：待审批
     @Column
     String reason;
+    @Column
+    String requestBy;
+    @Column
+    String requestDate;
 
 
     List<ProductModel> goods;
@@ -620,5 +624,21 @@ public class Invoice extends BaseModel implements Serializable {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getRequestBy() {
+        return requestBy;
+    }
+
+    public void setRequestBy(String requestBy) {
+        this.requestBy = requestBy;
+    }
+
+    public String getRequestDate() {
+        return requestDate;
+    }
+
+    public void setRequestDate(String requestDate) {
+        this.requestDate = requestDate;
     }
 }

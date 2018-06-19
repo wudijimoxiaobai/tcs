@@ -149,6 +149,21 @@
     <string name="wrote_off">wrote off</string>
     <string name="invalid">invalid</string>
     <string name="illegal">illegal</string>
+    <string name="invoice_details">Invoice Details</string>
+    <string name="application_list">Application List</string>
+    <string name="request_type">Request Type</string>
+    <string name="request_date">Request Date</string>
+    <string name="request_by">Request By</string>
+    <string name="DISA">Cancellation</string>
+    <string name="NEG">Negative</string>
+    <string name="process">Precess</string>
+    <string name="issue">Issue</string>
+    <string name="approve">Approve</string>
+    <string name="pass">通过</string>
+    <string name="reject">Reject</string>
+    <string name="to_confirm">待确认</string>
+    <string name="internal_reject">内部拒绝</string>
+    <string name="pending_approval">待审批</string>
 
     <string name="hit1">The username or password is not correct!</string>
     <string name="hit2">Please add product(s)!</string>

@@ -15,8 +15,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LaunchActivity"
-            android:theme="@style/SplashTheme"
             android:screenOrientation="landscape"
+            android:theme="@style/SplashTheme"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -39,6 +39,8 @@
         <activity android:name=".activity.SystemManagementActivity"/>
         <activity android:name=".activity.UserDetailsActivity"/>
         <activity android:name=".activity.ChangePasswordActivity"/>
+        <activity android:name=".activity.InvoiceDetailsActivity"/>
+        <activity android:name=".activity.ApplicationListActivity"/>
     </application>
 
 </manifest>
