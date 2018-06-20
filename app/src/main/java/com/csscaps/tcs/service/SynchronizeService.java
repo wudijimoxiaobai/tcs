@@ -1,7 +1,6 @@
 package com.csscaps.tcs.service;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
@@ -244,13 +243,5 @@ public class SynchronizeService extends Service implements IPresenter {
         }
     }
 
-    @Override
-    public Context getContext() {
-        return null;
-    }
 
-    @Override
-    public boolean isDetached() {
-        return false;
-    }
 }

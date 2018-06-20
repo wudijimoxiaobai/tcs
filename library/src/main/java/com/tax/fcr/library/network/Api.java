@@ -80,6 +80,57 @@ public abstract class Api {
         }
     }
 
+    public static void post1(final IPresenter1 presenter, RequestModel requestParam) {
+        if (TextUtils.isEmpty(BASE_URL)) return;
+        if (NetworkUtils.netWorkJudge()) {
+            Observable<ResponseModel> observable = ServiceFactory.getInstance()
+                    .getDefaultService().postService(requestParam);
+            Log.i("Retrofit", "请求：POST:" + requestParam.getFuncid() + "\n Request:" + JSON.toJSONString(requestParam, true));
+            subscribe1(requestParam.getFuncid(), observable, presenter,requestParam);
+        } else {
+            presenter.onFailure(requestParam.getFuncid(), ERR_NETWORK,requestParam);
+        }
+    }
+
+    private static void subscribe1(final String requestPath, Observable<ResponseModel> observable, final IPresenter1 presenter, final RequestModel requestParam) {
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ResponseModel>() {
+                    @Override
+                    public void onStart() {
+                    }
+
+                    @Override
+                    public void onNext(ResponseModel s) {
+                        Log.i("Retrofit", "返回：" + requestPath + " \nResponse:" + JSON.toJSONString(s, true));
+                        if ("0".equals(s.getCode())) {
+                            String data = s.getData();
+                            presenter.onSuccess(requestPath, data,requestParam);
+                        } else {
+                            presenter.onFailure(requestPath, s.getMessage(),requestParam);
+                        }
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        if (!isUnsubscribed()) unsubscribe();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        if (!isUnsubscribed()) unsubscribe();
+
+                        String errorCode;
+                       /* if (e instanceof SocketTimeoutException)
+                            errorCode = FAIL_CONNECT;
+                        else*/
+                        errorCode = ERR_NETWORK;
+
+                        presenter.onFailure(requestPath, errorCode,requestParam);
+                    }
+                });
+    }
 
     private static void subscribe(final String requestPath, Observable<ResponseModel> observable, final IPresenter presenter) {
         observable.subscribeOn(Schedulers.io())

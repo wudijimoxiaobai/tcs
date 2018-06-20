@@ -2,13 +2,13 @@ package com.csscaps.common.base;
 
 import android.content.Context;
 
-import com.tax.fcr.library.network.IPresenter;
+import com.tax.fcr.library.network.IPresenter2;
 
 /**
  * Created by tanglei on 16/6/16.
  * Presenter基类
  */
-public abstract class BasePresenter<V> implements IPresenter {
+public abstract class BasePresenter<V> implements IPresenter2 {
     protected V view;
     public Context mContext;
     private boolean isDetached;

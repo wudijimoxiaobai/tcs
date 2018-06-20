@@ -99,7 +99,7 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
 
         Invoice invoice = select().from(Invoice.class).where(Invoice_Table.invoice_no.eq(invoiceNo))
                 .and(Invoice_Table.invoice_type_code.eq(invoiceCode))
-                .and(Invoice_Table.status.eq(AVL)).querySingle();
+                .and(Invoice_Table.status.eq(AVL)).and(Invoice_Table.approveFlag.isNull()).querySingle();
         if (invoice == null) {
             ToastUtil.showShort(getString(R.string.hit46));
             return;
@@ -130,7 +130,7 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
 //        Intent intent = new Intent(mContext, InvoiceDetailsActivity.class);
 //        intent.putExtra("invoice", invoice);
 //        startActivity(intent);
-        InvoiceDetailsDialog invoiceDetailsDialog=new InvoiceDetailsDialog();
+        InvoiceDetailsDialog invoiceDetailsDialog=new InvoiceDetailsDialog(invoice);
         invoiceDetailsDialog.setFlag(0);
         invoiceDetailsDialog.show(getFragmentManager(),"InvoiceDetailsDialog");
     }

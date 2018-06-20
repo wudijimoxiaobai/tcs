@@ -138,6 +138,8 @@ public class Invoice extends BaseModel implements Serializable {
     String requestBy;
     @Column
     String requestDate;
+    @Column
+    String requestStatus; //0:申请失败 1:申请成功
 
 
     List<ProductModel> goods;
@@ -640,5 +642,13 @@ public class Invoice extends BaseModel implements Serializable {
 
     public void setRequestDate(String requestDate) {
         this.requestDate = requestDate;
+    }
+
+    public String getRequestStatus() {
+        return requestStatus;
+    }
+
+    public void setRequestStatus(String requestStatus) {
+        this.requestStatus = requestStatus;
     }
 }

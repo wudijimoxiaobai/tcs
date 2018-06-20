@@ -25,4 +25,14 @@ public interface ServerConstants {
     final String ATCS010 = "ATCS010";
     /*上传发票*/
     final String ATCS012 = "ATCS012";
+    /*负数发票申请*/
+    final String ATCS016 = "ATCS016";
+    /*负数发票申请结果下载*/
+    final String ATCS017 = "ATCS017";
+    /*作废发票申请*/
+    final String ATCS018 = "ATCS018";
+    /*负数发票申请结果下载*/
+    final String ATCS019 = "ATCS019";
+
+
 }

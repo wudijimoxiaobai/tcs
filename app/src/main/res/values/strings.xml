@@ -211,4 +211,5 @@
     <string name="hit44">The invoice code cannot be empty!</string>
     <string name="hit45">The invoice no cannot be empty!</string>
     <string name="hit46">没有符合条件的发票！</string>
+    <string name="hit47">确定开具负数发票吗？</string>
 </resources>
