@@ -10,7 +10,6 @@ import com.csscaps.tcs.model.RequestUploadInvoice;
 import com.tax.fcr.library.network.Api;
 import com.tax.fcr.library.network.IPresenter1;
 import com.tax.fcr.library.network.RequestModel;
-import com.tax.fcr.library.utils.Logger;
 import com.tax.fcr.library.utils.SecurityUtil;
 
 import java.util.List;
@@ -37,7 +36,6 @@ public class InvoiceApprovePresenter implements IPresenter1 {
         RequestModel requestModel = (RequestModel) O;
         String data = requestModel.getData();
         data= SecurityUtil.getFromBase64(data);
-        Logger.i("data2   "+data);
         RequestUploadInvoice requestUploadInvoice = JSON.parseObject(data, RequestUploadInvoice.class);
         String invoiceNo = requestUploadInvoice.getInvoice_data().get(0).getInvoice_no();
         Invoice invoice = select().from(Invoice.class).where(Invoice_Table.invoice_no.eq(invoiceNo)).querySingle();
@@ -80,7 +78,6 @@ public class InvoiceApprovePresenter implements IPresenter1 {
         requestModel.setFuncid(uploadInvoice.getFuncid());
         uploadInvoice.setDevicesn(requestModel.getDevicesn());
         requestModel.setData(JSON.toJSONString(uploadInvoice));
-        Logger.i("data1   "+requestModel.getData());
         Api.post1(this, requestModel);
     }
 

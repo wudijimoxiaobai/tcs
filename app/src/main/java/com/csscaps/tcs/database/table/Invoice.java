@@ -135,12 +135,15 @@ public class Invoice extends BaseModel implements Serializable {
     @Column
     String reason;
     @Column
+    String requestType;//DISA:cancelled, NEG:negative
+    @Column
     String requestBy;
     @Column
     String requestDate;
     @Column
     String requestStatus; //0:申请失败 1:申请成功
 
+    String invalid="N";
 
     List<ProductModel> goods;
 
@@ -650,5 +653,21 @@ public class Invoice extends BaseModel implements Serializable {
 
     public void setRequestStatus(String requestStatus) {
         this.requestStatus = requestStatus;
+    }
+
+    public String getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(String requestType) {
+        this.requestType = requestType;
+    }
+
+    public String getInvalid() {
+        return invalid;
+    }
+
+    public void setInvalid(String invalid) {
+        this.invalid = invalid;
     }
 }

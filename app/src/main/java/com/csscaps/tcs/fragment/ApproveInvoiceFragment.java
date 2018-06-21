@@ -58,7 +58,7 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
     @Override
     public void initView(Bundle savedInstanceState) {
         ObserverActionUtils.addAction(this);
-        data = select().from(Invoice.class).where(Invoice_Table.status.eq(DISA)).or(Invoice_Table.status.eq(NEG)).orderBy(Invoice_Table.requestDate, false).queryList();
+        data = select().from(Invoice.class).where(Invoice_Table.requestType.eq(DISA)).or(Invoice_Table.requestType.eq(NEG)).orderBy(Invoice_Table.requestDate, false).queryList();
         mAdapter = new ApproveInvoiceListAdapter(mContext, R.layout.approve_invoice_list_item, data);
         mListView.setAdapter(mAdapter);
         if (process/*&& TCSApplication.currentUser.getRole()==0*/)
@@ -82,7 +82,7 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
                 break;
             case R.id.process:
                 InvoiceDetailsDialog invoiceDetailsDialog1 = new InvoiceDetailsDialog(invoice);
-                if (invoice.getStatus().equals(NEG) && invoice.getApproveFlag().equals("0")) {
+                if (invoice.getRequestType().equals(NEG) && invoice.getApproveFlag().equals("0")) {
                     invoiceDetailsDialog1.setFlag(2);
                 } else {
                     invoiceDetailsDialog1.setFlag(4);
@@ -125,7 +125,7 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
     }
 
     private void refresh() {
-        data = select().from(Invoice.class).where(Invoice_Table.status.eq(DISA)).or(Invoice_Table.status.eq(NEG)).orderBy(Invoice_Table.requestDate, false).queryList();
+        data = select().from(Invoice.class).where(Invoice_Table.requestType.eq(DISA)).or(Invoice_Table.requestType.eq(NEG)).orderBy(Invoice_Table.requestDate, false).queryList();
         mAdapter.setData(data);
     }
 
@@ -133,9 +133,9 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
     public void call(Object o) {
         refresh();
         if (((int) o) == 1) {
-            if (invoice.getStatus().equals(DISA)) {
+            if (invoice.getRequestType().equals(DISA)) {
                 mApprovePresenter.cancellation(invoice);
-            } else if (invoice.getStatus().equals(NEG)) {
+            } else if (invoice.getRequestType().equals(NEG)) {
                 mApprovePresenter.negative(invoice);
             }
         }

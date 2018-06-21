@@ -112,7 +112,7 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
                         ToastUtil.showShort(getString(R.string.hit46));
                         return;
                     }
-                    invoice.setStatus(DISA);
+                    invoice.setRequestType(DISA);
                     break;
                 case 1://负数
                     dateTime = TextUtils.substring(dateTime, 0, 6);
@@ -120,7 +120,7 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
                         ToastUtil.showShort(getString(R.string.hit46));
                         return;
                     }
-                    invoice.setStatus(NEG);
+                    invoice.setRequestType(NEG);
                     break;
             }
             invoice.setApproveFlag("2");

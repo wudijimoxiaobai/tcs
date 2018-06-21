@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.csscaps.common.base.BaseApplication;
 import com.csscaps.common.utils.AppSP;
+import com.csscaps.common.utils.DateUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.database.TcsDatabase;
 import com.csscaps.tcs.database.table.Taxpayer;
@@ -60,7 +61,7 @@ public class TCSApplication extends BaseApplication {
      * 初始化数据
      */
     private void initData() {
-        timer.schedule(new MyTimerTask(),500, 5000/*(long) (DateUtils.HOUR_OF_MILLISECOND*0.5)*/);
+        timer.schedule(new MyTimerTask(),500, (long) (DateUtils.HOUR_OF_MILLISECOND*0.5));
         boolean initData = AppSP.getBoolean("initData", false);
         if (!initData) {
             new Thread() {

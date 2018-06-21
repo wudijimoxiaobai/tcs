@@ -9,5 +9,6 @@ import com.raizlabs.android.dbflow.annotation.Database;
 public class TcsDatabase {
     public static final String NAME = "TcsDatabase";
 
-    public static final int VERSION = 1;
+    public static final int VERSION = 1
+            ;
 }

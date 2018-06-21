@@ -46,7 +46,7 @@ public class ApproveInvoiceListAdapter extends QuickAdapter<Invoice> {
                 break;
         }
 
-        switch (item.getStatus()) {
+        switch (item.getRequestType()) {
             case "DISA":
                 helper.setText(R.id.request_type, context.getResources().getString(R.string.DISA));
                 break;

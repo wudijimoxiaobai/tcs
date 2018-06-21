@@ -9,13 +9,13 @@ import java.util.List;
  */
 
 public class RequestInvoiceResult extends RequestData {
-    List<Invoice> invoice;
+    List<Invoice> invoice_data;
 
-    public List<Invoice> getInvoice() {
-        return invoice;
+    public List<Invoice> getInvoice_data() {
+        return invoice_data;
     }
 
-    public void setInvoice(List<Invoice> invoice) {
-        this.invoice = invoice;
+    public void setInvoice_data(List<Invoice> invoice_data) {
+        this.invoice_data = invoice_data;
     }
 }
