@@ -156,7 +156,7 @@
     <string name="request_by">Request By</string>
     <string name="DISA">Cancellation</string>
     <string name="NEG">Negative</string>
-    <string name="process">Precess</string>
+    <string name="process">Process</string>
     <string name="issue">Issue</string>
     <string name="approve">Approve</string>
     <string name="pass">通过</string>
@@ -164,6 +164,21 @@
     <string name="to_confirm">待确认</string>
     <string name="internal_reject">内部拒绝</string>
     <string name="pending_approval">待审批</string>
+    <string name="date_from">Date from</string>
+    <string name="date_to">Date to</string>
+    <string name="issuing_date_from">Issuing Date from</string>
+    <string name="issuing_date_to">Issuing Date to</string>
+    <string name="online_declaration">Online Declaration</string>
+    <string name="invoice_deadline">Invoice Deadline</string>
+    <string name="deadline_date_from">Deadline Date From</string>
+    <string name="deadline_date_to">Deadline Date To</string>
+    <string name="deadline_date">Deadline Date</string>
+    <string name="action">Action</string>
+    <string name="tax_type">Tax Type</string>
+    <string name="automatic">Automatic</string>
+    <string name="compulsory">Compulsory</string>
+    <string name="declare">Declare</string>
+
 
     <string name="hit1">The username or password is not correct!</string>
     <string name="hit2">Please add product(s)!</string>
@@ -212,4 +227,6 @@
     <string name="hit45">The invoice no cannot be empty!</string>
     <string name="hit46">没有符合条件的发票！</string>
     <string name="hit47">确定开具负数发票吗？</string>
+    <string name="hit48">结束时间不能小于起始时间！</string>
+    <string name="hit49">确定退出系统吗？</string>
 </resources>

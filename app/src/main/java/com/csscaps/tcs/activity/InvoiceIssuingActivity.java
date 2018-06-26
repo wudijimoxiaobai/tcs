@@ -103,8 +103,8 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
         for (InvoiceType it : mInvoiceTypes) {
             invoiceTypeNames.add(it.getInvoice_type_name());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, invoiceTypeNames);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.simple_spinner_item, invoiceTypeNames);
+        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         mInvoiceType.setAdapter(adapter);
         mInvoiceType.setOnItemSelectedListener(this);
         mLanguageInInvoice.setOnItemSelectedListener(this);

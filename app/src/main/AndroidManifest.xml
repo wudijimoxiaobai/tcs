@@ -28,6 +28,8 @@
 
         <service android:name=".service.SynchronizeService"/>
         <service android:name=".service.InvoiceNoService"/>
+        <service android:name=".service.UploadInvoiceService"/>
+        <service android:name=".service.ReportDataService"/>
 
         <activity android:name=".LoginActivity"/>
         <activity android:name=".MainActivity"/>
@@ -42,6 +44,7 @@
         <activity android:name=".activity.ChangePasswordActivity"/>
         <activity android:name=".activity.InvoiceDetailsActivity"/>
         <activity android:name=".activity.ApplicationListActivity"/>
+        <activity android:name=".activity.OnlineDeclarationActivity"/>
     </application>
 
 </manifest>

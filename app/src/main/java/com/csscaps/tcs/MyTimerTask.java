@@ -1,6 +1,9 @@
 package com.csscaps.tcs;
 
+import android.content.Intent;
+
 import com.alibaba.fastjson.JSON;
+import com.csscaps.common.utils.AppSP;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.Invoice_Table;
 import com.csscaps.tcs.database.table.ProductModel;
@@ -9,10 +12,13 @@ import com.csscaps.tcs.model.ReceiveRequestResult;
 import com.csscaps.tcs.model.RequestInvoiceResult;
 import com.csscaps.tcs.model.RequestResultModel;
 import com.csscaps.tcs.model.RequestUploadInvoice;
+import com.csscaps.tcs.service.ReportDataService;
+import com.csscaps.tcs.service.UploadInvoiceService;
 import com.tax.fcr.library.network.Api;
 import com.tax.fcr.library.network.IPresenter;
 import com.tax.fcr.library.network.RequestModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
@@ -39,6 +45,10 @@ public class MyTimerTask extends TimerTask implements IPresenter {
         requestResult(engs, ServerConstants.ATCS017);
         request(disas1, ServerConstants.ATCS018);
         request(engs1, ServerConstants.ATCS016);
+        TCSApplication.getAppContext().startService(new Intent(TCSApplication.getAppContext(), UploadInvoiceService.class));
+        if(AppSP.getBoolean("automatic")){
+            TCSApplication.getAppContext().startService(new Intent(TCSApplication.getAppContext(), ReportDataService.class));
+        }
     }
 
     private void requestResult(List<Invoice> list, String funId) {
@@ -72,6 +82,7 @@ public class MyTimerTask extends TimerTask implements IPresenter {
     public void onSuccess(String requestPath, String objectString) {
         ReceiveRequestResult requestRust = JSON.parseObject(objectString, ReceiveRequestResult.class);
         List<RequestResultModel> invoiceData = requestRust.getInvoice_data();
+        List<Invoice> disInvoices = new ArrayList<>();
         for (RequestResultModel resultModel : invoiceData) {
             String invoiceNo = resultModel.getInvoice_no();
             Invoice invoice = select().from(Invoice.class).where(Invoice_Table.invoice_no.eq(invoiceNo)).querySingle();
@@ -90,6 +101,7 @@ public class MyTimerTask extends TimerTask implements IPresenter {
                                 invoice.setStatus(DISA);
                                 invoice.setInvalid_datetime(resultModel.getCancellation_date());
                                 invoice.setInvalid_flag("Y");
+                                disInvoices.add(invoice);
                             } else {
                                 invoice.setStatus(NEG);
                             }
@@ -103,11 +115,11 @@ public class MyTimerTask extends TimerTask implements IPresenter {
             invoice.update();
         }
 
+        if (disInvoices.size() > 0) request(disInvoices, ServerConstants.ATCS018);
     }
 
     @Override
-    public void onFailure(String requestPath, String errorMes) {
-    }
+    public void onFailure(String requestPath, String errorMes) {}
 
 
 }

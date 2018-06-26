@@ -10,7 +10,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  * Created by tl on 2018/5/22.
  */
 @Table(database = TcsDatabase.class)
-public class ProductModel extends BaseModel{
+public class ProductModel extends BaseModel implements Cloneable{
 
     @PrimaryKey(autoincrement = true)
     @Column
@@ -72,6 +72,10 @@ public class ProductModel extends BaseModel{
     @Column
     double i_tax;
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 
     public String getCategory() {
         return category;
@@ -295,5 +299,9 @@ public class ProductModel extends BaseModel{
 
     public void setI_tax(double i_tax) {
         this.i_tax = i_tax;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

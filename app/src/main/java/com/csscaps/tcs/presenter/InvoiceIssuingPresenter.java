@@ -62,7 +62,10 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
             productModels.add(productModel);
         }
         invoice.setGoods(productModels);
+        issuingInvoice(invoice);
+    }
 
+    public void issuingInvoice(Invoice invoice){
         RequestUploadInvoice uploadInvoice = new RequestUploadInvoice();
         uploadInvoice.setFuncid(ServerConstants.ATCS012);
         uploadInvoice.getInvoice_data().add(invoice);
@@ -79,7 +82,7 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
                             public void processModel(ProductModel model, DatabaseWrapper wrapper) {
                                 model.save();
                             }
-                        }).addAll(productModels).build())
+                        }).addAll(invoice.getGoods()).build())
                 .error(new Transaction.Error() {
                     @Override
                     public void onError(@NonNull Transaction transaction, @NonNull Throwable error) {
@@ -93,6 +96,5 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
         invoiceNo.delete();
         mContext.startService(new Intent(mContext, InvoiceNoService.class));
     }
-
 
 }

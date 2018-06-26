@@ -14,7 +14,7 @@ import java.util.List;
  * Created by tl on 2018/5/22.
  */
 @Table(database = TcsDatabase.class)
-public class Invoice extends BaseModel implements Serializable {
+public class Invoice extends BaseModel implements Serializable,Cloneable {
 
     public static final String SUCCESS = "1";
     public static final String FAILURE = "0";
@@ -150,6 +150,11 @@ public class Invoice extends BaseModel implements Serializable {
     String invoice_type_uid;
 
     List<Product> mProducts = new ArrayList<>();
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 
     public String getInvoice_no() {
         return invoice_no;

@@ -36,7 +36,20 @@
         <item>Active</item>
         <item>Inactive</item>
     </string-array>
+    <string-array name="status1">
+        <item>All</item>
+        <item>通过</item>
+        <item>拒绝</item>
+        <item>待确认</item>
+        <item>内部拒绝</item>
+        <item>待审批</item>
+    </string-array>
 
+    <string-array name="request_type">
+        <item>All</item>
+        <item>Cancellation</item>
+        <item>Negative</item>
+    </string-array>
     <string-array name="customer_type">
         <item>All</item>
         <item>Registered</item>
@@ -56,6 +69,19 @@
         <item>Wrote off</item>
         <item>Invalid</item>
         <item>Illegal</item>
+    </string-array>
+    <string-array name="invoice_status_key">
+        <item>AVL</item>
+        <item>DISA</item>
+        <item>NEG</item>
+        <item>WRO</item>
+        <item>IVLD</item>
+        <item>IRR</item>
+    </string-array>
+    <string-array name="upload_status">
+        <item>All</item>
+        <item>N</item>
+        <item>Y</item>
     </string-array>
 
     <string-array name="tab1">

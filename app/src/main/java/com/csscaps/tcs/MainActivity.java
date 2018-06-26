@@ -13,7 +13,9 @@ import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.tcs.activity.InvoiceInformationManagementActivity;
 import com.csscaps.tcs.activity.InvoiceIssuingActivity;
 import com.csscaps.tcs.activity.InvoiceManagementActivity;
+import com.csscaps.tcs.activity.OnlineDeclarationActivity;
 import com.csscaps.tcs.activity.SystemManagementActivity;
+import com.csscaps.tcs.dialog.ExitDialog;
 import com.csscaps.tcs.dialog.SynDataDialog;
 import com.csscaps.tcs.service.SynchronizeService;
 
@@ -83,8 +85,7 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.exit:
-                finish();
-                System.exit(0);
+                exit();
                 break;
             case R.id.syn:
                 startService(new Intent(this, SynchronizeService.class));
@@ -97,6 +98,7 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
                 startActivity(new Intent(this, InvoiceManagementActivity.class));
                 break;
             case R.id.declaration:
+                startActivity(new Intent(this, OnlineDeclarationActivity.class));
                 break;
             case R.id.statistics:
                 break;
@@ -112,5 +114,22 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
     @Override
     public void call(Object o) {
         mSynDataDialog.dismiss();
+    }
+
+    @Override
+    public void onBackPressed() {
+        exit();
+    }
+
+    private void exit(){
+        Handler handler=new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                finish();
+                System.exit(0);
+            }
+        };
+        ExitDialog exitDialog=new ExitDialog(handler);
+        exitDialog.show(getSupportFragmentManager(),"ExitDialog");
     }
 }

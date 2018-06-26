@@ -1,17 +1,28 @@
 package com.csscaps.tcs.fragment;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 
+import com.csscaps.common.utils.DateUtils;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.adapter.BaseManagementListAdapter;
 import com.csscaps.tcs.adapter.InvoiceQueryListAdapter;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.Invoice_Table;
 import com.csscaps.tcs.dialog.BaseAddDialog;
+import com.csscaps.tcs.dialog.InvoiceDetailsDialog;
+import com.csscaps.tcs.dialog.SearchInvoiceDialog;
+import com.csscaps.tcs.model.SearchInvoiceCondition;
+import com.csscaps.tcs.service.UploadInvoiceService;
+import com.raizlabs.android.dbflow.sql.language.Where;
 
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.OnClick;
@@ -23,7 +34,6 @@ import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
  */
 
 public class InvoiceQueryFragment extends BaseManagementListFragment<Invoice> {
-
 
     @Override
     protected int getLayoutResId() {
@@ -37,7 +47,7 @@ public class InvoiceQueryFragment extends BaseManagementListFragment<Invoice> {
 
     @Override
     protected List<Invoice> getData() {
-        return select().from(Invoice.class).orderBy(Invoice_Table.client_invoice_datetime,false).queryList();
+        return select().from(Invoice.class).orderBy(Invoice_Table.client_invoice_datetime, false).queryList();
     }
 
     @Override
@@ -50,11 +60,6 @@ public class InvoiceQueryFragment extends BaseManagementListFragment<Invoice> {
         return null;
     }
 
-    @Override
-    public void initView(Bundle savedInstanceState) {
-        super.initView(savedInstanceState);
-        mListView.setOnItemClickListener(null);
-    }
 
     @Override
     @OnClick({R.id.back, R.id.search, R.id.select})
@@ -72,18 +77,7 @@ public class InvoiceQueryFragment extends BaseManagementListFragment<Invoice> {
                         getActivity().finish();
                         break;
                     case 1://取消
-                        mBack.setTag(0);
-                        mSelect.setTag(0);
-//                        mBack.setText(getString(R.string.back));
-                        mSelect.setText((getString(R.string.select)));
-                        Drawable drawable = ContextCompat.getDrawable(mContext,R.mipmap.select);
-                        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-                        mSelect.setCompoundDrawables(drawable,null,null,null);
-                        mAllSelect.setButtonDrawable(ContextCompat.getDrawable(mContext, android.R.color.transparent));
-                        mBaseManagementListAdapter.setShowCheckBox(false);
-                        mAllSelect.setText(getString(R.string.no));
-                        mAllSelect.setChecked(false);
-//                        mAdd.setVisibility(View.VISIBLE);
+                        cancel();
                         break;
                 }
                 break;
@@ -97,24 +91,106 @@ public class InvoiceQueryFragment extends BaseManagementListFragment<Invoice> {
                         mAllSelect.setButtonDrawable(ContextCompat.getDrawable(mContext, R.drawable.cb_check_selector));
                         mAllSelect.setText(null);
                         mBaseManagementListAdapter.setShowCheckBox(true);
-//                        mAdd.setVisibility(View.INVISIBLE);
+                        notUploaded();
                         break;
                     case 1://上传
-
+                        List<Invoice> list = mBaseManagementListAdapter.getCheckedList();
+                        Intent intent = new Intent(mContext, UploadInvoiceService.class);
+                        intent.putExtra("list", (Serializable) list);
+                        mContext.startService(intent);
+                        cancel();
                         break;
                 }
                 break;
             case R.id.search:
+                SearchInvoiceDialog searchInvoiceDialog = new SearchInvoiceDialog(mHandler);
+                if (((Integer) mSelect.getTag()) == 1) searchInvoiceDialog.setSelect(true);
+                searchInvoiceDialog.show(getFragmentManager(), "SearchInvoiceDialog");
                 break;
         }
     }
 
+    private void cancel() {
+        mBack.setTag(0);
+        mSelect.setTag(0);
+//      mBack.setText(getString(R.string.back));
+        mSelect.setText((getString(R.string.select)));
+        Drawable drawable = ContextCompat.getDrawable(mContext, R.mipmap.select);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        mSelect.setCompoundDrawables(drawable, null, null, null);
+        mAllSelect.setButtonDrawable(ContextCompat.getDrawable(mContext, android.R.color.transparent));
+        mBaseManagementListAdapter.setShowCheckBox(false);
+        mAllSelect.setText(getString(R.string.no));
+        mAllSelect.setChecked(false);
+        onHiddenChanged(false);
+    }
+
+    @Override
+    public void call(Invoice invoice) {
+        onHiddenChanged(false);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Invoice invoice = data.get(i);
+        InvoiceDetailsDialog invoiceDetailsDialog = new InvoiceDetailsDialog(invoice);
+        if ("0".equals(invoice.getUploadStatus())) {
+            invoiceDetailsDialog.setFlag(1);
+        } else {
+            invoiceDetailsDialog.setFlag(3);
+        }
+        invoiceDetailsDialog.show(getFragmentManager(), "InvoiceDetailsDialog");
+    }
+
+    private void notUploaded() {
+        data = select().from(Invoice.class).where(Invoice_Table.uploadStatus.eq("0")).orderBy(Invoice_Table.client_invoice_datetime, false).queryList();
+        mBaseManagementListAdapter.setData(data);
+    }
+
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden){
-            data=select().from(Invoice.class).orderBy(Invoice_Table.client_invoice_datetime,false).queryList();
+        if (!hidden) {
+            data = select().from(Invoice.class).orderBy(Invoice_Table.client_invoice_datetime, false).queryList();
             mBaseManagementListAdapter.setData(data);
         }
     }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            SearchInvoiceCondition searchInvoiceCondition = (SearchInvoiceCondition) msg.obj;
+            Where where = select().from(Invoice.class).orderBy(Invoice_Table.client_invoice_datetime, false);
+            if (!TextUtils.isEmpty(searchInvoiceCondition.getInvoiceCode())) {
+                where = where.and(Invoice_Table.invoice_type_code.eq(searchInvoiceCondition.getInvoiceCode()));
+            }
+
+            if (!TextUtils.isEmpty(searchInvoiceCondition.getInvoiceNo())) {
+                where = where.and(Invoice_Table.invoice_no.eq(searchInvoiceCondition.getInvoiceNo()));
+            }
+
+            if (!TextUtils.isEmpty(searchInvoiceCondition.getIssuedBy())) {
+                where = where.and(Invoice_Table.drawer_name.eq(searchInvoiceCondition.getIssuedBy()));
+            }
+
+            if (!TextUtils.isEmpty(searchInvoiceCondition.getUploadStatus())) {
+                where = where.and(Invoice_Table.uploadStatus.eq(searchInvoiceCondition.getUploadStatus()));
+            }
+
+            if (!TextUtils.isEmpty(searchInvoiceCondition.getStatus())) {
+                where = where.and(Invoice_Table.status.eq(searchInvoiceCondition.getStatus()));
+            }
+
+            if (!TextUtils.isEmpty(searchInvoiceCondition.getIssuingDateFrom()) && TextUtils.isEmpty(searchInvoiceCondition.getIssuingDateTo())) {
+                where = where.and(Invoice_Table.requestDate.between(searchInvoiceCondition.getIssuingDateFrom()).and(DateUtils.getDateToString_YYYY_MM_DD_EN(DateUtils.getDateNow())));
+            }
+
+            if (!TextUtils.isEmpty(searchInvoiceCondition.getIssuingDateFrom()) && !TextUtils.isEmpty(searchInvoiceCondition.getIssuingDateTo())) {
+                where = where.and(Invoice_Table.requestDate.between(searchInvoiceCondition.getIssuingDateFrom()).and(searchInvoiceCondition.getIssuingDateTo()));
+            }
+            data = where.queryList();
+            mBaseManagementListAdapter.setData(data);
+        }
+    };
 }

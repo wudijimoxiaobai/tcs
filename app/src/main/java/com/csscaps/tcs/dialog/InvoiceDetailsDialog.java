@@ -16,23 +16,38 @@ import android.widget.TextView;
 
 import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
+import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.action.IInvoiceIssuingAction;
 import com.csscaps.tcs.activity.ApplicationListActivity;
 import com.csscaps.tcs.database.table.Invoice;
+import com.csscaps.tcs.database.table.InvoiceNo;
+import com.csscaps.tcs.database.table.InvoiceNo_Table;
+import com.csscaps.tcs.database.table.ProductModel;
+import com.csscaps.tcs.database.table.ProductModel_Table;
 import com.csscaps.tcs.fragment.ApproveInvoiceFragment;
 import com.csscaps.tcs.fragment.InvoiceDetailsFragment;
 import com.csscaps.tcs.fragment.RequestInvoiceFragment;
+import com.csscaps.tcs.presenter.InvoiceIssuingPresenter;
+import com.csscaps.tcs.service.UploadInvoiceService;
+import com.raizlabs.android.dbflow.structure.database.FlowCursor;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscription;
 
+import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
+
 /**
  * Created by tl on 2018/6/19.
  */
 
-public class InvoiceDetailsDialog extends DialogFragment {
+public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssuingAction {
 
     @BindView(R.id.approve)
     TextView mApprove;
@@ -46,7 +61,8 @@ public class InvoiceDetailsDialog extends DialogFragment {
     TextView mUpload;
 
     private int flag;
-    private Invoice mInvoice;
+    private Invoice mInvoice, negativeInvoice;
+    private InvoiceIssuingPresenter mIssuingPresenter;
 
     public InvoiceDetailsDialog(Invoice invoice) {
         mInvoice = invoice;
@@ -101,6 +117,7 @@ public class InvoiceDetailsDialog extends DialogFragment {
                 mReject.setVisibility(View.GONE);
                 mUpload.setVisibility(View.GONE);
                 mConfirm.setVisibility(View.GONE);
+                negativeInvoice();
                 break;
             case 3:
                 mApprove.setVisibility(View.GONE);
@@ -119,6 +136,7 @@ public class InvoiceDetailsDialog extends DialogFragment {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.add(R.id.content, fragment);
         transaction.commit();
+        mIssuingPresenter = new InvoiceIssuingPresenter(this, getContext());
     }
 
     @OnClick({R.id.back, R.id.approve, R.id.reject, R.id.issue, R.id.confirm, R.id.upload})
@@ -175,15 +193,80 @@ public class InvoiceDetailsDialog extends DialogFragment {
     }
 
     private void upload() {
-
-
+        dismiss();
+        List<Invoice> list = new ArrayList<>();
+        list.add(mInvoice);
+        Intent intent=new Intent(getContext(),UploadInvoiceService.class);
+        intent.putExtra("list",(Serializable) list);
+        getActivity().startService(intent);
     }
 
     private Handler mHandler = new Handler() {
+
         @Override
         public void handleMessage(Message msg) {
-
-
+            mIssuingPresenter.issuingInvoice(negativeInvoice);
         }
     };
+
+    private void negativeInvoice() {
+        try {
+            negativeInvoice = (Invoice) mInvoice.clone();
+            negativeInvoice.setOriginal_invoice_type_code(mInvoice.getInvoice_type_code());
+            negativeInvoice.setOriginal_invoice_no(mInvoice.getInvoice_no());
+            FlowCursor flowCursor = select().from(InvoiceNo.class).where(InvoiceNo_Table.invoice_type_code.eq(mInvoice.getInvoice_type_code())).orderBy(InvoiceNo_Table.id, true).query();
+            flowCursor.moveToFirst();
+            String invoice_num = flowCursor.getStringOrDefault("invoice_num");
+            flowCursor.close();
+            negativeInvoice.setInvoice_no(invoice_num);
+            negativeInvoice.setTotal_vat("-" + mInvoice.getTotal_vat());
+            negativeInvoice.setTotal_bpt("-" + mInvoice.getTotal_bpt());
+            negativeInvoice.setTotal_fee("-" + mInvoice.getTotal_fee());
+            negativeInvoice.setTotal_final("-" + mInvoice.getTotal_final());
+            negativeInvoice.setTotal_bpt_preypayment("-" + mInvoice.getTotal_bpt_preypayment());
+            negativeInvoice.setTotal_stamp("-" + mInvoice.getTotal_stamp());
+            negativeInvoice.setTotal_tax_due("-" + mInvoice.getTotal_tax_due());
+            negativeInvoice.setTotal_taxable_amount("-" + mInvoice.getTotal_taxable_amount());
+            negativeInvoice.setTotal_all("-" + mInvoice.getTotal_all());
+
+            String invoiceNo = mInvoice.getInvoice_no();
+            List<ProductModel> productModels = select().from(ProductModel.class).where(ProductModel_Table.invoice_no.eq(invoiceNo)).queryList();
+
+            List<ProductModel> negProductModels = new ArrayList<>();
+            for (int i = 0; i < productModels.size(); i++) {
+                ProductModel productMode = productModels.get(i);
+                ProductModel negProductMode = (ProductModel) productMode.clone();
+                negProductMode.setInvoice_no(invoice_num);
+                negProductMode.setId(0);
+                negProductMode.setVat(-productMode.getVat());
+                negProductMode.setBpt_prepayment(-productMode.getBpt_prepayment());
+                negProductMode.setBpt_final(-productMode.getBpt_final());
+                negProductMode.setFees(-productMode.getFees());
+                negProductMode.setStamp_duty_federal(-productMode.getStamp_duty_federal());
+                negProductMode.setStamp_duty_local(-productMode.getStamp_duty_local());
+                negProductMode.setE_tax(-productMode.getE_tax());
+                negProductMode.setI_tax(-productMode.getI_tax());
+                negProductMode.setTax_due("-" + productMode.getTax_due());
+                negProductMode.setTaxable_amount("-" + productMode.getTaxable_amount());
+                negProductMode.setAmount_inc("-" + productMode.getAmount_inc());
+                negProductModels.add(negProductMode);
+            }
+            negativeInvoice.setGoods(negProductModels);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void complete(boolean success) {
+        if (success) {
+            negativeInvoice.setUploadStatus(Invoice.SUCCESS);
+        } else {
+            negativeInvoice.setUploadStatus(Invoice.FAILURE);
+        }
+        negativeInvoice.save();
+        dismiss();
+        ToastUtil.showShort(getString(R.string.hit5));
+    }
 }

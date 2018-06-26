@@ -25,6 +25,7 @@ import butterknife.OnClick;
  */
 
 public class LoginActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
+
     @BindView(R.id.user)
     EditText mUser;
     @BindView(R.id.password)
@@ -33,7 +34,6 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
     AppCompatSpinner mSpinner;
     @BindView(R.id.login)
     TextView mLogin;
-
 
     @Override
     protected int getLayoutResId() {
