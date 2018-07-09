@@ -6,6 +6,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.csscaps.common.utils.FastDoubleClickUtil;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.activity.CustomerDetailsActivity;
 import com.csscaps.tcs.adapter.BaseManagementListAdapter;
@@ -68,8 +69,10 @@ public class CustomerManagementFragment extends BaseManagementListFragment<Custo
         super.onClick(view);
         switch (view.getId()) {
             case R.id.search:
+                if (FastDoubleClickUtil.isFastDoubleClick(R.id.search)) break;
                 SearchCustomerDialog searchCustomerDialog = new SearchCustomerDialog(mHandler);
                 searchCustomerDialog.show(getChildFragmentManager(), "SearchCustomerDialog");
+
                 break;
         }
     }
@@ -80,11 +83,11 @@ public class CustomerManagementFragment extends BaseManagementListFragment<Custo
             SearchCustomerCondition searchCustomerCondition = (SearchCustomerCondition) msg.obj;
             Where where = select().from(Customer.class).where();
             if (!TextUtils.isEmpty(searchCustomerCondition.getTin())) {
-                where = where.and(Customer_Table.tin.like(String.format(format,searchCustomerCondition.getTin())));
+                where = where.and(Customer_Table.tin.like(String.format(format, searchCustomerCondition.getTin())));
             }
 
             if (!TextUtils.isEmpty(searchCustomerCondition.getName())) {
-                where = where.and(Customer_Table.name.like(String.format(format,searchCustomerCondition.getName())));
+                where = where.and(Customer_Table.name.like(String.format(format, searchCustomerCondition.getName())));
             }
 
             switch (searchCustomerCondition.getType()) {

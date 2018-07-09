@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.csscaps.common.utils.DeviceUtils;
+import com.csscaps.common.utils.FastDoubleClickUtil;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.TCSApplication;
@@ -94,8 +95,9 @@ public class SelectProductDialog extends DialogFragment implements Action1<Produ
                 if (subscription != null) subscription.unsubscribe();
                 break;
             case R.id.add_product:
-                AddProductDialog addProductDialog = new AddProductDialog();
-                addProductDialog.show(getChildFragmentManager(), "AddProductDialog");
+                if (FastDoubleClickUtil.isFastDoubleClick()) break;
+                    AddProductDialog addProductDialog = new AddProductDialog();
+                    addProductDialog.show(getChildFragmentManager(), "AddProductDialog");
                 break;
         }
     }

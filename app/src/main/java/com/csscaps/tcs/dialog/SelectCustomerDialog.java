@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.csscaps.common.utils.DeviceUtils;
+import com.csscaps.common.utils.FastDoubleClickUtil;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
@@ -84,6 +85,7 @@ public class SelectCustomerDialog extends DialogFragment implements AdapterView.
                 dismiss();
                 break;
             case R.id.add_customer:
+                if (FastDoubleClickUtil.isFastDoubleClick()) break;
                 AddCustomerDialog addCustomerDialog = new AddCustomerDialog();
                 addCustomerDialog.setInvoiceObject(invoiceObject);
                 addCustomerDialog.show(getFragmentManager(), "AddCustomerDialog");
@@ -91,7 +93,7 @@ public class SelectCustomerDialog extends DialogFragment implements AdapterView.
             case R.id.select:
                 if (customer != null) {
                     Subscription subscription = ObserverActionUtils.subscribe(customer, InvoiceIssuingActivity.class);
-                    if(subscription!=null)subscription.unsubscribe();
+                    if (subscription != null) subscription.unsubscribe();
                     dismiss();
                 } else {
                     ToastUtil.showShort(getString(R.string.hit12));

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.csscaps.common.utils.DateUtils;
+import com.csscaps.common.utils.FastDoubleClickUtil;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.adapter.BaseManagementListAdapter;
 import com.csscaps.tcs.adapter.InvoiceQueryListAdapter;
@@ -103,6 +104,7 @@ public class InvoiceQueryFragment extends BaseManagementListFragment<Invoice> {
                 }
                 break;
             case R.id.search:
+                if (FastDoubleClickUtil.isFastDoubleClick(R.id.search)) break;
                 SearchInvoiceDialog searchInvoiceDialog = new SearchInvoiceDialog(mHandler);
                 if (((Integer) mSelect.getTag()) == 1) searchInvoiceDialog.setSelect(true);
                 searchInvoiceDialog.show(getFragmentManager(), "SearchInvoiceDialog");
@@ -132,6 +134,7 @@ public class InvoiceQueryFragment extends BaseManagementListFragment<Invoice> {
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        if (FastDoubleClickUtil.isFastDoubleClick()) return;
         Invoice invoice = data.get(i);
         InvoiceDetailsDialog invoiceDetailsDialog = new InvoiceDetailsDialog(invoice);
         if ("0".equals(invoice.getUploadStatus())) {

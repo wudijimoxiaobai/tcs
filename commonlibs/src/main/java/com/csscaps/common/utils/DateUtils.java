@@ -126,6 +126,7 @@ public class DateUtils {
     public static String format_yyyy_MM_EN = "yyyy-MM";
 
     public static String format_yyyyMM= "yyyyMM";
+    public static String format_yyyyMMdd= "yyyyMMdd";
     /**
      * 中文日期格式：2014年01月01日
      */

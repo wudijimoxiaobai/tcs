@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.csscaps.common.base.BaseFragment;
 import com.csscaps.common.utils.AppTools;
 import com.csscaps.common.utils.DateUtils;
+import com.csscaps.common.utils.FastDoubleClickUtil;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.TCSApplication;
@@ -46,11 +47,13 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
 
     private final String DISA = "DISA";
     private final String NEG = "NEG";
+    private final String AVL = "AVL";
     private ApproveInvoiceListAdapter mAdapter;
     private List<Invoice> data;
     private boolean process = true;
     private Invoice invoice;
     private InvoiceApprovePresenter mApprovePresenter;
+    private PopupWindow popupWindow;
 
     @Override
     protected int getLayoutResId() {
@@ -68,8 +71,10 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
         data = select().from(Invoice.class).where(Invoice_Table.requestType.eq(DISA)).or(Invoice_Table.requestType.eq(NEG)).orderBy(Invoice_Table.requestDate, false).queryList();
         mAdapter = new ApproveInvoiceListAdapter(mContext, R.layout.approve_invoice_list_item, data);
         mListView.setAdapter(mAdapter);
-        if (process/*&& TCSApplication.currentUser.getRole()==0*/)
+        if (process/*&& TCSApplication.currentUser.getRole()==0*/) {
             mListView.setOnItemClickListener(this);
+        }
+
     }
 
 
@@ -80,15 +85,18 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
                 getActivity().finish();
                 break;
             case R.id.search:
-                SearchApproveInvoiceDialog searchApproveInvoiceDialog=new SearchApproveInvoiceDialog(mHandler);
-                searchApproveInvoiceDialog.show(getFragmentManager(),"SearchApproveInvoiceDialog");
+                if (FastDoubleClickUtil.isFastDoubleClick(R.id.search)) break;
+                SearchApproveInvoiceDialog searchApproveInvoiceDialog = new SearchApproveInvoiceDialog(mHandler);
+                searchApproveInvoiceDialog.show(getFragmentManager(), "SearchApproveInvoiceDialog");
                 break;
             case R.id.details:
+                popupWindow.dismiss();
                 InvoiceDetailsDialog invoiceDetailsDialog = new InvoiceDetailsDialog(invoice);
                 invoiceDetailsDialog.setFlag(3);
                 invoiceDetailsDialog.show(getFragmentManager(), "InvoiceDetailsDialog");
                 break;
             case R.id.process:
+                popupWindow.dismiss();
                 InvoiceDetailsDialog invoiceDetailsDialog1 = new InvoiceDetailsDialog(invoice);
                 if (invoice.getRequestType().equals(NEG) && invoice.getApproveFlag().equals("0")) {
                     invoiceDetailsDialog1.setFlag(2);
@@ -108,6 +116,7 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
+            ObserverActionUtils.addAction(this);
             refresh();
         }
     }
@@ -116,7 +125,7 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         invoice = data.get(i);
         LinearLayout linearLayout = null;
-        if (((TCSApplication.currentUser.getRole() == 0 && invoice.getApproveFlag().equals("2"))||(invoice.getRequestType().equals(NEG) && invoice.getApproveFlag().equals("0")))) {
+        if (((TCSApplication.currentUser.getRole() == 0 && invoice.getApproveFlag().equals("2") && invoice.getStatus().equals(AVL)) || (invoice.getRequestType().equals(NEG) && invoice.getApproveFlag().equals("0") && invoice.getStatus().equals(AVL)))) {
             linearLayout = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.approve_list_popuwindow_layout, null);
         } else {
             linearLayout = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.product_popuwindow1_layout, null);
@@ -124,12 +133,11 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
         AppTools.measureView(linearLayout);
         int w = linearLayout.getMeasuredWidth();
         int h = linearLayout.getMeasuredHeight();
-        final PopupWindow popupWindow = AppTools.getPopupWindow(linearLayout, w, h);
+        popupWindow = AppTools.getPopupWindow(linearLayout, w, h);
         popupWindow.showAsDropDown(view, (int) ((view.getWidth() - w) / 2f), (int) -(view.getHeight() + h * 3f / 5));
         linearLayout.findViewById(R.id.details).setOnClickListener(this);
         TextView process = linearLayout.findViewById(R.id.process);
         if (process != null) process.setOnClickListener(this);
-
     }
 
     private void refresh() {
@@ -150,33 +158,33 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
     }
 
 
-    private Handler mHandler=new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            SearchApproveInvoiceCondition mSearchApproveInvoiceCondition= (SearchApproveInvoiceCondition) msg.obj;
-            Where where=select().from(Invoice.class).where(Invoice_Table.requestType.eq(DISA)).or(Invoice_Table.requestType.eq(NEG)).orderBy(Invoice_Table.requestDate, false);
-            if(!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getInvoiceCode())){
-                where=where.and(Invoice_Table.invoice_type_code.eq(mSearchApproveInvoiceCondition.getInvoiceCode()));
+            SearchApproveInvoiceCondition mSearchApproveInvoiceCondition = (SearchApproveInvoiceCondition) msg.obj;
+            Where where = select().from(Invoice.class).where(Invoice_Table.requestType.eq(DISA)).or(Invoice_Table.requestType.eq(NEG)).orderBy(Invoice_Table.requestDate, false);
+            if (!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getInvoiceCode())) {
+                where = where.and(Invoice_Table.invoice_type_code.eq(mSearchApproveInvoiceCondition.getInvoiceCode()));
             }
 
-            if(!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getInvoiceNo())){
-                where=where.and(Invoice_Table.invoice_no.eq(mSearchApproveInvoiceCondition.getInvoiceNo()));
+            if (!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getInvoiceNo())) {
+                where = where.and(Invoice_Table.invoice_no.eq(mSearchApproveInvoiceCondition.getInvoiceNo()));
             }
 
-            if(!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getRequestType())){
-                where=where.and(Invoice_Table.requestType.eq(mSearchApproveInvoiceCondition.getRequestType()));
+            if (!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getRequestType())) {
+                where = where.and(Invoice_Table.requestType.eq(mSearchApproveInvoiceCondition.getRequestType()));
             }
 
-            if(!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getStatus())){
-                where=where.and(Invoice_Table.approveFlag.eq(mSearchApproveInvoiceCondition.getStatus()));
+            if (!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getStatus())) {
+                where = where.and(Invoice_Table.approveFlag.eq(mSearchApproveInvoiceCondition.getStatus()));
             }
 
-            if(!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getDateFrom())&&TextUtils.isEmpty(mSearchApproveInvoiceCondition.getDateTo())){
-                where=where.and(Invoice_Table.requestDate.between(mSearchApproveInvoiceCondition.getDateFrom()).and(DateUtils.getDateToString_YYYY_MM_DD_EN(DateUtils.getDateNow())));
+            if (!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getDateFrom()) && TextUtils.isEmpty(mSearchApproveInvoiceCondition.getDateTo())) {
+                where = where.and(Invoice_Table.requestDate.between(mSearchApproveInvoiceCondition.getDateFrom()).and(DateUtils.getDateToString_YYYY_MM_DD_EN(DateUtils.getDateNow())));
             }
 
-            if(!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getDateFrom())&&!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getDateTo())){
-                where=where.and(Invoice_Table.requestDate.between(mSearchApproveInvoiceCondition.getDateFrom()).and(mSearchApproveInvoiceCondition.getDateTo()));
+            if (!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getDateFrom()) && !TextUtils.isEmpty(mSearchApproveInvoiceCondition.getDateTo())) {
+                where = where.and(Invoice_Table.requestDate.between(mSearchApproveInvoiceCondition.getDateFrom()).and(mSearchApproveInvoiceCondition.getDateTo()));
             }
 
             data.clear();

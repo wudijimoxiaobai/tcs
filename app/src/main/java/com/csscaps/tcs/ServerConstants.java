@@ -34,5 +34,5 @@ public interface ServerConstants {
     /*负数发票申请结果下载*/
     final String ATCS019 = "ATCS019";
 
-
+    final String ATCS023 = "ATCS023";
 }

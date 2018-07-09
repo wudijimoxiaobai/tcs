@@ -46,7 +46,7 @@ public class MyTimerTask extends TimerTask implements IPresenter {
         request(disas1, ServerConstants.ATCS018);
         request(engs1, ServerConstants.ATCS016);
         TCSApplication.getAppContext().startService(new Intent(TCSApplication.getAppContext(), UploadInvoiceService.class));
-        if(AppSP.getBoolean("automatic")){
+        if (AppSP.getBoolean("automatic")) {
             TCSApplication.getAppContext().startService(new Intent(TCSApplication.getAppContext(), ReportDataService.class));
         }
     }
@@ -91,6 +91,7 @@ public class MyTimerTask extends TimerTask implements IPresenter {
                 case ServerConstants.ATCS016://负数发票申请
                 case ServerConstants.ATCS018://作废发票申请
                     invoice.setRequestDate("1");
+                    invoice.setUploadStatus("1");
                     break;
                 case ServerConstants.ATCS017://负数发票申请结果
                 case ServerConstants.ATCS019://作废发票申请结果
@@ -101,7 +102,9 @@ public class MyTimerTask extends TimerTask implements IPresenter {
                                 invoice.setStatus(DISA);
                                 invoice.setInvalid_datetime(resultModel.getCancellation_date());
                                 invoice.setInvalid_flag("Y");
+                                invoice.setRequestDate("0");
                                 disInvoices.add(invoice);
+//                                ReportData reportData = select().from(ReportData.class).where(ReportData_Table.invoice_type_code.eq(invoice.getInvoice_type_code())).and(ReportData_Table.date.eq(date)).querySingle();
                             } else {
                                 invoice.setStatus(NEG);
                             }
@@ -115,11 +118,14 @@ public class MyTimerTask extends TimerTask implements IPresenter {
             invoice.update();
         }
 
-        if (disInvoices.size() > 0) request(disInvoices, ServerConstants.ATCS018);
+        if (disInvoices.size() > 0) {
+            request(disInvoices, ServerConstants.ATCS018);
+        }
     }
 
     @Override
-    public void onFailure(String requestPath, String errorMes) {}
+    public void onFailure(String requestPath, String errorMes) {
+    }
 
 
 }

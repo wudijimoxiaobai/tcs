@@ -12,9 +12,11 @@ import com.csscaps.common.utils.DateUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.MainActivity;
+import com.csscaps.tcs.MyTimerTask;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.ServerConstants;
 import com.csscaps.tcs.database.TcsDatabase;
+import com.csscaps.tcs.database.table.ControlData;
 import com.csscaps.tcs.database.table.InvoiceTaxType;
 import com.csscaps.tcs.database.table.InvoiceType;
 import com.csscaps.tcs.database.table.TaxItem;
@@ -25,7 +27,9 @@ import com.csscaps.tcs.model.ReceiveInvoiceType;
 import com.csscaps.tcs.model.ReceiveTaxItem;
 import com.csscaps.tcs.model.ReceiveTaxMethod;
 import com.csscaps.tcs.model.ReceiveTaxType;
+import com.csscaps.tcs.model.ReportDataModel;
 import com.csscaps.tcs.model.RequestData;
+import com.csscaps.tcs.model.RequestReportData;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
@@ -35,6 +39,7 @@ import com.tax.fcr.library.network.IPresenter;
 import com.tax.fcr.library.network.RequestModel;
 import com.tax.fcr.library.utils.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Subscription;
@@ -68,7 +73,9 @@ public class SynchronizeService extends Service implements IPresenter {
         synTaxItem();
         synInvoiceTaxType();
         synTaxMethod();
+        if (!AppSP.getBoolean("ControlData")) synControlData();
         c = 0;
+        new MyTimerTask().run();
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -116,6 +123,19 @@ public class SynchronizeService extends Service implements IPresenter {
     }
 
 
+    /*同步监控数据*/
+    private void synControlData() {
+        RequestReportData requestReportData = new RequestReportData();
+        requestReportData.setFuncid(ServerConstants.ATCS023);
+        requestReportData.setType("1");
+        RequestModel requestModel = new RequestModel();
+        requestModel.setFuncid(requestReportData.getFuncid());
+        requestReportData.setDevicesn(requestModel.getDevicesn());
+        requestModel.setData(JSON.toJSONString(requestReportData));
+        Api.post(this, requestModel);
+    }
+
+
     private void synData(String funcId) {
         RequestData requestData = new RequestData();
         requestData.setFuncid(funcId);
@@ -134,7 +154,6 @@ public class SynchronizeService extends Service implements IPresenter {
                 AppSP.putString("MyTaxpayer", objectString);
                 break;
             case ServerConstants.ATCS004:
-                long s = System.currentTimeMillis();
                 ReceiveTaxItem receiveTaxItem = JSON.parseObject(objectString, ReceiveTaxItem.class);
                 List<TaxItem> taxitems = receiveTaxItem.getTaxitem_info();
                 FlowManager.getDatabase(TcsDatabase.class)
@@ -147,8 +166,6 @@ public class SynchronizeService extends Service implements IPresenter {
                                 }).addAll(taxitems).build())
                         .build()
                         .execute();
-                long e = System.currentTimeMillis();
-                Logger.i("批量：" + (e - s));
                 break;
             case ServerConstants.ATCS005:
                 ReceiveTaxType receiveTaxType = JSON.parseObject(objectString, ReceiveTaxType.class);
@@ -213,11 +230,65 @@ public class SynchronizeService extends Service implements IPresenter {
                         .execute();
 
                 break;
+            case ServerConstants.ATCS023:
+                RequestReportData requestReportData = JSON.parseObject(objectString, RequestReportData.class);
+                List<ControlData> list = new ArrayList<>();
+                List<ReportDataModel> invoice_data = requestReportData.getInvoice_data();
+                for (ReportDataModel reportDataModel : invoice_data) {
+                    String str = reportDataModel.getManagerData();
+                    Logger.i(reportDataModel.getInvoice_type_code() + "  " +str.length()+" " +str);
+                    list.add(ReportDataService.parseControlDataStr(reportDataModel.getInvoice_type_code(),str));
+                }
+                FlowManager.getDatabase(TcsDatabase.class)
+                        .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
+                                new ProcessModelTransaction.ProcessModel<ControlData>() {
+                                    @Override
+                                    public void processModel(ControlData model, DatabaseWrapper wrapper) {
+                                        model.save();
+                                    }
+                                }).addAll(list).build())
+                        .success(new Transaction.Success() {
+                            @Override
+                            public void onSuccess(@NonNull Transaction transaction) {
+                                AppSP.putBoolean("ControlData", true);
+                            }
+                        })
+                        .build()
+                        .execute();
+                break;
 
         }
         c++;
         complete();
     }
+
+  /*  *//**
+     * 解析控制数据
+     *
+     * @return
+     *//*
+    private ControlData parseControlDataStr(String invoice_type_code,String controlDataStr) {
+        ControlData controlData = new ControlData();
+        controlData.setInvoice_type_code(invoice_type_code);
+        controlData.setNew_date(TextUtils.substring(controlDataStr,6,14));
+        controlData.setIssuing_last_date(TextUtils.substring(controlDataStr,14,22));
+        controlData.setTotal_amount_perinvoice(NumberBytesUtil.bytesToLong(ConvertUtils.hexString2Bytes(AppTools.fillZero(TextUtils.substring(controlDataStr,22,34),16))));
+        controlData.setTotal_all(NumberBytesUtil.bytesToLong(ConvertUtils.hexString2Bytes(AppTools.fillZero(TextUtils.substring(controlDataStr,34,46),16))));
+        controlData.setN_total_all(NumberBytesUtil.bytesToLong(ConvertUtils.hexString2Bytes(AppTools.fillZero(TextUtils.substring(controlDataStr,46,58),16))));
+        controlData.setReport_flag(TextUtils.substring(controlDataStr,58,59));
+        controlData.setTcs_pwd_flag(TextUtils.substring(controlDataStr,59,60));
+        controlData.setS_report_date(TextUtils.substring(controlDataStr,60,68));
+        controlData.setE_report_date(TextUtils.substring(controlDataStr,68,76));
+        controlData.setInvoice_type(TextUtils.substring(controlDataStr,76,78));
+        controlData.setCheck_tax_control_panel(TextUtils.substring(controlDataStr,78,79));
+        controlData.setCheck_tax_control_panel_n_invoice(TextUtils.substring(controlDataStr,79,80));
+        controlData.setRfu(TextUtils.substring(controlDataStr,80,82));
+        controlData.setTax_type_item_index(NumberBytesUtil.bytesToLong(ConvertUtils.hexString2Bytes(AppTools.fillZero(TextUtils.substring(controlDataStr,82,94),16))));
+        controlData.setIssuing_n_invoice_days(NumberBytesUtil.bytesToInt(ConvertUtils.hexString2Bytes(AppTools.fillZero(TextUtils.substring(controlDataStr,94,98),8))));
+        controlData.setIssuing_invoice_type(String.valueOf(NumberBytesUtil.bytesToInt(ConvertUtils.hexString2Bytes(AppTools.fillZero(TextUtils.substring(controlDataStr,98,100),8)))));
+        controlData.setInvoice_number_permonth(NumberBytesUtil.bytesToInt(ConvertUtils.hexString2Bytes(TextUtils.substring(controlDataStr,100,108))));
+        return controlData;
+    }*/
 
     @Override
     public void onFailure(String requestPath, String errorMes) {

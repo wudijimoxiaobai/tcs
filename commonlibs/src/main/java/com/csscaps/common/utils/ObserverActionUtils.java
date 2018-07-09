@@ -21,10 +21,19 @@ public class ObserverActionUtils {
         mapAction.put(action1.getClass().toString(), action1);
     }
 
-    public static void removeAction(Action1 action1) {
-        mapAction.remove(action1.getClass().toString());
+    public static void addAction(String key, Action1 action1) {
+        mapAction.put(key, action1);
     }
 
+    public static void removeAction(Action1 action1) {
+        if (mapAction.containsValue(action1)) {
+            mapAction.remove(action1.getClass().toString());
+        }
+    }
+
+    public static void removeAction(String key) {
+        mapAction.remove(key);
+    }
 
     public static void addObservable(Observable observable) {
         mapObservable.put(observable.getClass().toString(), observable);
@@ -56,6 +65,14 @@ public class ObserverActionUtils {
         return subscriber;
     }
 
+    public static <T> Subscription subscribe(T t, String key) {
+        Observable observable = Observable.just(t);
+        Action1 action1 = mapAction.get(key);
+        if (action1 == null) return null;
+        Subscription subscriber = observable.subscribe(action1);
+        return subscriber;
+    }
+
     public static <T> Subscription subscribe(T[] t, Class actionClass) {
         Observable observable = Observable.from(t);
         Action1 action1 = mapAction.get(actionClass.toString());
@@ -63,4 +80,6 @@ public class ObserverActionUtils {
         Subscription subscriber = observable.subscribe(action1);
         return subscriber;
     }
+
+
 }

@@ -8,6 +8,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
@@ -41,6 +42,8 @@ public class UserManagementFragment extends BaseManagementListFragment<User> {
     View mAddLine;
     @BindView(R.id.select_line)
     View mSelectLine;
+    @BindView(R.id.search)
+    TextView mSearch;
 
     private User user;
 
@@ -143,8 +146,8 @@ public class UserManagementFragment extends BaseManagementListFragment<User> {
                 mBaseManagementListAdapter.notifyDataSetChanged();
                 break;
             case R.id.search:
-                SearchUserDialog searchUserDialog=new SearchUserDialog(mHandler);
-                searchUserDialog.show(getChildFragmentManager(),"SearchUserDialog");
+                SearchUserDialog searchUserDialog = new SearchUserDialog(mHandler);
+                searchUserDialog.show(getChildFragmentManager(), "SearchUserDialog");
                 break;
         }
         super.onClick(view);
@@ -167,22 +170,22 @@ public class UserManagementFragment extends BaseManagementListFragment<User> {
         }
     }
 
-    Handler mHandler=new Handler(){
+    Handler mHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
-            SearchUserCondition searchUserCondition= (SearchUserCondition) msg.obj;
-            Where where=select().from(User.class).where();
-            if(!TextUtils.isEmpty(searchUserCondition.getUserName())){
-                where=where.and(User_Table.userName.like(String.format(format,searchUserCondition.getUserName())));
+            SearchUserCondition searchUserCondition = (SearchUserCondition) msg.obj;
+            Where where = select().from(User.class).where();
+            if (!TextUtils.isEmpty(searchUserCondition.getUserName())) {
+                where = where.and(User_Table.userName.like(String.format(format, searchUserCondition.getUserName())));
             }
 
-            if(searchUserCondition.getRole()!=-1){
-                where=where.and(User_Table.role.is(searchUserCondition.getRole()));
+            if (searchUserCondition.getRole() != -1) {
+                where = where.and(User_Table.role.is(searchUserCondition.getRole()));
             }
 
-            if(searchUserCondition.getStatus()!=-1){
-                where=where.and(User_Table.status.is(searchUserCondition.getStatus()));
+            if (searchUserCondition.getStatus() != -1) {
+                where = where.and(User_Table.status.is(searchUserCondition.getStatus()));
             }
 
             data.clear();

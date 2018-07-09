@@ -229,4 +229,6 @@
     <string name="hit47">确定开具负数发票吗？</string>
     <string name="hit48">结束时间不能小于起始时间！</string>
     <string name="hit49">确定退出系统吗？</string>
+    <string name="hit50">有发票未上传成功！</string>
+    <string name="hit51">Reason 不能为空！</string>
 </resources>

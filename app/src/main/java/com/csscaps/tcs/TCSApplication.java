@@ -36,6 +36,7 @@ public class TCSApplication extends BaseApplication {
     public static User currentUser;
     private Timer timer = new Timer();
 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -61,7 +62,7 @@ public class TCSApplication extends BaseApplication {
      * 初始化数据
      */
     private void initData() {
-        timer.schedule(new MyTimerTask(),500, (long) (DateUtils.HOUR_OF_MILLISECOND*0.5));
+        timer.schedule(new MyTimerTask(), 500, (long) (DateUtils.HOUR_OF_MILLISECOND * 0.5));
         boolean initData = AppSP.getBoolean("initData", false);
         if (!initData) {
             new Thread() {

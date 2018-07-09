@@ -1,7 +1,5 @@
 package com.csscaps.common.utils;
 
-import com.tax.fcr.library.utils.Logger;
-
 /**
  * Created by tl on 2017/10/9.
  * 短时间内按钮多次触发工具类
@@ -41,7 +39,7 @@ public class FastDoubleClickUtil {
         long time = System.currentTimeMillis();
         long timeD = time - lastClickTime;
         if (lastViewId == viewId && lastClickTime > 0 && timeD < diff) {
-            Logger.i("短时间内按钮多次触发");
+//            Logger.i("短时间内按钮多次触发");
             return true;
         }
         lastClickTime = time;

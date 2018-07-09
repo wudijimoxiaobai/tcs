@@ -87,6 +87,7 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
     private void search() {
         String invoiceCode = mInvoiceCode.getText().toString().trim();
         String invoiceNo = mInvoiceNo.getText().toString().trim();
+        String reason = mReason.getText().toString().trim();
         if (TextUtils.isEmpty(invoiceCode)) {
             ToastUtil.showShort(getString(R.string.hit44));
             return;
@@ -94,6 +95,11 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
 
         if (TextUtils.isEmpty(invoiceNo)) {
             ToastUtil.showShort(getString(R.string.hit45));
+            return;
+        }
+
+        if (TextUtils.isEmpty(reason)) {
+            ToastUtil.showShort(getString(R.string.hit51));
             return;
         }
 
@@ -125,14 +131,14 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
             }
             invoice.setApproveFlag("2");
         }
-        invoice.setReason(mReason.getText().toString().trim());
+        invoice.setReason(reason);
         this.invoice = invoice;
 //        Intent intent = new Intent(mContext, InvoiceDetailsActivity.class);
 //        intent.putExtra("invoice", invoice);
 //        startActivity(intent);
-        InvoiceDetailsDialog invoiceDetailsDialog=new InvoiceDetailsDialog(invoice);
+        InvoiceDetailsDialog invoiceDetailsDialog = new InvoiceDetailsDialog(invoice);
         invoiceDetailsDialog.setFlag(0);
-        invoiceDetailsDialog.show(getFragmentManager(),"InvoiceDetailsDialog");
+        invoiceDetailsDialog.show(getFragmentManager(), "InvoiceDetailsDialog");
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.csscaps.common.utils.FastDoubleClickUtil;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.TCSApplication;
 import com.csscaps.tcs.activity.ProductDetailsActivity;
@@ -90,8 +91,10 @@ public class ProductManagementFragment extends BaseManagementListFragment<Produc
         super.onClick(view);
         switch (view.getId()) {
             case R.id.search:
-                SearchProductDialog searchProductDialog=new SearchProductDialog(mHandler);
-                searchProductDialog.show(getChildFragmentManager(),"SearchProductDialog");
+                if (FastDoubleClickUtil.isFastDoubleClick(R.id.search)) break;
+                    SearchProductDialog searchProductDialog = new SearchProductDialog(mHandler);
+                    searchProductDialog.show(getChildFragmentManager(), "SearchProductDialog");
+
                 break;
         }
     }
@@ -100,14 +103,14 @@ public class ProductManagementFragment extends BaseManagementListFragment<Produc
 
         @Override
         public void handleMessage(Message msg) {
-            SearchProductCondition mSearchProductCondition= (SearchProductCondition) msg.obj;
-            Where where=select().from(Product.class).where();
-            if(!TextUtils.isEmpty(mSearchProductCondition.getProductName())){
-                where=where.and(Product_Table.productName.like(String.format(format,mSearchProductCondition.getProductName())));
+            SearchProductCondition mSearchProductCondition = (SearchProductCondition) msg.obj;
+            Where where = select().from(Product.class).where();
+            if (!TextUtils.isEmpty(mSearchProductCondition.getProductName())) {
+                where = where.and(Product_Table.productName.like(String.format(format, mSearchProductCondition.getProductName())));
             }
 
-            if(!TextUtils.isEmpty(mSearchProductCondition.getLocalName())){
-                where=where.and(Product_Table.localName.like(String.format(format,mSearchProductCondition.getLocalName())));
+            if (!TextUtils.isEmpty(mSearchProductCondition.getLocalName())) {
+                where = where.and(Product_Table.localName.like(String.format(format, mSearchProductCondition.getLocalName())));
             }
             data.clear();
             List list = where.queryList();

@@ -10,6 +10,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
 //        buildConfigField 'String', 'server', '"https://192.168.1.142:9180/"'
 //        buildConfigField 'String', 'server', '"https://219.145.93.245:9180/"'
     }
@@ -40,11 +43,17 @@ android {
             dirs 'libs'
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/jniLibs']
+        }
+    }
 }
+
 def dbflow_version = "4.0.3"
 dependencies {
     compile project(':commonlibs')
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -56,4 +65,12 @@ dependencies {
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
     compile(name: 'ofd_view', ext: 'aar')
+
+    compile files('libs/QtAndroid-bundled.jar')
+    compile files('libs/QtAndroidBearer-bundled.jar')
+    compile files('libs/QtAndroidBluetooth-bundled.jar')
+    compile files('libs/QtPositioning-bundled.jar')
+    compile files('libs/QtSensors-bundled.jar')
+    compile files('libs/QtMultimedia-bundled.jar')
+    compile files('libs/QtAndroidWebView-bundled.jar')
 }

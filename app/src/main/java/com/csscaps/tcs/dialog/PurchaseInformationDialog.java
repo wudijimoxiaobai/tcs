@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,8 @@ import com.csscaps.tcs.adapter.InvoiceProductListAdapter;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.Product;
 import com.csscaps.tcs.database.table.ProductModel;
+import com.csscaps.tcs.database.table.ReportData;
+import com.csscaps.tcs.database.table.ReportData_Table;
 import com.csscaps.tcs.presenter.InvoiceIssuingPresenter;
 
 import java.util.List;
@@ -30,6 +33,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.csscaps.tcs.activity.InvoiceIssuingActivity.mInvoice;
+import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
 /**
  * Created by tl on 2018/5/29.
@@ -121,7 +127,7 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
             etax += productModel.getE_tax();
             itax += productModel.getI_tax();
         }
-        Invoice invoice = InvoiceIssuingActivity.mInvoice;
+        Invoice invoice = mInvoice;
         invoice.setTotal_vat(String.format("%.2f", vat));
         invoice.setTotal_bpt(String.format("%.2f", bptf));
         invoice.setTotal_final(String.format("%.2f", sdf));
@@ -146,16 +152,59 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
     @Override
     public void complete(boolean success) {
         if (success) {
-            InvoiceIssuingActivity.mInvoice.setUploadStatus(Invoice.SUCCESS);
+            mInvoice.setUploadStatus(Invoice.SUCCESS);
         } else {
-            InvoiceIssuingActivity.mInvoice.setUploadStatus(Invoice.FAILURE);
+            mInvoice.setUploadStatus(Invoice.FAILURE);
         }
-        InvoiceIssuingActivity.mInvoice.save();
+        mInvoice.save();
         dismiss();
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
         ToastUtil.showShort(getString(R.string.hit5));
+        updateReportData();
+    }
+
+    private void updateReportData(){
+        String invoice_type_code = InvoiceIssuingActivity.mInvoice.getInvoice_type_code();
+        String client_invoice_datetime = InvoiceIssuingActivity.mInvoice.getClient_invoice_datetime();
+        String date = TextUtils.substring(client_invoice_datetime, 0, 6);
+        ReportData reportData = select().from(ReportData.class).where(ReportData_Table.invoice_type_code.eq(invoice_type_code)).and(ReportData_Table.date.eq(date)).querySingle();
+        if (reportData == null) {
+            reportData=new ReportData();
+            reportData.setInvoice_type_code(invoice_type_code);
+            reportData.setDate(date);
+            reportData.setTotal_all(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_all()));
+            reportData.setTotal_vat(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_vat()));
+            reportData.setTotal_bpt(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_bpt()));
+            reportData.setTotal_fee(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_fee()));
+            reportData.setTotal_stamp(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_stamp()));
+            reportData.setTotal_final(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_final()));
+            reportData.setTotal_bpt_preypayment(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_bpt_preypayment()));
+            reportData.setTotal_taxable_amount(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_taxable_amount()));
+            reportData.setN_total_all(0);
+            reportData.setN_total_vat(0);
+            reportData.setN_total_bpt(0);
+            reportData.setN_total_fee(0);
+            reportData.setN_total_stamp(0);
+            reportData.setN_total_final(0);
+            reportData.setN_total_taxable_amount(0);
+            reportData.setInvoice_number(1);
+            reportData.setC_invoice_number(0);
+            reportData.setN_invoice_number(0);
+            reportData.save();
+        } else {
+            reportData.setTotal_all(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_all())+reportData.getTotal_all());
+            reportData.setTotal_vat(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_vat())+reportData.getTotal_vat());
+            reportData.setTotal_bpt(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_bpt())+reportData.getTotal_bpt());
+            reportData.setTotal_fee(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_fee())+reportData.getTotal_fee());
+            reportData.setTotal_stamp(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_stamp())+reportData.getTotal_stamp());
+            reportData.setTotal_final(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_final())+reportData.getTotal_final());
+            reportData.setTotal_bpt_preypayment(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_bpt_preypayment())+reportData.getTotal_bpt_preypayment());
+            reportData.setTotal_taxable_amount(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_taxable_amount())+reportData.getTotal_taxable_amount());
+            reportData.setInvoice_number(reportData.getInvoice_number()+1);
+            reportData.update();
+        }
     }
 
     @Override

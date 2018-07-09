@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.csscaps.common.base.BaseFragment;
 import com.csscaps.common.utils.AppTools;
+import com.csscaps.common.utils.FastDoubleClickUtil;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.adapter.BaseManagementListAdapter;
@@ -51,7 +52,7 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
     protected List<T> data;
     protected BaseManagementListAdapter mBaseManagementListAdapter;
     protected PopupWindow popupWindow;
-    protected String format="%%%s%%";
+    protected String format = "%%%s%%";
     /**
      * 是否删除数据库数据
      */
@@ -150,18 +151,21 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
                 mBaseManagementListAdapter.notifyDataSetChanged();
                 break;
             case R.id.add:
-                BaseAddDialog dialog = getDialog();
-                if (dialog != null)
-                    dialog.show(getChildFragmentManager(), dialog.getClass().getName());
+                if (!FastDoubleClickUtil.isFastDoubleClick(R.id.add)) break;
+                    BaseAddDialog dialog = getDialog();
+                    if (dialog != null)
+                        dialog.show(getChildFragmentManager(), dialog.getClass().getName());
+
                 break;
             case R.id.edit:
-                popupWindow.dismiss();
-                T t1 = (T) view.getTag();
-                BaseAddDialog dialog1 = getDialog();
-                if (dialog1 != null) {
-                    dialog1.edit(t1);
-                    dialog1.show(getChildFragmentManager(), dialog1.getClass().getName());
-                }
+                if (FastDoubleClickUtil.isFastDoubleClick(R.id.edit)) break;
+                    popupWindow.dismiss();
+                    T t1 = (T) view.getTag();
+                    BaseAddDialog dialog1 = getDialog();
+                    if (dialog1 != null) {
+                        dialog1.edit(t1);
+                        dialog1.show(getChildFragmentManager(), dialog1.getClass().getName());
+                    }
                 break;
             case R.id.details:
                 popupWindow.dismiss();
@@ -200,6 +204,7 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
+        if(FastDoubleClickUtil.isFastDoubleClick()) return;
         popupWindow = getPopupWindow(view, getPopupWindowLayout());
         View contentView = popupWindow.getContentView();
         T t = data.get(i);

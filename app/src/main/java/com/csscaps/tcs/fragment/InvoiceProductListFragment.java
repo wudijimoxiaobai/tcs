@@ -2,6 +2,7 @@ package com.csscaps.tcs.fragment;
 
 import android.view.View;
 
+import com.csscaps.common.utils.FastDoubleClickUtil;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.activity.InvoiceIssuingActivity;
@@ -71,12 +72,13 @@ public class InvoiceProductListFragment extends BaseManagementListFragment<Produ
                 mBaseManagementListAdapter.notifyDataSetChanged();
                 break;
             case R.id.calculate:
-                if(data.size()==0){
+                if (FastDoubleClickUtil.isFastDoubleClick(R.id.calculate)) break;
+                if (data.size() == 0) {
                     ToastUtil.showShort(getString(R.string.hit21));
                     break;
                 }
-                PurchaseInformationDialog purchaseInformationDialog=new PurchaseInformationDialog(data);
-                purchaseInformationDialog.show(getFragmentManager(),"PurchaseInformationDialog");
+                PurchaseInformationDialog purchaseInformationDialog = new PurchaseInformationDialog(data);
+                purchaseInformationDialog.show(getFragmentManager(), "PurchaseInformationDialog");
                 break;
         }
     }

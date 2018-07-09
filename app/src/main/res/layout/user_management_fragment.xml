@@ -30,71 +30,79 @@
             android:text="@string/user_management"
             android:textSize="25sp"
             />
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_toStartOf="@+id/search"
-            android:background="#7a95b3"
-            />
 
-        <TextView
-            android:id="@+id/search"
-            style="@style/text"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/add"
-            android:drawableStart="@mipmap/search"
-            android:gravity="center"
-            android:minWidth="126dp"
-            android:paddingEnd="25dp"
-            android:paddingStart="25dp"
-            android:text="@string/search"/>
-
-        <View
-            android:id="@+id/add_line"
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_toStartOf="@+id/add"
-            android:background="#7a95b3"
-            />
-
-        <TextView
-            android:id="@+id/add"
-            style="@style/text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/select"
-            android:drawableStart="@mipmap/add"
-            android:gravity="center"
-            android:minWidth="126dp"
-            android:paddingEnd="25dp"
-            android:paddingStart="25dp"
-            android:text="@string/add"/>
-
-        <View
-            android:id="@+id/select_line"
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_toStartOf="@+id/select"
-            android:background="#7a95b3"
-            />
-
-        <TextView
-            android:id="@+id/select"
-            style="@style/text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:drawableStart="@mipmap/select"
-            android:gravity="center"
-            android:minWidth="126dp"
-            android:padding="20dp"
-            android:text="@string/select"
-            />
+            >
 
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_toStartOf="@+id/search"
+                android:background="#7a95b3"
+                />
+
+            <TextView
+                android:id="@+id/search"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/add"
+                android:drawableStart="@mipmap/search"
+                android:gravity="center"
+                android:minWidth="126dp"
+                android:paddingEnd="25dp"
+                android:paddingStart="25dp"
+                android:text="@string/search"/>
+
+            <View
+                android:id="@+id/add_line"
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_toStartOf="@+id/add"
+                android:background="#7a95b3"
+                />
+
+            <TextView
+                android:id="@+id/add"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/select"
+                android:drawableStart="@mipmap/add"
+                android:gravity="center"
+                android:minWidth="126dp"
+                android:paddingEnd="25dp"
+                android:paddingStart="25dp"
+                android:text="@string/add"/>
+
+            <View
+                android:id="@+id/select_line"
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_toStartOf="@+id/select"
+                android:background="#7a95b3"
+                />
+
+            <TextView
+                android:id="@+id/select"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:drawableStart="@mipmap/select"
+                android:gravity="center"
+                android:minWidth="126dp"
+                android:padding="20dp"
+                android:text="@string/select"
+                />
+        </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout

@@ -252,6 +252,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
                 negProductModels.add(negProductMode);
             }
             negativeInvoice.setGoods(negProductModels);
+            negativeInvoice.setStatus("NEG");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -266,6 +267,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
             negativeInvoice.setUploadStatus(Invoice.FAILURE);
         }
         negativeInvoice.save();
+        mInvoice.setStatus("WRO");
         dismiss();
         ToastUtil.showShort(getString(R.string.hit5));
     }

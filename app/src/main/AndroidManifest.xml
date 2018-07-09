@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
         android:name=".TCSApplication"
@@ -33,7 +35,6 @@
 
         <activity android:name=".LoginActivity"/>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".activity.InvoiceInformationManagementActivity"/>
         <activity android:name=".activity.ProductDetailsActivity"/>
         <activity android:name=".activity.CustomerDetailsActivity"/>
         <activity android:name=".activity.InvoiceIssuingActivity"/>
@@ -45,6 +46,7 @@
         <activity android:name=".activity.InvoiceDetailsActivity"/>
         <activity android:name=".activity.ApplicationListActivity"/>
         <activity android:name=".activity.OnlineDeclarationActivity"/>
+        <activity android:name=".activity.InvoiceInformationManagementActivity"/>
     </application>
 
 </manifest>
