@@ -151,7 +151,7 @@ public abstract class BaseManagementListFragment<T extends BaseModel> extends Ba
                 mBaseManagementListAdapter.notifyDataSetChanged();
                 break;
             case R.id.add:
-                if (!FastDoubleClickUtil.isFastDoubleClick(R.id.add)) break;
+                if (FastDoubleClickUtil.isFastDoubleClick(R.id.add)) break;
                     BaseAddDialog dialog = getDialog();
                     if (dialog != null)
                         dialog.show(getChildFragmentManager(), dialog.getClass().getName());

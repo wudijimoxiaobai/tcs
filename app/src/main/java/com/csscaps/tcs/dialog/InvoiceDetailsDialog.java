@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
+import com.csscaps.tcs.GeneratingXMLFileUtils;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.action.IInvoiceIssuingAction;
 import com.csscaps.tcs.activity.ApplicationListActivity;
@@ -61,11 +62,12 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
     TextView mUpload;
 
     private int flag;
-    private Invoice mInvoice, negativeInvoice;
+    private Invoice mInvoice, negativeInvoice, showInvoice;
     private InvoiceIssuingPresenter mIssuingPresenter;
 
     public InvoiceDetailsDialog(Invoice invoice) {
         mInvoice = invoice;
+        showInvoice = mInvoice;
     }
 
     @Override
@@ -137,6 +139,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         transaction.add(R.id.content, fragment);
         transaction.commit();
         mIssuingPresenter = new InvoiceIssuingPresenter(this, getContext());
+        GeneratingXMLFileUtils.generatingXmlFile(showInvoice);
     }
 
     @OnClick({R.id.back, R.id.approve, R.id.reject, R.id.issue, R.id.confirm, R.id.upload})
@@ -196,8 +199,8 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         dismiss();
         List<Invoice> list = new ArrayList<>();
         list.add(mInvoice);
-        Intent intent=new Intent(getContext(),UploadInvoiceService.class);
-        intent.putExtra("list",(Serializable) list);
+        Intent intent = new Intent(getContext(), UploadInvoiceService.class);
+        intent.putExtra("list", (Serializable) list);
         getActivity().startService(intent);
     }
 
@@ -253,6 +256,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
             }
             negativeInvoice.setGoods(negProductModels);
             negativeInvoice.setStatus("NEG");
+            showInvoice = negativeInvoice;
         } catch (Exception e) {
             e.printStackTrace();
         }

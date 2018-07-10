@@ -104,7 +104,7 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
             case R.id.statistics:
                 try {
                     NativeFormer nativeFormer=new NativeFormer();
-                    nativeFormer.parseXML("/sdcard/data.xml","/sdcard/data.ofd");
+//                    nativeFormer.parseXML("/sdcard/data.xml","/sdcard/data.ofd");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

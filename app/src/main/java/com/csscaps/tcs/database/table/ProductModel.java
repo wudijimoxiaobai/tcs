@@ -56,6 +56,8 @@ public class ProductModel extends BaseModel implements Cloneable{
     @Column
     String vat_amount;
     @Column
+    String specification;
+    @Column
     double vat;
     @Column
     double bpt_final;
@@ -303,5 +305,13 @@ public class ProductModel extends BaseModel implements Cloneable{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
     }
 }

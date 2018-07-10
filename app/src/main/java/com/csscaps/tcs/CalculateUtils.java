@@ -57,6 +57,8 @@ public class CalculateUtils {
      */
     public static ProductModel calculateProductTax(Product item) {
         ProductModel productModel = new ProductModel();
+        productModel.setSpecification(item.getSpecification());
+        productModel.setInvoice_no(InvoiceIssuingActivity.mInvoice.getInvoice_no());
         String relateTaxItemString = item.getRelatedTaxItemString();
         RelatedTaxItem relatedTaxItem = JSON.parseObject(relateTaxItemString, RelatedTaxItem.class);
         List<TaxItem> mTaxItemList = relatedTaxItem.getTaxItemList();
