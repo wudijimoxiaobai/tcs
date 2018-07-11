@@ -139,7 +139,8 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         transaction.add(R.id.content, fragment);
         transaction.commit();
         mIssuingPresenter = new InvoiceIssuingPresenter(this, getContext());
-        GeneratingXMLFileUtils.generatingXmlFile(showInvoice);
+        String dataXmlPath = getContext().getFilesDir().getAbsolutePath()+"/English/data.xml";
+        GeneratingXMLFileUtils.generatingXmlFile(showInvoice,dataXmlPath);
     }
 
     @OnClick({R.id.back, R.id.approve, R.id.reject, R.id.issue, R.id.confirm, R.id.upload})

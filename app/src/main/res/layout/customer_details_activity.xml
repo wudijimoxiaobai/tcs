@@ -65,7 +65,7 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:padding="10dp"
-                        android:textStyle="bold"
+
                         />
 
                     <View
@@ -76,13 +76,13 @@
 
                     <TextView
                         android:id="@+id/registered"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_weight="0.3"
                         android:gravity="start|center_vertical"
                         android:maxLines="1"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -101,14 +101,13 @@
                     >
 
                     <TextView
+                        style="@style/list_tile_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:padding="10dp"
                         android:text="@string/tin"
-                        android:textColor="@color/text1"
-                        android:textStyle="bold"
                         />
 
                     <View
@@ -119,13 +118,13 @@
 
                     <TextView
                         android:id="@+id/tin"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_weight="0.3"
                         android:gravity="start|center_vertical"
                         android:maxLines="1"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -144,14 +143,14 @@
                     >
 
                     <TextView
+                        style="@style/list_tile_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:padding="10dp"
                         android:text="@string/name"
-                        android:textColor="@color/text1"
-                        android:textStyle="bold"
+
                         />
 
                     <View
@@ -162,13 +161,13 @@
 
                     <TextView
                         android:id="@+id/name"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_weight="0.3"
                         android:gravity="start|center_vertical"
                         android:maxLines="1"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -188,14 +187,14 @@
                     >
 
                     <TextView
+                        style="@style/list_tile_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:padding="10dp"
                         android:text="@string/national_id"
-                        android:textColor="@color/text1"
-                        android:textStyle="bold"
+
                         />
 
                     <View
@@ -206,13 +205,13 @@
 
                     <TextView
                         android:id="@+id/national_id"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_weight="0.3"
                         android:gravity="start|center_vertical"
                         android:maxLines="1"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -232,14 +231,14 @@
                     >
 
                     <TextView
+                        style="@style/list_tile_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:padding="10dp"
                         android:text="@string/passport"
-                        android:textColor="@color/text1"
-                        android:textStyle="bold"
+
                         />
 
                     <View
@@ -250,13 +249,13 @@
 
                     <TextView
                         android:id="@+id/passport"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_weight="0.3"
                         android:gravity="start|center_vertical"
                         android:maxLines="1"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -276,14 +275,14 @@
                     >
 
                     <TextView
+                        style="@style/list_tile_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:padding="10dp"
                         android:text="@string/tel"
-                        android:textColor="@color/text1"
-                        android:textStyle="bold"
+
                         />
 
                     <View
@@ -294,6 +293,7 @@
 
                     <TextView
                         android:id="@+id/tel"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_weight="0.3"
@@ -301,7 +301,6 @@
                         android:inputType="number"
                         android:maxLines="1"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -321,14 +320,14 @@
                     >
 
                     <TextView
+                        style="@style/list_tile_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:padding="10dp"
                         android:text="@string/email"
-                        android:textColor="@color/text1"
-                        android:textStyle="bold"
+
                         />
 
                     <View
@@ -339,6 +338,7 @@
 
                     <TextView
                         android:id="@+id/email"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_weight="0.3"
@@ -346,7 +346,6 @@
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -366,14 +365,14 @@
                     >
 
                     <TextView
+                        style="@style/list_tile_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:padding="10dp"
                         android:text="@string/address"
-                        android:textColor="@color/text1"
-                        android:textStyle="bold"
+
                         />
 
                     <View
@@ -384,13 +383,13 @@
 
                     <TextView
                         android:id="@+id/address"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_weight="0.3"
                         android:gravity="start|center_vertical"
                         android:maxLines="1"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -410,14 +409,14 @@
                     >
 
                     <TextView
+                        style="@style/list_tile_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:padding="10dp"
                         android:text="@string/city"
-                        android:textColor="@color/text1"
-                        android:textStyle="bold"
+
                         />
 
                     <View
@@ -428,13 +427,13 @@
 
                     <TextView
                         android:id="@+id/city"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_weight="0.3"
                         android:gravity="start|center_vertical"
                         android:maxLines="1"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -453,14 +452,14 @@
                     >
 
                     <TextView
+                        style="@style/list_tile_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:padding="10dp"
                         android:text="@string/region"
-                        android:textColor="@color/text1"
-                        android:textStyle="bold"
+
                         />
 
                     <View
@@ -471,13 +470,13 @@
 
                     <TextView
                         android:id="@+id/state"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_weight="0.3"
                         android:gravity="start|center_vertical"
                         android:maxLines="1"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -496,14 +495,14 @@
                     >
 
                     <TextView
+                        style="@style/list_tile_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:padding="10dp"
                         android:text="@string/remarks"
-                        android:textColor="@color/text1"
-                        android:textStyle="bold"
+
                         />
 
                     <View
@@ -514,13 +513,13 @@
 
                     <TextView
                         android:id="@+id/remarks"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_weight="0.3"
                         android:gravity="start|top"
                         android:maxLines="1"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>

@@ -48,8 +48,8 @@
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/invoice_code"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+              style="@style/list_tile_text"
+                
                 />
 
             <EditText
@@ -67,7 +67,8 @@
                 android:inputType="number"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textColor="@color/text"
+                 style="@style/list_item_text"
+               
                 />
 
         </LinearLayout>
@@ -86,8 +87,8 @@
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/invoice_no"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+              style="@style/list_tile_text"
+                
                 />
 
             <EditText
@@ -105,7 +106,7 @@
                 android:inputType="number"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textColor="@color/text"
+                 style="@style/list_item_text"
                 />
 
         </LinearLayout>
@@ -124,8 +125,8 @@
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/request_type"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+              style="@style/list_tile_text"
+                
                 />
 
             <RelativeLayout
@@ -177,8 +178,8 @@
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/status"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+              style="@style/list_tile_text"
+                
                 />
 
             <RelativeLayout
@@ -230,8 +231,8 @@
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/date_from"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+              style="@style/list_tile_text"
+                
                 />
 
             <TextView
@@ -246,7 +247,7 @@
                 android:hint="@string/please_select"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textColor="@color/text"
+                 style="@style/list_item_text"
                 />
 
         </LinearLayout>
@@ -265,8 +266,8 @@
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/date_to"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+              style="@style/list_tile_text"
+                
                 />
 
             <TextView
@@ -281,7 +282,7 @@
                 android:hint="@string/please_select"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textColor="@color/text"
+                 style="@style/list_item_text"
                 />
 
         </LinearLayout>

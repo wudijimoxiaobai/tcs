@@ -31,6 +31,7 @@
             android:text="@string/product_management"
             android:textSize="25sp"
             />
+
         <View
             android:layout_width="1px"
             android:layout_height="match_parent"
@@ -51,6 +52,7 @@
             android:paddingEnd="25dp"
             android:paddingStart="25dp"
             android:text="@string/search"/>
+
         <View
             android:id="@+id/add_line"
             android:layout_width="1px"
@@ -122,6 +124,7 @@
 
                 <CheckBox
                     android:id="@+id/all_select"
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -130,59 +133,57 @@
                     android:gravity="start|center_vertical"
                     android:paddingStart="5dp"
                     android:text="@string/no"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
                     />
 
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/product_name"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/local_name"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/specification"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.2"
                     android:gravity="center"
                     android:text="@string/unit"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.1"
                     android:gravity="center"
                     android:text="@string/price"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
             </LinearLayout>
@@ -196,11 +197,11 @@
                 android:id="@+id/list_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/bg11"
                 android:divider="@color/divider"
                 android:dividerHeight="1dp"
                 android:listSelector="@android:color/transparent"
                 android:paddingBottom="10dp"
-                android:background="@drawable/bg11"
                 />
         </LinearLayout>
     </LinearLayout>

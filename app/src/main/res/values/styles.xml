@@ -24,7 +24,7 @@
 
     <style name="myDropTheme" parent="Widget.AppCompat.DropDownItem.Spinner">
         <item name="android:textColor">@color/text</item>
-        <item name="android:textSize">@dimen/text</item>
+        <item name="android:textSize">@dimen/list_item_text</item>
         <item name="android:background">@android:color/white</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:gravity">start</item>
@@ -52,12 +52,14 @@
         <item name="textAllCaps">false</item>
     </style>
 
-    <string name="list_item_text">
-          <item name="android:textColor">@color/text</item>
+    <style name="list_item_text">
+        <item name="android:textColor">@color/text</item>
         <item name="android:textSize">@dimen/list_item_text</item>
-    </string>
-    <string name="list_tile_text">
-          <item name="android:textColor">@color/text1</item>
+    </style>
+
+    <style name="list_tile_text">
+        <item name="android:textColor">@color/text1</item>
         <item name="android:textSize">@dimen/list_title_text</item>
-    </string>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

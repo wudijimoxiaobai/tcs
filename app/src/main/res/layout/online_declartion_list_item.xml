@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/text1"
-        android:textStyle="bold"
+        style="@style/list_tile_text"
+       
         />
 
     <TextView
@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/text1"
-        android:textStyle="bold"
+       style="@style/list_tile_text"
+       
         />
 
     <TextView
@@ -32,8 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/text1"
-        android:textStyle="bold"
+       style="@style/list_tile_text"
+       
         />
 
     <TextView
@@ -42,8 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/text1"
-        android:textStyle="bold"
+       style="@style/list_tile_text"
+       
         />
 
     <TextView
@@ -52,8 +52,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/text1"
-        android:textStyle="bold"
+       style="@style/list_tile_text"
+       
         />
 
     <LinearLayout
@@ -71,8 +71,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/declare"
-            android:textColor="@color/text1"
-            android:textStyle="bold"
+           style="@style/list_tile_text"
+           
             />
 
         <TextView
@@ -83,8 +83,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/upload"
-            android:textColor="@color/text1"
-            android:textStyle="bold"
+           style="@style/list_tile_text"
+           
             />
     </LinearLayout>
 </LinearLayout>

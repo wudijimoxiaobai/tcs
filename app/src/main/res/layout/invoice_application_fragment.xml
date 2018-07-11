@@ -70,53 +70,51 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/invoice_code"
-                    android:textStyle="bold"
-                    android:textColor="@color/text1"
                     />
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/invoice_type"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
                     />
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/object"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/safety_value"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/remaining_qty"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
             </LinearLayout>
 

@@ -17,12 +17,16 @@ public class InvoiceData {
     @XStreamAlias("BUYER")
     private Buyer buyer;
 
+    @XStreamAlias("TotalofStampDuty-Local")
+    private String TotalofStampDuty_Local;
+
+    @XStreamAlias("TotalofStamDuty-Federal")
+    private String TotalofStamDuty_Federal;
+
     private String Unit="SDG";
     private String TotalofVAT;
     private String TotalofBPTFinal;
     private String TotalofBPTPrepayment;
-    private String TotalofStampDuty_Local;
-    private String TotalofStamDuty_Federal;
     private String TotalofFees;
     private String TotalAmountExcl;
     private String TotalAmountExclIncl;
@@ -37,11 +41,8 @@ public class InvoiceData {
     public InvoiceData() {
     }
 
-    ;
 
-    public InvoiceData(String unit, String totalofVAT, String totalAmountExcl,
-                       String totalAmountExclIncl, String remark, String issuedby,
-                       String rWM) {
+    public InvoiceData(String unit, String totalofVAT, String totalAmountExcl, String totalAmountExclIncl, String remark, String issuedby, String rWM) {
         super();
         Unit = unit;
         TotalofVAT = totalofVAT;

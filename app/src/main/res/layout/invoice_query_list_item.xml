@@ -7,86 +7,86 @@
 
     <CheckBox
         android:id="@+id/no"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
-        android:layout_weight="1.1"
+        android:layout_weight="1.09"
         android:button="@null"
         android:focusable="false"
         android:gravity="start|center_vertical"
         android:paddingStart="5dp"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/invoice_code"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/invoice_no"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/issuing_date_time"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.98"
         android:gravity="center"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/issued_by"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/status"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="1.05"
         android:gravity="center"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/tax_Amount"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/i_tax"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/upload_status"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/text"
         />
 </LinearLayout>

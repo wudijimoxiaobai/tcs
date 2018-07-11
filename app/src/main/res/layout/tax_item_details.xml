@@ -24,6 +24,7 @@
 
             <TextView
                 android:id="@+id/name_title"
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -32,26 +33,23 @@
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:text="@string/name"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
                 />
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
                 />
 
             <TextView
                 android:id="@+id/name"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:gravity="start"
                 android:padding="20dp"
-                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -65,6 +63,7 @@
 
             <TextView
                 android:id="@+id/code_title"
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -73,27 +72,24 @@
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:text="@string/code"
-                android:textColor="@color/text1"
-
-                android:textStyle="bold"
                 />
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textColor="@color/text1"
                 android:textStyle="bold"
                 />
 
             <TextView
                 android:id="@+id/code"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:gravity="start"
                 android:padding="20dp"
-                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -106,6 +102,7 @@
 
             <TextView
                 android:id="@+id/description_title"
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -114,27 +111,23 @@
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:text="@string/description"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
                 />
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textColor="@color/text1"
-
-                android:textStyle="bold"
                 />
 
             <TextView
                 android:id="@+id/description"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:gravity="start"
                 android:padding="20dp"
-                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -147,6 +140,7 @@
 
             <TextView
                 android:id="@+id/parameter_title"
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -155,28 +149,23 @@
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:text="@string/parameter"
-                android:textColor="@color/text1"
-
-                android:textStyle="bold"
                 />
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textColor="@color/text1"
-
-                android:textStyle="bold"
                 />
 
             <TextView
                 android:id="@+id/parameter"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:gravity="start"
                 android:padding="20dp"
-                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -189,6 +178,7 @@
 
             <TextView
                 android:id="@+id/tax_rate_title"
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -197,28 +187,23 @@
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:text="@string/tax_rate"
-                android:textColor="@color/text1"
-
-                android:textStyle="bold"
                 />
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textColor="@color/text1"
-
-                android:textStyle="bold"
                 />
 
             <TextView
                 android:id="@+id/tax_rate"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:gravity="start"
                 android:padding="20dp"
-                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -231,6 +216,7 @@
 
             <TextView
                 android:id="@+id/formula_description_title"
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -239,26 +225,23 @@
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:text="@string/formula_description"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
                 />
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
                 />
 
             <TextView
                 android:id="@+id/formula_description"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:gravity="start"
                 android:padding="20dp"
-                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -271,6 +254,7 @@
 
             <TextView
                 android:id="@+id/unit_title"
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -279,26 +263,23 @@
                 android:paddingStart="20dp"
                 android:paddingTop="20dp"
                 android:text="@string/unit"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
                 />
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=":"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
                 />
 
             <TextView
                 android:id="@+id/unit"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:gravity="start"
                 android:padding="20dp"
-                android:textColor="@color/text"
                 />
         </LinearLayout>
 

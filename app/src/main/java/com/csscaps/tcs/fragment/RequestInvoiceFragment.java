@@ -145,7 +145,7 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
     public void call(Object o) {
         if (invoice != null) {
             invoice.setRequestBy(TCSApplication.currentUser.getUserName());
-            invoice.setRequestDate(DateUtils.getDateToString_YYYY_MM_DD_HH_MM_SS_EN(DateUtils.getDateNow()));
+            invoice.setRequestDate(DateUtils.getDateToString_YYYY_MM_DD_EN(DateUtils.getDateNow()));
             invoice.update();
         }
     }

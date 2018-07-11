@@ -58,14 +58,13 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/application_type"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
                     />
 
                 <RelativeLayout
@@ -108,18 +107,19 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/invoice_code"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <EditText
                     android:id="@+id/invoice_code"
+                    style="@style/list_item_text"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginEnd="10dp"
@@ -131,7 +131,6 @@
                     android:inputType="number"
                     android:maxLines="1"
                     android:padding="10dp"
-                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -145,18 +144,19 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/invoice_no"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <EditText
                     android:id="@+id/invoice_no"
+                    style="@style/list_item_text"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginEnd="10dp"
@@ -168,7 +168,6 @@
                     android:inputType="number"
                     android:maxLines="1"
                     android:padding="10dp"
-                    android:textColor="@color/text"
                     />
 
             </LinearLayout>
@@ -182,18 +181,19 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/reason"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <EditText
                     android:id="@+id/reason"
+                    style="@style/list_item_text"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
                     android:layout_marginEnd="10dp"
@@ -206,7 +206,6 @@
                     android:maxHeight="150dp"
                     android:maxLines="1"
                     android:padding="10dp"
-                    android:textColor="@color/text"
                     />
 
             </LinearLayout>

@@ -118,8 +118,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/invoice_code"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+                    style="@style/list_tile_text"
                     />
 
                 <TextView
@@ -128,8 +127,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/invoice_deadline"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+                    style="@style/list_tile_text"
+                    
                     />
 
                 <TextView
@@ -138,8 +137,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/deadline_date_from"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+                    style="@style/list_tile_text"
+                    
                     />
 
                 <TextView
@@ -148,8 +147,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/deadline_date_to"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+                    style="@style/list_tile_text"
+                    
                     />
 
                 <TextView
@@ -158,8 +157,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/deadline_date"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+                    style="@style/list_tile_text"
+                    
                     />
 
                 <TextView
@@ -168,8 +167,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/action"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+                    style="@style/list_tile_text"
+                    
                     android:visibility="gone"
                     />
             </LinearLayout>

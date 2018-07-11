@@ -42,18 +42,19 @@
             >
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/tin"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <EditText
                 android:id="@+id/tin"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
@@ -67,7 +68,6 @@
                 android:inputType="number"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -81,18 +81,19 @@
             >
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/name"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <EditText
                 android:id="@+id/name"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
@@ -105,7 +106,7 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textColor="@color/text"
+
                 />
 
         </LinearLayout>
@@ -119,14 +120,14 @@
             >
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/type"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <RelativeLayout

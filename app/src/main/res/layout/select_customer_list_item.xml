@@ -3,90 +3,91 @@
               android:id="@+id/layout"
               android:layout_width="match_parent"
               android:layout_height="45dp"
+              android:background="@color/white"
               android:gravity="center_vertical"
               android:orientation="horizontal"
               android:padding="10dp"
-              android:background="@color/white"
     >
 
 
     <TextView
         android:id="@+id/no"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
         android:layout_weight="1.07"
         android:gravity="start|center_vertical"
         android:paddingStart="5dp"
-        android:textColor="@color/text"
+
         />
 
 
     <TextView
         android:id="@+id/tin"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/name"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/tel"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text"
         />
 
 
     <TextView
         android:id="@+id/address"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/national_id"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/passport"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text"
         />
 
 

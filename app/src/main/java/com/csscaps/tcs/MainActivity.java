@@ -18,7 +18,7 @@ import com.csscaps.tcs.activity.SystemManagementActivity;
 import com.csscaps.tcs.dialog.ExitDialog;
 import com.csscaps.tcs.dialog.SynDataDialog;
 import com.csscaps.tcs.service.SynchronizeService;
-import com.suwell.ofd.formsdk.NativeFormer;
+import com.suwell.ofd.formsdk.FORMSDK;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -103,8 +103,8 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
                 break;
             case R.id.statistics:
                 try {
-                    NativeFormer nativeFormer=new NativeFormer();
-//                    nativeFormer.parseXML("/sdcard/data.xml","/sdcard/data.ofd");
+                    FORMSDK formsdk =new FORMSDK();
+                    formsdk.parseXML("/sdcard/single/Main.xml","/sdcard/data.ofd");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -129,15 +129,15 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
         exit();
     }
 
-    private void exit(){
-        Handler handler=new Handler(){
+    private void exit() {
+        Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 finish();
                 System.exit(0);
             }
         };
-        ExitDialog exitDialog=new ExitDialog(handler);
-        exitDialog.show(getSupportFragmentManager(),"ExitDialog");
+        ExitDialog exitDialog = new ExitDialog(handler);
+        exitDialog.show(getSupportFragmentManager(), "ExitDialog");
     }
 }

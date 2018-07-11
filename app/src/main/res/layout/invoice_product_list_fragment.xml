@@ -124,24 +124,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
-                    android:layout_weight="1.26"
+                    android:layout_weight="1.3"
                     android:button="@null"
                     android:gravity="start|center_vertical"
                     android:paddingStart="5dp"
                     android:text="@string/no"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+                    style="@style/list_tile_text"
                     />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.1"
+                    android:layout_weight="1.2"
                     android:gravity="center"
                     android:text="@string/product_name"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+                    style="@style/list_tile_text"
+                    
                     />
 
                 <TextView
@@ -150,29 +149,27 @@
                     android:layout_weight="1.1"
                     android:gravity="center"
                     android:text="@string/specification"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+                    style="@style/list_tile_text"
+                    
                     />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
+                    android:layout_weight="1.25"
                     android:gravity="center"
                     android:text="@string/unit"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+                    style="@style/list_tile_text"
                     />
 
                 <TextView
+                    android:id="@+id/textView"
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
+                    android:layout_weight="1.25"
                     android:gravity="center"
-                    android:text="@string/quantity"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
-                    />
+                    android:text="@string/quantity"/>
 
                 <TextView
                     android:id="@+id/textView2"
@@ -181,8 +178,8 @@
                     android:layout_weight="1.2"
                     android:gravity="center"
                     android:text="@string/price"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"/>
+                    style="@style/list_tile_text"
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -190,8 +187,8 @@
                     android:layout_weight="1.18"
                     android:gravity="center"
                     android:text="@string/e_tax"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+                    style="@style/list_tile_text"
+                    
                     />
 
                 <TextView
@@ -200,8 +197,8 @@
                     android:layout_weight="1.2"
                     android:gravity="center"
                     android:text="@string/tax_rate"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+                    style="@style/list_tile_text"
+                    
                     android:visibility="gone"
                     />
 
@@ -211,8 +208,8 @@
                     android:layout_weight="1.2"
                     android:gravity="center"
                     android:text="@string/tax_Amount"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+                    style="@style/list_tile_text"
+                    
                     />
 
                 <TextView
@@ -221,8 +218,8 @@
                     android:layout_weight="1.18"
                     android:gravity="center"
                     android:text="@string/i_tax"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+                    style="@style/list_tile_text"
+                    
                     />
             </LinearLayout>
 

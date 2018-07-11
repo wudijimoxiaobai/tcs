@@ -10,6 +10,7 @@
 
     <CheckBox
         android:id="@+id/no"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
@@ -18,96 +19,95 @@
         android:focusable="false"
         android:gravity="start|center_vertical"
         android:paddingStart="5dp"
-        android:textColor="@color/text"
         />
 
 
     <TextView
         android:id="@+id/tin"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/name"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/tel"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/email"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/address"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/city"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/region"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/remarks"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text"
         />
 
 </LinearLayout>

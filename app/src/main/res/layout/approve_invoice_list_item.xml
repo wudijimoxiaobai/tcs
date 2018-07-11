@@ -8,83 +8,82 @@
 
     <TextView
         android:id="@+id/no"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_weight="1.10"
+        android:layout_weight="1.09"
         android:gravity="start|center_vertical"
         android:paddingStart="5dp"
-        android:textColor="@color/text"
-        android:textStyle="bold"
         />
 
     <TextView
         android:id="@+id/invoice_code"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="1.03"
         android:gravity="center"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/invoice_no"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textColor="@color/text"/>
+        android:layout_weight="1.03"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/i_tax"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textColor="@color/text"/>
+        android:layout_weight="0.98"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/issuing_date_time"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.98"
         android:gravity="center"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/request_type"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/request_date"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center"
-        android:textColor="@color/text"/>
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/request_by"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="1.03"
         android:gravity="center"
-        android:textColor="@color/text"
         />
 
     <TextView
         android:id="@+id/status"
+        style="@style/list_item_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textColor="@color/text"/>
+        android:layout_weight="1.03"
+        android:gravity="center"/>
 
 
 </LinearLayout>

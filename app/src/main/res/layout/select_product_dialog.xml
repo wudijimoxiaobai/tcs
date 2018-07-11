@@ -82,8 +82,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/product_name"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+                style="@style/list_tile_text"
+                
                 />
 
             <TextView
@@ -92,8 +92,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/specification"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+                style="@style/list_tile_text"
+                
                 />
 
             <TextView
@@ -102,8 +102,8 @@
                 android:layout_weight="1.22"
                 android:gravity="center"
                 android:text="@string/unit"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+                style="@style/list_tile_text"
+                
                 />
 
             <TextView
@@ -112,8 +112,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/quantity"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+                style="@style/list_tile_text"
+                
                 />
 
             <TextView
@@ -122,8 +122,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/price"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+                style="@style/list_tile_text"
+                
                 />
 
         </LinearLayout>

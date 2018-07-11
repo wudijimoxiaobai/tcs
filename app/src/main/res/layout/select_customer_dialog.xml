@@ -70,6 +70,7 @@
 
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
@@ -77,69 +78,68 @@
                 android:gravity="start|center_vertical"
                 android:paddingStart="5dp"
                 android:text="@string/no"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/tin"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/name"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/tel"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/address"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/national_id"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/passport"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
 

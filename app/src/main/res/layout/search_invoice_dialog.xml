@@ -41,23 +41,24 @@
             >
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/invoice_code"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <EditText
                 android:id="@+id/invoice_code"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="10dp"
-                android:layout_weight="0.34"
+                android:layout_weight="0.5"
                 android:background="@drawable/bg2"
                 android:gravity="start|center_vertical"
                 android:hint="@string/please_input"
@@ -65,8 +66,8 @@
                 android:imeOptions="actionDone"
                 android:inputType="number"
                 android:maxLines="1"
+
                 android:padding="10dp"
-                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -80,23 +81,24 @@
             >
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/invoice_no"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <EditText
                 android:id="@+id/invoice_no"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="10dp"
-                android:layout_weight="0.34"
+                android:layout_weight="0.5"
                 android:background="@drawable/bg2"
                 android:gravity="start|center_vertical"
                 android:hint="@string/please_input"
@@ -105,10 +107,10 @@
                 android:inputType="number"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textColor="@color/text"
                 />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -118,23 +120,24 @@
             >
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/issued_by"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <EditText
                 android:id="@+id/issued_by"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="10dp"
-                android:layout_weight="0.34"
+                android:layout_weight="0.5"
                 android:background="@drawable/bg2"
                 android:gravity="start|center_vertical"
                 android:hint="@string/please_input"
@@ -143,10 +146,10 @@
                 android:inputType="number"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textColor="@color/text"
                 />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -156,14 +159,14 @@
             >
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/status"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <RelativeLayout
@@ -171,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="10dp"
-                android:layout_weight="0.34"
+                android:layout_weight="0.5"
                 >
 
                 <android.support.v7.widget.AppCompatSpinner
@@ -199,6 +202,7 @@
 
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/upload_status_layout"
             android:layout_width="match_parent"
@@ -209,14 +213,14 @@
             >
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/upload_status"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <RelativeLayout
@@ -224,7 +228,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="10dp"
-                android:layout_weight="0.34"
+                android:layout_weight="0.5"
                 >
 
                 <android.support.v7.widget.AppCompatSpinner
@@ -254,7 +258,6 @@
         </LinearLayout>
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -264,29 +267,29 @@
             >
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/issuing_date_from"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <TextView
                 android:id="@+id/issuing_date_from"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="10dp"
-                android:layout_weight="0.34"
+                android:layout_weight="0.5"
                 android:background="@drawable/bg2"
                 android:gravity="start|center_vertical"
                 android:hint="@string/please_select"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textColor="@color/text"
                 />
 
         </LinearLayout>
@@ -300,29 +303,29 @@
             >
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/issuing_date_to"
-                android:textColor="@color/text1"
-                android:textStyle="bold"
+
                 />
 
             <TextView
                 android:id="@+id/issuing_date_to"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="10dp"
-                android:layout_weight="0.34"
+                android:layout_weight="0.5"
                 android:background="@drawable/bg2"
                 android:gravity="start|center_vertical"
                 android:hint="@string/please_select"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textColor="@color/text"
                 />
 
         </LinearLayout>

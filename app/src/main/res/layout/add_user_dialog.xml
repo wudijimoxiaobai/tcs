@@ -73,20 +73,22 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/user_name"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <EditText
                     android:id="@+id/user_name"
+                    style="@style/list_item_text"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="0.34"
                     android:background="@drawable/edit_bg"
                     android:gravity="start|center_vertical"
@@ -95,8 +97,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
-                    android:textColor="@color/text"
-                    android:layout_marginEnd="10dp"
+
                     />
 
             </LinearLayout>
@@ -110,20 +111,22 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/real_name"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <EditText
                     android:id="@+id/real_name"
+                    style="@style/list_item_text"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="0.34"
                     android:background="@drawable/edit_bg"
                     android:gravity="start|center_vertical"
@@ -132,8 +135,6 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
-                    android:textColor="@color/text"
-                    android:layout_marginEnd="10dp"
                     />
 
             </LinearLayout>
@@ -147,20 +148,22 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/code"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <EditText
                     android:id="@+id/code"
+                    style="@style/list_item_text"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="0.34"
                     android:background="@drawable/edit_bg"
                     android:gravity="start|center_vertical"
@@ -169,8 +172,6 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
-                    android:textColor="@color/text"
-                    android:layout_marginEnd="10dp"
                     />
 
             </LinearLayout>
@@ -184,14 +185,14 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/gender"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <RadioGroup
@@ -208,6 +209,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="@string/male"
+                        android:textSize="@dimen/list_item_text"
                         />
 
                     <RadioButton
@@ -216,6 +218,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:text="@string/female"
+                        android:textSize="@dimen/list_item_text"
                         />
 
                 </RadioGroup>
@@ -230,21 +233,21 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/role"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.34"
                     android:layout_marginEnd="10dp"
+                    android:layout_weight="0.34"
                     >
 
                     <android.support.v7.widget.AppCompatSpinner
@@ -282,20 +285,22 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/tel"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <EditText
                     android:id="@+id/tel"
+                    style="@style/list_item_text"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="0.34"
                     android:background="@drawable/edit_bg"
                     android:gravity="start|center_vertical"
@@ -304,8 +309,6 @@
                     android:inputType="number"
                     android:maxLines="1"
                     android:padding="10dp"
-                    android:textColor="@color/text"
-                    android:layout_marginEnd="10dp"
                     />
 
             </LinearLayout>
@@ -319,20 +322,22 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/email"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <EditText
                     android:id="@+id/email"
+                    style="@style/list_item_text"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="0.34"
                     android:background="@drawable/edit_bg"
                     android:gravity="start|center_vertical"
@@ -341,8 +346,6 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
-                    android:textColor="@color/text"
-                    android:layout_marginEnd="10dp"
                     />
 
             </LinearLayout>
@@ -356,14 +359,14 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/status"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <RadioGroup
@@ -379,6 +382,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/active"
+                        android:textSize="@dimen/list_item_text"
                         />
 
                     <RadioButton
@@ -388,6 +392,7 @@
                         android:layout_marginStart="15dp"
                         android:checked="true"
                         android:text="@string/inactive"
+                        android:textSize="@dimen/list_item_text"
                         />
 
                 </RadioGroup>
@@ -402,20 +407,22 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/address"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <EditText
                     android:id="@+id/address"
+                    style="@style/list_item_text"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="0.34"
                     android:background="@drawable/edit_bg"
                     android:gravity="start|center_vertical"
@@ -424,8 +431,6 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
-                    android:textColor="@color/text"
-                    android:layout_marginEnd="10dp"
                     />
 
             </LinearLayout>
@@ -439,20 +444,22 @@
                 >
 
                 <TextView
+                    style="@style/list_tile_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
                     android:padding="10dp"
                     android:text="@string/remarks"
-                    android:textColor="@color/text1"
-                    android:textStyle="bold"
+
                     />
 
                 <EditText
                     android:id="@+id/remarks"
+                    style="@style/list_item_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="0.34"
                     android:background="@drawable/edit_bg"
                     android:gravity="start|center_vertical"
@@ -462,8 +469,6 @@
                     android:maxLines="1"
                     android:minHeight="100dp"
                     android:padding="10dp"
-                    android:textColor="@color/text"
-                    android:layout_marginEnd="10dp"
                     />
 
             </LinearLayout>

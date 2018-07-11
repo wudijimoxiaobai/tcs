@@ -69,6 +69,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/invoice_type"
                     android:textColor="#0492fd"
+                    android:textSize="@dimen/list_title_text"
                     />
 
                 <LinearLayout
@@ -79,12 +80,12 @@
                     >
 
                     <TextView
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/invoice_type"
-                        android:textColor="@color/text"
                         />
 
                     <RelativeLayout
@@ -120,16 +121,17 @@
                     </RelativeLayout>
 
                     <TextView
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/invoice_no_from"
-                        android:textColor="@color/text"
                         />
 
                     <TextView
                         android:id="@+id/invoice_no_from"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginEnd="10dp"
@@ -138,7 +140,6 @@
                         android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -152,16 +153,17 @@
                     >
 
                     <TextView
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/remaining_invoice"
-                        android:textColor="@color/text"
                         />
 
                     <TextView
                         android:id="@+id/remaining_invoice"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginEnd="10dp"
@@ -170,21 +172,21 @@
                         android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                     <TextView
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/object"
-                        android:textColor="@color/text"
                         />
 
 
                     <TextView
                         android:id="@+id/object"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginEnd="10dp"
@@ -193,7 +195,6 @@
                         android:background="@drawable/bg2"
                         android:gravity="start|center_vertical"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -207,12 +208,12 @@
                     >
 
                     <TextView
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/language_in_invoice"
-                        android:textColor="@color/text"
                         />
 
                     <RelativeLayout
@@ -247,15 +248,16 @@
                     </RelativeLayout>
 
                     <TextView
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:textColor="@color/text"
                         android:visibility="invisible"
                         />
 
                     <TextView
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginEnd="10dp"
@@ -263,7 +265,6 @@
                         android:layout_weight="0.8"
                         android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
-                        android:textColor="@color/text"
                         android:visibility="invisible"
                         />
 
@@ -285,6 +286,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/buyer_info"
                     android:textColor="#0492fd"
+                    android:textSize="@dimen/list_title_text"
                     />
 
                 <LinearLayout
@@ -295,16 +297,17 @@
                     >
 
                     <TextView
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/tin"
-                        android:textColor="@color/text"
                         />
 
                     <TextView
                         android:id="@+id/tin"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginEnd="10dp"
@@ -315,20 +318,20 @@
                         android:gravity="center_vertical|start"
                         android:hint="@string/please_select"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                     <TextView
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/name"
-                        android:textColor="@color/text"
                         />
 
                     <TextView
                         android:id="@+id/name"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginEnd="10dp"
@@ -337,7 +340,6 @@
                         android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -351,16 +353,17 @@
                     >
 
                     <TextView
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/national_id"
-                        android:textColor="@color/text"
                         />
 
                     <TextView
                         android:id="@+id/national_id"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginEnd="10dp"
@@ -369,20 +372,20 @@
                         android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                     <TextView
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/passport"
-                        android:textColor="@color/text"
                         />
 
                     <TextView
                         android:id="@+id/passport"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginEnd="10dp"
@@ -391,7 +394,6 @@
                         android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
@@ -405,16 +407,17 @@
                     >
 
                     <TextView
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/address"
-                        android:textColor="@color/text"
                         />
 
                     <TextView
                         android:id="@+id/address"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginEnd="10dp"
@@ -423,20 +426,20 @@
                         android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                     <TextView
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="@string/tel"
-                        android:textColor="@color/text"
                         />
 
                     <TextView
                         android:id="@+id/tel"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginEnd="10dp"
@@ -445,7 +448,6 @@
                         android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
-                        android:textColor="@color/text"
                         />
 
                 </LinearLayout>
