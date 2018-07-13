@@ -43,11 +43,13 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
     @Override
     public void onSuccess(String requestPath, String objectString) {
         if (!isDetached()) view.complete(true);
+        onDetach();
     }
 
     @Override
     public void onFailure(String requestPath, String errorMes) {
         if (!isDetached()) view.complete(false);
+        onDetach();
     }
 
 

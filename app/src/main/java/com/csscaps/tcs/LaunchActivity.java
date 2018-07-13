@@ -50,6 +50,6 @@ public class LaunchActivity extends Activity {
                     finish();
                 }
             }
-        }, 2000);
+        }, 1500);
     }
 }

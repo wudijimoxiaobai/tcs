@@ -186,12 +186,13 @@ public class InvoiceQueryFragment extends BaseManagementListFragment<Invoice> {
             }
 
             if (!TextUtils.isEmpty(searchInvoiceCondition.getIssuingDateFrom()) && TextUtils.isEmpty(searchInvoiceCondition.getIssuingDateTo())) {
-                where = where.and(Invoice_Table.requestDate.between(searchInvoiceCondition.getIssuingDateFrom()).and(DateUtils.getDateToString_YYYY_MM_DD_EN(DateUtils.getDateNow())));
+                where = where.and(Invoice_Table.client_invoice_datetime.between(searchInvoiceCondition.getIssuingDateFrom()).and(DateUtils.getDateToString_YYYY_MM_DD_HH_MM_SS_EN(DateUtils.getDateNow())));
             }
 
             if (!TextUtils.isEmpty(searchInvoiceCondition.getIssuingDateFrom()) && !TextUtils.isEmpty(searchInvoiceCondition.getIssuingDateTo())) {
-                where = where.and(Invoice_Table.requestDate.between(searchInvoiceCondition.getIssuingDateFrom()).and(searchInvoiceCondition.getIssuingDateTo()));
+                where = where.and(Invoice_Table.client_invoice_datetime.between(searchInvoiceCondition.getIssuingDateFrom()).and(searchInvoiceCondition.getIssuingDateTo()));
             }
+
             data = where.queryList();
             mBaseManagementListAdapter.setData(data);
         }

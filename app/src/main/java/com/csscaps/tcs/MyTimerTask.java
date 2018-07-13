@@ -83,6 +83,7 @@ public class MyTimerTask extends TimerTask implements IPresenter {
         ReceiveRequestResult requestRust = JSON.parseObject(objectString, ReceiveRequestResult.class);
         List<RequestResultModel> invoiceData = requestRust.getInvoice_data();
         List<Invoice> disInvoices = new ArrayList<>();
+        if(invoiceData==null) return;
         for (RequestResultModel resultModel : invoiceData) {
             String invoiceNo = resultModel.getInvoice_no();
             Invoice invoice = select().from(Invoice.class).where(Invoice_Table.invoice_no.eq(invoiceNo)).querySingle();

@@ -50,7 +50,7 @@ public class ExitDialog extends DialogFragment  {
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
         dialogWindow.setGravity(Gravity.CENTER);
-        int width = DeviceUtils.dip2Px(getContext(), 360);
+        int width = DeviceUtils.dip2Px(getContext(), 400);
         dialogWindow.setLayout(width, -2);
         dialogWindow.setWindowAnimations(R.style.scale_anim);
     }

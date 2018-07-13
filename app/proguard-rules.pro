@@ -251,6 +251,7 @@
 -keep class com.csscaps.tcs.database.table.**{*; }
 
 #ofd_view
+-dontwarn com.suwell.to.ofd**
 -dontwarn com.suwell.bc.**
 -keep class com.suwell.bc.** { *; }
 -dontwarn com.suwell.ofd.nativ.**
@@ -262,3 +263,13 @@
     <fields>;
     <methods>;
 }
+
+-dontwarn com.google.zxing.**
+-keep  class com.google.zxing.**{*;}
+
+-dontwarn com.thoughtworks.xstream.**
+-keep class com.thoughtworks.xstream.** { *; }
+#-dontwarn com.suwell.ofd.formsdk.**
+#-keep class com.suwell.ofd.formsdk.** { *; }
+#-dontwarn org.qtproject.qt5.android.**
+#-keep class org.qtproject.qt5.android.**{*;}

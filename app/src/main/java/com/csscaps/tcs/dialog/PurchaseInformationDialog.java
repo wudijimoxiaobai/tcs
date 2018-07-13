@@ -63,7 +63,9 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
     @BindView(R.id.i_tax)
     TextView mITax;
 
-    private List<Product> data;
+    protected List<Product> data;
+    private PreviewInvoiceDialog previewInvoiceDialog;
+    private PrintInvoiceDialog printInvoiceDialog;
     private InvoiceIssuingPresenter presenter;
 
     public PurchaseInformationDialog(List<Product> data) {
@@ -104,8 +106,12 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
                 dismiss();
                 break;
             case R.id.preview:
+                if (previewInvoiceDialog == null) previewInvoiceDialog = new PreviewInvoiceDialog(mInvoice);
+                previewInvoiceDialog.show(getFragmentManager(), "PreviewInvoiceDialog");
                 break;
             case R.id.print:
+//                if (printInvoiceDialog == null) printInvoiceDialog = new PrintInvoiceDialog(mInvoice, this);
+//                printInvoiceDialog.show(getFragmentManager(), "PrintInvoiceDialog");
                 presenter = new InvoiceIssuingPresenter(this, getContext());
                 presenter.issuingInvoice(data);
                 break;
@@ -165,13 +171,13 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
         updateReportData();
     }
 
-    private void updateReportData(){
+    private void updateReportData() {
         String invoice_type_code = InvoiceIssuingActivity.mInvoice.getInvoice_type_code();
         String client_invoice_datetime = InvoiceIssuingActivity.mInvoice.getClient_invoice_datetime();
         String date = TextUtils.substring(client_invoice_datetime, 0, 6);
         ReportData reportData = select().from(ReportData.class).where(ReportData_Table.invoice_type_code.eq(invoice_type_code)).and(ReportData_Table.date.eq(date)).querySingle();
         if (reportData == null) {
-            reportData=new ReportData();
+            reportData = new ReportData();
             reportData.setInvoice_type_code(invoice_type_code);
             reportData.setDate(date);
             reportData.setTotal_all(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_all()));
@@ -194,22 +200,18 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
             reportData.setN_invoice_number(0);
             reportData.save();
         } else {
-            reportData.setTotal_all(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_all())+reportData.getTotal_all());
-            reportData.setTotal_vat(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_vat())+reportData.getTotal_vat());
-            reportData.setTotal_bpt(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_bpt())+reportData.getTotal_bpt());
-            reportData.setTotal_fee(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_fee())+reportData.getTotal_fee());
-            reportData.setTotal_stamp(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_stamp())+reportData.getTotal_stamp());
-            reportData.setTotal_final(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_final())+reportData.getTotal_final());
-            reportData.setTotal_bpt_preypayment(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_bpt_preypayment())+reportData.getTotal_bpt_preypayment());
-            reportData.setTotal_taxable_amount(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_taxable_amount())+reportData.getTotal_taxable_amount());
-            reportData.setInvoice_number(reportData.getInvoice_number()+1);
+            reportData.setTotal_all(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_all()) + reportData.getTotal_all());
+            reportData.setTotal_vat(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_vat()) + reportData.getTotal_vat());
+            reportData.setTotal_bpt(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_bpt()) + reportData.getTotal_bpt());
+            reportData.setTotal_fee(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_fee()) + reportData.getTotal_fee());
+            reportData.setTotal_stamp(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_stamp()) + reportData.getTotal_stamp());
+            reportData.setTotal_final(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_final()) + reportData.getTotal_final());
+            reportData.setTotal_bpt_preypayment(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_bpt_preypayment()) + reportData.getTotal_bpt_preypayment());
+            reportData.setTotal_taxable_amount(Double.valueOf(InvoiceIssuingActivity.mInvoice.getTotal_taxable_amount()) + reportData.getTotal_taxable_amount());
+            reportData.setInvoice_number(reportData.getInvoice_number() + 1);
             reportData.update();
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (presenter != null) presenter.onDetach();
-    }
+
 }

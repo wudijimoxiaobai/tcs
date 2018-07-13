@@ -57,7 +57,7 @@
     </style>
 
     <!--话框动画样式-->
-    <style name="monitor_search_dialog_anim" parent="android:Animation">
+    <style name="dialog_right_anim" parent="android:Animation">
         <item name="@android:windowEnterAnimation">@anim/right_edge_enter</item>
         //进入时的动画
         <item name="@android:windowExitAnimation">@anim/right_edge_exit</item>
@@ -65,7 +65,7 @@
     </style>
 
     <!--话框动画样式-->
-    <style name="search_dialog_anim" parent="android:Animation">
+    <style name="dialog_top_anim" parent="android:Animation">
         <item name="@android:windowEnterAnimation">@anim/top_edge_enter</item>
         //进入时的动画
         <item name="@android:windowExitAnimation">@anim/top_edge_exit</item>

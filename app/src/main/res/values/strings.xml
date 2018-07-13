@@ -159,11 +159,11 @@
     <string name="process">Process</string>
     <string name="issue">Issue</string>
     <string name="approve">Approve</string>
-    <string name="pass">通过</string>
-    <string name="reject">Reject</string>
-    <string name="to_confirm">待确认</string>
-    <string name="internal_reject">内部拒绝</string>
-    <string name="pending_approval">待审批</string>
+    <string name="pass">Pass</string>
+    <string name="reject">Rejection</string>
+    <string name="to_confirm">Pending for confirmation</string>
+    <string name="internal_reject">Internal Rejection</string>
+    <string name="pending_approval">Pending for Approval</string>
     <string name="date_from">Date from</string>
     <string name="date_to">Date to</string>
     <string name="issuing_date_from">Issuing Date from</string>
@@ -225,10 +225,12 @@
     <string name="hit43">The server address illegality</string>
     <string name="hit44">The invoice code cannot be empty!</string>
     <string name="hit45">The invoice no cannot be empty!</string>
-    <string name="hit46">没有符合条件的发票！</string>
-    <string name="hit47">确定开具负数发票吗？</string>
-    <string name="hit48">结束时间不能小于起始时间！</string>
-    <string name="hit49">确定退出系统吗？</string>
-    <string name="hit50">有发票未上传成功！</string>
-    <string name="hit51">Reason 不能为空！</string>
+    <string name="hit46">There is no eligible invoice!</string>
+    <string name="hit47">Are you sure to issue negative invoice?</string>
+    <string name="hit48">The end time can not less than start time</string>
+    <string name="hit49">Are you sure to exit system?</string>
+    <string name="hit50">There are some invoices not upload successful!</string>
+    <string name="hit51">The reason no cannot be empty!</string>
+    <string name="hit52">It does not in current tax period!</string>
+    <string name="hit53">It cannot work in the same tax period!</string>
 </resources>

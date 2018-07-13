@@ -18,7 +18,6 @@ import com.csscaps.tcs.activity.SystemManagementActivity;
 import com.csscaps.tcs.dialog.ExitDialog;
 import com.csscaps.tcs.dialog.SynDataDialog;
 import com.csscaps.tcs.service.SynchronizeService;
-import com.suwell.ofd.formsdk.FORMSDK;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -102,12 +101,12 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
                 startActivity(new Intent(this, OnlineDeclarationActivity.class));
                 break;
             case R.id.statistics:
-                try {
-                    FORMSDK formsdk =new FORMSDK();
-                    formsdk.parseXML("/sdcard/single/Main.xml","/sdcard/data.ofd");
+               /* try {
+                    NativeFormer nativeFormer =new NativeFormer();
+                    nativeFormer.parseXML("/sdcard/single/Main.xml","/sdcard/data.ofd");
                 } catch (Exception e) {
                     e.printStackTrace();
-                }
+                }*/
 
                 break;
             case R.id.system_management:

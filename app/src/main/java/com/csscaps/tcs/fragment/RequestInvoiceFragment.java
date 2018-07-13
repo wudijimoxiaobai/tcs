@@ -115,7 +115,7 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
             switch (status) {
                 case 0://作废
                     if (!dateTime.startsWith(dateNow)) {
-                        ToastUtil.showShort(getString(R.string.hit46));
+                        ToastUtil.showShort(getString(R.string.hit52));
                         return;
                     }
                     invoice.setRequestType(DISA);
@@ -123,7 +123,7 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
                 case 1://负数
                     dateTime = TextUtils.substring(dateTime, 0, 6);
                     if (DateUtils.compareDate(dateNow, dateTime, DateUtils.format_yyyyMM) != 1) {
-                        ToastUtil.showShort(getString(R.string.hit46));
+                        ToastUtil.showShort(getString(R.string.hit53));
                         return;
                     }
                     invoice.setRequestType(NEG);

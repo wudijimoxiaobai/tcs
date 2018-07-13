@@ -38,11 +38,11 @@
     </string-array>
     <string-array name="status1">
         <item>All</item>
-        <item>通过</item>
-        <item>拒绝</item>
-        <item>待确认</item>
-        <item>内部拒绝</item>
-        <item>待审批</item>
+        <item>Pass</item>
+        <item>Rejection</item>
+        <item>Pending for confirmation</item>
+        <item>Internal Rejection</item>
+        <item>Pending for Approval</item>
     </string-array>
 
     <string-array name="request_type">

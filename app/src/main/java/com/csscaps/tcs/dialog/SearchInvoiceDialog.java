@@ -93,7 +93,7 @@ public class SearchInvoiceDialog extends DialogFragment implements AdapterView.O
         mStatusSpinner.setDropDownVerticalOffset(offset);
         mUploadStatusSpinner.setOnItemSelectedListener(this);
         mStatusSpinner.setOnItemSelectedListener(this);
-        if(select) mUploadStatusLayout.setVisibility(View.GONE);
+        if (select) mUploadStatusLayout.setVisibility(View.GONE);
     }
 
     @OnClick({R.id.issuing_date_from, R.id.issuing_date_to, R.id.cancel, R.id.confirm})
@@ -109,9 +109,9 @@ public class SearchInvoiceDialog extends DialogFragment implements AdapterView.O
                 dismiss();
                 break;
             case R.id.confirm:
-                if(select)mSearchInvoiceCondition.setUploadStatus(String.valueOf(0));
-                mSearchInvoiceCondition.setIssuingDateFrom((String) mIssuingDateFrom.getTag());
-                mSearchInvoiceCondition.setIssuingDateTo((String) mIssuingDateTo.getTag());
+                if (select) mSearchInvoiceCondition.setUploadStatus(String.valueOf(0));
+                mSearchInvoiceCondition.setIssuingDateFrom(DateUtils.dateToStr(DateUtils.getTimeOfDayStart(DateUtils.getStringToDate_YYYY_MM_DD_EN((String) mIssuingDateFrom.getTag())), DateUtils.format_yyyyMMddHHmmss_24_EN));
+                mSearchInvoiceCondition.setIssuingDateTo(DateUtils.dateToStr(DateUtils.getTimeOfDayEnd(DateUtils.getStringToDate_YYYY_MM_DD_EN((String) mIssuingDateTo.getTag())), DateUtils.format_yyyyMMddHHmmss_24_EN));
                 if (!TextUtils.isEmpty(mSearchInvoiceCondition.getIssuingDateFrom()) && !TextUtils.isEmpty(mSearchInvoiceCondition.getIssuingDateTo())) {
                     if (DateUtils.compareDate(mSearchInvoiceCondition.getIssuingDateFrom(), mSearchInvoiceCondition.getIssuingDateTo(), DateUtils.format_yyyy_MM_dd_EN) == 1) {
                         ToastUtil.showShort(getString(R.string.hit48));

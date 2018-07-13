@@ -60,6 +60,7 @@ public class UserManagementFragment extends BaseManagementListFragment<User> {
             mSelect.setVisibility(View.GONE);
             mAddLine.setVisibility(View.GONE);
             mSelectLine.setVisibility(View.GONE);
+            mSearch.setVisibility(View.GONE);
         }
     }
 

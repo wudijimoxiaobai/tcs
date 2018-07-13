@@ -1,6 +1,6 @@
 package com.csscaps.tcs.database.table;
 
-import com.csscaps.tcs.database.TcsDatabase;
+import com.csscaps.tcs.database.TaxpayerDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
@@ -9,7 +9,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 /**
  * Created by tl on 2018/5/18.
  */
-@Table(database = TcsDatabase.class)
+@Table(database = TaxpayerDatabase.class)
 public class Taxpayer extends BaseModel {
 
     @Column
