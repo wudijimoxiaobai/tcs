@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 
 import com.alibaba.fastjson.JSON;
 import com.csscaps.common.base.BasePresenter;
-import com.csscaps.common.utils.DateUtils;
 import com.csscaps.tcs.ServerConstants;
 import com.csscaps.tcs.action.IInvoiceIssuingAction;
 import com.csscaps.tcs.activity.InvoiceIssuingActivity;
@@ -55,7 +54,6 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
 
     public void issuingInvoice(List<Product> products) {
         Invoice invoice = InvoiceIssuingActivity.mInvoice;
-        invoice.setClient_invoice_datetime(DateUtils.dateToStr(DateUtils.getDateNow(), DateUtils.format_yyyyMMddHHmmss_24_EN));
         List<ProductModel> productModels = new ArrayList<>();
         for (int i = 0; i < products.size(); i++) {
             Product p = products.get(i);

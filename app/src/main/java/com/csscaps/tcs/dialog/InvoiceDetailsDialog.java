@@ -17,8 +17,8 @@ import android.widget.TextView;
 import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
-import com.csscaps.tcs.GeneratingXMLFileUtils;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.ShowOfdUtils;
 import com.csscaps.tcs.action.IInvoiceIssuingAction;
 import com.csscaps.tcs.activity.ApplicationListActivity;
 import com.csscaps.tcs.database.table.Invoice;
@@ -32,6 +32,7 @@ import com.csscaps.tcs.fragment.RequestInvoiceFragment;
 import com.csscaps.tcs.presenter.InvoiceIssuingPresenter;
 import com.csscaps.tcs.service.UploadInvoiceService;
 import com.raizlabs.android.dbflow.structure.database.FlowCursor;
+import com.suwell.to.ofd.ofdviewer.OFDView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -60,6 +61,8 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
     TextView mConfirm;
     @BindView(R.id.upload)
     TextView mUpload;
+    @BindView(R.id.ofd_view)
+    OFDView mOfdView;
 
     private int flag;
     private Invoice mInvoice, negativeInvoice, showInvoice;
@@ -139,8 +142,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         transaction.add(R.id.content, fragment);
         transaction.commit();
         mIssuingPresenter = new InvoiceIssuingPresenter(this, getContext());
-        String dataXmlPath = getContext().getFilesDir().getAbsolutePath()+"/English/data.xml";
-        GeneratingXMLFileUtils.generatingXmlFile(showInvoice,dataXmlPath);
+        ShowOfdUtils.showOfd(showInvoice,mOfdView);
     }
 
     @OnClick({R.id.back, R.id.approve, R.id.reject, R.id.issue, R.id.confirm, R.id.upload})

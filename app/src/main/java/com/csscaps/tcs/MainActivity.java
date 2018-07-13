@@ -101,12 +101,12 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
                 startActivity(new Intent(this, OnlineDeclarationActivity.class));
                 break;
             case R.id.statistics:
-               /* try {
-                    NativeFormer nativeFormer =new NativeFormer();
-                    nativeFormer.parseXML("/sdcard/single/Main.xml","/sdcard/data.ofd");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }*/
+//                try {
+//                    NativeFormer nativeFormer =new NativeFormer();
+//                    nativeFormer.parseXML("/sdcard/single/Main.xml","/sdcard/data1.ofd");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 
                 break;
             case R.id.system_management:

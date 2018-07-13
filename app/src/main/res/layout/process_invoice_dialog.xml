@@ -8,8 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="74dp"
         android:background="@drawable/bg10"
-        android:paddingStart="15dp"
         android:paddingEnd="15dp"
+        android:paddingStart="15dp"
         >
 
         <TextView
@@ -37,8 +37,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:layout_alignParentEnd="true"
+            android:orientation="horizontal"
             >
 
             <TextView
@@ -115,6 +115,11 @@
         android:background="@drawable/bg12"
         android:orientation="vertical"
         >
+
+        <com.suwell.to.ofd.ofdviewer.OFDView
+            android:id="@+id/ofd_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
 
     </LinearLayout>

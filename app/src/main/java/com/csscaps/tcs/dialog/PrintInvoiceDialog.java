@@ -11,6 +11,7 @@ import android.view.Window;
 
 import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.ShowOfdUtils;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.presenter.InvoiceIssuingPresenter;
 import com.suwell.to.ofd.ofdviewer.OFDView;
@@ -49,6 +50,7 @@ public class PrintInvoiceDialog extends DialogFragment  {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.print_invoice_dialog, null);
         ButterKnife.bind(this, view);
+        ShowOfdUtils.showOfd(invoice,mOfdView);
         return view;
     }
 

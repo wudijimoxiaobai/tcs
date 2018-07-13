@@ -7,6 +7,7 @@ import com.csscaps.common.utils.AppTools;
 import com.csscaps.common.utils.DateUtils;
 import com.csscaps.common.utils.QRCodeUtil;
 import com.csscaps.tcs.database.table.Invoice;
+import com.csscaps.tcs.database.table.Product;
 import com.csscaps.tcs.database.table.ProductModel;
 import com.csscaps.tcs.database.table.ProductModel_Table;
 import com.csscaps.tcs.model.Buyer;
@@ -35,19 +36,19 @@ import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
 public class GeneratingXMLFileUtils {
 
-    private static final  String HEADER="<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>";
+    private static final String HEADER = "<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>";
 
-    public static void generatingXmlFile(Invoice showInvoice,String dataXmlPath) {
-        InvoiceData invoiceData=new InvoiceData();
+    public static void generatingXmlFile(Invoice showInvoice, String dataXmlPath) {
+        InvoiceData invoiceData = new InvoiceData();
 
-        Head head=new Head();
+        Head head = new Head();
         head.setINVOICECODE(showInvoice.getInvoice_type_code());
         head.setDEVICENO("80249001000048");
         head.setINVOICENUMBER(showInvoice.getInvoice_no());
         head.setISSUANCEDATE(DateUtils.dateToStr(DateUtils.getStringToDate(showInvoice.getClient_invoice_datetime(), DateUtils.format_yyyyMMddHHmmss_24_EN), DateUtils.format_yyyy_MM_dd_HH_mm_ss_24_EN));
         invoiceData.setHead(head);
 
-        Seller seller=new Seller();
+        Seller seller = new Seller();
         seller.setTIN(showInvoice.getSeller_tin());
         seller.setNAME(showInvoice.getSeller_name());
         seller.setADDRESS(showInvoice.getSeller_address());
@@ -55,7 +56,7 @@ public class GeneratingXMLFileUtils {
         seller.setPHONENO(showInvoice.getSeller_phone());
         invoiceData.setSeller(seller);
 
-        Buyer buyer=new Buyer();
+        Buyer buyer = new Buyer();
         buyer.setTIN(showInvoice.getPurchaser_tin());
         buyer.setPHONENO(showInvoice.getPurchaser_phone());
         buyer.setNAME(showInvoice.getPurchaser_name());
@@ -77,11 +78,20 @@ public class GeneratingXMLFileUtils {
 
         String invoiceNo = showInvoice.getInvoice_no();
         List<ProductModel> productModels = select().from(ProductModel.class).where(ProductModel_Table.invoice_no.eq(invoiceNo)).queryList();
-        List<QD> QDs=new ArrayList<>();
+        if (productModels.size() == 0) {
+            List<Product> products = showInvoice.getProducts();
+            for (int i = 0; i < products.size(); i++) {
+                Product p = products.get(i);
+                ProductModel productModel = p.getProductModel();
+                productModel.setLine_no(String.valueOf(i + 1));
+                productModels.add(productModel);
+            }
+        }
+        List<QD> QDs = new ArrayList<>();
         invoiceData.setQDs(QDs);
         for (int i = 0; i < productModels.size(); i++) {
             ProductModel productModel = productModels.get(i);
-            QD qd=new QD();
+            QD qd = new QD();
             qd.setITEMNAME(productModel.getItem_name());
             qd.setDESCRIPTION(productModel.getSpecification());
             qd.setUNIT(productModel.getUnit());
@@ -141,6 +151,7 @@ public class GeneratingXMLFileUtils {
 
         //购方tin
         str = showInvoice.getPurchaser_tin();
+        if (str == null) str = "0";
         str = AppTools.fillZero(str, 26);
         sb.append(str);
 

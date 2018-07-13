@@ -25,6 +25,7 @@ public class NativeFormer {
         System.loadLibrary("gnustl_shared");
         System.loadLibrary("log4cpp");
         System.loadLibrary("Qt5Core");
+        System.loadLibrary("Qt5Gui");
         System.loadLibrary("Qt5Network");
         System.loadLibrary("Qt5Xml");
         System.loadLibrary("sw3");

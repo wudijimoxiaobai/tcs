@@ -8,6 +8,7 @@ import com.csscaps.common.utils.DateUtils;
 import com.csscaps.tcs.database.table.User;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.suwell.to.ofd.ofdviewer.OFDView;
 import com.tax.fcr.library.network.Api;
 import com.tax.fcr.library.utils.Logger;
 import com.tax.fcr.library.utils.NetworkUtils;
@@ -56,6 +57,7 @@ public class TCSApplication extends BaseApplication {
      * 初始化数据
      */
     private void initData() {
+        OFDView.setLicense("测试","802ADEB5CB87C6722AC93CEC0293BD5306445654");
         timer.schedule(new MyTimerTask(), 500, (long) (DateUtils.HOUR_OF_MILLISECOND * 0.5));
         boolean initData = AppSP.getBoolean("initData", false);
         if (!initData) {

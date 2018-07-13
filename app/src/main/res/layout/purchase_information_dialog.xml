@@ -45,7 +45,6 @@
             android:paddingStart="15dp"
             android:text="@string/preview"
             android:textColor="@color/text2"
-            android:visibility="invisible"
             />
 
         <TextView

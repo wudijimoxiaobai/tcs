@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.csscaps.common.utils.DateUtils;
 import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.MainActivity;
@@ -110,15 +111,16 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
                 previewInvoiceDialog.show(getFragmentManager(), "PreviewInvoiceDialog");
                 break;
             case R.id.print:
-//                if (printInvoiceDialog == null) printInvoiceDialog = new PrintInvoiceDialog(mInvoice, this);
-//                printInvoiceDialog.show(getFragmentManager(), "PrintInvoiceDialog");
-                presenter = new InvoiceIssuingPresenter(this, getContext());
-                presenter.issuingInvoice(data);
+                if (printInvoiceDialog == null) printInvoiceDialog = new PrintInvoiceDialog(mInvoice, this);
+                printInvoiceDialog.show(getFragmentManager(), "PrintInvoiceDialog");
+//                presenter = new InvoiceIssuingPresenter(this, getContext());
+//                presenter.issuingInvoice(data);
                 break;
         }
     }
 
     private void initView() {
+        mInvoice.setProducts(data);
         InvoiceProductListAdapter adapter = new InvoiceProductListAdapter(getContext(), R.layout.invoice_product_list_item_layout, data);
         mListView.setAdapter(adapter);
         double vat = 0, bptf = 0, bptp = 0, fees = 0, sdl = 0, sdf = 0, etax = 0, itax = 0;
@@ -143,6 +145,7 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
         invoice.setTotal_taxable_amount(String.format("%.2f", etax));
         invoice.setTotal_all(String.format("%.2f", itax));
         invoice.setTotal_tax_due(String.format("%.2f", itax - etax));
+        invoice.setClient_invoice_datetime(DateUtils.dateToStr(DateUtils.getDateNow(), DateUtils.format_yyyyMMddHHmmss_24_EN));
 
         mTotalVat.setText(invoice.getTotal_vat());
         mTotalBptF.setText(invoice.getTotal_bpt());
