@@ -269,7 +269,7 @@
 
 -dontwarn com.thoughtworks.xstream.**
 -keep class com.thoughtworks.xstream.** { *; }
-#-dontwarn com.suwell.ofd.formsdk.**
-#-keep class com.suwell.ofd.formsdk.** { *; }
-#-dontwarn org.qtproject.qt5.android.**
-#-keep class org.qtproject.qt5.android.**{*;}
+-dontwarn com.suwell.ofd.formsdk.**
+-keep class com.suwell.ofd.formsdk.** { *; }
+-dontwarn org.qtproject.qt5.android.**
+-keep class org.qtproject.qt5.android.**{*;}
