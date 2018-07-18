@@ -38,6 +38,12 @@ public class InvoiceData {
     private String RWM;
     private String title;
 
+    //*************************
+    @XStreamAlias("QD")
+    private NQD QD;
+    @XStreamAlias("QD1")
+    private QD1 QD1;
+
     public InvoiceData() {
     }
 
@@ -187,5 +193,21 @@ public class InvoiceData {
 
     public void setTotalofFees(String totalofFees) {
         TotalofFees = totalofFees;
+    }
+
+    public NQD getQD() {
+        return QD;
+    }
+
+    public void setQD(NQD QD) {
+        this.QD = QD;
+    }
+
+    public com.csscaps.tcs.model.QD1 getQD1() {
+        return QD1;
+    }
+
+    public void setQD1(com.csscaps.tcs.model.QD1 QD1) {
+        this.QD1 = QD1;
     }
 }

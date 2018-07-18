@@ -57,7 +57,7 @@ public class TCSApplication extends BaseApplication {
      * 初始化数据
      */
     private void initData() {
-        OFDView.setLicense("测试","802ADEB5CB87C6722AC93CEC0293BD5306445654");
+        OFDView.setLicense("测试", "802ADEB5CB87C6722AC93CEC0293BD5306445654");
         timer.schedule(new MyTimerTask(), 500, (long) (DateUtils.HOUR_OF_MILLISECOND * 0.5));
         boolean initData = AppSP.getBoolean("initData", false);
         if (!initData) {
@@ -99,8 +99,9 @@ public class TCSApplication extends BaseApplication {
                         is = getAssets().open("English/" + str[i]);
                         fos = new FileOutputStream(f);
                         byte[] b = new byte[1024];
-                        while (is.read(b) != -1) {
-                            fos.write(b);
+                        int len;
+                        while ((len = is.read(b)) != -1) {
+                            fos.write(b, 0, len);
                         }
                         fos.flush();
                         is.close();
@@ -132,9 +133,10 @@ public class TCSApplication extends BaseApplication {
             Logger.i("test", "initData11111");
             byte[] buf = new byte[1024];
             int len;
-            while ((len = in.read(buf)) > 0)
+            while ((len = in.read(buf)) > 0) {
                 out.write(buf, 0, len);
-
+            }
+            out.flush();
             in.close();
             out.close();
             AppSP.putBoolean("initData", true);

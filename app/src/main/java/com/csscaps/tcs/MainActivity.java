@@ -19,6 +19,10 @@ import com.csscaps.tcs.dialog.ExitDialog;
 import com.csscaps.tcs.dialog.SynDataDialog;
 import com.csscaps.tcs.service.SynchronizeService;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import rx.functions.Action1;
@@ -101,13 +105,7 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
                 startActivity(new Intent(this, OnlineDeclarationActivity.class));
                 break;
             case R.id.statistics:
-//                try {
-//                    NativeFormer nativeFormer =new NativeFormer();
-//                    nativeFormer.parseXML("/sdcard/single/Main.xml","/sdcard/data1.ofd");
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-
+//                copy();
                 break;
             case R.id.system_management:
                 startActivity(new Intent(this, SystemManagementActivity.class));
@@ -138,5 +136,28 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
         };
         ExitDialog exitDialog = new ExitDialog(handler);
         exitDialog.show(getSupportFragmentManager(), "ExitDialog");
+    }
+
+
+    private void copy() {
+        String dataXmlPath = TCSApplication.getAppContext().getFilesDir().getAbsolutePath() + "/English/data.xml";
+        try {
+            FileInputStream is = new FileInputStream(new File(dataXmlPath));
+            File file = new File("/sdcard/data.xml");
+            if (file.exists()){
+                file.delete();
+            }
+            file.createNewFile();
+            FileOutputStream fos = new FileOutputStream(file);
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = is.read(buf)) !=-1)
+                fos.write(buf, 0, len);
+            fos.flush();
+            is.close();
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

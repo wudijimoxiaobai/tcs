@@ -13,7 +13,9 @@ import com.csscaps.tcs.database.table.ProductModel_Table;
 import com.csscaps.tcs.model.Buyer;
 import com.csscaps.tcs.model.Head;
 import com.csscaps.tcs.model.InvoiceData;
-import com.csscaps.tcs.model.QD;
+import com.csscaps.tcs.model.NQD;
+import com.csscaps.tcs.model.QD1;
+import com.csscaps.tcs.model.QUA;
 import com.csscaps.tcs.model.Seller;
 import com.suwell.ofd.render.util.BitmapUtil;
 import com.tax.fcr.library.utils.Logger;
@@ -24,7 +26,6 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
@@ -87,7 +88,19 @@ public class GeneratingXMLFileUtils {
                 productModels.add(productModel);
             }
         }
-        List<QD> QDs = new ArrayList<>();
+
+        NQD nqd = new NQD();
+        QD1 qd1 = new QD1();
+        invoiceData.setQD(nqd);
+        invoiceData.setQD1(qd1);
+        for (int i = 0; i < productModels.size(); i++) {
+            ProductModel productModel = productModels.get(i);
+            nqd.getItemNames().add(productModel.getItem_name());
+            QUA qua = new QUA(productModel.getQty(), productModel.getUnit_price(), productModel.getTaxable_amount());
+            qd1.getQUAs().add(qua);
+
+        }
+       /* List<QD> QDs = new ArrayList<>();
         invoiceData.setQDs(QDs);
         for (int i = 0; i < productModels.size(); i++) {
             ProductModel productModel = productModels.get(i);
@@ -100,10 +113,11 @@ public class GeneratingXMLFileUtils {
             qd.setAMOUNT(productModel.getTaxable_amount());
             qd.setVAT(String.format("%.2f", Math.round((productModel.getVat()) * 100) * 0.01d));
             QDs.add(qd);
-        }
+        }*/
 
         XStream xStream = new XStream(new DomDriver());
         xStream.processAnnotations(InvoiceData.class);
+        xStream.alias("ITEMNAME", String.class);
         File dataXmlFile = new File(dataXmlPath);
         try {
             if (!dataXmlFile.exists()) {
@@ -113,6 +127,8 @@ public class GeneratingXMLFileUtils {
                     + System.getProperty("line.separator")
                     + xStream.toXML(invoiceData);
             FileWriter fileWriter = new FileWriter(dataXmlFile);
+            xmlData = xmlData.replaceAll("\\<QUA\\>", "");
+            xmlData = xmlData.replaceAll("\\</QUA\\>", "");
             fileWriter.write(xmlData);
             fileWriter.flush();
             fileWriter.close();
