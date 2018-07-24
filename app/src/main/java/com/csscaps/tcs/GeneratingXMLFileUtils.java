@@ -65,7 +65,8 @@ public class GeneratingXMLFileUtils {
         buyer.setNATIONALID(showInvoice.getPurchaser_id_number());
         invoiceData.setBuyer(buyer);
 
-        invoiceData.setTotalofVAT(showInvoice.getTotal_vat());
+        //总税
+        invoiceData.setTotalofVAT(showInvoice.getTotal_tax_due());
         invoiceData.setTotalofBPTFinal(showInvoice.getTotal_bpt());
         invoiceData.setTotalofBPTPrepayment(showInvoice.getTotal_bpt_preypayment());
         invoiceData.setTotalofStampDuty_Local(showInvoice.getTotal_stamp());
@@ -198,7 +199,7 @@ public class GeneratingXMLFileUtils {
         }
 
         String content = SecurityUtil.base64Encode2String(bytes);
-        decode(content);
+//        decode(content);
         Bitmap bitmap = QRCodeUtil.createQRCodeBitmap(content, 200, 200);
         bytes = BitmapUtil.Bitmap2Bytes(bitmap);
 //        File f=new File("/sdcard/qr.jpg");
