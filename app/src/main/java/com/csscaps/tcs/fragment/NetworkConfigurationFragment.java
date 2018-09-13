@@ -1,6 +1,5 @@
 package com.csscaps.tcs.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,9 +9,9 @@ import com.csscaps.common.base.BaseFragment;
 import com.csscaps.common.utils.AppSP;
 import com.csscaps.common.utils.RegexUtils;
 import com.csscaps.common.utils.ToastUtil;
+import com.csscaps.tcs.BuildConfig;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.ServerConstants;
-import com.csscaps.tcs.service.SynchronizeService;
 import com.tax.fcr.library.network.Api;
 import com.tax.fcr.library.network.IPresenter;
 import com.tax.fcr.library.network.RequestModel;
@@ -43,7 +42,8 @@ public class NetworkConfigurationFragment extends BaseFragment implements IPrese
     }
 
     @Override
-    protected void onInitPresenters() {}
+    protected void onInitPresenters() {
+    }
 
     @Override
     public void initView(Bundle savedInstanceState) {
@@ -72,8 +72,8 @@ public class NetworkConfigurationFragment extends BaseFragment implements IPrese
         if (TextUtils.isEmpty(serverAddress)) {
             ToastUtil.showShort(getString(R.string.hit38));
             return;
-        }else{
-            if(!RegexUtils.isIP(serverAddress)){
+        } else {
+            if (!RegexUtils.isIP(serverAddress)) {
                 ToastUtil.showShort(getString(R.string.hit43));
                 return;
             }
@@ -84,7 +84,7 @@ public class NetworkConfigurationFragment extends BaseFragment implements IPrese
             return;
         } else {
             int port = Integer.valueOf(serverPort);
-            if (port<1||port>65535){
+            if (port < 1 || port > 65535) {
                 ToastUtil.showShort(getString(R.string.hit42));
                 return;
             }
@@ -94,8 +94,10 @@ public class NetworkConfigurationFragment extends BaseFragment implements IPrese
             ToastUtil.showShort(getString(R.string.hit41));
             return;
         }*/
-
-        String url = String.format(getString(R.string.url_format), serverAddress, serverPort);
+        String url;
+        if (BuildConfig.https) {
+            url = String.format(getString(R.string.url_https_format), serverAddress, serverPort);
+        } else url = String.format(getString(R.string.url_http_format), serverAddress, serverPort);
         Api.setBaseUrl(url);
         RequestModel requestModel = new RequestModel();
         requestModel.setFuncid(ServerConstants.A000);
@@ -108,7 +110,7 @@ public class NetworkConfigurationFragment extends BaseFragment implements IPrese
         AppSP.putString("serverAddress", serverAddress);
         AppSP.putString("serverPort", serverPort);
         AppSP.putString("uploadAddress", uploadAddress);
-        mContext.startService(new Intent(mContext, SynchronizeService.class).putExtra("autoSyn", true));
+//        mContext.startService(new Intent(mContext, SynchronizeService.class).putExtra("autoSyn", true));
     }
 
     @Override

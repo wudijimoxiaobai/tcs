@@ -162,7 +162,7 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
         @Override
         public void handleMessage(Message msg) {
             SearchApproveInvoiceCondition mSearchApproveInvoiceCondition = (SearchApproveInvoiceCondition) msg.obj;
-            Where where = select().from(Invoice.class).where(Invoice_Table.requestType.eq(DISA)).or(Invoice_Table.requestType.eq(NEG)).orderBy(Invoice_Table.requestDate, false);
+            Where where = select().from(Invoice.class).where(Invoice_Table.requestType.in(NEG,DISA)).orderBy(Invoice_Table.requestDate, false);
             if (!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getInvoiceCode())) {
                 where = where.and(Invoice_Table.invoice_type_code.eq(mSearchApproveInvoiceCondition.getInvoiceCode()));
             }

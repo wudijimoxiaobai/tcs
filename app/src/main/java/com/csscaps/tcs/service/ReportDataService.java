@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.csscaps.common.utils.AppTools;
 import com.csscaps.common.utils.ConvertUtils;
+import com.csscaps.common.utils.DateUtils;
 import com.csscaps.common.utils.NumberBytesUtil;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.text.TextUtils.substring;
+import static com.csscaps.tcs.database.table.ReportData_Table.date;
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
 /**
@@ -62,13 +64,24 @@ public class ReportDataService extends Service implements IPresenter {
     private void report() {
         List<ControlData> listControlData = select().from(ControlData.class).queryList();
         if (listControlData.size() > 0) {
-            String date = TextUtils.substring(listControlData.get(0).getS_report_date(), 0, 6);
-            if (checkInvoiceUpload(date)) {
+            ControlData controlData=listControlData.get(0);
+            if (checkInvoiceUpload(controlData)) {
                 if (fromOnlineDeclarationActivity) {
                     ToastUtil.showShort(getString(R.string.hit50));
                 }
                 return;
             }
+
+            String dateNow = DateUtils.dateToStr(DateUtils.getDateNow(), DateUtils.format_yyyyMMdd);
+            //未到数据报送终止日期，不能抄报
+            if (DateUtils.compareDate(dateNow, controlData.getE_report_date(), DateUtils.format_yyyyMMdd) != 1) {
+                if (fromOnlineDeclarationActivity) {
+                    ToastUtil.showShort(getString(R.string.hit55));
+                }
+                return;
+            }
+
+            String date = TextUtils.substring(controlData.getS_report_date(), 0, 6);
             RequestReportData requestReportData = new RequestReportData();
             requestReportData.setFuncid(ServerConstants.ATCS023);
             requestReportData.setType("2");
@@ -85,13 +98,17 @@ public class ReportDataService extends Service implements IPresenter {
     /**
      * 检查本期发票是否有未上传的
      *
-     * @param date
+     * @param controlData
      * @return true：是 false ：否
      */
-    private boolean checkInvoiceUpload(String date) {
+    private boolean checkInvoiceUpload(ControlData controlData) {
         String likeStr = date + "%%";
+        //数据报送起始日期
+        String sDate=DateUtils.dateToStr(DateUtils.getStringToDate(controlData.getS_report_date(),DateUtils.format_yyyyMMdd), DateUtils.format_yyyyMMddHHmmss_24_EN);
+        //数据报送终止日期
+        String eDate=DateUtils.dateToStr(DateUtils.getStringToDate(controlData.getE_report_date(),DateUtils.format_yyyyMMdd), DateUtils.format_yyyyMMddHHmmss_24_EN);
         List<Invoice> list = select().from(Invoice.class).where(Invoice_Table.uploadStatus.eq(Invoice.FAILURE))
-                .and(Invoice_Table.client_invoice_datetime.like(likeStr))
+                .and(Invoice_Table.client_invoice_datetime.between(sDate).and(eDate))
                 .queryList();
         if (list.size() > 0) return true;
         return false;

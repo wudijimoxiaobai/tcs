@@ -35,6 +35,10 @@ public class InvoiceType extends BaseModel {
      * calculate_method : xxx
      */
 
+    public static final String NEW ="NEW ";
+    public static final String AVL="AVL";
+    public static final String DISA ="DISA";
+
     @PrimaryKey
     @Column
     String invoice_type_uid;

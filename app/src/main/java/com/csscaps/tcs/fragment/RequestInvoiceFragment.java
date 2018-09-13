@@ -119,6 +119,7 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
                         return;
                     }
                     invoice.setRequestType(DISA);
+                    invoice.setInvalid_remark(reason);
                     break;
                 case 1://负数
                     dateTime = TextUtils.substring(dateTime, 0, 6);
@@ -127,11 +128,11 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
                         return;
                     }
                     invoice.setRequestType(NEG);
+                    invoice.setNegative_approval_remark(reason);
                     break;
             }
             invoice.setApproveFlag("2");
         }
-        invoice.setReason(reason);
         this.invoice = invoice;
 //        Intent intent = new Intent(mContext, InvoiceDetailsActivity.class);
 //        intent.putExtra("invoice", invoice);

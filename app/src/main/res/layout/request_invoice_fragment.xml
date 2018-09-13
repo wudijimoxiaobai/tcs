@@ -40,205 +40,212 @@
         android:padding="30dp"
         >
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg1"
-            android:orientation="vertical"
-            android:paddingEnd="300dp"
-            android:paddingStart="300dp"
-            android:paddingTop="60dp"
             >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
+                android:orientation="vertical"
+                android:paddingEnd="200dp"
+                android:paddingStart="200dp"
+                android:paddingTop="60dp"
                 >
 
-                <TextView
-                    style="@style/list_tile_text"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:gravity="end"
-                    android:padding="10dp"
-                    android:text="@string/application_type"
-                    />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="0.5"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     >
 
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/application_type"
+                    <TextView
+                        style="@style/list_tile_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:gravity="end"
+                        android:padding="10dp"
+                        android:text="@string/application_type"
+                        />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="0.5"
+                        >
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/application_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/bg2"
+                            android:entries="@array/application_type"
+                            android:gravity="start"
+                            android:spinnerMode="dropdown"
+                            android:textAlignment="viewStart"
+                            android:textDirection="locale"
+                            android:theme="@style/myDropTheme"
+                            />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:background="@mipmap/arrow_down"
+                            />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        style="@style/list_tile_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:gravity="end"
+                        android:padding="10dp"
+                        android:text="@string/invoice_code"
+
+                        />
+
+                    <EditText
+                        android:id="@+id/invoice_code"
+                        style="@style/list_item_text"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:background="@drawable/bg2"
-                        android:entries="@array/application_type"
-                        android:gravity="start"
-                        android:spinnerMode="dropdown"
-                        android:textAlignment="viewStart"
-                        android:textDirection="locale"
-                        android:theme="@style/myDropTheme"
-                        />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"
-                        android:background="@mipmap/arrow_down"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="start|center_vertical"
+                        android:hint="@string/please_input"
+                        android:imeOptions="flagNavigateNext"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:padding="10dp"
                         />
-                </RelativeLayout>
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                >
+                </LinearLayout>
 
-                <TextView
-                    style="@style/list_tile_text"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:gravity="end"
-                    android:padding="10dp"
-                    android:text="@string/invoice_code"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
 
-                    />
+                    <TextView
+                        style="@style/list_tile_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:gravity="end"
+                        android:padding="10dp"
+                        android:text="@string/invoice_no"
 
-                <EditText
-                    android:id="@+id/invoice_code"
-                    style="@style/list_item_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="0.5"
-                    android:background="@drawable/edit_bg"
-                    android:gravity="start|center_vertical"
-                    android:hint="@string/please_input"
-                    android:imeOptions="flagNavigateNext"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:padding="10dp"
-                    />
+                        />
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/invoice_no"
+                        style="@style/list_item_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="start|center_vertical"
+                        android:hint="@string/please_input"
+                        android:imeOptions="flagNavigateNext"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                >
+                </LinearLayout>
 
-                <TextView
-                    style="@style/list_tile_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:gravity="end"
-                    android:padding="10dp"
-                    android:text="@string/invoice_no"
-
-                    />
-
-                <EditText
-                    android:id="@+id/invoice_no"
-                    style="@style/list_item_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="0.5"
-                    android:background="@drawable/edit_bg"
-                    android:gravity="start|center_vertical"
-                    android:hint="@string/please_input"
-                    android:imeOptions="flagNavigateNext"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:padding="10dp"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                >
-
-                <TextView
-                    style="@style/list_tile_text"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:gravity="end"
-                    android:padding="10dp"
-                    android:text="@string/reason"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
 
-                    />
+                    <TextView
+                        style="@style/list_tile_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:gravity="end"
+                        android:padding="10dp"
+                        android:text="@string/reason"
 
-                <EditText
-                    android:id="@+id/reason"
-                    style="@style/list_item_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="0.5"
-                    android:background="@drawable/edit_bg"
-                    android:gravity="start|top"
-                    android:hint="@string/please_input"
-                    android:imeOptions="flagNavigateNext"
-                    android:inputType="text"
-                    android:maxHeight="150dp"
-                    android:maxLines="1"
-                    android:padding="10dp"
-                    />
+                        />
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/reason"
+                        style="@style/list_item_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/edit_bg"
+                        android:gravity="start|top"
+                        android:hint="@string/please_input"
+                        android:imeOptions="flagNavigateNext"
+                        android:inputType="text"
+                        android:maxHeight="150dp"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                >
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:gravity="end"
-                    android:padding="10dp"
-                    />
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
 
-                <TextView
-                    android:id="@+id/search"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="0.5"
-                    android:background="@drawable/bg3"
-                    android:gravity="center"
-                    android:text="@string/search"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_title"
-                    />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:gravity="end"
+                        android:padding="10dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/search"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/bg3"
+                        android:gravity="center"
+                        android:text="@string/search"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_title"
+                        />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>

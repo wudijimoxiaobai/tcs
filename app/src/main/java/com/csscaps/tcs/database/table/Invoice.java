@@ -14,7 +14,7 @@ import java.util.List;
  * Created by tl on 2018/5/22.
  */
 @Table(database = TcsDatabase.class)
-public class Invoice extends BaseModel implements Serializable,Cloneable {
+public class Invoice extends BaseModel implements Serializable, Cloneable {
 
     public static final String SUCCESS = "1";
     public static final String FAILURE = "0";
@@ -142,8 +142,10 @@ public class Invoice extends BaseModel implements Serializable,Cloneable {
     String requestDate;
     @Column
     String requestStatus; //0:申请失败 1:申请成功
+    @Column
+    String negative_approval_remark;//负数原因
 
-    String invalid="N";
+    String invalid = "N";
 
     List<ProductModel> goods;
 
@@ -674,5 +676,13 @@ public class Invoice extends BaseModel implements Serializable,Cloneable {
 
     public void setInvalid(String invalid) {
         this.invalid = invalid;
+    }
+
+    public String getNegative_approval_remark() {
+        return negative_approval_remark;
+    }
+
+    public void setNegative_approval_remark(String negative_approval_remark) {
+        this.negative_approval_remark = negative_approval_remark;
     }
 }

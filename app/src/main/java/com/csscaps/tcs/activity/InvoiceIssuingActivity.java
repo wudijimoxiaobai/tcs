@@ -7,16 +7,20 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.csscaps.common.base.BaseActivity;
 import com.csscaps.common.utils.AppSP;
+import com.csscaps.common.utils.DateUtils;
 import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.TCSApplication;
+import com.csscaps.tcs.database.table.ControlData;
+import com.csscaps.tcs.database.table.ControlData_Table;
 import com.csscaps.tcs.database.table.Customer;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.InvoiceNo;
@@ -63,7 +67,7 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
     @BindView(R.id.address)
     TextView mAddress;
     @BindView(R.id.tel)
-    TextView mTel;
+    EditText mTel;
 
     private List<InvoiceType> mInvoiceTypes;
     private ArrayList<String> invoiceTypeNames;
@@ -72,6 +76,7 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
     private InvoiceType invoiceType;
     private int pObject;
     private String cInvoiceTypeCode;
+
 
     @Override
     protected int getLayoutResId() {
@@ -101,9 +106,11 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
         mInvoiceTypes = select().from(InvoiceType.class).queryList();
         invoiceTypeNames = new ArrayList<>();
         for (InvoiceType it : mInvoiceTypes) {
-            invoiceTypeNames.add(it.getInvoice_type_name());
+            //可用发票
+            if (InvoiceType.AVL.equals(it.getStatus()))
+                invoiceTypeNames.add(it.getInvoice_type_name());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.simple_spinner_item, invoiceTypeNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, invoiceTypeNames);
         adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         mInvoiceType.setAdapter(adapter);
         mInvoiceType.setOnItemSelectedListener(this);
@@ -127,7 +134,7 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
                     ToastUtil.showShort(getString(R.string.hit23));
                     return;
                 }
-                if (pObject == 1 &&TextUtils.isEmpty(mInvoice.getPurchaser_tin()) ) {
+                if (pObject == 1 && TextUtils.isEmpty(mInvoice.getPurchaser_tin())) {
                     ToastUtil.showShort(getString(R.string.hit23));
                     return;
                 }
@@ -135,10 +142,22 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
 //                    ToastUtil.showShort(getString(R.string.hit23));
 //                    return;
 //                }
+                mInvoice.setPurchaser_phone(mTel.getText().toString().trim());
                 Intent intent = new Intent(this, ProductListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tin:
+                String invoice_type_code = mInvoice.getInvoice_type_code();
+                ControlData controlData = select().from(ControlData.class).where(ControlData_Table.invoice_type_code.eq(invoice_type_code)).querySingle();
+                if (controlData != null) {
+                    String issuing_last_date = controlData.getIssuing_last_date();
+                    String dateNow = DateUtils.dateToStr(DateUtils.getDateNow(), DateUtils.format_yyyyMMdd);
+                    //发票尚未抄报，不能开票
+                    if (DateUtils.compareDate(dateNow, issuing_last_date, DateUtils.format_yyyyMMdd) == 1) {
+                        ToastUtil.showShort(getString(R.string.hit54));
+                        return;
+                    }
+                }
                 try {
                     SelectCustomerDialog selectCustomerDialog = new SelectCustomerDialog(invoiceType.getInvoiceObject());
                     selectCustomerDialog.show(getSupportFragmentManager(), "SelectCustomerDialog");
@@ -183,7 +202,12 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
         }
         FlowCursor flowCursor = select().from(InvoiceNo.class).where(InvoiceNo_Table.invoice_type_code.eq(code)).orderBy(InvoiceNo_Table.id, true).query();
         flowCursor.moveToFirst();
-        String invoice_num = flowCursor.getStringOrDefault("invoice_num");
+        String invoice_num = null;
+        try {
+            invoice_num = flowCursor.getStringOrDefault("invoice_num");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (!TextUtils.isEmpty(invoice_num)) {
             mInvoiceNoFrom.setText(invoice_num);
             mInvoice.setInvoice_no(invoice_num);
@@ -198,6 +222,11 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
         if (!code.equals(cInvoiceTypeCode)) {
             cInvoiceTypeCode = code;
             resetProductTax();
+        }
+        if (pObject == 1) {
+            mTel.setEnabled(true);
+        } else {
+            mTel.setEnabled(false);
         }
     }
 

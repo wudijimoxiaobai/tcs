@@ -275,6 +275,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         }
         negativeInvoice.save();
         mInvoice.setStatus("WRO");
+        mInvoice.update();
         dismiss();
         ToastUtil.showShort(getString(R.string.hit5));
     }

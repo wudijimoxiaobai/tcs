@@ -55,7 +55,7 @@ public class PreviewInvoiceDialog extends DialogFragment {
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
         dialogWindow.setGravity(Gravity.END);
-        int width = DeviceUtils.dip2Px(getContext(), 600);
+        int width =  (int)(DeviceUtils.getScreenWidth(getContext())*2f/5f);
         dialogWindow.setLayout(width, -1);
         dialogWindow.setWindowAnimations(R.style.dialog_right_anim);
     }

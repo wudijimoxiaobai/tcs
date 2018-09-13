@@ -139,7 +139,8 @@
     <string name="test">Test</string>
     <string name="verify">Verify</string>
     <string name="type">Type</string>
-    <string name="url_format" formatted="false">https://%s:%s/</string>
+    <string name="url_https_format" formatted="false">https://%s:%s/</string>
+    <string name="url_http_format" formatted="false">http://%s:%s/</string>
     <string name="select_invoice">Select Invoice</string>
     <string name="reason">Reason</string>
     <string name="application_type">Application Type</string>
@@ -166,6 +167,8 @@
     <string name="pending_approval">Pending for Approval</string>
     <string name="date_from">Date from</string>
     <string name="date_to">Date to</string>
+    <string name="request_date_from">Request Date from</string>
+    <string name="request_date_to">Request Date to</string>
     <string name="issuing_date_from">Issuing Date from</string>
     <string name="issuing_date_to">Issuing Date to</string>
     <string name="online_declaration">Online Declaration</string>
@@ -233,4 +236,6 @@
     <string name="hit51">The reason no cannot be empty!</string>
     <string name="hit52">It does not in current tax period!</string>
     <string name="hit53">It cannot work in the same tax period!</string>
+    <string name="hit54">The invoice in this type has not been declared, it can not be issued！</string>
+    <string name="hit55">it is not time yet for invoice declaration！</string>
 </resources>

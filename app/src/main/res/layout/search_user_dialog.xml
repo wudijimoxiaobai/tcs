@@ -42,18 +42,18 @@
             >
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/name"
-                 style="@style/list_tile_text"
-               
                 />
 
             <EditText
                 android:id="@+id/name"
+                style="@style/list_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginEnd="20dp"
@@ -62,15 +62,12 @@
                 android:background="@drawable/bg2"
                 android:gravity="start|center_vertical"
                 android:hint="@string/please_input"
-                android:imeActionLabel="@string/verify"
-                android:imeOptions="actionDone"
-                android:inputType="number"
                 android:maxLines="1"
                 android:padding="10dp"
-                style="@style/list_item_text"
                 />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,14 +77,14 @@
             >
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/role"
-                 style="@style/list_tile_text"
-                
+
                 />
 
             <RelativeLayout
@@ -133,14 +130,14 @@
             >
 
             <TextView
+                style="@style/list_tile_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
                 android:text="@string/status"
-                 style="@style/list_tile_text"
-                
+
                 />
 
             <RelativeLayout

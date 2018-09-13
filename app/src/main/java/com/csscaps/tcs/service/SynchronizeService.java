@@ -44,6 +44,8 @@ import java.util.List;
 
 import rx.Subscription;
 
+import static com.raizlabs.android.dbflow.sql.language.SQLite.delete;
+
 /**
  * Created by tl on 2018/5/9.
  */
@@ -154,6 +156,7 @@ public class SynchronizeService extends Service implements IPresenter {
                 AppSP.putString("MyTaxpayer", objectString);
                 break;
             case ServerConstants.ATCS004:
+                delete().from(TaxItem.class).execute();
                 ReceiveTaxItem receiveTaxItem = JSON.parseObject(objectString, ReceiveTaxItem.class);
                 List<TaxItem> taxitems = receiveTaxItem.getTaxitem_info();
                 FlowManager.getDatabase(TcsDatabase.class)
@@ -168,6 +171,7 @@ public class SynchronizeService extends Service implements IPresenter {
                         .execute();
                 break;
             case ServerConstants.ATCS005:
+                delete().from(TaxType.class).execute();
                 ReceiveTaxType receiveTaxType = JSON.parseObject(objectString, ReceiveTaxType.class);
                 List<TaxType> taxTypes = receiveTaxType.getTaxtype_info();
                 FlowManager.getDatabase(TcsDatabase.class)
@@ -182,6 +186,7 @@ public class SynchronizeService extends Service implements IPresenter {
                         .execute();
                 break;
             case ServerConstants.ATCS006:
+                delete().from(InvoiceType.class).execute();
                 ReceiveInvoiceType receiveInvoiceType = JSON.parseObject(objectString, ReceiveInvoiceType.class);
                 List<InvoiceType> invoiceTypes = receiveInvoiceType.getInvoice_type_info();
                 FlowManager.getDatabase(TcsDatabase.class)
@@ -202,6 +207,7 @@ public class SynchronizeService extends Service implements IPresenter {
                         .execute();
                 break;
             case ServerConstants.ATCS007:
+                delete().from(InvoiceTaxType.class).execute();
                 ReceiveInvoiceTaxType receiveInvoiceTaxType = JSON.parseObject(objectString, ReceiveInvoiceTaxType.class);
                 List<InvoiceTaxType> invoice_tax_info = receiveInvoiceTaxType.getInvoice_tax_info();
                 FlowManager.getDatabase(TcsDatabase.class)
@@ -216,6 +222,7 @@ public class SynchronizeService extends Service implements IPresenter {
                         .execute();
                 break;
             case ServerConstants.ATCS008:
+                delete().from(TaxMethod.class).execute();
                 ReceiveTaxMethod receiveTaxMethod = JSON.parseObject(objectString, ReceiveTaxMethod.class);
                 List<TaxMethod> calc_rule_info = receiveTaxMethod.getCalc_rule_info();
                 FlowManager.getDatabase(TcsDatabase.class)

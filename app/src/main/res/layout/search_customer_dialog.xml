@@ -63,8 +63,6 @@
                 android:background="@drawable/bg2"
                 android:gravity="start|center_vertical"
                 android:hint="@string/please_input"
-                android:imeActionLabel="@string/verify"
-                android:imeOptions="actionDone"
                 android:inputType="number"
                 android:maxLines="1"
                 android:padding="10dp"

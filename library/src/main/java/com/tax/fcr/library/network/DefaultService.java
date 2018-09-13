@@ -23,6 +23,7 @@ public interface DefaultService {
      *
      * @return
      */
+//    @POST("tcs.web/bizWndUrl")
     @POST("tcs.front/bizWndUrl")
     Observable<ResponseModel> postService(@Body() RequestModel requestParam);
 

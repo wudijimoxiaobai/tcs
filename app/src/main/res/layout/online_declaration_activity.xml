@@ -46,9 +46,8 @@
             android:layout_toStartOf="@+id/upload"
             android:gravity="center"
             android:text="@string/declare"
-            android:minWidth="126dp"
-            android:paddingEnd="25dp"
-            android:paddingStart="25dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="5dp"
             />
         <View
             android:layout_width="1px"
@@ -65,9 +64,8 @@
             android:layout_toStartOf="@+id/synchronize"
             android:gravity="center"
             android:text="@string/upload"
-            android:minWidth="126dp"
-            android:paddingEnd="25dp"
-            android:paddingStart="25dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="5dp"
             />
         <View
             android:layout_width="1px"
@@ -84,7 +82,7 @@
             android:layout_alignParentEnd="true"
             android:drawableStart="@mipmap/synchronize"
             android:gravity="center"
-            android:paddingStart="15dp"
+            android:paddingStart="5dp"
             android:text="@string/synchronize"
             />
 

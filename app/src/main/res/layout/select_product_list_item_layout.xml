@@ -12,7 +12,7 @@
         android:id="@+id/checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1.27"
+        android:layout_weight="1.262"
         android:button="@drawable/cb_check_selector"
         />
 

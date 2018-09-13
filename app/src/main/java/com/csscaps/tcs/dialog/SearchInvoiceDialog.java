@@ -110,8 +110,10 @@ public class SearchInvoiceDialog extends DialogFragment implements AdapterView.O
                 break;
             case R.id.confirm:
                 if (select) mSearchInvoiceCondition.setUploadStatus(String.valueOf(0));
-                mSearchInvoiceCondition.setIssuingDateFrom(DateUtils.dateToStr(DateUtils.getTimeOfDayStart(DateUtils.getStringToDate_YYYY_MM_DD_EN((String) mIssuingDateFrom.getTag())), DateUtils.format_yyyyMMddHHmmss_24_EN));
-                mSearchInvoiceCondition.setIssuingDateTo(DateUtils.dateToStr(DateUtils.getTimeOfDayEnd(DateUtils.getStringToDate_YYYY_MM_DD_EN((String) mIssuingDateTo.getTag())), DateUtils.format_yyyyMMddHHmmss_24_EN));
+                if (!TextUtils.isEmpty((String) mIssuingDateFrom.getTag()))
+                    mSearchInvoiceCondition.setIssuingDateFrom(DateUtils.dateToStr(DateUtils.getTimeOfDayStart(DateUtils.getStringToDate_YYYY_MM_DD_EN((String) mIssuingDateFrom.getTag())), DateUtils.format_yyyyMMddHHmmss_24_EN));
+                if (!TextUtils.isEmpty((String) mIssuingDateTo.getTag()))
+                    mSearchInvoiceCondition.setIssuingDateTo(DateUtils.dateToStr(DateUtils.getTimeOfDayEnd(DateUtils.getStringToDate_YYYY_MM_DD_EN((String) mIssuingDateTo.getTag())), DateUtils.format_yyyyMMddHHmmss_24_EN));
                 if (!TextUtils.isEmpty(mSearchInvoiceCondition.getIssuingDateFrom()) && !TextUtils.isEmpty(mSearchInvoiceCondition.getIssuingDateTo())) {
                     if (DateUtils.compareDate(mSearchInvoiceCondition.getIssuingDateFrom(), mSearchInvoiceCondition.getIssuingDateTo(), DateUtils.format_yyyy_MM_dd_EN) == 1) {
                         ToastUtil.showShort(getString(R.string.hit48));

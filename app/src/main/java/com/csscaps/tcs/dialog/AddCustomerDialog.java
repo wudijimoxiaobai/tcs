@@ -88,23 +88,7 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
 //                if (actionId == EditorInfo.IME_ACTION_DONE) {
                     String tin = mTin.getText().toString().trim();
-                    boolean initData = AppSP.getBoolean("initData", false);
-                    if (initData) {
-                        Taxpayer taxpayer = select().from(Taxpayer.class).where(Taxpayer_Table.tin.eq(tin)).querySingle();
-                        if (taxpayer != null) {
-                            mName.setText(taxpayer.getEname());
-                            mTel.setText(taxpayer.getTel());
-                            mAddress.setText(taxpayer.getAddress());
-                            mCity.setText(taxpayer.getCity());
-                            mState.setText(taxpayer.getState());
-                            t.setRegistered(true);
-                        } else {
-                            ToastUtil.showShort(getString(R.string.hit13));
-                        }
-                    } else {
-                        ToastUtil.showShort(getString(R.string.hit14));
-                    }
-
+                     verify(tin);
 //                }
                 return false;
             }
@@ -120,6 +104,27 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
                 mUnregistered.setVisibility(View.GONE);
                 break;
         }
+    }
+
+    private boolean verify( String tin){
+        boolean initData = AppSP.getBoolean("initData", false);
+        if (initData) {
+            Taxpayer taxpayer = select().from(Taxpayer.class).where(Taxpayer_Table.tin.eq(tin)).querySingle();
+            if (taxpayer != null) {
+                mName.setText(taxpayer.getEname());
+                mTel.setText(taxpayer.getTel());
+                mAddress.setText(taxpayer.getAddress());
+                mCity.setText(taxpayer.getCity());
+                mState.setText(taxpayer.getState());
+                t.setRegistered(true);
+                return true;
+            } else {
+                ToastUtil.showShort(getString(R.string.hit13));
+            }
+        } else {
+            ToastUtil.showShort(getString(R.string.hit14));
+        }
+        return false;
     }
 
     @Override
@@ -163,7 +168,9 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
             return;
         }
 
-
+        if(t.isRegistered()&&TextUtils.isEmpty(t.getName())){
+            if(!verify(tin)) return;
+        }
 
 
         editTextsIntoT();

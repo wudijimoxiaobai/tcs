@@ -49,7 +49,7 @@
         <View
             android:layout_width="1px"
             android:layout_height="match_parent"
-            android:layout_toStartOf="@+id/add"
+            android:layout_toStartOf="@+id/search"
             android:background="#7a95b3"
             />
 
@@ -63,8 +63,8 @@
             android:drawableStart="@mipmap/search"
             android:gravity="center"
             android:minWidth="126dp"
-            android:paddingEnd="25dp"
-            android:paddingStart="25dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="5dp"
             android:text="@string/search"/>
 
         <View
@@ -83,8 +83,8 @@
             android:layout_centerVertical="true"
             android:drawableStart="@mipmap/select"
             android:gravity="center"
-            android:minWidth="126dp"
-            android:padding="20dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="10dp"
             android:text="@string/select"
             />
 

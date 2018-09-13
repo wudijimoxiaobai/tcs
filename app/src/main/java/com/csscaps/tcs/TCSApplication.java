@@ -49,7 +49,10 @@ public class TCSApplication extends BaseApplication {
         String serverAddress = AppSP.getString("serverAddress");
         String serverPort = AppSP.getString("serverPort");
         if (TextUtils.isEmpty(serverAddress) || TextUtils.isEmpty(serverPort)) return;
-        String url = String.format(getString(R.string.url_format), serverAddress, serverPort);
+        String url;
+        if (BuildConfig.https) {
+            url = String.format(getString(R.string.url_https_format), serverAddress, serverPort);
+        } else url = String.format(getString(R.string.url_http_format), serverAddress, serverPort);
         Api.setBaseUrl(url);
     }
 

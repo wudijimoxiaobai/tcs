@@ -186,7 +186,7 @@ public class InvoiceQueryFragment extends BaseManagementListFragment<Invoice> {
             }
 
             if (!TextUtils.isEmpty(searchInvoiceCondition.getIssuingDateFrom()) && TextUtils.isEmpty(searchInvoiceCondition.getIssuingDateTo())) {
-                where = where.and(Invoice_Table.client_invoice_datetime.between(searchInvoiceCondition.getIssuingDateFrom()).and(DateUtils.getDateToString_YYYY_MM_DD_HH_MM_SS_EN(DateUtils.getDateNow())));
+                where = where.and(Invoice_Table.client_invoice_datetime.between(searchInvoiceCondition.getIssuingDateFrom()).and(DateUtils.dateToStr(DateUtils.getDateNow(),DateUtils.format_yyyyMMddHHmmss_24_EN)));
             }
 
             if (!TextUtils.isEmpty(searchInvoiceCondition.getIssuingDateFrom()) && !TextUtils.isEmpty(searchInvoiceCondition.getIssuingDateTo())) {

@@ -57,8 +57,8 @@
             android:layout_height="match_parent"
             android:background="@drawable/bg1"
             android:orientation="vertical"
-            android:paddingEnd="300dp"
-            android:paddingStart="300dp"
+            android:paddingEnd="200dp"
+            android:paddingStart="200dp"
             android:paddingTop="100dp"
             >
 
@@ -126,7 +126,6 @@
                     android:background="@drawable/edit_bg"
                     android:gravity="start|center_vertical"
                     android:hint="@string/please_input"
-                    android:imeOptions="flagNavigateNext"
                     android:inputType="number"
                     android:maxLines="1"
                     android:padding="10dp"
@@ -140,6 +139,7 @@
                 android:layout_marginTop="50dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 >
 
                 <TextView

@@ -48,7 +48,6 @@
                 android:layout_weight="1"
                 android:gravity="end"
                 android:padding="10dp"
-
                 android:text="@string/product_name"
                 />
 
@@ -63,9 +62,8 @@
                 android:background="@drawable/bg2"
                 android:gravity="start|center_vertical"
                 android:hint="@string/please_input"
-                android:imeActionLabel="@string/verify"
-                android:imeOptions="actionDone"
                 android:inputType="text"
+                android:imeOptions="flagNavigateNext"
                 android:maxLines="1"
                 android:padding="10dp"
                 />
@@ -102,7 +100,6 @@
                 android:background="@drawable/bg2"
                 android:gravity="start|center_vertical"
                 android:hint="@string/please_input"
-                android:imeOptions="flagNavigateNext"
                 android:inputType="text"
                 android:maxLines="1"
                 android:padding="10dp"

@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.csscaps.common.utils.FastDoubleClickUtil;
 import com.csscaps.common.utils.ToastUtil;
+import com.csscaps.tcs.CalculateUtils;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.activity.InvoiceIssuingActivity;
 import com.csscaps.tcs.adapter.BaseManagementListAdapter;
@@ -54,6 +55,13 @@ public class InvoiceProductListFragment extends BaseManagementListFragment<Produ
         return null;
     }
 
+    @Override
+    public void call(Product product) {
+        if (product.getProductModel() == null) {
+            product.setProductModel(CalculateUtils.calculateProductTax(product));
+        }
+        super.call(product);
+    }
 
     @Override
     @OnClick({R.id.calculate})
