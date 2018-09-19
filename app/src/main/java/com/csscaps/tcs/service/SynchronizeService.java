@@ -269,33 +269,6 @@ public class SynchronizeService extends Service implements IPresenter {
         complete();
     }
 
-  /*  *//**
-     * 解析控制数据
-     *
-     * @return
-     *//*
-    private ControlData parseControlDataStr(String invoice_type_code,String controlDataStr) {
-        ControlData controlData = new ControlData();
-        controlData.setInvoice_type_code(invoice_type_code);
-        controlData.setNew_date(TextUtils.substring(controlDataStr,6,14));
-        controlData.setIssuing_last_date(TextUtils.substring(controlDataStr,14,22));
-        controlData.setTotal_amount_perinvoice(NumberBytesUtil.bytesToLong(ConvertUtils.hexString2Bytes(AppTools.fillZero(TextUtils.substring(controlDataStr,22,34),16))));
-        controlData.setTotal_all(NumberBytesUtil.bytesToLong(ConvertUtils.hexString2Bytes(AppTools.fillZero(TextUtils.substring(controlDataStr,34,46),16))));
-        controlData.setN_total_all(NumberBytesUtil.bytesToLong(ConvertUtils.hexString2Bytes(AppTools.fillZero(TextUtils.substring(controlDataStr,46,58),16))));
-        controlData.setReport_flag(TextUtils.substring(controlDataStr,58,59));
-        controlData.setTcs_pwd_flag(TextUtils.substring(controlDataStr,59,60));
-        controlData.setS_report_date(TextUtils.substring(controlDataStr,60,68));
-        controlData.setE_report_date(TextUtils.substring(controlDataStr,68,76));
-        controlData.setInvoice_type(TextUtils.substring(controlDataStr,76,78));
-        controlData.setCheck_tax_control_panel(TextUtils.substring(controlDataStr,78,79));
-        controlData.setCheck_tax_control_panel_n_invoice(TextUtils.substring(controlDataStr,79,80));
-        controlData.setRfu(TextUtils.substring(controlDataStr,80,82));
-        controlData.setTax_type_item_index(NumberBytesUtil.bytesToLong(ConvertUtils.hexString2Bytes(AppTools.fillZero(TextUtils.substring(controlDataStr,82,94),16))));
-        controlData.setIssuing_n_invoice_days(NumberBytesUtil.bytesToInt(ConvertUtils.hexString2Bytes(AppTools.fillZero(TextUtils.substring(controlDataStr,94,98),8))));
-        controlData.setIssuing_invoice_type(String.valueOf(NumberBytesUtil.bytesToInt(ConvertUtils.hexString2Bytes(AppTools.fillZero(TextUtils.substring(controlDataStr,98,100),8)))));
-        controlData.setInvoice_number_permonth(NumberBytesUtil.bytesToInt(ConvertUtils.hexString2Bytes(TextUtils.substring(controlDataStr,100,108))));
-        return controlData;
-    }*/
 
     @Override
     public void onFailure(String requestPath, String errorMes) {

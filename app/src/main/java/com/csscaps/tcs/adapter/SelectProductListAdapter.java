@@ -3,6 +3,7 @@ package com.csscaps.tcs.adapter;
 import android.content.Context;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CheckBox;
@@ -47,6 +48,9 @@ public class SelectProductListAdapter extends QuickAdapter<Product> implements T
         price.setFilters(inputFilter);
         quantity.setText(item.getQuantity());
         price.setText(item.getPrice());
+        if(TextUtils.isEmpty(item.getPrice())){
+            price.setEnabled(true);
+        }else  price.setEnabled(false);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

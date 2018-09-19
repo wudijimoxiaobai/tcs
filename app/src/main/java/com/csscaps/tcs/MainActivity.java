@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.csscaps.common.base.BaseActivity;
 import com.csscaps.common.utils.DateUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
+import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.activity.InvoiceInformationManagementActivity;
 import com.csscaps.tcs.activity.InvoiceIssuingActivity;
 import com.csscaps.tcs.activity.InvoiceManagementActivity;
@@ -18,6 +21,7 @@ import com.csscaps.tcs.activity.SystemManagementActivity;
 import com.csscaps.tcs.dialog.ExitDialog;
 import com.csscaps.tcs.dialog.SynDataDialog;
 import com.csscaps.tcs.service.SynchronizeService;
+import com.tax.fcr.library.network.Api;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,6 +37,10 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
     TextView mUser;
     @BindView(R.id.time_date)
     TextView mTimeDate;
+    @BindView(R.id.first_row)
+    LinearLayout mFirstRow;
+    @BindView(R.id.second_row)
+    LinearLayout mSecondRow;
 
     private String name;
     private SynDataDialog mSynDataDialog = new SynDataDialog();
@@ -57,16 +65,22 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
         mUser.setText(name);
         mHandler.sendEmptyMessage(0);
         ObserverActionUtils.addAction(this);
+      /*  int w= (int) (DeviceUtils.getScreenWidth(this)*2f/3f);
+        int h= (int) ((DeviceUtils.getScreenHeight(this)-DeviceUtils.dip2Px(this,85)-DeviceUtils.getScreenStatusBarHeight(this))*1f/3f);
+        mFirstRow.getLayoutParams().width=w;
+        mFirstRow.getLayoutParams().height=h;
+        mSecondRow.getLayoutParams().width=w;
+        mSecondRow.getLayoutParams().height=h;*/
     }
 
     Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            String time = DateUtils.getDateToString_HH_MM_SS_EN(DateUtils.getDateNow());
+//            String time = DateUtils.getDateToString_HH_MM_SS_EN(DateUtils.getDateNow());
             String date = DateUtils.getDateToString_YYYY_MM_DD_EN(DateUtils.getDateNow());
             int mWeekday = DateUtils.getDayOfWeek(DateUtils.getDateNow());
             String week = getResources().getStringArray(R.array.weekday)[mWeekday - 1];
-            String format = getResources().getString(R.string.date_time);
+//            String format = getResources().getString(R.string.date_time);
 //            mTimeDate.setText(String.format(format, time, date, week));
             mTimeDate.setText(date + " " + week);
             sendEmptyMessageDelayed(0, 1000);
@@ -92,6 +106,10 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
                 exit();
                 break;
             case R.id.syn:
+                if (TextUtils.isEmpty(Api.getBaseUrl())) {
+                    ToastUtil.showShort(getString(R.string.hit56));
+                    return;
+                }
                 startService(new Intent(this, SynchronizeService.class));
                 mSynDataDialog.show(getSupportFragmentManager(), "SynDataDialog");
                 break;
@@ -144,14 +162,14 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
         try {
             FileInputStream is = new FileInputStream(new File(dataXmlPath));
             File file = new File("/sdcard/data.xml");
-            if (file.exists()){
+            if (file.exists()) {
                 file.delete();
             }
             file.createNewFile();
             FileOutputStream fos = new FileOutputStream(file);
             byte[] buf = new byte[1024];
             int len;
-            while ((len = is.read(buf)) !=-1)
+            while ((len = is.read(buf)) != -1)
                 fos.write(buf, 0, len);
             fos.flush();
             is.close();

@@ -236,6 +236,7 @@
     <string name="hit51">The reason no cannot be empty!</string>
     <string name="hit52">It does not in current tax period!</string>
     <string name="hit53">It cannot work in the same tax period!</string>
-    <string name="hit54">The invoice in this type has not been declared, it can not be issued！</string>
-    <string name="hit55">it is not time yet for invoice declaration！</string>
+    <string name="hit54">The invoice in this type has not been declared, it can not be issued!</string>
+    <string name="hit55">it is not time yet for invoice declaration!</string>
+    <string name="hit56">Please configure the network firstly! </string>
 </resources>

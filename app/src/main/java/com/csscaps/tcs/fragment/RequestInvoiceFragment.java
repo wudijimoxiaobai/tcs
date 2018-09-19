@@ -134,9 +134,6 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
             invoice.setApproveFlag("2");
         }
         this.invoice = invoice;
-//        Intent intent = new Intent(mContext, InvoiceDetailsActivity.class);
-//        intent.putExtra("invoice", invoice);
-//        startActivity(intent);
         InvoiceDetailsDialog invoiceDetailsDialog = new InvoiceDetailsDialog(invoice);
         invoiceDetailsDialog.setFlag(0);
         invoiceDetailsDialog.show(getFragmentManager(), "InvoiceDetailsDialog");

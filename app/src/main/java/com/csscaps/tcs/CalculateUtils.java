@@ -107,13 +107,15 @@ public class CalculateUtils {
 
         String myTaxpayerString = AppSP.getString("MyTaxpayer");
         MyTaxpayer myTaxpayer = JSON.parseObject(myTaxpayerString, MyTaxpayer.class);
-        if("Y".equals(myTaxpayer.getWithholding())){
-            totalTax-=productModel.getBpt_prepayment();
-            double bptp=(productModel.getBpt_final()+productModel.getFees()+productModel.getStamp_duty_local()+productModel.getStamp_duty_federal()+productModel.getVat())*0.01f;
-            totalTax=totalTax+bptp;
+        //如果纳税人  withholding 等于Y
+        // BPTPrepayment= BPTPrepayment+ (item.StampDutyLocal + item.stampDutyFederal + item.Fee + item.BPTFinal + item.VatAmount) * 0.01；
+        if ("Y".equals(myTaxpayer.getWithholding())) {
+            totalTax -= productModel.getBpt_prepayment();
+            double bptp =productModel.getBpt_prepayment()+ (productModel.getBpt_final() + productModel.getFees() + productModel.getStamp_duty_local() + productModel.getStamp_duty_federal() + productModel.getVat()) * 0.01f;
+            totalTax = totalTax + bptp;
             productModel.setBpt_prepayment(bptp);
-        }else{
-            totalTax-=productModel.getBpt_prepayment();
+        } else {
+            totalTax -= productModel.getBpt_prepayment();
             productModel.setBpt_prepayment(0);
         }
         productModel.setE_tax(Double.valueOf(String.format("%.2f", Math.round((amount) * 100) * 0.01d)));
@@ -202,7 +204,7 @@ public class CalculateUtils {
                 switch (taxTypeCode) {
                     case SDF:
                     case SDL:
-                         tax=price * quantity*percentage/100;
+                        tax = price * quantity * percentage / 100;
                         break;
                     default:
                         if (isTaxIn) {
@@ -219,7 +221,7 @@ public class CalculateUtils {
                 switch (taxTypeCode) {
                     case SDF:
                     case SDL:
-                         tax=quantity*fixedAmount;
+                        tax = quantity * fixedAmount;
                         break;
                     default:
                         tax = (quantity + p) * c * r;

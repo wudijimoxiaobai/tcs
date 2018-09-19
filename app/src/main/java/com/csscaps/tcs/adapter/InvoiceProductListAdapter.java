@@ -23,13 +23,13 @@ import java.util.List;
 
 public class InvoiceProductListAdapter extends BaseManagementListAdapter<Product> {
 
-    private InputFilter inputFilter[]=new InputFilter[]{new DecimalDigitsInputFilter(2)};
+    private InputFilter inputFilter[] = new InputFilter[]{new DecimalDigitsInputFilter(2)};
     private int editPosition = -1;
     private int count;
 
     public InvoiceProductListAdapter(Context context, int layoutResId, List<Product> data) {
         super(context, layoutResId, data);
-        count=this.data.size();
+        count = this.data.size();
     }
 
     @Override
@@ -61,9 +61,13 @@ public class InvoiceProductListAdapter extends BaseManagementListAdapter<Product
 
         if (position == editPosition) {
             quantityEditText.setVisibility(View.VISIBLE);
-            priceEditText.setVisibility(View.VISIBLE);
-            priceTextView.setVisibility(View.GONE);
             quantityTextView.setVisibility(View.GONE);
+            if (TextUtils.isEmpty(item.getPrice())) {
+                priceTextView.setVisibility(View.GONE);
+                priceEditText.setVisibility(View.VISIBLE);
+            } else {
+                priceEditText.setVisibility(View.GONE);
+            }
         } else {
             quantityEditText.setVisibility(View.GONE);
             priceEditText.setVisibility(View.GONE);
@@ -127,8 +131,8 @@ public class InvoiceProductListAdapter extends BaseManagementListAdapter<Product
 
     @Override
     public void notifyDataSetChanged() {
-        if(data.size()!=count) setEditPosition(-1);
+        if (data.size() != count) setEditPosition(-1);
         super.notifyDataSetChanged();
-        count=this.data.size();
+        count = this.data.size();
     }
 }
