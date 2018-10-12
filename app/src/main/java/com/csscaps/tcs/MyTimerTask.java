@@ -42,7 +42,7 @@ public class MyTimerTask extends TimerTask implements IPresenter {
         //申请成功，待审批 的负数发票
         List<Invoice> engs = select().from(Invoice.class).where(Invoice_Table.requestType.eq(NEG)).and(Invoice_Table.approveFlag.eq("4")).and(Invoice_Table.requestStatus.eq("1")).queryList();
         //申请失败，待审批或审批通过 的作废发票
-        List<Invoice> disas1 = select().from(Invoice.class).where(Invoice_Table.requestType.eq(DISA)).and(Invoice_Table.approveFlag.in("4","0")).and(Invoice_Table.requestStatus.eq("0")).queryList();
+        List<Invoice> disas1 = select().from(Invoice.class).where(Invoice_Table.requestType.eq(DISA)).and(Invoice_Table.approveFlag.in("4", "0")).and(Invoice_Table.requestStatus.eq("0")).queryList();
         //申请失败，待审批 的负数发票
         List<Invoice> engs1 = select().from(Invoice.class).where(Invoice_Table.requestType.eq(NEG)).and(Invoice_Table.approveFlag.eq("4")).and(Invoice_Table.requestStatus.eq("0")).queryList();
         requestResult(disas, ServerConstants.ATCS019);

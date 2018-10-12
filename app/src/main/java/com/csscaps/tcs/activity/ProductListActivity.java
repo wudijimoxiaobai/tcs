@@ -4,6 +4,7 @@ package com.csscaps.tcs.activity;
 import android.os.Bundle;
 
 import com.csscaps.common.base.BaseActivity;
+import com.csscaps.tcs.PrintUtil;
 import com.csscaps.tcs.R;
 
 /**
@@ -11,6 +12,8 @@ import com.csscaps.tcs.R;
  */
 
 public class ProductListActivity extends BaseActivity {
+
+    private PrintUtil mPrintUtil;
 
     @Override
     protected int getLayoutResId() {
@@ -24,7 +27,23 @@ public class ProductListActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
-
+        mPrintUtil=new PrintUtil();
+        mPrintUtil.init();
     }
 
+    @Override
+    protected void onResume() {
+        mPrintUtil.optPrinter(true);
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mPrintUtil.optPrinter(false);
+        super.onDestroy();
+    }
+
+    public PrintUtil getPrintUtil() {
+        return mPrintUtil;
+    }
 }

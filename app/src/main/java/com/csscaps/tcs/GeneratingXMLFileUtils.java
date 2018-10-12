@@ -104,7 +104,7 @@ public class GeneratingXMLFileUtils {
        /* List<QD> QDs = new ArrayList<>();
         invoiceData.setQDs(QDs);
         for (int i = 0; i < productModels.size(); i++) {
-            ProductModel productModel = productModels.get(i);
+            SdProductModel productModel = productModels.get(i);
             QD qd = new QD();
             qd.setITEMNAME(productModel.getItem_name());
             qd.setDESCRIPTION(productModel.getSpecification());

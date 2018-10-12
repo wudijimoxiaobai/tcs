@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.csscaps.tcs.activity.InvoiceIssuingActivity;
 import com.csscaps.tcs.activity.InvoiceManagementActivity;
 import com.csscaps.tcs.activity.OnlineDeclarationActivity;
 import com.csscaps.tcs.activity.SystemManagementActivity;
+import com.csscaps.tcs.database.table.SdInvoice;
 import com.csscaps.tcs.dialog.ExitDialog;
 import com.csscaps.tcs.dialog.SynDataDialog;
 import com.csscaps.tcs.service.SynchronizeService;
@@ -123,6 +125,12 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
                 startActivity(new Intent(this, OnlineDeclarationActivity.class));
                 break;
             case R.id.statistics:
+                SDCardUtil.unlockSdcard();
+                Log.i("TEST", " "+SDCardUtil.checkLockSdcardStatus());
+                SdInvoice sdInvoice = new SdInvoice();
+                sdInvoice.setInvoice_type_code("jajdl");
+                sdInvoice.save();
+//                SDCardUtil.lockSdcard();
 //                copy();
                 break;
             case R.id.system_management:

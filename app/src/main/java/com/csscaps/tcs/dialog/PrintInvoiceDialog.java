@@ -1,5 +1,6 @@
 package com.csscaps.tcs.dialog;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -10,8 +11,10 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 import com.csscaps.common.utils.DeviceUtils;
+import com.csscaps.tcs.PrintUtil;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.ShowOfdUtils;
+import com.csscaps.tcs.activity.ProductListActivity;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.presenter.InvoiceIssuingPresenter;
 import com.suwell.to.ofd.ofdviewer.OFDView;
@@ -73,8 +76,11 @@ public class PrintInvoiceDialog extends DialogFragment  {
                 dismiss();
                 break;
             case R.id.confirm:
-                dismiss();
-                presenter.issuingInvoice(mPurchaseInformationDialog.data);
+//                dismiss();
+//                presenter.issuingInvoice(mPurchaseInformationDialog.data);
+                float dpi = (PrintUtil.DotLineWidth * 25.4f / mOfdView.getMapPagesWH().get(0)[0]);
+                Bitmap bitmap= mOfdView.mOFDParseCore.renderPageBitmap(0,dpi);
+                ((ProductListActivity)getActivity()).getPrintUtil().print(bitmap);
                 break;
         }
     }
