@@ -23,11 +23,13 @@ import com.csscaps.tcs.database.table.SdInvoice;
 import com.csscaps.tcs.dialog.ExitDialog;
 import com.csscaps.tcs.dialog.SynDataDialog;
 import com.csscaps.tcs.service.SynchronizeService;
+import com.raizlabs.android.dbflow.config.FlowManager;
 import com.tax.fcr.library.network.Api;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -64,6 +66,7 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        initSdDB();
         mUser.setText(name);
         mHandler.sendEmptyMessage(0);
         ObserverActionUtils.addAction(this);
@@ -125,13 +128,18 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
                 startActivity(new Intent(this, OnlineDeclarationActivity.class));
                 break;
             case R.id.statistics:
-                SDCardUtil.unlockSdcard();
-                Log.i("TEST", " "+SDCardUtil.checkLockSdcardStatus());
-                SdInvoice sdInvoice = new SdInvoice();
-                sdInvoice.setInvoice_type_code("jajdl");
-                sdInvoice.save();
-//                SDCardUtil.lockSdcard();
-//                copy();
+                SdcardUtil.unlockSdcard();
+                Log.i("TEST", " " + SdcardUtil.checkLockSdcardStatus());
+                if (!SdcardUtil.checkLockSdcardStatus()) {
+                    SdcardDBUtil.openDB(this);
+                    SdInvoice sdInvoice = new SdInvoice();
+                    sdInvoice.setInvoice_type_code("****4554jajdl565***");
+                    sdInvoice.setInvoice_made_by("name");
+                    sdInvoice.save();
+                    SdcardDBUtil.closeDB();
+                }
+                SdcardUtil.lockSdcard();
+                Log.i("TEST", " " + SdcardUtil.checkLockSdcardStatus());
                 break;
             case R.id.system_management:
                 startActivity(new Intent(this, SystemManagementActivity.class));
@@ -162,6 +170,16 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
         };
         ExitDialog exitDialog = new ExitDialog(handler);
         exitDialog.show(getSupportFragmentManager(), "ExitDialog");
+    }
+
+    //初始化sd卡备份数据库
+    private void initSdDB() {
+        //sd卡数据库文件夹
+        Map<String, String> map = System.getenv();
+        String SDPath=  map.get("SECONDARY_STORAGE");
+        File file = new File(SDPath+"/FCR");
+        FileDatabaseContext mSdDatabaseContext = new FileDatabaseContext(this, file, false);
+        FlowManager.init(mSdDatabaseContext);
     }
 
 

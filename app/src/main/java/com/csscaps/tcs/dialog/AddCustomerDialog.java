@@ -107,22 +107,26 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
     }
 
     private boolean verify( String tin){
-        boolean initData = AppSP.getBoolean("initData", false);
-        if (initData) {
-            Taxpayer taxpayer = select().from(Taxpayer.class).where(Taxpayer_Table.tin.eq(tin)).querySingle();
-            if (taxpayer != null) {
-                mName.setText(taxpayer.getEname());
-                mTel.setText(taxpayer.getTel());
-                mAddress.setText(taxpayer.getAddress());
-                mCity.setText(taxpayer.getCity());
-                mState.setText(taxpayer.getState());
-                t.setRegistered(true);
-                return true;
+        try {
+            boolean initData = AppSP.getBoolean("initData", false);
+            if (initData) {
+                Taxpayer taxpayer = select().from(Taxpayer.class).where(Taxpayer_Table.tin.eq(tin)).querySingle();
+                if (taxpayer != null) {
+                    mName.setText(taxpayer.getEname());
+                    mTel.setText(taxpayer.getTel());
+                    mAddress.setText(taxpayer.getAddress());
+                    mCity.setText(taxpayer.getCity());
+                    mState.setText(taxpayer.getState());
+                    t.setRegistered(true);
+                    return true;
+                } else {
+                    ToastUtil.showShort(getString(R.string.hit13));
+                }
             } else {
-                ToastUtil.showShort(getString(R.string.hit13));
+                ToastUtil.showShort(getString(R.string.hit14));
             }
-        } else {
-            ToastUtil.showShort(getString(R.string.hit14));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

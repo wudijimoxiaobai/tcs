@@ -39,6 +39,9 @@ public class TCSApplication extends BaseApplication {
         FlowManager.init(new FlowConfig.Builder(this).build());
         initData();
         addOfdTemplate();
+        //设置sd卡密码，锁定sd卡；
+        SdcardUtil.sdcardSetPassword();
+        SdcardUtil.lockSdcard();
     }
 
     /**

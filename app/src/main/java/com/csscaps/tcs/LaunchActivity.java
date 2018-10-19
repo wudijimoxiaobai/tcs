@@ -13,11 +13,9 @@ import com.csscaps.common.utils.AppSP;
 import com.csscaps.common.utils.AppTools;
 import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.tcs.database.table.User;
-import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
-import java.io.File;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by tl on 2018/5/4.
@@ -58,18 +56,8 @@ public class LaunchActivity extends Activity {
                 }
             }
         }, 1500);
-        initSdDB();
+
     }
 
-    //初始化sd卡备份数据库
-    private void initSdDB() {
-        //sd卡数据库文件夹
-        Map<String, String> map = System.getenv();
-        String SDPath=  map.get("SECONDARY_STORAGE");
-        File file = new File(SDPath+"/FCR");
-        FileDatabaseContext mSdDatabaseContext = new FileDatabaseContext(this, file, false);
-        FlowManager.init(mSdDatabaseContext);
-//        SDCardUtil.sdcardSetPassword();
-//        SDCardUtil.lockSdcard();
-    }
+
 }

@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Handler;
 import android.util.Log;
 
 import com.csscaps.common.utils.ToastUtil;
@@ -13,16 +14,16 @@ import java.io.ByteArrayOutputStream;
 import java.util.concurrent.locks.ReentrantLock;
 
 import CommDevice.USBPort;
-import aclasdriver.AclasBaseFunction;
 import aclasdriver.Printer;
 
 /**
  * Created by tl on 2018/10/12.
+ * 打印
  */
 
 public class PrintUtil {
 
-    private static final String tag = "PrinterDemo";
+    private static final String tag = "PrintUtil";
     public static int DotLineWidth = 384; //576
     static int DotLineBytes = DotLineWidth / 8;
     private Printer mPrinter;
@@ -31,16 +32,13 @@ public class PrintUtil {
     private int print_mode = 1;
     boolean bStdEpson = false;
     private String strPrinterSerial = "";
+    private Handler mHandler;
 
 
     public void init() {
         mPrinter = new Printer();
         strPrinterSerial = USBPort.getDeviceName(0);
         bStdEpson = Printer.isEpsonPrinter(strPrinterSerial);
-        String archStr = java.lang.System.getProperty("os.arch").toUpperCase();
-        Log.d(tag, " print_mode:" + print_mode + " strPrinterSerial:" + strPrinterSerial + " bStdEpson:" + bStdEpson + " archStr:" + archStr);
-        AclasBaseFunction function = new AclasBaseFunction();
-        function.beepWithDevice(null, function.AL_BEEP_ONCE);
     }
 
 
@@ -53,7 +51,6 @@ public class PrintUtil {
             } else {
                 retopen = mPrinter.Open(0, null);
             }
-
             if (retopen >= 1) {
                 bFlagPrinterOpen = true;
                 int ret = mPrinter.SetPrintMode(print_mode);
@@ -86,7 +83,7 @@ public class PrintUtil {
         }
     }
 
-    public void print( Bitmap bitmap) {
+    public void print(Bitmap bitmap) {
         if (pThread != null) {
             pThread.clearPrintBuffer();
         }
@@ -101,8 +98,9 @@ public class PrintUtil {
         int height = bmp.getHeight();
         int width = bmp.getWidth();
         int byteofline = DotLineBytes;
+        Log.d(tag, "kwq print picutre_bmp_print width:"+width+" h:"+height+" line:"+byteofline);
 
-        int h = DotLineWidth * height / width;
+        int h = DotLineWidth * height / width+1;
         Bitmap bitmap = Bitmap.createBitmap(DotLineWidth, h, Bitmap.Config.ARGB_8888);
         Canvas PluCanvas = new Canvas(bitmap);
         PluCanvas.drawColor(Color.TRANSPARENT);
@@ -111,33 +109,50 @@ public class PrintUtil {
         PluCanvas.drawBitmap(bmp, new Rect(0, 0, width, height), new Rect(0, 0, DotLineWidth, h), paint);
         bmp = bitmap;
         width = DotLineWidth;
+        height=h;
 
         byte[] BitMapBuf = new byte[byteofline];
         int[] tmpbuf = new int[width + 8];
 
-        if (pThread != null) {
+        if(pThread!=null){
             pThread.clearPrintBuffer();
         }
-
-        for (int i = 0; i < h; i++) {
+        for(int i=0; i<height; i++)
+        {
             bmp.getPixels(tmpbuf, 0, width, 0, i, width, 1);
 
-            for (int j = 0; j < width; j += 8) {
-                for (int k = 0; k < 8; k++) {
-                    if ((tmpbuf[j + k] == Color.TRANSPARENT) || (tmpbuf[j + k] == Color.WHITE)) {
-                        BitMapBuf[j / 8] &= ~(0x80 >> k);
-                    } else {
-                        BitMapBuf[j / 8] |= (0x80 >> k);
+            for(int j=0; j<width; j+=8)
+            {
+                for(int k=0; k<8; k++)
+                {
+
+                    if((tmpbuf[j+k] == Color.TRANSPARENT) || (tmpbuf[j+k] == Color.WHITE))
+                    {
+                        BitMapBuf[j/8] &= ~(0x80 >> k);
+                    }else
+                    {
+                        BitMapBuf[j/8] |= (0x80 >> k);
                     }
                 }
             }
-            if (pThread != null) {
+            if(pThread!=null){
                 pThread.appendPrintData(BitMapBuf, 0, DotLineBytes);
             }
         }
-
     }
 
+    public void setHandler(Handler handler) {
+        mHandler = handler;
+    }
+
+    public synchronized boolean checkPaper() {
+        boolean havePaper;
+        havePaper = mPrinter.IsPaperExist();
+        if (!havePaper) {
+            ToastUtil.showLong(TCSApplication.getAppContext().getString(R.string.hit57));
+        }
+        return havePaper;
+    }
 
     class PrinterThread extends Thread {
         ReentrantLock bufferLock = new ReentrantLock();
@@ -212,15 +227,6 @@ public class PrintUtil {
             return ret;
         }
 
-        public synchronized boolean checkPaper() {
-            boolean havePaper = false;
-            havePaper = mPrinter.IsPaperExist();
-            if (!havePaper) {
-                ToastUtil.showLong("没有打印纸了！");
-            }
-            return havePaper;
-        }
-
         @Override
         public void run() {
             super.run();
@@ -242,16 +248,14 @@ public class PrintUtil {
                 if (timer++ > timerMax) {
                     timer = 0;
                     timerMax = 5;
-                    checkPaper();   //check paper status
+                    havePaper=checkPaper();   //check paper status
                 }
                 if (havePaper && enablePrint) {
                     int ret = printData(cutterType);
-
                     Log.d(tag, "Print data result0:" + ret);
-
-
+                    if(ret==-1) break;
+                    mHandler.sendEmptyMessage(0);
                     if (bSerial) {
-
                         try {
                             sleep(0);
                         } catch (InterruptedException e) {

@@ -114,6 +114,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/bg12"
         android:orientation="vertical"
+        android:gravity="center_horizontal"
         >
 
         <com.suwell.to.ofd.ofdviewer.OFDView

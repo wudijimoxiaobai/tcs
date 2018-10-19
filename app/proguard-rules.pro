@@ -273,3 +273,8 @@
 -keep class com.suwell.ofd.formsdk.** { *; }
 -dontwarn org.qtproject.qt5.android.**
 -keep class org.qtproject.qt5.android.**{*;}
+#顶尖
+-dontwarn aclasdriver.**
+-keep class aclasdriver.**{*;}
+-dontwarn CommDevice.**
+-keep class CommDevice.**{*;}

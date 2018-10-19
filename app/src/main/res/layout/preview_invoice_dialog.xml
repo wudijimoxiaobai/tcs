@@ -43,8 +43,8 @@
         android:layout_height="wrap_content"
         android:background="@color/bg1"
         android:gravity="center"
-        android:paddingTop="15dp"
         android:paddingBottom="15dp"
+        android:paddingTop="15dp"
         >
 
         <TextView

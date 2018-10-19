@@ -26,9 +26,10 @@ public class ShowOfdUtils {
                     File file = new File(OFD_FILE_PATH);
                     mOfdView.fromFile(file)
                             .defaultPage(0)
-                            .swipeHorizontal(false)
+                            .swipeHorizontal(true)
                             .load();
                     mOfdView.useBestQuality(true);
+                    mOfdView.zoomTo(2.5f);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

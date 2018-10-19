@@ -97,6 +97,8 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 0.9f);
         dialogWindow.setLayout(width, height);
         dialogWindow.setWindowAnimations(R.style.scale_anim);
+//        LinearLayout.LayoutParams lp= (LinearLayout.LayoutParams) mOfdView.getLayoutParams();
+//        lp.width=width*3/5;
     }
 
     public void setFlag(int flag) {

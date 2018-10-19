@@ -75,6 +75,8 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
         requestModel.setData(JSON.toJSONString(uploadInvoice));
         Api.post(this, requestModel);
 
+        List<ProductModel> goods=invoice.getGoods();
+
         FlowManager.getDatabase(TcsDatabase.class)
                 .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
                         new ProcessModelTransaction.ProcessModel<ProductModel>() {
@@ -82,7 +84,7 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
                             public void processModel(ProductModel model, DatabaseWrapper wrapper) {
                                 model.save();
                             }
-                        }).addAll(invoice.getGoods()).build())
+                        }).addAll(goods).build())
                 .error(new Transaction.Error() {
                     @Override
                     public void onError(@NonNull Transaction transaction, @NonNull Throwable error) {
