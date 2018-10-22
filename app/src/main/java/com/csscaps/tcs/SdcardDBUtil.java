@@ -1,18 +1,23 @@
 package com.csscaps.tcs;
 
-import android.content.Context;
-import android.os.Environment;
-import android.util.Log;
-
 import com.csscaps.tcs.database.SDInvoiceDatabase;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.ProductModel;
 import com.csscaps.tcs.database.table.SdInvoice;
+import com.csscaps.tcs.database.table.SdInvoice_Table;
+import com.csscaps.tcs.database.table.SdProductModel;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
+import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
 /**
  * Created by tl on 2018/10/17.
@@ -24,6 +29,11 @@ public class SdcardDBUtil {
     // sd卡数据库是否打是否打开
     public static boolean isOpen = true;
 
+    public static String lock = "lock";
+
+    public static ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+
+
     /**
      * 关闭sd卡数据库
      */
@@ -34,56 +44,172 @@ public class SdcardDBUtil {
 
     /**
      * 打开sd卡数据库
-     * @param context
      */
-    public static void openDB(Context context) {
-        boolean isOk=true;
-        while (isOk){
-            try {
-                Thread.sleep(10);
-                Map<String, String> map = System.getenv();
-                String SDPath = map.get("SECONDARY_STORAGE");
-                String status = Environment.getExternalStorageState(new File(SDPath));
-                Log.i("test","status "+status);
-                if(!status.equalsIgnoreCase(Environment.MEDIA_MOUNTED)) continue;
-                Thread.sleep(100);
-                if(!isOpen){
-                    File file = new File(SDPath + "/FCR");
-                    FileDatabaseContext mSdDatabaseContext = new FileDatabaseContext(context, file, false);
-                    FlowManager.getDatabase(SDInvoiceDatabase.class).reset(mSdDatabaseContext);
-                    FlowManager.getDatabase(SDInvoiceDatabase.class).getWritableDatabase();
+    public static void openDB(String SDPath) {
+        File file = new File(SDPath + "/FCR");
+        FileDatabaseContext mSdDatabaseContext = new FileDatabaseContext(TCSApplication.getAppContext(), file, false);
+        FlowManager.getDatabase(SDInvoiceDatabase.class).reset(mSdDatabaseContext);
+        FlowManager.getDatabase(SDInvoiceDatabase.class).getWritableDatabase();
+    }
+
+
+    public static void insertUpdateSDDB(final Object object, final int flag) {
+        cachedThreadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (lock) {
+                    SdcardUtil.unlockSdcard();
+                    //数据库文件是否可以打开
+                    int status = SdcardUtil.checkLockSdcardStatus();
+                    if (status == 0) {//已解锁
+                        boolean isOk = true;
+                        Map<String, String> map = System.getenv();
+                        String SDPath = map.get("SECONDARY_STORAGE");
+                        while (isOk) {
+                            File sdFile = new File(SDPath);
+                            //SD卡是否可读写
+                            if (!sdFile.canWrite()) continue;
+                            if (!isOpen) {
+                                openDB(SDPath);
+                            }
+                            isOk = false;
+                        }
+                        isOpen = true;
+                        if (object instanceof Invoice) {
+                            switch (flag) {
+                                case 1:
+                                    saveSdInvoice(object);
+                                    break;
+                                case 2:
+                                    updateSdInvoice(object);
+                                    break;
+                            }
+
+                        } else if (object instanceof List) {
+                            saveListSDProductModel(object);
+                        }
+                        SdcardDBUtil.closeDB();
+                        SdcardUtil.lockSdcard();
+                        SdcardUtil.checkLockSdcardStatus();
+                    } else if (status == -1) {//解锁失败
+                        insertUpdateSDDB(object, flag);
+                    }
                 }
-                isOk=false;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
-        }
-        isOpen = true;
+        });
     }
 
+    /**
+     * 插入商品
+     *
+     * @param object
+     */
+    private static void saveListSDProductModel(Object object) {
+        List<ProductModel> list = (List<ProductModel>) object;
+        List<SdProductModel> goods = new ArrayList<>();
+        for (ProductModel productModel : list) {
 
-    public static void insertInvoiceSDDB(Context context,Invoice invoice){
-        SdcardUtil.unlockSdcard();
-        Log.i("TEST", " " + SdcardUtil.checkLockSdcardStatus());
-        if (!SdcardUtil.checkLockSdcardStatus()) {
-            SdcardDBUtil.openDB(context);
-            SdInvoice sdInvoice = new SdInvoice();
-            sdInvoice.setInvoice_type_code(invoice.getInvoice_short_code());
-            sdInvoice.setInvoice_made_by(invoice.getInvoice_made_by());
-            sdInvoice.save();
-            SdcardDBUtil.closeDB();
+            SdProductModel sm = new SdProductModel();
+            sm.setInvoice_no(productModel.getInvoice_no());
+            sm.setI_tax(productModel.getI_tax());
+            sm.setE_tax(productModel.getE_tax());
+            sm.setAmount_inc(productModel.getAmount_inc());
+
+            sm.setCategory(productModel.getCategory());
+            sm.setCurrency_code(productModel.getCurrency_code());
+            sm.setExchange_rate(productModel.getExchange_rate());
+            sm.setBpt_final(productModel.getBpt_final());
+            sm.setBpt_prepayment(productModel.getBpt_prepayment());
+            sm.setVat(productModel.getVat());
+            sm.setVat_amount(productModel.getVat_amount());
+            sm.setStamp_duty_federal(productModel.getStamp_duty_federal());
+            sm.setStamp_duty_local(productModel.getStamp_duty_local());
+            sm.setFees(productModel.getFees());
+
+            sm.setUnit(productModel.getUnit());
+            sm.setUnit_price(productModel.getUnit_price());
+            sm.setUnit_price_after_tax(productModel.getUnit_price_after_tax());
+            sm.setUnit_price_tax_rate(productModel.getUnit_price_tax_rate());
+            sm.setQty(productModel.getQty());
+            sm.setProduct_code(productModel.getProduct_code());
+            sm.setTax_due(productModel.getTax_due());
+            sm.setTaxable_amount(productModel.getTaxable_amount());
+            sm.setTaxable_amount_org(productModel.getTaxable_amount_org());
+            sm.setTaxable_amount(productModel.getTaxable_amount());
+            sm.setTaxable_item_uid(productModel.getTaxable_item_uid());
+            sm.setItem_name(productModel.getItem_name());
+            sm.setItem_desc(productModel.getItem_desc());
+            sm.setSpecification(productModel.getSpecification());
+            sm.setTaxtype(productModel.getTaxtype());
+            sm.setTaxtype(productModel.getTaxtype());
+            goods.add(sm);
         }
-        SdcardUtil.lockSdcard();
-        Log.i("TEST", " " + SdcardUtil.checkLockSdcardStatus());
+        FlowManager.getDatabase(SDInvoiceDatabase.class)
+                .executeTransaction(new ProcessModelTransaction.Builder<>(
+                        new ProcessModelTransaction.ProcessModel<SdProductModel>() {
+                            @Override
+                            public void processModel(SdProductModel model, DatabaseWrapper wrapper) {
+                                model.save();
+                            }
+                        }).addAll(goods).build());
 
 
     }
 
-    public static void insertProductModelSDDB(Context context,List<ProductModel> goods){
+    /**
+     * 插入发票
+     *
+     * @param object
+     */
+    private static void saveSdInvoice(Object object) {
+        Invoice invoice = (Invoice) object;
+        SdInvoice sdInvoice = new SdInvoice();
+        sdInvoice.setDrawer_name(invoice.getDrawer_name());
+        sdInvoice.setClient_invoice_datetime(invoice.getClient_invoice_datetime());
+        sdInvoice.setInvoice_no(invoice.getInvoice_no());
+        sdInvoice.setInvoice_type_code(invoice.getInvoice_short_code());
+        sdInvoice.setInvoice_made_by(invoice.getInvoice_made_by());
+        sdInvoice.setSeller_tin(invoice.getSeller_tin());
+        sdInvoice.setSeller_address(invoice.getSeller_address());
+        sdInvoice.setSeller_name(invoice.getSeller_name());
+        sdInvoice.setSeller_phone(invoice.getSeller_phone());
+        sdInvoice.setInvoice_type_name(invoice.getInvoice_type_name());
+        sdInvoice.setInvoice_type_code(invoice.getInvoice_type_code());
+        sdInvoice.setInvoice_type_uid(invoice.getInvoice_type_uid());
+        sdInvoice.setPurchaser_tin(invoice.getPurchaser_tin());
+        sdInvoice.setPurchaser_phone(invoice.getPurchaser_phone());
+        sdInvoice.setPurchaser_address(invoice.getPurchaser_address());
+        sdInvoice.setPurchaser_name(invoice.getPurchaser_id_type());
+        sdInvoice.setPurchaser_id_type(invoice.getPurchaser_id_type());
+        sdInvoice.setPurchaser_id_number(invoice.getPurchaser_id_number());
+        sdInvoice.setTotal_vat(invoice.getTotal_vat());
+        sdInvoice.setTotal_bpt(invoice.getTotal_bpt());
+        sdInvoice.setTotal_final(invoice.getTotal_final());
+        sdInvoice.setTotal_stamp(invoice.getTotal_stamp());
+        sdInvoice.setTotal_bpt_preypayment(invoice.getTotal_bpt_preypayment());
+        sdInvoice.setTotal_fee(invoice.getTotal_fee());
+        sdInvoice.setTotal_taxable_amount(invoice.getTotal_taxable_amount());
+        sdInvoice.setTotal_all(invoice.getTotal_all());
+        sdInvoice.setTotal_tax_due(invoice.getTotal_tax_due());
+        sdInvoice.setStatus(invoice.getStatus());
+        sdInvoice.save();
+    }
 
-
+    /**
+     * 更新发票
+     *
+     * @param object
+     */
+    private static void updateSdInvoice(Object object) {
+        Invoice invoice = (Invoice) object;
+        String invoiceNo = invoice.getInvoice_no();
+        SdInvoice sdInvoice = select().from(SdInvoice.class).where(SdInvoice_Table.invoice_no.eq(invoiceNo)).querySingle();
+        sdInvoice.setStatus(invoice.getStatus());
+        sdInvoice.update();
     }
 }
+
+
 
 
 

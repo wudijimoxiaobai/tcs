@@ -109,6 +109,7 @@ public class MyTimerTask extends TimerTask implements IPresenter {
                                 invoice.setInvalid_flag("Y");
                                 invoice.setRequestStatus("0");
                                 disInvoices.add(invoice);
+                                SdcardDBUtil.insertUpdateSDDB(invoice,2);
                             }
                             break;
                         case REJ://拒绝

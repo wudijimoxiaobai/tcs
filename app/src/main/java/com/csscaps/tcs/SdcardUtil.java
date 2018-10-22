@@ -12,36 +12,33 @@ import aclasdriver.SDCard;
 public class SdcardUtil {
 
     private static final String Password = "aclas";
-    private static SDCard mSdcard =new SDCard();
+    private static SDCard mSdcard = new SDCard();
 
-    public static boolean checkLockSdcardStatus(){
+    public static int checkLockSdcardStatus() {
         int ret;
         ret = mSdcard.CheckCardStatus();
-        Log.i("TEST","Status "+ret);
-        if(ret == 0){
-            return false;
-        }
-        return true;
+        Log.i("TEST", "Status " + ret);
+        return ret;
     }
 
-    public static void sdcardSetPassword(){
+    public static void sdcardSetPassword() {
         byte[] b = Password.getBytes();
         mSdcard.SdcardSetPasswd(b, 1);
     }
 
-    public static void lockSdcard(){
+    public static void lockSdcard() {
         byte[] b = Password.getBytes();
         mSdcard.SdcardSetPasswd(b, 0);
         mSdcard.SdcardLock();
     }
 
-    public static void unlockSdcard(){
+    public static void unlockSdcard() {
         byte[] b = Password.getBytes();
         mSdcard.SdcardSetPasswd(b, 0);
         mSdcard.SdcardUnLock();
     }
 
-    public static void sdcardClearPassword(){
+    public static void sdcardClearPassword() {
         byte[] b = Password.getBytes();
         mSdcard.SdcardSetPasswd(b, 0);
         mSdcard.SdcardClearPasswd();

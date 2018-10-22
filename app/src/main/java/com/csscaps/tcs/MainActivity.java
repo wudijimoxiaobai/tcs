@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,7 +18,6 @@ import com.csscaps.tcs.activity.InvoiceIssuingActivity;
 import com.csscaps.tcs.activity.InvoiceManagementActivity;
 import com.csscaps.tcs.activity.OnlineDeclarationActivity;
 import com.csscaps.tcs.activity.SystemManagementActivity;
-import com.csscaps.tcs.database.table.SdInvoice;
 import com.csscaps.tcs.dialog.ExitDialog;
 import com.csscaps.tcs.dialog.SynDataDialog;
 import com.csscaps.tcs.service.SynchronizeService;
@@ -128,18 +126,10 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
                 startActivity(new Intent(this, OnlineDeclarationActivity.class));
                 break;
             case R.id.statistics:
-                SdcardUtil.unlockSdcard();
-                Log.i("TEST", " " + SdcardUtil.checkLockSdcardStatus());
-                if (!SdcardUtil.checkLockSdcardStatus()) {
-                    SdcardDBUtil.openDB(this);
-                    SdInvoice sdInvoice = new SdInvoice();
-                    sdInvoice.setInvoice_type_code("****4554jajdl565***");
-                    sdInvoice.setInvoice_made_by("name");
-                    sdInvoice.save();
-                    SdcardDBUtil.closeDB();
-                }
-                SdcardUtil.lockSdcard();
-                Log.i("TEST", " " + SdcardUtil.checkLockSdcardStatus());
+            /*    Invoice invoice = new Invoice();
+                invoice.setInvoice_type_code("****4554jajdl565***");
+                invoice.setInvoice_made_by("name");
+                SdcardDBUtil.insertUpdateSDDB(invoice,1);*/
                 break;
             case R.id.system_management:
                 startActivity(new Intent(this, SystemManagementActivity.class));
@@ -176,8 +166,8 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
     private void initSdDB() {
         //sd卡数据库文件夹
         Map<String, String> map = System.getenv();
-        String SDPath=  map.get("SECONDARY_STORAGE");
-        File file = new File(SDPath+"/FCR");
+        String SDPath = map.get("SECONDARY_STORAGE");
+        File file = new File(SDPath + "/FCR");
         FileDatabaseContext mSdDatabaseContext = new FileDatabaseContext(this, file, false);
         FlowManager.init(mSdDatabaseContext);
     }

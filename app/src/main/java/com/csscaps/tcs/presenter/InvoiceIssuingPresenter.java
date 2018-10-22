@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 
 import com.alibaba.fastjson.JSON;
 import com.csscaps.common.base.BasePresenter;
+import com.csscaps.tcs.SdcardDBUtil;
 import com.csscaps.tcs.ServerConstants;
 import com.csscaps.tcs.action.IInvoiceIssuingAction;
 import com.csscaps.tcs.activity.InvoiceIssuingActivity;
@@ -65,7 +66,7 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
         issuingInvoice(invoice);
     }
 
-    public void issuingInvoice(Invoice invoice){
+    public void issuingInvoice(Invoice invoice) {
         RequestUploadInvoice uploadInvoice = new RequestUploadInvoice();
         uploadInvoice.setFuncid(ServerConstants.ATCS012);
         uploadInvoice.getInvoice_data().add(invoice);
@@ -75,7 +76,7 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
         requestModel.setData(JSON.toJSONString(uploadInvoice));
         Api.post(this, requestModel);
 
-        List<ProductModel> goods=invoice.getGoods();
+        List<ProductModel> goods = invoice.getGoods();
 
         FlowManager.getDatabase(TcsDatabase.class)
                 .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
@@ -94,9 +95,13 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
                 .build()
                 .execute();
 
+        SdcardDBUtil.insertUpdateSDDB(invoice,1);
+        SdcardDBUtil.insertUpdateSDDB(goods,1);
+
         InvoiceNo invoiceNo = select().from(InvoiceNo.class).where(InvoiceNo_Table.invoice_num.eq(invoice.getInvoice_no())).querySingle();
         invoiceNo.delete();
         mContext.startService(new Intent(mContext, InvoiceNoService.class));
+
     }
 
 }
