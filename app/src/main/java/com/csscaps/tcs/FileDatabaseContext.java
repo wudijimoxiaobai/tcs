@@ -125,6 +125,7 @@ public class FileDatabaseContext extends ContextWrapper {
                 result = SQLiteDatabase.openOrCreateDatabase(getDatabasePath(name), null);
                 break;
             case "TcsDatabase.db":
+            case "InvoiceDatabase.db":
             case "TaxpayerDatabase.db":
                 File file = context.getDatabasePath(name);
                 if (!file.getParentFile().exists()) file.getParentFile().mkdirs();

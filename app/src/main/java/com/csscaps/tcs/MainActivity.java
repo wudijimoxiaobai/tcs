@@ -129,7 +129,7 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
             /*    Invoice invoice = new Invoice();
                 invoice.setInvoice_type_code("****4554jajdl565***");
                 invoice.setInvoice_made_by("name");
-                SdcardDBUtil.insertUpdateSDDB(invoice,1);*/
+                SdcardDBUtil.saveSDDB(invoice,1);*/
                 break;
             case R.id.system_management:
                 startActivity(new Intent(this, SystemManagementActivity.class));

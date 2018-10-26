@@ -47,9 +47,32 @@ public class NetworkConfigurationFragment extends BaseFragment implements IPrese
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        mServerAddress.setText(AppSP.getString("serverAddress"));
-        mServerPort.setText(AppSP.getString("serverPort"));
-        mUploadAddress.setText(AppSP.getString("uploadAddress"));
+        serverAddress=AppSP.getString("serverAddress");
+        serverPort=AppSP.getString("serverPort");
+        uploadAddress=AppSP.getString("uploadAddress");
+        mServerAddress.setText(serverAddress);
+        mServerPort.setText(serverPort);
+        mUploadAddress.setText(uploadAddress);
+        mServerAddress.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    serverAddress = mServerAddress.getText().toString().trim();
+                    AppSP.putString("serverAddress", serverAddress);
+                }
+            }
+        });
+
+        mServerPort.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    serverPort = mServerPort.getText().toString().trim();
+                    AppSP.putString("serverPort", serverPort);
+                }
+            }
+        });
     }
 
 
@@ -60,15 +83,14 @@ public class NetworkConfigurationFragment extends BaseFragment implements IPrese
                 getActivity().finish();
                 break;
             case R.id.test:
+                mServerAddress.clearFocus();
+                mServerPort.clearFocus();
                 test();
                 break;
         }
     }
 
     private void test() {
-        serverAddress = mServerAddress.getText().toString().trim();
-        serverPort = mServerPort.getText().toString().trim();
-        uploadAddress = mUploadAddress.getText().toString().trim();
         if (TextUtils.isEmpty(serverAddress)) {
             ToastUtil.showShort(getString(R.string.hit38));
             return;
@@ -107,9 +129,6 @@ public class NetworkConfigurationFragment extends BaseFragment implements IPrese
     @Override
     public void onSuccess(String requestPath, String objectString) {
         ToastUtil.showLong(getString(R.string.hit40));
-        AppSP.putString("serverAddress", serverAddress);
-        AppSP.putString("serverPort", serverPort);
-        AppSP.putString("uploadAddress", uploadAddress);
 //        mContext.startService(new Intent(mContext, SynchronizeService.class).putExtra("autoSyn", true));
     }
 

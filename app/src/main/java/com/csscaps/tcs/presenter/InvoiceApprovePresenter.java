@@ -1,6 +1,7 @@
 package com.csscaps.tcs.presenter;
 
 import com.alibaba.fastjson.JSON;
+import com.csscaps.tcs.SdcardDBUtil;
 import com.csscaps.tcs.ServerConstants;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.Invoice_Table;
@@ -41,6 +42,7 @@ public class InvoiceApprovePresenter implements IPresenter1 {
         Invoice invoice = select().from(Invoice.class).where(Invoice_Table.invoice_no.eq(invoiceNo)).querySingle();
         invoice.setRequestStatus(status);
         invoice.update();
+        SdcardDBUtil.saveSDDB(invoice);
     }
 
     /**

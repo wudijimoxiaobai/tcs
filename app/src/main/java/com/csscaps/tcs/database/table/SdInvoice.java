@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by tl on 2018/5/22.
  */
-@Table(database = SDInvoiceDatabase.class)
+@Table(database = SDInvoiceDatabase.class, name = "Invoice")
 public class SdInvoice extends BaseModel implements Serializable, Cloneable {
 
     public static final String SUCCESS = "1";

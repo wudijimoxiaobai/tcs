@@ -42,6 +42,14 @@ public class HttpsUtils {
         public X509TrustManager trustManager;
     }
 
+    /**
+     * 参数全为null 信任所有证书，全不为null 双向认证
+     *
+     * @param certificates 服务器证书  不为null 单向认证服务器
+     * @param bksFile      客户端秘钥库
+     * @param password     秘钥库密码
+     * @return
+     */
     public static SSLParams getSslSocketFactory(InputStream[] certificates, InputStream bksFile, String password) {
         SSLParams sslParams = new SSLParams();
         try {
@@ -107,9 +115,7 @@ public class HttpsUtils {
                 try {
                     if (certificate != null)
                         certificate.close();
-                } catch (IOException e)
-
-                {
+                } catch (IOException e) {
                 }
             }
             TrustManagerFactory trustManagerFactory = null;

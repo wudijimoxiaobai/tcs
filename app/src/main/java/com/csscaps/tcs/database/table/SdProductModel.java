@@ -9,8 +9,8 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 /**
  * Created by tl on 2018/5/22.
  */
-@Table(database = SDInvoiceDatabase.class)
-public class SdProductModel extends BaseModel implements Cloneable{
+@Table(database = SDInvoiceDatabase.class, name = "ProductModel")
+public class SdProductModel extends BaseModel implements Cloneable {
 
     @PrimaryKey(autoincrement = true)
     @Column

@@ -19,6 +19,7 @@ import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.MainActivity;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.SdcardDBUtil;
 import com.csscaps.tcs.action.IInvoiceIssuingAction;
 import com.csscaps.tcs.activity.InvoiceIssuingActivity;
 import com.csscaps.tcs.adapter.InvoiceProductListAdapter;
@@ -166,6 +167,7 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
             mInvoice.setUploadStatus(Invoice.FAILURE);
         }
         mInvoice.save();
+        SdcardDBUtil.saveSDDB(mInvoice);
         dismiss();
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);

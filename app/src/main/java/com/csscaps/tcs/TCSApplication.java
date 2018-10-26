@@ -14,10 +14,12 @@ import com.tax.fcr.library.utils.Logger;
 import com.tax.fcr.library.utils.NetworkUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Map;
 import java.util.Timer;
 
 /**
@@ -29,7 +31,9 @@ public class TCSApplication extends BaseApplication {
     public static User currentUser;
     private Timer timer = new Timer();
     /*纳税人数据库文件*/
-    private final String DB = "TaxpayerDatabase.db";
+    private final String TAXPAYER_DB = "TaxpayerDatabase.db";
+    /*发票数据库文件 */
+    private final String INVOICE_DB = "InvoiceDatabase.db";
 
     @Override
     public void onCreate() {
@@ -39,9 +43,6 @@ public class TCSApplication extends BaseApplication {
         FlowManager.init(new FlowConfig.Builder(this).build());
         initData();
         addOfdTemplate();
-        //设置sd卡密码，锁定sd卡；
-        SdcardUtil.sdcardSetPassword();
-        SdcardUtil.lockSdcard();
     }
 
     /**
@@ -64,18 +65,33 @@ public class TCSApplication extends BaseApplication {
      */
     private void initData() {
         OFDView.setLicense("测试", "802ADEB5CB87C6722AC93CEC0293BD5306445654");
-        timer.schedule(new MyTimerTask(), 500, (long) (DateUtils.HOUR_OF_MILLISECOND * 0.5));
         boolean initData = AppSP.getBoolean("initData", false);
         if (!initData) {
             new Thread() {
                 @Override
                 public void run() {
-                    copyDB();
+                    //copy纳税人数据库
+                    copyDB(TAXPAYER_DB);
+                    //copy sd卡发票数据库文件
+                    copyDB(INVOICE_DB);
+                    AppSP.putBoolean("initData", true);
+                    lockTimer();
                 }
             }.start();
+        } else {
+            lockTimer();
         }
     }
 
+    /**
+     * 加锁执行定时任务
+     */
+    private void lockTimer() {
+        //设置sd卡密码，锁定sd卡；
+        SdcardUtil.sdcardSetPassword();
+        SdcardUtil.lockSdcard();
+        timer.schedule(new MyTimerTask(), 500, (long) (DateUtils.HOUR_OF_MILLISECOND * 0.5));
+    }
 
     /**
      * 添加ofd模板
@@ -127,14 +143,36 @@ public class TCSApplication extends BaseApplication {
         }.start();
     }
 
-    private void copyDB() {
-        InputStream in = null;
+    /**
+     * copy数据库文件
+     *
+     * @param dbName 数据库名称
+     */
+    private void copyDB(String dbName) {
         OutputStream out = null;
+        InputStream in = null;
         try {
-            File file = getDatabasePath(DB);
+            switch (dbName) {
+                case TAXPAYER_DB:
+                    in = getAssets().open(TAXPAYER_DB);
+                    break;
+                case INVOICE_DB:
+                    //copy sd卡发票数据库文件
+                    Map<String, String> map = System.getenv();
+                    String SDPath = map.get("SECONDARY_STORAGE");
+                    SdcardUtil.unlockSdcard();
+                    File sdFile=new File(SDPath);
+                    while (!sdFile.canRead()) {}
+                    File file = new File(SDPath + "/FCR/SDInvoiceDatabase.db");
+                    if (file.exists()) {
+                        in = new FileInputStream(file);
+                    }
+                    break;
+            }
+
+            File file = getDatabasePath(dbName);
             if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
             if (!file.exists()) file.createNewFile();
-            in = getAssets().open(DB);
             out = new FileOutputStream(file);
             Logger.i("test", "initData11111");
             byte[] buf = new byte[1024];
@@ -145,7 +183,6 @@ public class TCSApplication extends BaseApplication {
             out.flush();
             in.close();
             out.close();
-            AppSP.putBoolean("initData", true);
             Logger.i("test", "initData2222");
         } catch (Exception e) {
             e.printStackTrace();

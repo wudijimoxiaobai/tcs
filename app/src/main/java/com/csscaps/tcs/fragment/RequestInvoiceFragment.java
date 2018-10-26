@@ -13,6 +13,7 @@ import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.SdcardDBUtil;
 import com.csscaps.tcs.TCSApplication;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.Invoice_Table;
@@ -145,6 +146,7 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
             invoice.setRequestBy(TCSApplication.currentUser.getUserName());
             invoice.setRequestDate(DateUtils.getDateToString_YYYY_MM_DD_EN(DateUtils.getDateNow()));
             invoice.update();
+            SdcardDBUtil.saveSDDB(invoice);
         }
     }
 }

@@ -95,8 +95,7 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
                 .build()
                 .execute();
 
-        SdcardDBUtil.insertUpdateSDDB(invoice,1);
-        SdcardDBUtil.insertUpdateSDDB(goods,1);
+        SdcardDBUtil.saveSDDB(goods);
 
         InvoiceNo invoiceNo = select().from(InvoiceNo.class).where(InvoiceNo_Table.invoice_num.eq(invoice.getInvoice_no())).querySingle();
         invoiceNo.delete();

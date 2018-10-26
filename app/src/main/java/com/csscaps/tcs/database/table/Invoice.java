@@ -1,6 +1,6 @@
 package com.csscaps.tcs.database.table;
 
-import com.csscaps.tcs.database.TcsDatabase;
+import com.csscaps.tcs.database.InvoiceDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by tl on 2018/5/22.
  */
-@Table(database = TcsDatabase.class)
+@Table(database = InvoiceDatabase.class)
 public class Invoice extends BaseModel implements Serializable, Cloneable {
 
     public static final String SUCCESS = "1";

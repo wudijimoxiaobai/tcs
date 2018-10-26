@@ -4,7 +4,6 @@ import com.csscaps.tcs.database.SDInvoiceDatabase;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.ProductModel;
 import com.csscaps.tcs.database.table.SdInvoice;
-import com.csscaps.tcs.database.table.SdInvoice_Table;
 import com.csscaps.tcs.database.table.SdProductModel;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
@@ -16,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
 /**
  * Created by tl on 2018/10/17.
@@ -44,6 +41,8 @@ public class SdcardDBUtil {
 
     /**
      * 打开sd卡数据库
+     *
+     * @param SDPath 外挂sd卡路径
      */
     public static void openDB(String SDPath) {
         File file = new File(SDPath + "/FCR");
@@ -53,7 +52,12 @@ public class SdcardDBUtil {
     }
 
 
-    public static void insertUpdateSDDB(final Object object, final int flag) {
+    /**
+     * 插入或更新数据
+     *
+     * @param object
+     */
+    public static void saveSDDB(final Object object) {
         cachedThreadPool.execute(new Runnable() {
             @Override
             public void run() {
@@ -65,8 +69,8 @@ public class SdcardDBUtil {
                         boolean isOk = true;
                         Map<String, String> map = System.getenv();
                         String SDPath = map.get("SECONDARY_STORAGE");
+                        File sdFile = new File(SDPath);
                         while (isOk) {
-                            File sdFile = new File(SDPath);
                             //SD卡是否可读写
                             if (!sdFile.canWrite()) continue;
                             if (!isOpen) {
@@ -76,15 +80,7 @@ public class SdcardDBUtil {
                         }
                         isOpen = true;
                         if (object instanceof Invoice) {
-                            switch (flag) {
-                                case 1:
-                                    saveSdInvoice(object);
-                                    break;
-                                case 2:
-                                    updateSdInvoice(object);
-                                    break;
-                            }
-
+                            saveSdInvoice((Invoice) object);
                         } else if (object instanceof List) {
                             saveListSDProductModel(object);
                         }
@@ -92,7 +88,7 @@ public class SdcardDBUtil {
                         SdcardUtil.lockSdcard();
                         SdcardUtil.checkLockSdcardStatus();
                     } else if (status == -1) {//解锁失败
-                        insertUpdateSDDB(object, flag);
+                        saveSDDB(object);
                     }
                 }
             }
@@ -144,6 +140,7 @@ public class SdcardDBUtil {
             sm.setTaxtype(productModel.getTaxtype());
             goods.add(sm);
         }
+
         FlowManager.getDatabase(SDInvoiceDatabase.class)
                 .executeTransaction(new ProcessModelTransaction.Builder<>(
                         new ProcessModelTransaction.ProcessModel<SdProductModel>() {
@@ -152,21 +149,18 @@ public class SdcardDBUtil {
                                 model.save();
                             }
                         }).addAll(goods).build());
-
-
     }
 
     /**
      * 插入发票
      *
-     * @param object
+     * @param invoice
      */
-    private static void saveSdInvoice(Object object) {
-        Invoice invoice = (Invoice) object;
+    private static void saveSdInvoice(Invoice invoice) {
         SdInvoice sdInvoice = new SdInvoice();
+        sdInvoice.setInvoice_no(invoice.getInvoice_no());
         sdInvoice.setDrawer_name(invoice.getDrawer_name());
         sdInvoice.setClient_invoice_datetime(invoice.getClient_invoice_datetime());
-        sdInvoice.setInvoice_no(invoice.getInvoice_no());
         sdInvoice.setInvoice_type_code(invoice.getInvoice_short_code());
         sdInvoice.setInvoice_made_by(invoice.getInvoice_made_by());
         sdInvoice.setSeller_tin(invoice.getSeller_tin());
@@ -192,24 +186,18 @@ public class SdcardDBUtil {
         sdInvoice.setTotal_all(invoice.getTotal_all());
         sdInvoice.setTotal_tax_due(invoice.getTotal_tax_due());
         sdInvoice.setStatus(invoice.getStatus());
+        sdInvoice.setUploadStatus(invoice.getUploadStatus());
+        sdInvoice.setApproveFlag(invoice.getApproveFlag());
+        sdInvoice.setRequestStatus(invoice.getRequestStatus());
+        sdInvoice.setRequestBy(invoice.getRequestBy());
+        sdInvoice.setRequestType(invoice.getRequestType());
+        sdInvoice.setRequestDate(invoice.getRequestDate());
+        sdInvoice.setReason(invoice.getReason());
+        sdInvoice.setRemark(invoice.getRemark());
+        sdInvoice.setNegative_approval_remark(invoice.getNegative_approval_remark());
+        sdInvoice.setInvalid_remark(invoice.getInvalid_remark());
         sdInvoice.save();
     }
 
-    /**
-     * 更新发票
-     *
-     * @param object
-     */
-    private static void updateSdInvoice(Object object) {
-        Invoice invoice = (Invoice) object;
-        String invoiceNo = invoice.getInvoice_no();
-        SdInvoice sdInvoice = select().from(SdInvoice.class).where(SdInvoice_Table.invoice_no.eq(invoiceNo)).querySingle();
-        sdInvoice.setStatus(invoice.getStatus());
-        sdInvoice.update();
-    }
+
 }
-
-
-
-
-

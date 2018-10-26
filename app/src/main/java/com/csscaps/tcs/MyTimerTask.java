@@ -109,7 +109,6 @@ public class MyTimerTask extends TimerTask implements IPresenter {
                                 invoice.setInvalid_flag("Y");
                                 invoice.setRequestStatus("0");
                                 disInvoices.add(invoice);
-                                SdcardDBUtil.insertUpdateSDDB(invoice,2);
                             }
                             break;
                         case REJ://拒绝
@@ -119,6 +118,7 @@ public class MyTimerTask extends TimerTask implements IPresenter {
                     break;
             }
             invoice.update();
+            SdcardDBUtil.saveSDDB(invoice);
         }
         //局端是先处理上传 再增加作废申请
         if (disInvoices.size() > 0) {

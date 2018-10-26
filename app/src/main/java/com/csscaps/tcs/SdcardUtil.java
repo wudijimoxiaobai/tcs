@@ -14,6 +14,11 @@ public class SdcardUtil {
     private static final String Password = "aclas";
     private static SDCard mSdcard = new SDCard();
 
+    /**
+     * 检查sd卡状态
+     *
+     * @return
+     */
     public static int checkLockSdcardStatus() {
         int ret;
         ret = mSdcard.CheckCardStatus();
@@ -21,23 +26,47 @@ public class SdcardUtil {
         return ret;
     }
 
+    /**
+     * 设置sd卡密码
+     */
     public static void sdcardSetPassword() {
+
         byte[] b = Password.getBytes();
         mSdcard.SdcardSetPasswd(b, 1);
     }
 
+    /**
+     * 锁定SD卡
+     */
     public static void lockSdcard() {
-        byte[] b = Password.getBytes();
-        mSdcard.SdcardSetPasswd(b, 0);
-        mSdcard.SdcardLock();
+        if (checkLockSdcardStatus() == 0) {
+            int ret = -1;
+            while (ret != 0) {
+                byte[] b = Password.getBytes();
+                mSdcard.SdcardSetPasswd(b, 0);
+                ret = mSdcard.SdcardLock();
+                Log.i("TEST", "SdcardLock Status " + ret);
+            }
+        }
     }
 
+    /**
+     * 解锁sd卡
+     */
     public static void unlockSdcard() {
-        byte[] b = Password.getBytes();
-        mSdcard.SdcardSetPasswd(b, 0);
-        mSdcard.SdcardUnLock();
+        if (checkLockSdcardStatus() == 1) {
+            int ret = -1;
+            while (ret != 0) {
+                byte[] b = Password.getBytes();
+                mSdcard.SdcardSetPasswd(b, 0);
+                ret = mSdcard.SdcardUnLock();
+            }
+        }
     }
 
+    /**
+     * 清除sd卡密码
+     */
     public static void sdcardClearPassword() {
         byte[] b = Password.getBytes();
         mSdcard.SdcardSetPasswd(b, 0);

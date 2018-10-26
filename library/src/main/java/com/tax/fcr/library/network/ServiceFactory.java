@@ -13,7 +13,7 @@ public class ServiceFactory {
     private final Retrofit retrofit;
     private DefaultService defaultService;
     private DownloadService downloadService;
-    private static  ServiceFactory INSTANCE;
+    private static ServiceFactory INSTANCE;
 
     private ServiceFactory() {
         retrofit = new Retrofit.Builder()
@@ -31,8 +31,8 @@ public class ServiceFactory {
     }
 
     public static ServiceFactory getInstance() {
-        if(INSTANCE!=null) return INSTANCE;
-        return INSTANCE=new ServiceFactory();
+        if (INSTANCE != null) return INSTANCE;
+        return INSTANCE = new ServiceFactory();
     }
 
     public DefaultService getDefaultService() {

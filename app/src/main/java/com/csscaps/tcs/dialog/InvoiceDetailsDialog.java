@@ -18,6 +18,7 @@ import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.SdcardDBUtil;
 import com.csscaps.tcs.ShowOfdUtils;
 import com.csscaps.tcs.action.IInvoiceIssuingAction;
 import com.csscaps.tcs.activity.ApplicationListActivity;
@@ -174,7 +175,6 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
     private void approve() {
         dismiss();
         mInvoice.setApproveFlag("4");
-        mInvoice.update();
         Subscription subscription = ObserverActionUtils.subscribe(1, ApproveInvoiceFragment.class);
         if (subscription != null) subscription.unsubscribe();
     }
@@ -183,6 +183,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         dismiss();
         mInvoice.setApproveFlag("3");
         mInvoice.update();
+        SdcardDBUtil.saveSDDB(mInvoice);
         Subscription subscription = ObserverActionUtils.subscribe(0, ApproveInvoiceFragment.class);
         if (subscription != null) subscription.unsubscribe();
     }
@@ -280,5 +281,8 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         mInvoice.update();
         dismiss();
         ToastUtil.showShort(getString(R.string.hit5));
+        //备份到sd卡
+        SdcardDBUtil.saveSDDB(negativeInvoice);
+        SdcardDBUtil.saveSDDB(mInvoice);
     }
 }
