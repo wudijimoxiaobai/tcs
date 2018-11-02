@@ -18,6 +18,7 @@ import com.csscaps.tcs.model.QD1;
 import com.csscaps.tcs.model.QUA;
 import com.csscaps.tcs.model.Seller;
 import com.suwell.ofd.render.util.BitmapUtil;
+import com.tax.fcr.library.network.RequestModel;
 import com.tax.fcr.library.utils.Logger;
 import com.tax.fcr.library.utils.SecurityUtil;
 import com.thoughtworks.xstream.XStream;
@@ -44,7 +45,7 @@ public class GeneratingXMLFileUtils {
 
         Head head = new Head();
         head.setINVOICECODE(showInvoice.getInvoice_type_code());
-        head.setDEVICENO("80249001000048");
+        head.setDEVICENO(RequestModel.devicesn);
         head.setINVOICENUMBER(showInvoice.getInvoice_no());
         head.setISSUANCEDATE(DateUtils.dateToStr(DateUtils.getStringToDate(showInvoice.getClient_invoice_datetime(), DateUtils.format_yyyyMMddHHmmss_24_EN), DateUtils.format_yyyy_MM_dd_HH_mm_ss_24_EN));
         invoiceData.setHead(head);

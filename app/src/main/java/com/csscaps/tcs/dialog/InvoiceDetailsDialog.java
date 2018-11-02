@@ -223,6 +223,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
             negativeInvoice = (Invoice) mInvoice.clone();
             negativeInvoice.setOriginal_invoice_type_code(mInvoice.getInvoice_type_code());
             negativeInvoice.setOriginal_invoice_no(mInvoice.getInvoice_no());
+            negativeInvoice.setNegative_flag("Y");
             FlowCursor flowCursor = select().from(InvoiceNo.class).where(InvoiceNo_Table.invoice_type_code.eq(mInvoice.getInvoice_type_code())).orderBy(InvoiceNo_Table.id, true).query();
             flowCursor.moveToFirst();
             String invoice_num = flowCursor.getStringOrDefault("invoice_num");
@@ -258,6 +259,12 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
                 negProductMode.setTax_due("-" + productMode.getTax_due());
                 negProductMode.setTaxable_amount("-" + productMode.getTaxable_amount());
                 negProductMode.setAmount_inc("-" + productMode.getAmount_inc());
+                negProductMode.setVat_amount("-" +productMode.getVat_amount());
+                negProductMode.setBptf_amount("-" +productMode.getBptf_amount());
+                negProductMode.setBptp_amount("-" +productMode.getBptp_amount());
+                negProductMode.setSdf_amount("-" +productMode.getSdf_amount());
+                negProductMode.setSdl_amount("-" +productMode.getSdl_amount());
+                negProductMode.setFees_amount("-" +productMode.getFees_amount());
                 negProductModels.add(negProductMode);
             }
             negativeInvoice.setGoods(negProductModels);

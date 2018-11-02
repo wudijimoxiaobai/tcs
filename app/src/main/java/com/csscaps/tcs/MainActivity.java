@@ -20,9 +20,11 @@ import com.csscaps.tcs.activity.OnlineDeclarationActivity;
 import com.csscaps.tcs.activity.SystemManagementActivity;
 import com.csscaps.tcs.dialog.ExitDialog;
 import com.csscaps.tcs.dialog.SynDataDialog;
+import com.csscaps.tcs.psam.PSAMUtil;
 import com.csscaps.tcs.service.SynchronizeService;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.tax.fcr.library.network.Api;
+import com.tax.fcr.library.utils.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -126,10 +128,11 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
                 startActivity(new Intent(this, OnlineDeclarationActivity.class));
                 break;
             case R.id.statistics:
-            /*    Invoice invoice = new Invoice();
-                invoice.setInvoice_type_code("****4554jajdl565***");
-                invoice.setInvoice_made_by("name");
-                SdcardDBUtil.saveSDDB(invoice,1);*/
+                String str = "测试dlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfh" +
+                        "测试ajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfh" +
+                        "测试ajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfh" +
+                        "测试ajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfh";
+                Logger.i(PSAMUtil.encryptAES(str));
                 break;
             case R.id.system_management:
                 startActivity(new Intent(this, SystemManagementActivity.class));
@@ -172,6 +175,11 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
         FlowManager.init(mSdDatabaseContext);
     }
 
+    @Override
+    protected void onDestroy() {
+        PSAMUtil.disconnect();
+        super.onDestroy();
+    }
 
     private void copy() {
         String dataXmlPath = TCSApplication.getAppContext().getFilesDir().getAbsolutePath() + "/English/data.xml";

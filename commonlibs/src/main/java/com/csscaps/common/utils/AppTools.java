@@ -24,12 +24,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.StatFs;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.format.Formatter;
 import android.text.style.ForegroundColorSpan;
 import android.util.Base64;
 import android.util.DisplayMetrics;
@@ -1132,5 +1134,31 @@ public class AppTools {
             }
         }
         return text;
+    }
+
+    /**
+     * 获得SD卡总大小
+     *
+     * @return
+     */
+    public static String getSDTotalSize(Context context) {
+        File path = Environment.getExternalStorageDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSize();
+        long totalBlocks = stat.getBlockCount();
+        return Formatter.formatFileSize(context, blockSize * totalBlocks);
+    }
+
+
+    public static byte[] byteMerger(byte[] byte_1, byte[] byte_2){
+        byte[] byte_3 = new byte[byte_1.length+byte_2.length];
+        System.arraycopy(byte_1, 0, byte_3, 0, byte_1.length);
+        System.arraycopy(byte_2, 0, byte_3, byte_1.length, byte_2.length);
+        return byte_3;
+    }
+
+
+    public static byte[] byteMerger(byte[] byte_1, byte[] byte_2,byte[] byte_3){
+        return byteMerger(byteMerger(byte_1,byte_2),byte_3);
     }
 }

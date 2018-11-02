@@ -22,6 +22,7 @@ import com.csscaps.tcs.database.table.InvoiceType;
 import com.csscaps.tcs.database.table.TaxItem;
 import com.csscaps.tcs.database.table.TaxMethod;
 import com.csscaps.tcs.database.table.TaxType;
+import com.csscaps.tcs.model.MyTaxpayer;
 import com.csscaps.tcs.model.ReceiveInvoiceTaxType;
 import com.csscaps.tcs.model.ReceiveInvoiceType;
 import com.csscaps.tcs.model.ReceiveTaxItem;
@@ -70,15 +71,19 @@ public class SynchronizeService extends Service implements IPresenter {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null) autoSyn = intent.getBooleanExtra("autoSyn", false);
         synTaxpayer();
+        c = 0;
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+
+    private void synData() {
         synInvoiceType();
         synTaxType();
         synTaxItem();
         synInvoiceTaxType();
         synTaxMethod();
         if (!AppSP.getBoolean("ControlData")) synControlData();
-        c = 0;
         new MyTimerTask().run();
-        return super.onStartCommand(intent, flags, startId);
     }
 
 
@@ -154,6 +159,9 @@ public class SynchronizeService extends Service implements IPresenter {
         switch (requestPath) {
             case ServerConstants.ATCS002:
                 AppSP.putString("MyTaxpayer", objectString);
+                MyTaxpayer myTaxpayer = JSON.parseObject(objectString, MyTaxpayer.class);
+                RequestData.sellerid = myTaxpayer.getSellerid();
+                synData();
                 break;
             case ServerConstants.ATCS004:
                 delete().from(TaxItem.class).execute();
@@ -243,8 +251,8 @@ public class SynchronizeService extends Service implements IPresenter {
                 List<ReportDataModel> invoice_data = requestReportData.getInvoice_data();
                 for (ReportDataModel reportDataModel : invoice_data) {
                     String str = reportDataModel.getManagerData();
-                    Logger.i(reportDataModel.getInvoice_type_code() + "  " +str.length()+" " +str);
-                    list.add(ReportDataService.parseControlDataStr(reportDataModel.getInvoice_type_code(),str));
+                    Logger.i(reportDataModel.getInvoice_type_code() + "  " + str.length() + " " + str);
+                    list.add(ReportDataService.parseControlDataStr(reportDataModel.getInvoice_type_code(), str));
                 }
                 FlowManager.getDatabase(TcsDatabase.class)
                         .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
@@ -283,6 +291,7 @@ public class SynchronizeService extends Service implements IPresenter {
             }
         }
         c++;
+        if(requestPath.equals(ServerConstants.ATCS002)) c=6;
         complete();
     }
 

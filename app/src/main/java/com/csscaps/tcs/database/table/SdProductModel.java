@@ -73,6 +73,16 @@ public class SdProductModel extends BaseModel implements Cloneable {
     double e_tax;
     @Column
     double i_tax;
+    @Column
+    String bptf_amount;
+    @Column
+    String bptp_amount;
+    @Column
+    String sdf_amount;
+    @Column
+    String sdl_amount;
+    @Column
+    String fees_amount;
 
     @Override
     public Object clone() throws CloneNotSupportedException {
@@ -313,5 +323,45 @@ public class SdProductModel extends BaseModel implements Cloneable {
 
     public void setSpecification(String specification) {
         this.specification = specification;
+    }
+
+    public String getBptf_amount() {
+        return bptf_amount;
+    }
+
+    public void setBptf_amount(String bptf_amount) {
+        this.bptf_amount = bptf_amount;
+    }
+
+    public String getBptp_amount() {
+        return bptp_amount;
+    }
+
+    public void setBptp_amount(String bptp_amount) {
+        this.bptp_amount = bptp_amount;
+    }
+
+    public String getSdf_amount() {
+        return sdf_amount;
+    }
+
+    public void setSdf_amount(String sdf_amount) {
+        this.sdf_amount = sdf_amount;
+    }
+
+    public String getSdl_amount() {
+        return sdl_amount;
+    }
+
+    public void setSdl_amount(String sdl_amount) {
+        this.sdl_amount = sdl_amount;
+    }
+
+    public String getFees_amount() {
+        return fees_amount;
+    }
+
+    public void setFees_amount(String fees_amount) {
+        this.fees_amount = fees_amount;
     }
 }

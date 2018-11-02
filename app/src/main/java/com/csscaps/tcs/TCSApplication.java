@@ -1,11 +1,16 @@
 package com.csscaps.tcs;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.text.TextUtils;
 
 import com.csscaps.common.base.BaseApplication;
 import com.csscaps.common.utils.AppSP;
 import com.csscaps.common.utils.DateUtils;
 import com.csscaps.tcs.database.table.User;
+import com.csscaps.tcs.psam.PSAMUtil;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.suwell.to.ofd.ofdviewer.OFDView;
@@ -41,8 +46,10 @@ public class TCSApplication extends BaseApplication {
         setNetworkConfig();
         //dbflow 初始化
         FlowManager.init(new FlowConfig.Builder(this).build());
+        PSAMUtil.connect();
         initData();
         addOfdTemplate();
+//        listenForScreenTurningOff();
     }
 
     /**
@@ -73,7 +80,7 @@ public class TCSApplication extends BaseApplication {
                     //copy纳税人数据库
                     copyDB(TAXPAYER_DB);
                     //copy sd卡发票数据库文件
-                    copyDB(INVOICE_DB);
+//                    copyDB(INVOICE_DB);
                     AppSP.putBoolean("initData", true);
                     lockTimer();
                 }
@@ -88,8 +95,8 @@ public class TCSApplication extends BaseApplication {
      */
     private void lockTimer() {
         //设置sd卡密码，锁定sd卡；
-        SdcardUtil.sdcardSetPassword();
-        SdcardUtil.lockSdcard();
+//        SdcardUtil.sdcardSetPassword();
+//        SdcardUtil.lockSdcard();
         timer.schedule(new MyTimerTask(), 500, (long) (DateUtils.HOUR_OF_MILLISECOND * 0.5));
     }
 
@@ -161,8 +168,9 @@ public class TCSApplication extends BaseApplication {
                     Map<String, String> map = System.getenv();
                     String SDPath = map.get("SECONDARY_STORAGE");
                     SdcardUtil.unlockSdcard();
-                    File sdFile=new File(SDPath);
-                    while (!sdFile.canRead()) {}
+                    File sdFile = new File(SDPath);
+                    while (!sdFile.canRead()) {
+                    }
                     File file = new File(SDPath + "/FCR/SDInvoiceDatabase.db");
                     if (file.exists()) {
                         in = new FileInputStream(file);
@@ -174,7 +182,7 @@ public class TCSApplication extends BaseApplication {
             if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
             if (!file.exists()) file.createNewFile();
             out = new FileOutputStream(file);
-            Logger.i("test", "initData11111");
+            Logger.i("test", "initData" + dbName);
             byte[] buf = new byte[1024];
             int len;
             while ((len = in.read(buf)) > 0) {
@@ -183,7 +191,7 @@ public class TCSApplication extends BaseApplication {
             out.flush();
             in.close();
             out.close();
-            Logger.i("test", "initData2222");
+            Logger.i("test", "initData" + dbName);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -195,6 +203,27 @@ public class TCSApplication extends BaseApplication {
             }
         }
 
+    }
+
+
+
+    private void listenForScreenTurningOff() {
+        IntentFilter screenStateFilter = new IntentFilter();
+        screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
+        screenStateFilter.addAction(Intent.ACTION_SCREEN_ON);
+        registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                switch (intent.getAction()) {
+                    case Intent.ACTION_SCREEN_OFF:
+                        PSAMUtil.disconnect();
+                        break;
+                    case Intent.ACTION_SCREEN_ON:
+                        PSAMUtil.connect();
+                        break;
+                }
+            }
+        }, screenStateFilter);
     }
 
 

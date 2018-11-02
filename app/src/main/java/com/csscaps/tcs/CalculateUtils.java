@@ -86,21 +86,27 @@ public class CalculateUtils {
             switch (taxTypeCode) {
                 case VAT:
                     productModel.setVat(tax);
+                    productModel.setVat_amount(String.valueOf(tax));
                     break;
                 case BPTF:
                     productModel.setBpt_final(tax);
+                    productModel.setBptf_amount(String.valueOf(tax));
                     break;
                 case BPTP:
                     productModel.setBpt_prepayment(tax);
+                    productModel.setBptp_amount(String.valueOf(tax));
                     break;
                 case FEES:
                     productModel.setFees(tax);
+                    productModel.setFees_amount(String.valueOf(tax));
                     break;
                 case SDF:
                     productModel.setStamp_duty_federal(tax);
+                    productModel.setSdf_amount(String.valueOf(tax));
                     break;
                 case SDL:
                     productModel.setStamp_duty_local(tax);
+                    productModel.setSdl_amount(String.valueOf(tax));
                     break;
             }
         }
