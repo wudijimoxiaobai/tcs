@@ -141,7 +141,7 @@ public class PCSC {
      * @return The Answer To Reset smart card response.
      * @throws PCSCException if a PC/SC exception occurs.
      */
-    static native byte[] SCardReconnect
+   public static native byte[] SCardReconnect
             (long lCardHandle, int iShareMode, int iPreferredProtocols, 
             int iInitialization)
             throws PCSCException;

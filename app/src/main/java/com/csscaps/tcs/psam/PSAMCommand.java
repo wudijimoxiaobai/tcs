@@ -9,8 +9,11 @@ public class PSAMCommand {
     /*打开3Fo1目录*/
     final static String COMMAND_3F01 = "00A40000023F01";
 
-    /*取随机数*/
-    final static String COMMAND_GET_RANDOM = "0084000004";
+    /*取随4个字节机数*/
+    final static String COMMAND_GET_RANDOM_4 = "0084000004";
+
+    /*取随8个字节机数*/
+    final static String COMMAND_GET_RANDOM_8 = "0084000008";
 
     /*声明AES加密*/
     final static String COMMAND_DECLARE_AES_ENCRYPT = "802A080000";
@@ -23,6 +26,24 @@ public class PSAMCommand {
 
     /*声明AES解密*/
     final static String COMMAND_DECLARE_AES_DECODE = "802A090000";
+
+    /*sha256  小于256*/
+    final static String COMMAND_SHA256_LT = "80CC0000";
+
+    /*sha256  大于256 第一个报文*/
+    final static String COMMAND_SHA256_GT_S = "80CC8000C0";
+
+    /*sha256  大于256 中间报文*/
+    final static String COMMAND_SHA256_GT_M = "80CCC000C0";
+
+    /*sha256  大于256 最后报文*/
+    final static String COMMAND_SHA256_GT_E = "80CCE000";
+
+    /*RSA 签名*/
+    final static String COMMAND_RSA = "80C20001";
+
+    /*服务器返回数据验签*/
+    final static String COMMAND_VERIFY_SIGN = "80C4000300";
 
 
 }

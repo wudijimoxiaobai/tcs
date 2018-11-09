@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.csscaps.common.base.BaseActivity;
+import com.csscaps.common.utils.ConvertUtils;
 import com.csscaps.common.utils.DateUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
@@ -128,11 +129,19 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
                 startActivity(new Intent(this, OnlineDeclarationActivity.class));
                 break;
             case R.id.statistics:
-                String str = "测试dlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfh" +
-                        "测试ajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfh" +
-                        "测试ajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfh" +
-                        "测试ajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfhajdlfjaldjlfajljdflajdfh";
-                Logger.i(PSAMUtil.encryptAES(str));
+                String str="2018103000000000300C000000000000000000000000000000000000000000000BB8000000000" +
+                        "CE4000000000BB8000000000BB8000000000000000045D964B991000000000000000000000000000" +
+                        "000000000000000000000000007490000000065CC000000000000000000659D83FD";
+                byte b[] =PSAMUtil.SHA256(ConvertUtils.hexString2Bytes(str));
+                Logger.i("SHA256  "+ ConvertUtils.bytes2HexString(b));
+                b=PSAMUtil.RSASign(ConvertUtils.hexString2Bytes(str));
+                Logger.i("RSASign  "+ ConvertUtils.bytes2HexString(b));
+                str="44646467454发哈快递费可拉倒垃圾啊jfaljdlfjaldfja垃圾地方啦及垃圾分类就按h28000080";
+                str=str+str+str+str;
+                b=PSAMUtil.encryptAES(str.getBytes());
+
+                Logger.i("encryptAES  "+ ConvertUtils.bytes2HexString(b));
+                Logger.i("decodeAES  "+ new String(PSAMUtil.decodeAES(b)));
                 break;
             case R.id.system_management:
                 startActivity(new Intent(this, SystemManagementActivity.class));

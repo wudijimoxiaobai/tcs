@@ -6,7 +6,7 @@ package com.csscaps.tcs;
 
 public interface ServerConstants {
     /*网络连接测试*/
-    final String A000="A000";
+    final String A000 = "A000";
     /*同步纳税人*/
     final String ATCS002 = "ATCS002";
 
@@ -21,6 +21,8 @@ public interface ServerConstants {
     final String ATCS007 = "ATCS007";
     /*计税公式*/
     final String ATCS008 = "ATCS008";
+    /*服务器时间信息同步*/
+    final String ATCS009 = "ATCS009";
     /* 发票号段申请 */
     final String ATCS010 = "ATCS010";
     /*上传发票*/
@@ -33,6 +35,10 @@ public interface ServerConstants {
     final String ATCS018 = "ATCS018";
     /*负数发票申请结果下载*/
     final String ATCS019 = "ATCS019";
-
+    /*抄报*/
     final String ATCS023 = "ATCS023";
+    /*psam卡外部认证*/
+    final String ASKJ012 = "ASKJ012";
+    /*获取服务器时间*/
+    final String A014 = "A014";
 }

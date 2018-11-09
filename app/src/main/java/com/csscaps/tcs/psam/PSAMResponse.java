@@ -5,8 +5,8 @@ package com.csscaps.tcs.psam;
  * psam卡指令返回结果
  */
 
-public class Response {
-    private byte [] result;
+public class PSAMResponse {
+    private byte[] result;
     private boolean isSuccessful;
 
     public byte[] getResult() {

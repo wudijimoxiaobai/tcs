@@ -18,6 +18,7 @@ import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.RTCUtil;
 import com.csscaps.tcs.TCSApplication;
 import com.csscaps.tcs.database.table.ControlData;
 import com.csscaps.tcs.database.table.ControlData_Table;
@@ -151,7 +152,7 @@ public class InvoiceIssuingActivity extends BaseActivity implements AdapterView.
                 ControlData controlData = select().from(ControlData.class).where(ControlData_Table.invoice_type_code.eq(invoice_type_code)).querySingle();
                 if (controlData != null) {
                     String issuing_last_date = controlData.getIssuing_last_date();
-                    String dateNow = DateUtils.dateToStr(DateUtils.getDateNow(), DateUtils.format_yyyyMMdd);
+                    String dateNow = DateUtils.dateToStr(RTCUtil.getRTC(), DateUtils.format_yyyyMMdd);
                     //发票尚未抄报，不能开票
                     if (DateUtils.compareDate(dateNow, issuing_last_date, DateUtils.format_yyyyMMdd) == 1) {
                         ToastUtil.showShort(getString(R.string.hit54));

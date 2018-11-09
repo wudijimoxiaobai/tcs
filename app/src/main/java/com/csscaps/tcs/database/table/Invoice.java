@@ -25,6 +25,8 @@ public class Invoice extends BaseModel implements Serializable, Cloneable {
     @Column
     String invoice_short_code;
     @Column
+    String fiscal_long_code;
+    @Column
     String invoice_made_by = "S";
     @Column
     String invoice_from;
@@ -684,5 +686,13 @@ public class Invoice extends BaseModel implements Serializable, Cloneable {
 
     public void setNegative_approval_remark(String negative_approval_remark) {
         this.negative_approval_remark = negative_approval_remark;
+    }
+
+    public String getFiscal_long_code() {
+        return fiscal_long_code;
+    }
+
+    public void setFiscal_long_code(String fiscal_long_code) {
+        this.fiscal_long_code = fiscal_long_code;
     }
 }

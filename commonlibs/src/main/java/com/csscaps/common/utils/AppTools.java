@@ -807,8 +807,8 @@ public class AppTools {
      * @return
      */
     public static String unitFormat(int i) {
-        DecimalFormat df=new DecimalFormat("00");
-        String retStr=df.format(i);
+        DecimalFormat df = new DecimalFormat("00");
+        String retStr = df.format(i);
         return retStr;
     }
 
@@ -1041,11 +1041,12 @@ public class AppTools {
 
     /**
      * 更改应用语言
+     *
      * @param context
      */
 
     public static void changeAppLanguage(Context context, String language) {
-        Locale locale=new Locale(language);
+        Locale locale = new Locale(language);
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
         Configuration configuration = resources.getConfiguration();
@@ -1117,10 +1118,8 @@ public class AppTools {
     /**
      * 填充0
      *
-     * @param text
-     *            {@link String} 需要补0的字符
-     * @param length
-     *            {@link Integer} 补0后的长度
+     * @param text   {@link String} 需要补0的字符
+     * @param length {@link Integer} 补0后的长度
      * @return {@link String}
      */
     public static String fillZero(String text, int length) {
@@ -1150,15 +1149,17 @@ public class AppTools {
     }
 
 
-    public static byte[] byteMerger(byte[] byte_1, byte[] byte_2){
-        byte[] byte_3 = new byte[byte_1.length+byte_2.length];
+    public static byte[] byteMerger(byte[] byte_1, byte[] byte_2) {
+        byte[] byte_3 = new byte[byte_1.length + byte_2.length];
         System.arraycopy(byte_1, 0, byte_3, 0, byte_1.length);
         System.arraycopy(byte_2, 0, byte_3, byte_1.length, byte_2.length);
         return byte_3;
     }
 
 
-    public static byte[] byteMerger(byte[] byte_1, byte[] byte_2,byte[] byte_3){
-        return byteMerger(byteMerger(byte_1,byte_2),byte_3);
+    public static byte[] byteMerger(byte[] byte_1, byte[] byte_2, byte[] byte_3) {
+        return byteMerger(byteMerger(byte_1, byte_2), byte_3);
     }
+
+
 }

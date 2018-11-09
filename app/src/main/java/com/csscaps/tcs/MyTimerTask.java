@@ -53,6 +53,7 @@ public class MyTimerTask extends TimerTask implements IPresenter {
         if (AppSP.getBoolean("automatic")) {
             TCSApplication.getAppContext().startService(new Intent(TCSApplication.getAppContext(), ReportDataService.class));
         }
+        RTCUtil.setRTCFormServer();
     }
 
     private void requestResult(List<Invoice> list, String funId) {
@@ -97,6 +98,9 @@ public class MyTimerTask extends TimerTask implements IPresenter {
                 case ServerConstants.ATCS018://作废发票申请
                     invoice.setRequestStatus("1");
                     invoice.setUploadStatus("1");
+                    if (requestPath.equals(ServerConstants.ATCS018) && DISA.equals(invoice.getStatus())) {
+                        Util.updateReportDataDaily(invoice);
+                    }
                     break;
                 case ServerConstants.ATCS017://负数发票申请结果
                 case ServerConstants.ATCS019://作废发票申请结果
@@ -109,6 +113,7 @@ public class MyTimerTask extends TimerTask implements IPresenter {
                                 invoice.setInvalid_flag("Y");
                                 invoice.setRequestStatus("0");
                                 disInvoices.add(invoice);
+                                Util.updateReportDataDaily(invoice);
                             }
                             break;
                         case REJ://拒绝

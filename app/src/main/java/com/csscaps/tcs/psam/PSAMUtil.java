@@ -1,12 +1,17 @@
 package com.csscaps.tcs.psam;
 
 import com.aclas.aclasdemoforcr20.PCSCException;
+import com.alibaba.fastjson.JSON;
 import com.csscaps.common.utils.AppTools;
 import com.csscaps.common.utils.ConvertUtils;
 import com.csscaps.common.utils.NumberBytesUtil;
+import com.csscaps.tcs.ServerConstants;
+import com.csscaps.tcs.model.ReceiveExternalAuthenticate;
+import com.csscaps.tcs.model.RequestExternalAuthenticate;
+import com.tax.fcr.library.network.Api;
+import com.tax.fcr.library.network.IPresenter;
+import com.tax.fcr.library.network.RequestModel;
 import com.tax.fcr.library.utils.Logger;
-
-import java.nio.charset.StandardCharsets;
 
 import static com.aclas.aclasdemoforcr20.PCSC.SCardConnect;
 import static com.aclas.aclasdemoforcr20.PCSC.SCardDisconnect;
@@ -14,6 +19,7 @@ import static com.aclas.aclasdemoforcr20.PCSC.SCardEstablishContext;
 import static com.aclas.aclasdemoforcr20.PCSC.SCardGetStatusChange;
 import static com.aclas.aclasdemoforcr20.PCSC.SCardIsValidContext;
 import static com.aclas.aclasdemoforcr20.PCSC.SCardListReaders;
+import static com.aclas.aclasdemoforcr20.PCSC.SCardReconnect;
 import static com.aclas.aclasdemoforcr20.PCSC.SCardReleaseContext;
 import static com.aclas.aclasdemoforcr20.PCSC.SCardStatus;
 import static com.aclas.aclasdemoforcr20.PCSC.SCardTransmit;
@@ -40,6 +46,7 @@ public class PSAMUtil {
     private static int protocol;
     private static String SUCCESSFUL_CODE = "9000";
     private static boolean isOpen3F01 = false;
+    public static boolean isAuthenticate = false;
 
     /**
      * 连接psam
@@ -66,8 +73,9 @@ public class PSAMUtil {
                 b[i] = bytes[4 - i];
             }
             devicesn = String.valueOf(NumberBytesUtil.bytesToLong(b));
-            Logger.i("devicesn "+devicesn);
+            Logger.i("devicesn " + devicesn);
             isOpen3F01 = open3F01();
+            externalAuthenticate();
         } catch (PCSCException e) {
             e.printStackTrace();
         }
@@ -79,6 +87,7 @@ public class PSAMUtil {
      */
     public static void disconnect() {
         try {
+            SCardReconnect(cardId, SCARD_SHARE_SHARED, SCARD_PROTOCOL_T0 | SCARD_PROTOCOL_T1, SCARD_UNPOWER_CARD);
             SCardDisconnect(cardId, SCARD_UNPOWER_CARD);
             SCardReleaseContext(contextId);
         } catch (PCSCException e) {
@@ -93,23 +102,24 @@ public class PSAMUtil {
      * @param command 命令
      * @return
      */
-    private static Response command(byte[] command) {
-        Response response = response = new Response();
+    private static PSAMResponse command(byte[] command) {
+        Logger.i("command " + bytes2HexString(command));
+        PSAMResponse PSAMResponse = PSAMResponse = new PSAMResponse();
         try {
             byte[] result = SCardTransmit(cardId, protocol, command, 0, command.length);
-            Logger.i("response" + bytes2HexString(result));
+            Logger.i("PSAMResponse" + bytes2HexString(result));
             if (result != null && result.length >= 2) {
                 String resultCode = bytes2HexString(subByte(result, result.length - 2, 2));
                 Logger.i("resultCode" + resultCode);
                 if (resultCode.equals(SUCCESSFUL_CODE)) {
-                    response.setSuccessful(true);
-                    response.setResult(subByte(result, 0, result.length - 2));
+                    PSAMResponse.setSuccessful(true);
+                    PSAMResponse.setResult(subByte(result, 0, result.length - 2));
                 }
             }
         } catch (PCSCException e) {
             e.printStackTrace();
         }
-        return response;
+        return PSAMResponse;
     }
 
     /**
@@ -118,20 +128,55 @@ public class PSAMUtil {
      * @return
      */
     private static boolean open3F01() {
-        Response response = command(hexString2Bytes(PSAMCommand.COMMAND_3F01));
-        return response.isSuccessful();
+        PSAMResponse PSAMResponse = command(hexString2Bytes(PSAMCommand.COMMAND_3F01));
+        return PSAMResponse.isSuccessful();
+    }
+
+    /**
+     * 外部认证
+     */
+    public static void externalAuthenticate() {
+        //获取8个字节的随机码
+        PSAMResponse PSAMResponse = command(hexString2Bytes(PSAMCommand.COMMAND_GET_RANDOM_8));
+        RequestExternalAuthenticate requestExternalAuthenticateModel = new RequestExternalAuthenticate();
+        requestExternalAuthenticateModel.setFuncid(ServerConstants.ASKJ012);
+        requestExternalAuthenticateModel.setPsam_sn(devicesn);
+        requestExternalAuthenticateModel.setDevicesn(devicesn);
+        requestExternalAuthenticateModel.setRandom_data(bytes2HexString(PSAMResponse.getResult()));
+        RequestModel requestModel = new RequestModel();
+        requestModel.setFuncid(requestExternalAuthenticateModel.getFuncid());
+        requestExternalAuthenticateModel.setDevicesn(requestModel.getDevicesn());
+        requestModel.setData(JSON.toJSONString(requestExternalAuthenticateModel));
+        Api.post(new IPresenter() {
+            @Override
+            public void onSuccess(String requestPath, String objectString) {
+                objectString = objectString.replace("\\", "");
+                objectString = objectString.replace("\"{", "{");
+                objectString = objectString.replace("}\"", "}");
+                ReceiveExternalAuthenticate receiveExternalAuthenticate = JSON.parseObject(objectString, ReceiveExternalAuthenticate.class);
+                String data = receiveExternalAuthenticate.getMessage().getData();
+                PSAMResponse PSAMResponse = command(hexString2Bytes(data));
+                if (PSAMResponse.isSuccessful()) {
+                    isAuthenticate = true;
+                } else isAuthenticate = false;
+            }
+
+            @Override
+            public void onFailure(String requestPath, String errorMes) {
+
+            }
+        }, requestModel);
     }
 
     /**
      * AES加密
      *
-     * @param str
+     * @param sbt
      * @return
      */
-    public static String encryptAES(String str) {
-        Response response = command(hexString2Bytes(PSAMCommand.COMMAND_DECLARE_AES_ENCRYPT));
-        if (response.isSuccessful()) {
-            byte[] sbt = str.getBytes(StandardCharsets.UTF_8);
+    public static byte[] encryptAES(byte[] sbt) {
+        PSAMResponse PSAMResponse = command(hexString2Bytes(PSAMCommand.COMMAND_DECLARE_AES_ENCRYPT));
+        if (PSAMResponse.isSuccessful()) {
             if (sbt.length > 192) {
                 int s = sbt.length / 192;
                 StringBuffer sb = new StringBuffer();
@@ -140,26 +185,26 @@ public class PSAMUtil {
                     if (i == s - 1) {
                         if (s * 192 == sbt.length) {
                             data = AppTools.subByte(sbt, i * 192, 192);
-                            response = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_FINAL_AES_ENCRYPT_DECODE), fill80n080(data)));
-                            sb.append(bytes2HexString(response.getResult()));
+                            PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_FINAL_AES_ENCRYPT_DECODE), fill80n080(data)));
+                            sb.append(bytes2HexString(PSAMResponse.getResult()));
                         } else {
                             data = AppTools.subByte(sbt, i * 192, 192);
-                            response = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_NON_FINAL_AES_ENCRYPT_DECODE), fill80n080(data)));
-                            sb.append(bytes2HexString(response.getResult()));
-                            data = AppTools.subByte(sbt, i * 192, sbt.length - s * 192);
-                            response = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_FINAL_AES_ENCRYPT_DECODE), fill80n080(data)));
-                            sb.append(bytes2HexString(response.getResult()));
+                            PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_NON_FINAL_AES_ENCRYPT_DECODE), fill80n080(data)));
+                            sb.append(bytes2HexString(PSAMResponse.getResult()));
+                            data = AppTools.subByte(sbt, (i + 1) * 192, sbt.length - s * 192);
+                            PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_FINAL_AES_ENCRYPT_DECODE), fill80n080(data)));
+                            sb.append(bytes2HexString(PSAMResponse.getResult()));
                         }
                     } else {
                         data = AppTools.subByte(sbt, i * 192, 192);
-                        response = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_NON_FINAL_AES_ENCRYPT_DECODE), fill80n080(data)));
-                        sb.append(bytes2HexString(response.getResult()));
+                        PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_NON_FINAL_AES_ENCRYPT_DECODE), fill80n080(data)));
+                        sb.append(bytes2HexString(PSAMResponse.getResult()));
                     }
                 }
-                return sb.toString();
+                return hexString2Bytes(sb.toString());
             } else {
-                response = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_FINAL_AES_ENCRYPT_DECODE), fill80n080(sbt)));
-                return bytes2HexString(response.getResult());
+                PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_FINAL_AES_ENCRYPT_DECODE), fill80n080(sbt)));
+                return PSAMResponse.getResult();
 
             }
         }
@@ -200,38 +245,28 @@ public class PSAMUtil {
     /**
      * AES解密
      *
-     * @param str
+     * @param sbt
      * @return
      */
-    public static String decodeAES(String str) {
-        Response response = command(hexString2Bytes(PSAMCommand.COMMAND_DECLARE_AES_DECODE));
-        if (response.isSuccessful()) {
-            byte[] sbt = str.getBytes();
-            if (sbt.length > 208) {
-                int s = sbt.length / 208;
-                StringBuffer sb = new StringBuffer();
-                for (int i = 0; i < s; i++) {
-                    byte[] data;
-                    if (i == s - 1) {
-                        data = AppTools.subByte(sbt, i * 208, 208);
-                        response = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_FINAL_AES_ENCRYPT_DECODE), data));
-                        String resultStr = ConvertUtils.bytes2HexString(response.getResult());
-                        resultStr = wipeOffPaddingBytes(resultStr);
-                        byte []string= ConvertUtils.hexString2Bytes(sb.toString() + resultStr);
-                        return new String(string,StandardCharsets.UTF_8);
-                    } else {
-                        data = AppTools.subByte(sbt, i * 208, 208);
-                        response = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_NON_FINAL_AES_ENCRYPT_DECODE), data));
-                        String resultStr = ConvertUtils.bytes2HexString(response.getResult());
-                        resultStr = wipeOffPaddingBytes(resultStr);
-                        sb.append(resultStr);
-                    }
+    public static byte[] decodeAES(byte[] sbt) {
+        PSAMResponse PSAMResponse = command(hexString2Bytes(PSAMCommand.COMMAND_DECLARE_AES_DECODE));
+        if (PSAMResponse.isSuccessful()) {
+            int s = sbt.length / 208;
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < s; i++) {
+                byte[] data = AppTools.subByte(sbt, i * 208, 208);
+                if (i == s - 1) {
+                    PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_FINAL_AES_ENCRYPT_DECODE), data));
+                    String resultStr = ConvertUtils.bytes2HexString(PSAMResponse.getResult());
+                    resultStr = wipeOffPaddingBytes(resultStr);
+                    byte[] string = ConvertUtils.hexString2Bytes(sb.toString() + resultStr);
+                    return string;
+                } else {
+                    PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_NON_FINAL_AES_ENCRYPT_DECODE), data));
+                    String resultStr = ConvertUtils.bytes2HexString(PSAMResponse.getResult());
+                    resultStr = wipeOffPaddingBytes(resultStr);
+                    sb.append(resultStr);
                 }
-
-            } else {
-                response = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_FINAL_AES_ENCRYPT_DECODE), sbt));
-                String resultStr = ConvertUtils.bytes2HexString(response.getResult());
-                return wipeOffPaddingBytes(resultStr);
             }
         }
         return null;
@@ -239,6 +274,7 @@ public class PSAMUtil {
 
     /**
      * 去除补码 80...00...80
+     *
      * @param finalDecodeString
      * @return
      */
@@ -248,5 +284,87 @@ public class PSAMUtil {
             finalDecodeString = finalDecodeString.substring(0, index);
         }
         return finalDecodeString;
+    }
+
+    /**
+     * SHA256
+     *
+     * @param sbt
+     * @return
+     */
+    public static byte[] SHA256(byte[] sbt) {
+        PSAMResponse PSAMResponse = new PSAMResponse();
+        int length = sbt.length;
+        if (length >= 256) {
+            int s = length / 192;
+            StringBuffer sb = new StringBuffer();
+
+            for (int i = 0; i < s; i++) {
+                byte[] data;
+                if (i == 0) {
+                    data = AppTools.subByte(sbt, i * 192, 192);
+                    PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_SHA256_GT_S), data));
+                    sb.append(bytes2HexString(PSAMResponse.getResult()));
+                } else if (i == s - 1) {
+                    if (s * 192 == length) {
+                        data = AppTools.subByte(sbt, i * 192, 192);
+                        PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_SHA256_GT_E), new byte[]{(byte) data.length}, data));
+                        sb.append(bytes2HexString(PSAMResponse.getResult()));
+                        return hexString2Bytes(sb.toString().replace("null", ""));
+                    } else {
+                        data = AppTools.subByte(sbt, i * 192, 192);
+                        PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_SHA256_GT_M), data));
+                        sb.append(bytes2HexString(PSAMResponse.getResult()));
+                        data = AppTools.subByte(sbt, (i + 1) * 192, length - s * 192);
+                        PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_SHA256_GT_E), new byte[]{(byte) data.length}, data));
+                        sb.append(bytes2HexString(PSAMResponse.getResult()));
+                        return hexString2Bytes(sb.toString().replace("null", ""));
+                    }
+                } else {
+                    data = AppTools.subByte(sbt, i * 192, 192);
+                    PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_SHA256_GT_M), data));
+                    sb.append(bytes2HexString(PSAMResponse.getResult()));
+                }
+
+                if (s == 1) {
+                    data = AppTools.subByte(sbt, (i + 1) * 192, length - s * 192);
+                    PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_SHA256_GT_E), new byte[]{(byte) data.length}, data));
+                    sb.append(bytes2HexString(PSAMResponse.getResult()));
+                    return hexString2Bytes(sb.toString().replace("null", ""));
+                }
+            }
+        } else {
+            PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_SHA256_LT), new byte[]{(byte) length}, sbt));
+            return PSAMResponse.getResult();
+        }
+        return null;
+    }
+
+
+    /**
+     * 数据签名
+     *
+     * @param sbt
+     * @return
+     */
+    public static byte[] RSASign(byte[] sbt) {
+        if (sbt.length >= 256) {
+            sbt = SHA256(sbt);
+        }
+        PSAMResponse PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_RSA), new byte[]{(byte) sbt.length}, sbt));
+        return PSAMResponse.getResult();
+    }
+
+
+    /**
+     * 服务器返回的签名数据进行验签
+     *
+     * @param sbt
+     * @return
+     */
+    public static boolean verifySign(byte[] sbt) {
+        sbt = SHA256(sbt);
+        PSAMResponse PSAMResponse = command(AppTools.byteMerger(hexString2Bytes(PSAMCommand.COMMAND_VERIFY_SIGN), sbt, new byte[]{(byte) 0}));
+        return PSAMResponse.isSuccessful();
     }
 }

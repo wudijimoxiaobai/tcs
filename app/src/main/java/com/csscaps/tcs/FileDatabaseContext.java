@@ -121,6 +121,7 @@ public class FileDatabaseContext extends ContextWrapper {
     public SQLiteDatabase openOrCreateDatabase(String name, int mode, CursorFactory factory, DatabaseErrorHandler errorHandler) {
         SQLiteDatabase result = null;
         switch (name) {
+            case "DailyDatabase.db":
             case "SDInvoiceDatabase.db":
                 result = SQLiteDatabase.openOrCreateDatabase(getDatabasePath(name), null);
                 break;

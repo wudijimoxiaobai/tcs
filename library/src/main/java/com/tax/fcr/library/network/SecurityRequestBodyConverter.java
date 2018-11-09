@@ -16,8 +16,9 @@ import retrofit2.Converter;
  * Created by thinkpad on 2016/9/2.
  */
 public class SecurityRequestBodyConverter<T> implements Converter<T, RequestBody> {
-    private static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8");
 
+    private static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8");
+    public static Class mClass;
 
     @Override
     public RequestBody convert(T value) throws IOException {
@@ -26,9 +27,21 @@ public class SecurityRequestBodyConverter<T> implements Converter<T, RequestBody
         } else {
             RequestModel requestModel = (RequestModel) value;
             String data = requestModel.getData();
-            if (!TextUtils.isEmpty(data)) requestModel.setData(SecurityUtil.getBase64(data));
+            if (!TextUtils.isEmpty(data)) {
+              /*  //AES 加密
+                try {
+                    Method method = mClass.getMethod("encryptAES", byte[].class);
+                    byte b[] = (byte[]) method.invoke(mClass, data.getBytes(StandardCharsets.UTF_8));
+                    requestModel.setData(SecurityUtil.base64Encode2String(b));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }*/
+                requestModel.setData(SecurityUtil.getBase64(data));
+            }
             String postBody = JSON.toJSONString(requestModel);
             return RequestBody.create(MEDIA_TYPE, postBody);
         }
     }
+
+
 }

@@ -86,27 +86,27 @@ public class CalculateUtils {
             switch (taxTypeCode) {
                 case VAT:
                     productModel.setVat(tax);
-                    productModel.setVat_amount(String.valueOf(tax));
+                    productModel.setVat_amount(String.format("%.2f", tax));
                     break;
                 case BPTF:
                     productModel.setBpt_final(tax);
-                    productModel.setBptf_amount(String.valueOf(tax));
+                    productModel.setBptf_amount(String.format("%.2f", tax));
                     break;
                 case BPTP:
                     productModel.setBpt_prepayment(tax);
-                    productModel.setBptp_amount(String.valueOf(tax));
+                    productModel.setBptp_amount(String.format("%.2f", tax));
                     break;
                 case FEES:
                     productModel.setFees(tax);
-                    productModel.setFees_amount(String.valueOf(tax));
+                    productModel.setFees_amount(String.format("%.2f", tax));
                     break;
                 case SDF:
                     productModel.setStamp_duty_federal(tax);
-                    productModel.setSdf_amount(String.valueOf(tax));
+                    productModel.setSdf_amount(String.format("%.2f", tax));
                     break;
                 case SDL:
                     productModel.setStamp_duty_local(tax);
-                    productModel.setSdl_amount(String.valueOf(tax));
+                    productModel.setSdl_amount(String.format("%.2f", tax));
                     break;
             }
         }
@@ -117,12 +117,16 @@ public class CalculateUtils {
         // BPTPrepayment= BPTPrepayment+ (item.StampDutyLocal + item.stampDutyFederal + item.Fee + item.BPTFinal + item.VatAmount) * 0.01；
         if ("Y".equals(myTaxpayer.getWithholding())) {
             totalTax -= productModel.getBpt_prepayment();
-            double bptp =productModel.getBpt_prepayment()+ (productModel.getBpt_final() + productModel.getFees() + productModel.getStamp_duty_local() + productModel.getStamp_duty_federal() + productModel.getVat()) * 0.01f;
+            double bptp =productModel.getBpt_prepayment()+ (productModel.getBpt_final() + productModel.getFees() + productModel.getStamp_duty_local() + productModel.getStamp_duty_federal() + productModel.getVat()) * 0.01d;
             totalTax = totalTax + bptp;
+            bptp = Math.round(bptp * 100) * 0.01d;
+            bptp = Double.valueOf(String.format("%.2f", bptp));
             productModel.setBpt_prepayment(bptp);
+            productModel.setBptp_amount(String.format("%.2f", bptp));
         } else {
             totalTax -= productModel.getBpt_prepayment();
             productModel.setBpt_prepayment(0);
+            productModel.setBptp_amount(String.format("%.2f", 0));
         }
         productModel.setE_tax(Double.valueOf(String.format("%.2f", Math.round((amount) * 100) * 0.01d)));
         productModel.setI_tax(Double.valueOf(String.format("%.2f", Math.round((amount + totalTax) * 100) * 0.01d)));

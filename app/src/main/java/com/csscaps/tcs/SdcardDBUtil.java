@@ -6,6 +6,7 @@ import com.csscaps.tcs.database.table.ProductModel;
 import com.csscaps.tcs.database.table.SdInvoice;
 import com.csscaps.tcs.database.table.SdProductModel;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
 
@@ -24,11 +25,11 @@ import java.util.concurrent.Executors;
 public class SdcardDBUtil {
 
     // sd卡数据库是否打是否打开
-    public static boolean isOpen = true;
+    private static boolean isOpen = true;
 
-    public static String lock = "lock";
+    private static String lock = "lock";
 
-    public static ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+    private static ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
 
     /**
@@ -83,6 +84,8 @@ public class SdcardDBUtil {
                             saveSdInvoice((Invoice) object);
                         } else if (object instanceof List) {
                             saveListSDProductModel(object);
+                        }else if(object instanceof BaseModel){
+                            ((BaseModel) object).save();
                         }
                         SdcardDBUtil.closeDB();
                         SdcardUtil.lockSdcard();
@@ -131,7 +134,6 @@ public class SdcardDBUtil {
             sm.setTax_due(productModel.getTax_due());
             sm.setTaxable_amount(productModel.getTaxable_amount());
             sm.setTaxable_amount_org(productModel.getTaxable_amount_org());
-            sm.setTaxable_amount(productModel.getTaxable_amount());
             sm.setTaxable_item_uid(productModel.getTaxable_item_uid());
             sm.setItem_name(productModel.getItem_name());
             sm.setItem_desc(productModel.getItem_desc());
@@ -196,6 +198,7 @@ public class SdcardDBUtil {
         sdInvoice.setRemark(invoice.getRemark());
         sdInvoice.setNegative_approval_remark(invoice.getNegative_approval_remark());
         sdInvoice.setInvalid_remark(invoice.getInvalid_remark());
+        sdInvoice.setFiscal_long_code(invoice.getFiscal_long_code());
         sdInvoice.save();
     }
 

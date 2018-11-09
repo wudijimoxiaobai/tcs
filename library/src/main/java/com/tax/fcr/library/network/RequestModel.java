@@ -12,7 +12,7 @@ public class RequestModel {
 
     private String funcid;
     public static String devicesn;
-    private String device_type="TCS";
+    private String device_type="APP";
     private String data;
     private String checkcode;
 

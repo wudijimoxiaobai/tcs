@@ -14,12 +14,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.csscaps.common.utils.DateUtils;
 import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.RTCUtil;
 import com.csscaps.tcs.SdcardDBUtil;
 import com.csscaps.tcs.ShowOfdUtils;
+import com.csscaps.tcs.Util;
 import com.csscaps.tcs.action.IInvoiceIssuingAction;
 import com.csscaps.tcs.activity.ApplicationListActivity;
 import com.csscaps.tcs.database.table.Invoice;
@@ -145,7 +148,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         transaction.add(R.id.content, fragment);
         transaction.commit();
         mIssuingPresenter = new InvoiceIssuingPresenter(this, getContext());
-        ShowOfdUtils.showOfd(showInvoice,mOfdView);
+        ShowOfdUtils.showOfd(showInvoice, mOfdView);
     }
 
     @OnClick({R.id.back, R.id.approve, R.id.reject, R.id.issue, R.id.confirm, R.id.upload})
@@ -221,6 +224,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
     private void negativeInvoice() {
         try {
             negativeInvoice = (Invoice) mInvoice.clone();
+            negativeInvoice.setClient_invoice_datetime(DateUtils.dateToStr(RTCUtil.getRTC(), DateUtils.format_yyyyMMddHHmmss_24_EN));
             negativeInvoice.setOriginal_invoice_type_code(mInvoice.getInvoice_type_code());
             negativeInvoice.setOriginal_invoice_no(mInvoice.getInvoice_no());
             negativeInvoice.setNegative_flag("Y");
@@ -259,17 +263,18 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
                 negProductMode.setTax_due("-" + productMode.getTax_due());
                 negProductMode.setTaxable_amount("-" + productMode.getTaxable_amount());
                 negProductMode.setAmount_inc("-" + productMode.getAmount_inc());
-                negProductMode.setVat_amount("-" +productMode.getVat_amount());
-                negProductMode.setBptf_amount("-" +productMode.getBptf_amount());
-                negProductMode.setBptp_amount("-" +productMode.getBptp_amount());
-                negProductMode.setSdf_amount("-" +productMode.getSdf_amount());
-                negProductMode.setSdl_amount("-" +productMode.getSdl_amount());
-                negProductMode.setFees_amount("-" +productMode.getFees_amount());
+                negProductMode.setVat_amount("-" + productMode.getVat_amount());
+                negProductMode.setBptf_amount("-" + productMode.getBptf_amount());
+                negProductMode.setBptp_amount("-" + productMode.getBptp_amount());
+                negProductMode.setSdf_amount("-" + productMode.getSdf_amount());
+                negProductMode.setSdl_amount("-" + productMode.getSdl_amount());
+                negProductMode.setFees_amount("-" + productMode.getFees_amount());
                 negProductModels.add(negProductMode);
             }
             negativeInvoice.setGoods(negProductModels);
             negativeInvoice.setStatus("NEG");
             showInvoice = negativeInvoice;
+            Util.signInvoice(negativeInvoice);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -284,6 +289,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
             negativeInvoice.setUploadStatus(Invoice.FAILURE);
         }
         negativeInvoice.save();
+        Util.updateReportDataDaily(negativeInvoice);
         mInvoice.setStatus("WRO");
         mInvoice.update();
         dismiss();
@@ -292,4 +298,6 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         SdcardDBUtil.saveSDDB(negativeInvoice);
         SdcardDBUtil.saveSDDB(mInvoice);
     }
+
+
 }

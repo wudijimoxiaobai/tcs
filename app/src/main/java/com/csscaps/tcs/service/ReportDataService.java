@@ -8,13 +8,14 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
-import com.csscaps.common.utils.AppTools;
 import com.csscaps.common.utils.ConvertUtils;
 import com.csscaps.common.utils.DateUtils;
 import com.csscaps.common.utils.NumberBytesUtil;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.RTCUtil;
 import com.csscaps.tcs.ServerConstants;
+import com.csscaps.tcs.Util;
 import com.csscaps.tcs.database.TcsDatabase;
 import com.csscaps.tcs.database.table.ControlData;
 import com.csscaps.tcs.database.table.Invoice;
@@ -36,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.text.TextUtils.substring;
+import static com.csscaps.tcs.Util.doubleToHex;
 import static com.csscaps.tcs.database.table.ReportData_Table.date;
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
@@ -72,7 +74,7 @@ public class ReportDataService extends Service implements IPresenter {
                 return;
             }
 
-            String dateNow = DateUtils.dateToStr(DateUtils.getDateNow(), DateUtils.format_yyyyMMdd);
+            String dateNow = DateUtils.dateToStr(RTCUtil.getRTC(), DateUtils.format_yyyyMMdd);
             //未到数据报送终止日期，不能抄报
             if (DateUtils.compareDate(dateNow, controlData.getE_report_date(), DateUtils.format_yyyyMMdd) != 1) {
                 if (fromOnlineDeclarationActivity) {
@@ -144,7 +146,7 @@ public class ReportDataService extends Service implements IPresenter {
                 reportData.setC_invoice_number(0);
                 reportData.setN_invoice_number(0);*/
                 String str = reportDataModel.getManagerData();
-                ControlData controlData = parseControlDataStr(invoice_type_code, str);
+                ControlData controlData = Util.parseControlDataStr(invoice_type_code, str);
                 reportData.setReport_date(controlData.getNew_date());
                 listControlData.add(controlData);
                 listReportData.add(reportData);
@@ -202,22 +204,22 @@ public class ReportDataService extends Service implements IPresenter {
             if (reportData != null) {
                 sb.append(controlData.getS_report_date())
                         .append(controlData.getE_report_date())
-                        .append(doubleToHex(reportData.getTotal_all()))
-                        .append(doubleToHex(reportData.getTotal_vat()))
-                        .append(doubleToHex(reportData.getTotal_stamp()))
-                        .append(doubleToHex(reportData.getTotal_bpt()))
-                        .append(doubleToHex(reportData.getTotal_bpt_preypayment()))
-                        .append(doubleToHex(reportData.getTotal_final()))
-                        .append(doubleToHex(reportData.getTotal_fee()))
-                        .append(doubleToHex(reportData.getTotal_taxable_amount()))
-                        .append(doubleToHex(reportData.getN_total_all()))
-                        .append(doubleToHex(reportData.getN_total_taxable_amount()))
-                        .append(doubleToHex(reportData.getN_total_vat()))
-                        .append(doubleToHex(reportData.getN_total_stamp()))
-                        .append(doubleToHex(reportData.getN_total_bpt()))
-                        .append(doubleToHex(reportData.getN_total_bpt_preypayment()))
-                        .append(doubleToHex(reportData.getN_total_fee()))
-                        .append(doubleToHex(reportData.getN_total_final()))
+                        .append(Util.doubleToHex(reportData.getTotal_all()))
+                        .append(Util.doubleToHex(reportData.getTotal_vat()))
+                        .append(Util.doubleToHex(reportData.getTotal_stamp()))
+                        .append(Util.doubleToHex(reportData.getTotal_bpt()))
+                        .append(Util.doubleToHex(reportData.getTotal_bpt_preypayment()))
+                        .append(Util.doubleToHex(reportData.getTotal_final()))
+                        .append(Util.doubleToHex(reportData.getTotal_fee()))
+                        .append(Util.doubleToHex(reportData.getTotal_taxable_amount()))
+                        .append(Util.doubleToHex(reportData.getN_total_all()))
+                        .append(Util.doubleToHex(reportData.getN_total_taxable_amount()))
+                        .append(Util.doubleToHex(reportData.getN_total_vat()))
+                        .append(Util.doubleToHex(reportData.getN_total_stamp()))
+                        .append(Util.doubleToHex(reportData.getN_total_bpt()))
+                        .append(Util.doubleToHex(reportData.getN_total_bpt_preypayment()))
+                        .append(Util.doubleToHex(reportData.getN_total_fee()))
+                        .append(Util.doubleToHex(reportData.getN_total_final()))
                         .append(ConvertUtils.bytes2HexString(NumberBytesUtil.intToBytes(reportData.getInvoice_number())))
                         .append(ConvertUtils.bytes2HexString(NumberBytesUtil.intToBytes(reportData.getN_invoice_number())))
                         .append(ConvertUtils.bytes2HexString(NumberBytesUtil.intToBytes(reportData.getC_invoice_number())));
@@ -231,43 +233,7 @@ public class ReportDataService extends Service implements IPresenter {
         return invoice_data;
     }
 
-    /**
-     * hex 6字节
-     *
-     * @param amount
-     * @return
-     */
-    private String doubleToHex(double amount) {
-        long a = (long) (amount * 100);
-        String hex = ConvertUtils.bytes2HexString(NumberBytesUtil.longToBytes(a));
-        return substring(hex, 4, 16);
-    }
 
-    /**
-     * 解析控制数据
-     *
-     * @return
-     */
-    public static ControlData parseControlDataStr(String invoice_type_code, String controlDataStr) {
-        ControlData controlData = new ControlData();
-        controlData.setInvoice_type_code(invoice_type_code);
-        controlData.setNew_date(substring(controlDataStr, 6, 14));
-        controlData.setIssuing_last_date(substring(controlDataStr, 14, 22));
-        controlData.setTotal_amount_perinvoice(NumberBytesUtil.bytesToLong(ConvertUtils.hexString2Bytes(AppTools.fillZero(substring(controlDataStr, 22, 34), 16))) / 100);
-        controlData.setTotal_all(NumberBytesUtil.bytesToLong(ConvertUtils.hexString2Bytes(AppTools.fillZero(substring(controlDataStr, 34, 46), 16))) / 100);
-        controlData.setN_total_all(NumberBytesUtil.bytesToLong(ConvertUtils.hexString2Bytes(AppTools.fillZero(substring(controlDataStr, 46, 58), 16))) / 100);
-        controlData.setReport_flag(substring(controlDataStr, 58, 59));
-        controlData.setTcs_pwd_flag(substring(controlDataStr, 59, 60));
-        controlData.setS_report_date(substring(controlDataStr, 60, 68));
-        controlData.setE_report_date(substring(controlDataStr, 68, 76));
-        controlData.setInvoice_type(substring(controlDataStr, 76, 78));
-        controlData.setCheck_tax_control_panel(substring(controlDataStr, 78, 79));
-        controlData.setCheck_tax_control_panel_n_invoice(substring(controlDataStr, 79, 80));
-        controlData.setRfu(substring(controlDataStr, 80, 82));
-        controlData.setTax_type_item_index(NumberBytesUtil.bytesToLong(ConvertUtils.hexString2Bytes(AppTools.fillZero(substring(controlDataStr, 82, 94), 16))));
-        controlData.setIssuing_n_invoice_days(NumberBytesUtil.bytesToInt(ConvertUtils.hexString2Bytes(AppTools.fillZero(substring(controlDataStr, 94, 98), 8))));
-        controlData.setIssuing_invoice_type(String.valueOf(NumberBytesUtil.bytesToInt(ConvertUtils.hexString2Bytes(AppTools.fillZero(substring(controlDataStr, 98, 100), 8)))));
-        controlData.setInvoice_number_permonth(NumberBytesUtil.bytesToInt(ConvertUtils.hexString2Bytes(substring(controlDataStr, 100, 108))));
-        return controlData;
-    }
+
+
 }

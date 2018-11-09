@@ -14,7 +14,9 @@ import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.MainActivity;
 import com.csscaps.tcs.MyTimerTask;
 import com.csscaps.tcs.R;
+import com.csscaps.tcs.RTCUtil;
 import com.csscaps.tcs.ServerConstants;
+import com.csscaps.tcs.Util;
 import com.csscaps.tcs.database.TcsDatabase;
 import com.csscaps.tcs.database.table.ControlData;
 import com.csscaps.tcs.database.table.InvoiceTaxType;
@@ -149,7 +151,7 @@ public class SynchronizeService extends Service implements IPresenter {
         RequestModel requestModel = new RequestModel();
         requestModel.setFuncid(requestData.getFuncid());
         requestData.setDevicesn(requestModel.getDevicesn());
-        requestData.setSystime(DateUtils.dateToStr(DateUtils.getDateNow(), DateUtils.format_yyyyMMddHHmmss_24_EN));
+        requestData.setSystime(DateUtils.dateToStr(RTCUtil.getRTC(), DateUtils.format_yyyyMMddHHmmss_24_EN));
         requestModel.setData(JSON.toJSONString(requestData));
         Api.post(this, requestModel);
     }
@@ -252,7 +254,7 @@ public class SynchronizeService extends Service implements IPresenter {
                 for (ReportDataModel reportDataModel : invoice_data) {
                     String str = reportDataModel.getManagerData();
                     Logger.i(reportDataModel.getInvoice_type_code() + "  " + str.length() + " " + str);
-                    list.add(ReportDataService.parseControlDataStr(reportDataModel.getInvoice_type_code(), str));
+                    list.add(Util.parseControlDataStr(reportDataModel.getInvoice_type_code(), str));
                 }
                 FlowManager.getDatabase(TcsDatabase.class)
                         .beginTransactionAsync(new ProcessModelTransaction.Builder<>(

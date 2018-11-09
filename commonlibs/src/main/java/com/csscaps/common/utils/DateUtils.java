@@ -1343,6 +1343,8 @@ public class DateUtils {
         return DateToString.format(dateIn);
     }
 
+
+
     /**
      * 将日期转换为中文字符串（2014年01月01日 12时30分）
      *

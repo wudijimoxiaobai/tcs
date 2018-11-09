@@ -15,6 +15,8 @@ import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.suwell.to.ofd.ofdviewer.OFDView;
 import com.tax.fcr.library.network.Api;
+import com.tax.fcr.library.network.SecurityRequestBodyConverter;
+import com.tax.fcr.library.network.SecurityResponseBodyConverter;
 import com.tax.fcr.library.utils.Logger;
 import com.tax.fcr.library.utils.NetworkUtils;
 
@@ -49,7 +51,8 @@ public class TCSApplication extends BaseApplication {
         PSAMUtil.connect();
         initData();
         addOfdTemplate();
-//        listenForScreenTurningOff();
+        listenForScreenTurningOff();
+        SecurityRequestBodyConverter.mClass = SecurityResponseBodyConverter.mClass = PSAMUtil.class;
     }
 
     /**
@@ -80,7 +83,7 @@ public class TCSApplication extends BaseApplication {
                     //copy纳税人数据库
                     copyDB(TAXPAYER_DB);
                     //copy sd卡发票数据库文件
-//                    copyDB(INVOICE_DB);
+                    copyDB(INVOICE_DB);
                     AppSP.putBoolean("initData", true);
                     lockTimer();
                 }
@@ -95,8 +98,8 @@ public class TCSApplication extends BaseApplication {
      */
     private void lockTimer() {
         //设置sd卡密码，锁定sd卡；
-//        SdcardUtil.sdcardSetPassword();
-//        SdcardUtil.lockSdcard();
+        SdcardUtil.sdcardSetPassword();
+        SdcardUtil.lockSdcard();
         timer.schedule(new MyTimerTask(), 500, (long) (DateUtils.HOUR_OF_MILLISECOND * 0.5));
     }
 
@@ -206,7 +209,6 @@ public class TCSApplication extends BaseApplication {
     }
 
 
-
     private void listenForScreenTurningOff() {
         IntentFilter screenStateFilter = new IntentFilter();
         screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
@@ -216,9 +218,11 @@ public class TCSApplication extends BaseApplication {
             public void onReceive(Context context, Intent intent) {
                 switch (intent.getAction()) {
                     case Intent.ACTION_SCREEN_OFF:
+                        Logger.i("ACTION_SCREEN_OFF");
                         PSAMUtil.disconnect();
                         break;
                     case Intent.ACTION_SCREEN_ON:
+                        Logger.i("ACTION_SCREEN_ON");
                         PSAMUtil.connect();
                         break;
                 }
