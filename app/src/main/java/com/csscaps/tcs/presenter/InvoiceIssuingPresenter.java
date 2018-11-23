@@ -10,6 +10,7 @@ import com.csscaps.tcs.SdcardDBUtil;
 import com.csscaps.tcs.ServerConstants;
 import com.csscaps.tcs.action.IInvoiceIssuingAction;
 import com.csscaps.tcs.activity.InvoiceIssuingActivity;
+import com.csscaps.tcs.database.SDInvoiceDatabase;
 import com.csscaps.tcs.database.TcsDatabase;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.InvoiceNo;
@@ -95,7 +96,7 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
                 .build()
                 .execute();
 
-        SdcardDBUtil.saveSDDB(goods);
+        SdcardDBUtil.saveSDDB(goods,SDInvoiceDatabase.class);
 
         InvoiceNo invoiceNo = select().from(InvoiceNo.class).where(InvoiceNo_Table.invoice_num.eq(invoice.getInvoice_no())).querySingle();
         invoiceNo.delete();

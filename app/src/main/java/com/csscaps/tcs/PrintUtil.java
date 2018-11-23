@@ -84,9 +84,11 @@ public class PrintUtil {
     }
 
     public void print(Bitmap bitmap) {
+        optPrinter(true);
         if (pThread != null) {
             pThread.clearPrintBuffer();
         }
+
         picutre_bmp_print(bitmap);
         if (pThread != null) {
             pThread.startPrintData();
@@ -98,9 +100,9 @@ public class PrintUtil {
         int height = bmp.getHeight();
         int width = bmp.getWidth();
         int byteofline = DotLineBytes;
-        Log.d(tag, "kwq print picutre_bmp_print width:"+width+" h:"+height+" line:"+byteofline);
+        Log.d(tag, "kwq print picutre_bmp_print width:" + width + " h:" + height + " line:" + byteofline);
 
-        int h = DotLineWidth * height / width+1;
+        int h = DotLineWidth * height / width + 1;
         Bitmap bitmap = Bitmap.createBitmap(DotLineWidth, h, Bitmap.Config.ARGB_8888);
         Canvas PluCanvas = new Canvas(bitmap);
         PluCanvas.drawColor(Color.TRANSPARENT);
@@ -109,33 +111,28 @@ public class PrintUtil {
         PluCanvas.drawBitmap(bmp, new Rect(0, 0, width, height), new Rect(0, 0, DotLineWidth, h), paint);
         bmp = bitmap;
         width = DotLineWidth;
-        height=h;
+        height = h;
 
         byte[] BitMapBuf = new byte[byteofline];
         int[] tmpbuf = new int[width + 8];
 
-        if(pThread!=null){
+        if (pThread != null) {
             pThread.clearPrintBuffer();
         }
-        for(int i=0; i<height; i++)
-        {
+        for (int i = 0; i < height; i++) {
             bmp.getPixels(tmpbuf, 0, width, 0, i, width, 1);
 
-            for(int j=0; j<width; j+=8)
-            {
-                for(int k=0; k<8; k++)
-                {
+            for (int j = 0; j < width; j += 8) {
+                for (int k = 0; k < 8; k++) {
 
-                    if((tmpbuf[j+k] == Color.TRANSPARENT) || (tmpbuf[j+k] == Color.WHITE))
-                    {
-                        BitMapBuf[j/8] &= ~(0x80 >> k);
-                    }else
-                    {
-                        BitMapBuf[j/8] |= (0x80 >> k);
+                    if ((tmpbuf[j + k] == Color.TRANSPARENT) || (tmpbuf[j + k] == Color.WHITE)) {
+                        BitMapBuf[j / 8] &= ~(0x80 >> k);
+                    } else {
+                        BitMapBuf[j / 8] |= (0x80 >> k);
                     }
                 }
             }
-            if(pThread!=null){
+            if (pThread != null) {
                 pThread.appendPrintData(BitMapBuf, 0, DotLineBytes);
             }
         }
@@ -248,13 +245,18 @@ public class PrintUtil {
                 if (timer++ > timerMax) {
                     timer = 0;
                     timerMax = 5;
-                    havePaper=checkPaper();   //check paper status
+                    havePaper = checkPaper();   //check paper status
                 }
                 if (havePaper && enablePrint) {
                     int ret = printData(cutterType);
                     Log.d(tag, "Print data result0:" + ret);
-                    if(ret==-1) break;
-                    mHandler.sendEmptyMessage(0);
+                    if (ret == -1) {
+                        mHandler.sendEmptyMessage(0);
+                        optPrinter(false);
+                        break;
+                    }
+                    mHandler.sendEmptyMessage(1);
+                    optPrinter(false);
                     if (bSerial) {
                         try {
                             sleep(0);

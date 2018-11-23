@@ -22,13 +22,14 @@ import com.csscaps.tcs.RTCUtil;
 import com.csscaps.tcs.SdcardDBUtil;
 import com.csscaps.tcs.Util;
 import com.csscaps.tcs.action.IInvoiceIssuingAction;
-import com.csscaps.tcs.activity.InvoiceIssuingActivity;
 import com.csscaps.tcs.adapter.InvoiceProductListAdapter;
+import com.csscaps.tcs.database.SDInvoiceDatabase;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.Product;
 import com.csscaps.tcs.database.table.ProductModel;
 import com.csscaps.tcs.presenter.InvoiceIssuingPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -111,10 +112,10 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
                 previewInvoiceDialog.show(getFragmentManager(), "PreviewInvoiceDialog");
                 break;
             case R.id.print:
-//                if (printInvoiceDialog == null) printInvoiceDialog = new PrintInvoiceDialog(mInvoice, this);
-//                printInvoiceDialog.show(getFragmentManager(), "PrintInvoiceDialog");
-                presenter = new InvoiceIssuingPresenter(this, getContext());
-                presenter.issuingInvoice(data);
+                PrintInvoiceDialog printInvoiceDialog = new PrintInvoiceDialog(mInvoice, this);
+                printInvoiceDialog.show(getFragmentManager(), "PrintInvoiceDialog");
+//                presenter = new InvoiceIssuingPresenter(this, getContext());
+//                presenter.issuingInvoice(data);
                 break;
         }
     }
@@ -154,8 +155,17 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
         mTotalSdf.setText(invoice.getTotal_final());
         mTotalFees.setText(invoice.getTotal_fee());
         mETax.setText(String.format("%.2f", etax));
-        mITax.setText(String.format("%.2f", itax));
+        mITax.setText(String.format("%.2f", itax-fees));
         Util.signInvoice(mInvoice);
+
+        List<ProductModel> productModels = new ArrayList<>();
+        for (int i = 0; i < data.size(); i++) {
+            Product p = data.get(i);
+            ProductModel productModel = p.getProductModel();
+            productModel.setLine_no(String.valueOf(i + 1));
+            productModels.add(productModel);
+        }
+        mInvoice.setGoods(productModels);
     }
 
 
@@ -167,13 +177,13 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
             mInvoice.setUploadStatus(Invoice.FAILURE);
         }
         mInvoice.save();
-        SdcardDBUtil.saveSDDB(mInvoice);
+        SdcardDBUtil.saveSDDB(mInvoice, SDInvoiceDatabase.class);
         dismiss();
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
         ToastUtil.showShort(getString(R.string.hit5));
-        Util.updateReportDataDaily(InvoiceIssuingActivity.mInvoice);
+        Util.updateReportDataDaily(mInvoice);
     }
 
 

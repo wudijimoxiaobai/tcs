@@ -2,6 +2,8 @@ package com.csscaps.tcs;
 
 import android.util.Log;
 
+import com.tax.fcr.library.utils.Logger;
+
 import aclasdriver.SDCard;
 
 /**
@@ -30,7 +32,6 @@ public class SdcardUtil {
      * 设置sd卡密码
      */
     public static void sdcardSetPassword() {
-
         byte[] b = Password.getBytes();
         mSdcard.SdcardSetPasswd(b, 1);
     }
@@ -48,6 +49,7 @@ public class SdcardUtil {
                 Log.i("TEST", "SdcardLock Status " + ret);
             }
         }
+        Logger.i("**********已加锁*********");
     }
 
     /**

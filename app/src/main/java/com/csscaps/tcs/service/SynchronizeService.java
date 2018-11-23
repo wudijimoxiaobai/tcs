@@ -73,6 +73,7 @@ public class SynchronizeService extends Service implements IPresenter {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null) autoSyn = intent.getBooleanExtra("autoSyn", false);
         synTaxpayer();
+        Util.get3f_pwd_key();
         c = 0;
         return super.onStartCommand(intent, flags, startId);
     }
@@ -163,6 +164,7 @@ public class SynchronizeService extends Service implements IPresenter {
                 AppSP.putString("MyTaxpayer", objectString);
                 MyTaxpayer myTaxpayer = JSON.parseObject(objectString, MyTaxpayer.class);
                 RequestData.sellerid = myTaxpayer.getSellerid();
+                AppSP.putString("sellerid",  RequestData.sellerid);
                 synData();
                 break;
             case ServerConstants.ATCS004:
@@ -293,7 +295,7 @@ public class SynchronizeService extends Service implements IPresenter {
             }
         }
         c++;
-        if(requestPath.equals(ServerConstants.ATCS002)) c=6;
+        if (requestPath.equals(ServerConstants.ATCS002)) c = 6;
         complete();
     }
 

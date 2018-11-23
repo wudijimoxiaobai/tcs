@@ -10,7 +10,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  * Created by tl on 2018/11/9.
  */
 @Table(database = DailyDatabase.class)
-public class Daily extends BaseModel {
+public class Daily extends BaseModel implements  Cloneable {
 
     @PrimaryKey(autoincrement = true)
     @Column
@@ -21,7 +21,6 @@ public class Daily extends BaseModel {
     String invoice_type_code;
     @Column
     String s_invoice_no;
-
 
     @Column
     int invoice_count;
@@ -81,6 +80,10 @@ public class Daily extends BaseModel {
     double c_total_bpt_preypayment;
     @Column
     double c_total_fee;
+
+    @Column
+    int addr;
+
 
     public int getId() {
         return id;
@@ -328,5 +331,18 @@ public class Daily extends BaseModel {
 
     public void setC_total_fee(double c_total_fee) {
         this.c_total_fee = c_total_fee;
+    }
+
+    public int getAddr() {
+        return addr;
+    }
+
+    public void setAddr(int addr) {
+        this.addr = addr;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

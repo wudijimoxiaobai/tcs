@@ -125,7 +125,12 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         invoice = data.get(i);
         LinearLayout linearLayout = null;
-        if (((TCSApplication.currentUser.getRole() == 0 && invoice.getApproveFlag().equals("2") && invoice.getStatus().equals(AVL)) || (invoice.getRequestType().equals(NEG) && invoice.getApproveFlag().equals("0") && invoice.getStatus().equals(AVL)))) {
+        if (((TCSApplication.currentUser.getRole() == 0
+                && invoice.getApproveFlag().equals("2")
+                && invoice.getStatus().equals(AVL))
+                || (invoice.getRequestType().equals(NEG)
+                && invoice.getApproveFlag().equals("0")
+                && invoice.getStatus().equals(AVL)))) {
             linearLayout = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.approve_list_popuwindow_layout, null);
         } else {
             linearLayout = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.product_popuwindow1_layout, null);

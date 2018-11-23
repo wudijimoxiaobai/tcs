@@ -1,9 +1,7 @@
 package com.csscaps.tcs;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.app.Activity;
+import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.csscaps.common.base.BaseApplication;
@@ -29,6 +27,9 @@ import java.io.OutputStream;
 import java.util.Map;
 import java.util.Timer;
 
+import static com.csscaps.tcs.SdcardDBUtil.isWriteSD;
+import static com.csscaps.tcs.SdcardDBUtil.lock;
+
 /**
  * Created by tl on 2018/5/2.
  */
@@ -48,11 +49,14 @@ public class TCSApplication extends BaseApplication {
         setNetworkConfig();
         //dbflow 初始化
         FlowManager.init(new FlowConfig.Builder(this).build());
-        PSAMUtil.connect();
+        PSAMUtil.getDeviceSn();
         initData();
         addOfdTemplate();
-        listenForScreenTurningOff();
         SecurityRequestBodyConverter.mClass = SecurityResponseBodyConverter.mClass = PSAMUtil.class;
+        FMUtil.init();
+        SdcardUtil.sdcardSetPassword();
+//        registerActivityLifecycleCallbacks();
+        unlockSdcard();
     }
 
     /**
@@ -97,9 +101,9 @@ public class TCSApplication extends BaseApplication {
      * 加锁执行定时任务
      */
     private void lockTimer() {
-        //设置sd卡密码，锁定sd卡；
-        SdcardUtil.sdcardSetPassword();
-        SdcardUtil.lockSdcard();
+//        //设置sd卡密码，锁定sd卡；
+//        SdcardUtil.sdcardSetPassword();
+//        SdcardUtil.lockSdcard();
         timer.schedule(new MyTimerTask(), 500, (long) (DateUtils.HOUR_OF_MILLISECOND * 0.5));
     }
 
@@ -209,26 +213,89 @@ public class TCSApplication extends BaseApplication {
     }
 
 
-    private void listenForScreenTurningOff() {
-        IntentFilter screenStateFilter = new IntentFilter();
-        screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        screenStateFilter.addAction(Intent.ACTION_SCREEN_ON);
-        registerReceiver(new BroadcastReceiver() {
+
+    private int mFinalCount;
+
+    private void registerActivityLifecycleCallbacks() {
+
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
-            public void onReceive(Context context, Intent intent) {
-                switch (intent.getAction()) {
-                    case Intent.ACTION_SCREEN_OFF:
-                        Logger.i("ACTION_SCREEN_OFF");
-                        PSAMUtil.disconnect();
-                        break;
-                    case Intent.ACTION_SCREEN_ON:
-                        Logger.i("ACTION_SCREEN_ON");
-                        PSAMUtil.connect();
-                        break;
+            public void onActivityCreated(Activity activity, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onActivityStarted(Activity activity) {
+                mFinalCount++;
+                //如果mFinalCount ==1，说明是从后台到前台
+                if (mFinalCount == 1) {
+
+                }
+
+            }
+
+            @Override
+            public void onActivityResumed(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityPaused(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityStopped(Activity activity) {
+                mFinalCount--;
+                //如果mFinalCount ==0，说明是前台到后台
+                if (mFinalCount == 0) {
+                    //说明从前台回到了后台
+//                    SdcardDBUtil.closeDB(SDInvoiceDatabase.class);
+//                    SdcardDBUtil.closeDB(DailyDatabase.class);
+//                    SdcardUtil.lockSdcard();
                 }
             }
-        }, screenStateFilter);
+
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+
+            }
+        });
     }
 
 
+    public static void unlockSdcard(){
+
+        //说明从后台回到了前台
+        SdcardDBUtil.cachedThreadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (lock) {
+                    SdcardUtil.unlockSdcard();
+                    //数据库文件是否可以打开
+                    int status = SdcardUtil.checkLockSdcardStatus();
+                    if (status == 0) {//已解锁
+                        boolean isOk = true;
+                        while (isOk) {
+                            //SD卡是否可读写
+                            if (!isWriteSD()) {
+                                continue;
+                            }
+                            isOk = false;
+                        }
+//                        SdcardDBUtil.openDB(SDInvoiceDatabase.class);
+//                        SdcardDBUtil.openDB(DailyDatabase.class);
+                        Logger.i("**********已解锁*********");
+                    } else if (status == -1) {//解锁失败
+                        run();
+                    }
+                }
+            }
+        });
+    }
 }

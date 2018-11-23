@@ -41,4 +41,6 @@ public interface ServerConstants {
     final String ASKJ012 = "ASKJ012";
     /*获取服务器时间*/
     final String A014 = "A014";
+    /*获取3f秘钥*/
+    final String AP003 = "AP003";
 }

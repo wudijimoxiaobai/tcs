@@ -1,16 +1,21 @@
 package com.csscaps.tcs;
 
+import com.csscaps.tcs.database.DailyDatabase;
 import com.csscaps.tcs.database.SDInvoiceDatabase;
+import com.csscaps.tcs.database.table.Daily;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.ProductModel;
 import com.csscaps.tcs.database.table.SdInvoice;
 import com.csscaps.tcs.database.table.SdProductModel;
 import com.raizlabs.android.dbflow.config.FlowManager;
-import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.raizlabs.android.dbflow.sql.language.Where;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
+import com.tax.fcr.library.utils.Logger;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,32 +29,28 @@ import java.util.concurrent.Executors;
 
 public class SdcardDBUtil {
 
-    // sd卡数据库是否打是否打开
-    private static boolean isOpen = true;
+    public static String lock = "lock";
 
-    private static String lock = "lock";
-
-    private static ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+    public static ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
 
     /**
      * 关闭sd卡数据库
      */
-    public static void closeDB() {
-        isOpen = false;
-        FlowManager.getDatabase(SDInvoiceDatabase.class).getHelper().closeDB();
+    public static void closeDB(Class databaseClass) {
+        FlowManager.getDatabase(databaseClass).getHelper().closeDB();
     }
 
     /**
      * 打开sd卡数据库
-     *
-     * @param SDPath 外挂sd卡路径
      */
-    public static void openDB(String SDPath) {
+    public static void openDB(Class databaseClass) {
+        Map<String, String> map = System.getenv();
+        String SDPath = map.get("SECONDARY_STORAGE");
         File file = new File(SDPath + "/FCR");
         FileDatabaseContext mSdDatabaseContext = new FileDatabaseContext(TCSApplication.getAppContext(), file, false);
-        FlowManager.getDatabase(SDInvoiceDatabase.class).reset(mSdDatabaseContext);
-        FlowManager.getDatabase(SDInvoiceDatabase.class).getWritableDatabase();
+        FlowManager.getDatabase(databaseClass).reset(mSdDatabaseContext);
+        FlowManager.getDatabase(databaseClass).getWritableDatabase();
     }
 
 
@@ -58,41 +59,46 @@ public class SdcardDBUtil {
      *
      * @param object
      */
-    public static void saveSDDB(final Object object) {
+    public static void saveSDDB(final Object object, final Class databaseClass) {
         cachedThreadPool.execute(new Runnable() {
             @Override
             public void run() {
                 synchronized (lock) {
-                    SdcardUtil.unlockSdcard();
+                   /* SdcardUtil.unlockSdcard();
                     //数据库文件是否可以打开
                     int status = SdcardUtil.checkLockSdcardStatus();
                     if (status == 0) {//已解锁
                         boolean isOk = true;
-                        Map<String, String> map = System.getenv();
-                        String SDPath = map.get("SECONDARY_STORAGE");
-                        File sdFile = new File(SDPath);
                         while (isOk) {
                             //SD卡是否可读写
-                            if (!sdFile.canWrite()) continue;
-                            if (!isOpen) {
-                                openDB(SDPath);
-                            }
+                            if (!isWriteSD()) continue;
+                            openDB(databaseClass);
                             isOk = false;
-                        }
-                        isOpen = true;
+                        }*/
+
                         if (object instanceof Invoice) {
                             saveSdInvoice((Invoice) object);
                         } else if (object instanceof List) {
                             saveListSDProductModel(object);
-                        }else if(object instanceof BaseModel){
-                            ((BaseModel) object).save();
+                        } else if (object instanceof Daily) {
+                            Daily daily = (Daily) object;
+                            daily.save();
                         }
-                        SdcardDBUtil.closeDB();
+                    Logger.i("**********saveSDDB*********");
+
+                        /*SdcardDBUtil.closeDB(databaseClass);
                         SdcardUtil.lockSdcard();
                         SdcardUtil.checkLockSdcardStatus();
+                        isOk = true;
+                        while (isOk) {
+                            Logger.i("**********canWrite*********");
+                            if (isWriteSD()) continue;
+                            isOk = false;
+                        }
+                        Logger.i("**********saveSDDB*********");
                     } else if (status == -1) {//解锁失败
-                        saveSDDB(object);
-                    }
+                        saveSDDB(object, databaseClass);
+                    }*/
                 }
             }
         });
@@ -200,6 +206,105 @@ public class SdcardDBUtil {
         sdInvoice.setInvalid_remark(invoice.getInvalid_remark());
         sdInvoice.setFiscal_long_code(invoice.getFiscal_long_code());
         sdInvoice.save();
+    }
+
+
+    /**
+     * 从sd查询
+     *
+     * @param where
+     * @return
+     */
+    public static Object queryFromSD(Where where, boolean single) {
+        Object object = null;
+       /* SdcardUtil.unlockSdcard();
+        //数据库文件是否可以打开
+        int status = SdcardUtil.checkLockSdcardStatus();
+        if (status == 0) {//已解锁
+            boolean isOk = true;
+            while (isOk) {
+                //SD卡是否可读写
+                if (!isWriteSD()) continue;
+                openDB(DailyDatabase.class);
+                isOk = false;
+            }*/
+            if (single) {
+                object = where.querySingle();
+            } else {
+                object = where.queryList();
+            }
+           /* SdcardDBUtil.closeDB(DailyDatabase.class);
+            SdcardUtil.lockSdcard();
+            SdcardUtil.checkLockSdcardStatus();
+            isOk = true;
+            while (isOk) {
+                if (isWriteSD()) {
+                    continue;
+                }
+                isOk = false;
+            }*/
+         /*   Logger.i("**********queryFromSD*********");
+            return object;
+        } else if (status == -1) {//解锁失败
+            queryFromSD(where, single);
+        }*/
+        return object;
+    }
+
+
+    public static Object querySingleFromSD(Where where) {
+        return queryFromSD(where, true);
+    }
+
+
+    public static List queryListFromSD(Where where) {
+        return (List) queryFromSD(where, false);
+    }
+
+    public static boolean isWriteSD() {
+        Map<String, String> map = System.getenv();
+        String SDPath = map.get("SECONDARY_STORAGE");
+        File sdFile = new File(SDPath + "/tmp.txt");
+        FileWriter fileWriter = null;
+        try {
+            if (!sdFile.exists()) {
+                sdFile.createNewFile();
+            }
+            fileWriter = new FileWriter(sdFile, false);
+            fileWriter.write("A");
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (Exception e) {
+            try {
+                if (fileWriter != null) fileWriter.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            return false;
+        }
+        return true;
+
+    }
+
+
+    /**
+     * 从sd查询
+     *
+     * @param where
+     * @return
+     */
+    public static void deleteFromSD(Where where) {
+        List<Daily> list = where.queryList();
+        FlowManager.getDatabase(DailyDatabase.class)
+                .executeTransaction(new ProcessModelTransaction.Builder<>(
+                        new ProcessModelTransaction.ProcessModel<Daily>() {
+                            @Override
+                            public void processModel(Daily model, DatabaseWrapper wrapper) {
+                                model.delete();
+                            }
+                        }).addAll(list).build());
+        Logger.i("**********deleteFromSD*********");
+
     }
 
 

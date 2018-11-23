@@ -67,14 +67,14 @@ public class GeneratingXMLFileUtils {
         invoiceData.setBuyer(buyer);
 
         //总税
-        invoiceData.setTotalofVAT(showInvoice.getTotal_tax_due());
+        invoiceData.setTotalofVAT(String.format("%.2f",(Double.valueOf(showInvoice.getTotal_tax_due())- Double.valueOf(showInvoice.getTotal_fee()))));
         invoiceData.setTotalofBPTFinal(showInvoice.getTotal_bpt());
         invoiceData.setTotalofBPTPrepayment(showInvoice.getTotal_bpt_preypayment());
         invoiceData.setTotalofStampDuty_Local(showInvoice.getTotal_stamp());
         invoiceData.setTotalofStamDuty_Federal(showInvoice.getTotal_final());
         invoiceData.setTotalofFees(showInvoice.getTotal_fee());
         invoiceData.setTotalAmountExcl(showInvoice.getTotal_taxable_amount());
-        invoiceData.setTotalAmountExclIncl(showInvoice.getTotal_all());
+        invoiceData.setTotalAmountExclIncl(String.format("%.2f",(Double.valueOf(showInvoice.getTotal_all())- Double.valueOf(showInvoice.getTotal_fee()))));
         invoiceData.setRemark(showInvoice.getRemark());
         invoiceData.setIssuedby(showInvoice.getDrawer_name());
         invoiceData.setRWM(getQRCodeToString(showInvoice));

@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.alibaba.fastjson.JSON;
 import com.csscaps.common.utils.AppSP;
+import com.csscaps.tcs.database.SDInvoiceDatabase;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.Invoice_Table;
 import com.csscaps.tcs.database.table.ProductModel;
@@ -123,7 +124,7 @@ public class MyTimerTask extends TimerTask implements IPresenter {
                     break;
             }
             invoice.update();
-            SdcardDBUtil.saveSDDB(invoice);
+            SdcardDBUtil.saveSDDB(invoice,SDInvoiceDatabase.class);
         }
         //局端是先处理上传 再增加作废申请
         if (disInvoices.size() > 0) {

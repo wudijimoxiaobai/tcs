@@ -45,5 +45,6 @@ public class PSAMCommand {
     /*服务器返回数据验签*/
     final static String COMMAND_VERIFY_SIGN = "80C4000300";
 
-
+    /*外部认证*/
+    final static String COMMAND_EXTERNAL_AUTHENTICATE = "0082000008";
 }

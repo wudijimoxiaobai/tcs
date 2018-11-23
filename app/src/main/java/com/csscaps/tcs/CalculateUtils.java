@@ -118,9 +118,9 @@ public class CalculateUtils {
         if ("Y".equals(myTaxpayer.getWithholding())) {
             totalTax -= productModel.getBpt_prepayment();
             double bptp =productModel.getBpt_prepayment()+ (productModel.getBpt_final() + productModel.getFees() + productModel.getStamp_duty_local() + productModel.getStamp_duty_federal() + productModel.getVat()) * 0.01d;
-            totalTax = totalTax + bptp;
             bptp = Math.round(bptp * 100) * 0.01d;
             bptp = Double.valueOf(String.format("%.2f", bptp));
+            totalTax = totalTax + bptp;
             productModel.setBpt_prepayment(bptp);
             productModel.setBptp_amount(String.format("%.2f", bptp));
         } else {
@@ -128,6 +128,9 @@ public class CalculateUtils {
             productModel.setBpt_prepayment(0);
             productModel.setBptp_amount(String.format("%.2f", 0));
         }
+
+        totalTax=Double.valueOf(String.format("%.2f", totalTax));
+
         productModel.setE_tax(Double.valueOf(String.format("%.2f", Math.round((amount) * 100) * 0.01d)));
         productModel.setI_tax(Double.valueOf(String.format("%.2f", Math.round((amount + totalTax) * 100) * 0.01d)));
         sb.delete(0, 1);
@@ -139,9 +142,9 @@ public class CalculateUtils {
         productModel.setTax_due(String.format("%.2f", Math.round((totalTax) * 100) * 0.01d));
         productModel.setTaxable_amount(String.format("%.2f", Math.round((amount) * 100) * 0.01d));
         productModel.setAmount_inc(String.format("%.2f", Math.round((amount + totalTax) * 100) * 0.01d));
-        item.setTotalTax(productModel.getTax_due());
+        item.setTotalTax(String.format("%.2f", Math.round((totalTax-productModel.getFees()) * 100) * 0.01d));
         item.seteTax(productModel.getTaxable_amount());
-        item.setiTax(productModel.getAmount_inc());
+        item.setiTax(String.format("%.2f", Math.round((amount + totalTax-productModel.getFees()) * 100) * 0.01d));
         return productModel;
     }
 

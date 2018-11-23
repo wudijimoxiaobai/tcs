@@ -3,6 +3,7 @@ package com.csscaps.tcs;
 import com.csscaps.tcs.database.table.Invoice;
 import com.suwell.ofd.formsdk.NativeFormer;
 import com.suwell.to.ofd.ofdviewer.OFDView;
+import com.suwell.to.ofd.ofdviewer.listener.OnLoadCompleteListener;
 
 import java.io.File;
 
@@ -10,11 +11,12 @@ import java.io.File;
  * Created by tl on 2018/7/13.
  */
 
-public class ShowOfdUtils {
+public class ShowOfdUtil {
     //生成ofd文件路径
     public static final String OFD_FILE_PATH = "/sdcard/data.ofd";
 
-    public static void showOfd(final Invoice showInvoice, final OFDView mOfdView) {
+    public static void showOfd(final Invoice showInvoice, final OFDView mOfdView,final OnLoadCompleteListener onLoadCompleteListener) {
+
         new Thread() {
             @Override
             public void run() {
@@ -27,6 +29,7 @@ public class ShowOfdUtils {
                     mOfdView.fromFile(file)
                             .defaultPage(0)
                             .swipeHorizontal(true)
+                            .onLoad(onLoadCompleteListener)
                             .load();
                     mOfdView.useBestQuality(true);
                     mOfdView.zoomTo(2.5f);

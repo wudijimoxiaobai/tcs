@@ -240,4 +240,5 @@
     <string name="hit55">it is not time yet for invoice declaration!</string>
     <string name="hit56">Please configure the network firstly! </string>
     <string name="hit57">No printing paper!</string>
+    <string name="hit58">Printing invoice!</string>
 </resources>

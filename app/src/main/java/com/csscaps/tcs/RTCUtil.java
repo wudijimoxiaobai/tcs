@@ -9,7 +9,6 @@ import com.csscaps.tcs.model.RequestData;
 import com.tax.fcr.library.network.Api;
 import com.tax.fcr.library.network.IPresenter;
 import com.tax.fcr.library.network.RequestModel;
-import com.tax.fcr.library.utils.Logger;
 
 import java.util.Date;
 
@@ -25,7 +24,8 @@ public class RTCUtil {
 
     public static Date getRTC() {
         Date date = new Date();
-        base.getRTCTime(date);
+        int iRet=base.getRTCTime(date);
+        if(iRet!=0) getRTC();
         return date;
     }
 

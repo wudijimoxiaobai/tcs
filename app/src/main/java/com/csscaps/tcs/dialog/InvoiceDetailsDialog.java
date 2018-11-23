@@ -21,10 +21,11 @@ import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.RTCUtil;
 import com.csscaps.tcs.SdcardDBUtil;
-import com.csscaps.tcs.ShowOfdUtils;
+import com.csscaps.tcs.ShowOfdUtil;
 import com.csscaps.tcs.Util;
 import com.csscaps.tcs.action.IInvoiceIssuingAction;
 import com.csscaps.tcs.activity.ApplicationListActivity;
+import com.csscaps.tcs.database.SDInvoiceDatabase;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.InvoiceNo;
 import com.csscaps.tcs.database.table.InvoiceNo_Table;
@@ -33,7 +34,6 @@ import com.csscaps.tcs.database.table.ProductModel_Table;
 import com.csscaps.tcs.fragment.ApproveInvoiceFragment;
 import com.csscaps.tcs.fragment.InvoiceDetailsFragment;
 import com.csscaps.tcs.fragment.RequestInvoiceFragment;
-import com.csscaps.tcs.presenter.InvoiceIssuingPresenter;
 import com.csscaps.tcs.service.UploadInvoiceService;
 import com.raizlabs.android.dbflow.structure.database.FlowCursor;
 import com.suwell.to.ofd.ofdviewer.OFDView;
@@ -70,7 +70,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
 
     private int flag;
     private Invoice mInvoice, negativeInvoice, showInvoice;
-    private InvoiceIssuingPresenter mIssuingPresenter;
+//    private InvoiceIssuingPresenter mIssuingPresenter;
 
     public InvoiceDetailsDialog(Invoice invoice) {
         mInvoice = invoice;
@@ -147,8 +147,8 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.add(R.id.content, fragment);
         transaction.commit();
-        mIssuingPresenter = new InvoiceIssuingPresenter(this, getContext());
-        ShowOfdUtils.showOfd(showInvoice, mOfdView);
+//        mIssuingPresenter = new InvoiceIssuingPresenter(this, getContext());
+        ShowOfdUtil.showOfd(showInvoice, mOfdView,null);
     }
 
     @OnClick({R.id.back, R.id.approve, R.id.reject, R.id.issue, R.id.confirm, R.id.upload})
@@ -178,6 +178,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
     private void approve() {
         dismiss();
         mInvoice.setApproveFlag("4");
+        mInvoice.update();
         Subscription subscription = ObserverActionUtils.subscribe(1, ApproveInvoiceFragment.class);
         if (subscription != null) subscription.unsubscribe();
     }
@@ -186,7 +187,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         dismiss();
         mInvoice.setApproveFlag("3");
         mInvoice.update();
-        SdcardDBUtil.saveSDDB(mInvoice);
+        SdcardDBUtil.saveSDDB(mInvoice, SDInvoiceDatabase.class);
         Subscription subscription = ObserverActionUtils.subscribe(0, ApproveInvoiceFragment.class);
         if (subscription != null) subscription.unsubscribe();
     }
@@ -217,7 +218,9 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
 
         @Override
         public void handleMessage(Message msg) {
-            mIssuingPresenter.issuingInvoice(negativeInvoice);
+//            mIssuingPresenter.issuingInvoice(negativeInvoice);
+            PrintInvoiceDialog printInvoiceDialog = new PrintInvoiceDialog(negativeInvoice,InvoiceDetailsDialog.this);
+            printInvoiceDialog.show(getFragmentManager(), "PrintInvoiceDialog");
         }
     };
 
@@ -295,8 +298,8 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         dismiss();
         ToastUtil.showShort(getString(R.string.hit5));
         //备份到sd卡
-        SdcardDBUtil.saveSDDB(negativeInvoice);
-        SdcardDBUtil.saveSDDB(mInvoice);
+        SdcardDBUtil.saveSDDB(negativeInvoice, SDInvoiceDatabase.class);
+        SdcardDBUtil.saveSDDB(mInvoice, SDInvoiceDatabase.class);
     }
 
 

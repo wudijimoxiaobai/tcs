@@ -13,7 +13,6 @@ import com.csscaps.tcs.BuildConfig;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.RTCUtil;
 import com.csscaps.tcs.ServerConstants;
-import com.csscaps.tcs.psam.PSAMUtil;
 import com.tax.fcr.library.network.Api;
 import com.tax.fcr.library.network.IPresenter;
 import com.tax.fcr.library.network.RequestModel;
@@ -132,7 +131,6 @@ public class NetworkConfigurationFragment extends BaseFragment implements IPrese
     public void onSuccess(String requestPath, String objectString) {
         ToastUtil.showLong(getString(R.string.hit40));
 //        mContext.startService(new Intent(mContext, SynchronizeService.class).putExtra("autoSyn", true));
-        PSAMUtil.externalAuthenticate();
         RTCUtil.setRTCFormServer();
     }
 
