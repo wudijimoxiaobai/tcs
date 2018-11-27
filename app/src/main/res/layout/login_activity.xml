@@ -75,6 +75,7 @@
                 android:paddingEnd="5dp"
                 android:paddingStart="5dp"
                 android:textColorHint="@color/hit"
+                android:textCursorDrawable="@null"
                 />
 
             <EditText
@@ -93,6 +94,7 @@
                 android:paddingEnd="5dp"
                 android:paddingStart="5dp"
                 android:textColorHint="@color/hit"
+                android:textCursorDrawable="@null"
                 />
 
             <RelativeLayout

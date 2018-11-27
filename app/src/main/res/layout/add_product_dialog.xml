@@ -100,7 +100,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
-
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -137,6 +137,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -174,6 +175,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -209,6 +211,7 @@
                     android:hint="@string/please_input"
                     android:inputType="numberDecimal"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -244,6 +247,7 @@
                     android:hint="@string/please_input"
                     android:inputType="numberDecimal"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -279,6 +283,7 @@
                     android:hint="@string/please_input"
                     android:inputType="numberDecimal"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -316,6 +321,7 @@
                     android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -352,6 +358,7 @@
                     android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -389,6 +396,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -459,6 +467,7 @@
                     android:gravity="start|top"
                     android:hint="@string/please_input"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>

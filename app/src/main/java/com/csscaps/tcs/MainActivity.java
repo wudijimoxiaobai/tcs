@@ -128,13 +128,12 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
                 startActivity(new Intent(this, OnlineDeclarationActivity.class));
                 break;
             case R.id.statistics:
-              /*  byte b[] = new byte[170];
-                FMUtil.readFM(0, b);
-                Logger.i(0 + " ---readFM---  " + ConvertUtils.bytes2HexString(b));*/
-               /* Invoice invoice=new Invoice();
-                invoice.setInvoice_no(String.valueOf(1));
-                SdcardDBUtil.saveSDDB(invoice, SDInvoiceDatabase.class);
-*/
+//                byte b[] = new byte[170];
+//                FMUtil.readFM(0, b);
+//                Logger.i(0 + " ---readFM---  " + ConvertUtils.bytes2HexString(b));
+//                Invoice invoice=new Invoice();
+//                invoice.setInvoice_no(String.valueOf(1));
+//                SdcardDBUtil.saveSDDB(invoice, SDInvoiceDatabase.class);
                 break;
             case R.id.system_management:
                 startActivity(new Intent(this, SystemManagementActivity.class));

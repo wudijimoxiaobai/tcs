@@ -44,7 +44,7 @@ public class UploadInvoiceService extends Service implements IPresenter {
         if (intent != null) list = (List<Invoice>) intent.getSerializableExtra("list");
         if (list == null)
             list = select().from(Invoice.class).where(Invoice_Table.uploadStatus.eq("0")).queryList();
-        uploadInvoice(list);
+        if (list.size() > 0) uploadInvoice(list);
         return super.onStartCommand(intent, flags, startId);
     }
 

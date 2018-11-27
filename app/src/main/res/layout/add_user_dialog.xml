@@ -97,7 +97,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
-
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -135,6 +135,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -172,6 +173,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -309,6 +311,7 @@
                     android:inputType="number"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -346,6 +349,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -431,6 +435,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>
@@ -469,6 +474,7 @@
                     android:maxLines="1"
                     android:minHeight="100dp"
                     android:padding="10dp"
+                    android:textCursorDrawable="@null"
                     />
 
             </LinearLayout>

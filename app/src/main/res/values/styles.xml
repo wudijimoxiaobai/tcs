@@ -62,4 +62,18 @@
         <item name="android:textSize">@dimen/list_title_text</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="MySwitch" parent="Theme.AppCompat.Light">
+        <!-- Active thumb color & Active track color(30% transparency) switch 打开时的拇指按钮的颜色 轨迹颜色默认为30%这个颜色 -->
+        <item name="colorControlActivated">@color/blue1</item>
+
+        <!-- Inactive thumb color switch关闭时的拇指按钮的颜色 -->
+        <item name="colorSwitchThumbNormal">@android:color/darker_gray</item>
+
+        <!-- Inactive track color(30% transparency) switch关闭时的轨迹的颜色 30%这个颜色 -->
+        <item name="android:colorForeground">@android:color/darker_gray</item>
+
+        <!--使用方法：  在布局文件中给需要自定义控件中增加 android:theme="@style/MySwitch"
+                       如果是 SwitchCompat 控件，则是增加 app:theme="@style/MySwitch"     -->
+    </style>
 </resources>
