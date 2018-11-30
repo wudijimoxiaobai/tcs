@@ -49,15 +49,21 @@ public class Product extends BaseModel implements Serializable {
     String relatedTaxItemString;
 
     @Column
+    String unitDiscountPercentage;
+
+    @Column
+    String unitDiscountAmount;
+
+    @Column
     String commission;
 
     String quantity;
 
-    String totalTax="0";
+    String totalTax = "0";
 
-    String eTax="0";
+    String eTax = "0";
 
-    String iTax="0";
+    String iTax = "0";
 
     ProductModel mProductModel;
 
@@ -195,5 +201,21 @@ public class Product extends BaseModel implements Serializable {
 
     public void setProductModel(ProductModel productModel) {
         mProductModel = productModel;
+    }
+
+    public String getUnitDiscountPercentage() {
+        return unitDiscountPercentage;
+    }
+
+    public void setUnitDiscountPercentage(String unitDiscountPercentage) {
+        this.unitDiscountPercentage = unitDiscountPercentage;
+    }
+
+    public String getUnitDiscountAmount() {
+        return unitDiscountAmount;
+    }
+
+    public void setUnitDiscountAmount(String unitDiscountAmount) {
+        this.unitDiscountAmount = unitDiscountAmount;
     }
 }

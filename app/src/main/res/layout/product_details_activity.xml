@@ -236,6 +236,90 @@
                         android:layout_weight="1"
                         android:gravity="end"
                         android:padding="10dp"
+                        android:text="@string/unit_discount_percentage"
+                        />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/divider"
+                        />
+
+                    <TextView
+                        android:id="@+id/unit_discount_percentage"
+                        style="@style/list_item_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="0.3"
+                        android:gravity="start|center_vertical"
+                        android:padding="10dp"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        style="@style/list_tile_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:padding="10dp"
+                        android:text="@string/unit_discount_amount"
+                        />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/divider"
+                        />
+
+                    <TextView
+                        android:id="@+id/unit_discount_amount"
+                        style="@style/list_item_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="0.3"
+                        android:gravity="start|center_vertical"
+                        android:padding="10dp"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        style="@style/list_tile_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:padding="10dp"
                         android:text="@string/percentage"
                         />
 

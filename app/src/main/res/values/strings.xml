@@ -181,7 +181,8 @@
     <string name="automatic">Automatic</string>
     <string name="compulsory">Compulsory</string>
     <string name="declare">Declare</string>
-
+    <string name="unit_discount_amount">Unit Discount Amount</string>
+    <string name="unit_discount_percentage">Unit Discount Percentage</string>
 
     <string name="hit1">The username or password is not correct!</string>
     <string name="hit2">Please add product(s)!</string>

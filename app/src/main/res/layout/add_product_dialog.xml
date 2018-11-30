@@ -215,6 +215,74 @@
                     />
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    style="@style/list_tile_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:padding="10dp"
+                    android:text="@string/unit_discount_percentage"
+                    />
+
+                <EditText
+                    android:id="@+id/unit_discount_percentage"
+                    style="@style/list_item_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="0.345"
+                    android:background="@drawable/edit_bg"
+                    android:gravity="start|center_vertical"
+                    android:hint="@string/please_input"
+                    android:inputType="numberDecimal"
+                    android:padding="10dp"
+                    android:textCursorDrawable="@null"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    style="@style/list_tile_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:padding="10dp"
+                    android:text="@string/unit_discount_amount"
+                    />
+
+                <EditText
+                    android:id="@+id/unit_discount_amount"
+                    style="@style/list_item_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="0.345"
+                    android:background="@drawable/edit_bg"
+                    android:gravity="start|center_vertical"
+                    android:hint="@string/please_input"
+                    android:inputType="numberDecimal"
+                    android:padding="10dp"
+                    android:textCursorDrawable="@null"
+                    />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -27,6 +27,8 @@
         android:layout_weight="1"
         android:gravity="center"
         style="@style/list_item_text"
+        android:ellipsize="end"
+        android:lines="1"
         />
 
     <TextView
@@ -36,6 +38,8 @@
         android:layout_weight="1"
         android:gravity="center"
         style="@style/list_item_text"
+        android:ellipsize="end"
+        android:lines="1"
         />
 
     <TextView

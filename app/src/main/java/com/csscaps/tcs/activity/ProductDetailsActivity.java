@@ -46,6 +46,10 @@ public class ProductDetailsActivity extends BaseDetailsActivity<Product> {
     TextView mRelatedTaxItems;
     @BindView(R.id.specification)
     TextView mSpecification;
+    @BindView(R.id.unit_discount_percentage)
+    TextView mUnitDiscountPercentage;
+    @BindView(R.id.unit_discount_amount)
+    TextView mUnitDiscountAmount;
 
     private Product mProduct;
 

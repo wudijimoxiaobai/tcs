@@ -56,6 +56,10 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
     EditText mCommission;
     @BindView(R.id.specification)
     EditText mSpecification;
+    @BindView(R.id.unit_discount_percentage)
+    EditText mUnitDiscountPercentage;
+    @BindView(R.id.unit_discount_amount)
+    EditText mUnitDiscountAmount;
 
     @Override
     protected int getLayoutId() {
@@ -63,11 +67,12 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
     }
 
     protected void initView() {
-        InputFilter inputFilter[]=new InputFilter[]{new DecimalDigitsInputFilter(2)};
+        InputFilter inputFilter[] = new InputFilter[]{new DecimalDigitsInputFilter(2)};
         mPrice.setFilters(inputFilter);
         mFixedAmount.setFilters(inputFilter);
         mPurchase.setFilters(inputFilter);
         mCommission.setFilters(inputFilter);
+        mUnitDiscountAmount.setFilters(inputFilter);
 
         if (t == null) t = new Product();
         ObserverActionUtils.addAction(this);
