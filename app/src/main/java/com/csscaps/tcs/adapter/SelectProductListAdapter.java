@@ -27,7 +27,7 @@ import java.util.List;
 public class SelectProductListAdapter extends QuickAdapter<Product> implements TextWatcher {
 
     private List<Product> checkedList = new ArrayList<>();
-    private InputFilter inputFilter[]=new InputFilter[]{new DecimalDigitsInputFilter(2)};
+    private InputFilter inputFilter[] = new InputFilter[]{new DecimalDigitsInputFilter(2)};
     private CheckBox mCheckBox;
 
     public SelectProductListAdapter(Context context, int layoutResId, List<Product> data) {
@@ -41,22 +41,41 @@ public class SelectProductListAdapter extends QuickAdapter<Product> implements T
         helper.setText(R.id.unit, item.getUnit());
 
         final EditText quantity = helper.getView(R.id.quantity);
-        final EditText price = helper.getView(R.id.price);
+        final EditText priceET = helper.getView(R.id.price);
         final CheckBox checkBox = helper.getView(R.id.checkbox);
-        AppTools.expandViewTouchDelegate(checkBox,100,100,100,100);
+        AppTools.expandViewTouchDelegate(checkBox, 100, 100, 100, 100);
         quantity.setFilters(inputFilter);
-        price.setFilters(inputFilter);
+        priceET.setFilters(inputFilter);
         quantity.setText(item.getQuantity());
-        price.setText(item.getPrice());
-        if(TextUtils.isEmpty(item.getPrice())){
-            price.setEnabled(true);
-        }else  price.setEnabled(false);
+
+        String priceStr = item.getPrice();
+        String unitDiscountPercentageStr = item.getUnitDiscountPercentage();
+        String unitDiscountAmountStr = item.getUnitDiscountAmount();
+        double price = TextUtils.isEmpty(priceStr) ? 0 : Double.valueOf(priceStr);
+        double unitDiscountPercentage = TextUtils.isEmpty(unitDiscountPercentageStr) ? 0 : Double.valueOf(unitDiscountPercentageStr);
+        double unitDiscountAmount = TextUtils.isEmpty(unitDiscountAmountStr) ? 0 : Double.valueOf(unitDiscountAmountStr);
+        if (price != 0) {
+            if (unitDiscountAmount != 0) {
+                price = price - unitDiscountAmount;
+            }
+
+            if (unitDiscountPercentage != 0) {
+                price = price * unitDiscountPercentage / 100;
+            }
+
+            price = Math.round(price * 100) * 0.01d;
+        }
+
+        priceET.setText(String.format("%.2f", price));
+        if (TextUtils.isEmpty(item.getPrice())) {
+            priceET.setEnabled(true);
+        } else priceET.setEnabled(false);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     if (!checkedList.contains(item)) {
-                        item.setPrice(price.getText().toString().trim());
+                        item.setPrice(priceET.getText().toString().trim());
                         item.setQuantity(quantity.getText().toString().trim());
                         checkedList.add(item);
 //                        Logger.i("quantity " + quantity.getText().toString().trim());
@@ -81,25 +100,25 @@ public class SelectProductListAdapter extends QuickAdapter<Product> implements T
         quantity.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-             if(b){
-                 mCheckBox=checkBox;
-             }
+                if (b) {
+                    mCheckBox = checkBox;
+                }
 
             }
         });
-        price.setOnFocusChangeListener(null);
-        price.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        priceET.setOnFocusChangeListener(null);
+        priceET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if(b){
-                    mCheckBox=checkBox;
+                if (b) {
+                    mCheckBox = checkBox;
                 }
             }
         });
 
-        price.removeTextChangedListener(this);
+        priceET.removeTextChangedListener(this);
         quantity.removeTextChangedListener(this);
-        price.addTextChangedListener(this);
+        priceET.addTextChangedListener(this);
         quantity.addTextChangedListener(this);
     }
 
@@ -120,7 +139,7 @@ public class SelectProductListAdapter extends QuickAdapter<Product> implements T
 
     @Override
     public void afterTextChanged(Editable editable) {
-        if (mCheckBox!=null&&mCheckBox.isChecked()) {
+        if (mCheckBox != null && mCheckBox.isChecked()) {
             mCheckBox.setChecked(false);
             mCheckBox.setChecked(true);
         }

@@ -117,7 +117,7 @@ public class CalculateUtils {
         // BPTPrepayment= BPTPrepayment+ (item.StampDutyLocal + item.stampDutyFederal + item.Fee + item.BPTFinal + item.VatAmount) * 0.01；
         if ("Y".equals(myTaxpayer.getWithholding())) {
             totalTax -= productModel.getBpt_prepayment();
-            double bptp =productModel.getBpt_prepayment()+ (productModel.getBpt_final() + productModel.getFees() + productModel.getStamp_duty_local() + productModel.getStamp_duty_federal() + productModel.getVat()) * 0.01d;
+            double bptp = productModel.getBpt_prepayment() + (productModel.getBpt_final() + productModel.getFees() + productModel.getStamp_duty_local() + productModel.getStamp_duty_federal() + productModel.getVat()) * 0.01d;
             bptp = Math.round(bptp * 100) * 0.01d;
             bptp = Double.valueOf(String.format("%.2f", bptp));
             totalTax = totalTax + bptp;
@@ -129,22 +129,22 @@ public class CalculateUtils {
             productModel.setBptp_amount(String.format("%.2f", 0));
         }
 
-        totalTax=Double.valueOf(String.format("%.2f", totalTax));
+        totalTax = Double.valueOf(String.format("%.2f", totalTax));
 
         productModel.setE_tax(Double.valueOf(String.format("%.2f", Math.round((amount) * 100) * 0.01d)));
         productModel.setI_tax(Double.valueOf(String.format("%.2f", Math.round((amount + totalTax) * 100) * 0.01d)));
         sb.delete(0, 1);
         productModel.setQty(item.getQuantity());
-        productModel.setUnit_price(item.getPrice());
+        productModel.setUnit_price(String.valueOf(price));
         productModel.setTaxtype(sb.toString());
         productModel.setItem_name(item.getProductName());
         productModel.setUnit(item.getUnit());
         productModel.setTax_due(String.format("%.2f", Math.round((totalTax) * 100) * 0.01d));
         productModel.setTaxable_amount(String.format("%.2f", Math.round((amount) * 100) * 0.01d));
         productModel.setAmount_inc(String.format("%.2f", Math.round((amount + totalTax) * 100) * 0.01d));
-        item.setTotalTax(String.format("%.2f", Math.round((totalTax-productModel.getFees()) * 100) * 0.01d));
+        item.setTotalTax(String.format("%.2f", Math.round((totalTax - productModel.getFees()) * 100) * 0.01d));
         item.seteTax(productModel.getTaxable_amount());
-        item.setiTax(String.format("%.2f", Math.round((amount + totalTax-productModel.getFees()) * 100) * 0.01d));
+        item.setiTax(String.format("%.2f", Math.round((amount + totalTax - productModel.getFees()) * 100) * 0.01d));
         return productModel;
     }
 
@@ -163,16 +163,15 @@ public class CalculateUtils {
         String percentageStr = item.getPercentage();
         String commissionStr = item.getCommission();
 
-        float price = TextUtils.isEmpty(priceStr) ? 0 : Float.valueOf(priceStr);
-        float quantity = TextUtils.isEmpty(quantityStr) ? 0 : Float.valueOf(quantityStr);
-        float fixedAmount = TextUtils.isEmpty(fixedAmountStr) ? 0 : Float.valueOf(fixedAmountStr);
-        float purchase = TextUtils.isEmpty(purchaseStr) ? 0 : Float.valueOf(purchaseStr);
-        float p = TextUtils.isEmpty(pStr) ? 0 : Float.valueOf(pStr);
-        float c = TextUtils.isEmpty(cStr) ? 0 : Float.valueOf(cStr);
-        float r = TextUtils.isEmpty(rStr) ? 0 : Float.valueOf(rStr);
-        float percentage = TextUtils.isEmpty(percentageStr) ? 0 : Float.valueOf(percentageStr);
-        float commission = TextUtils.isEmpty(commissionStr) ? 0 : Float.valueOf(commissionStr);
-
+        double price = TextUtils.isEmpty(priceStr) ? 0 : Double.valueOf(priceStr);
+        double quantity = TextUtils.isEmpty(quantityStr) ? 0 : Double.valueOf(quantityStr);
+        double fixedAmount = TextUtils.isEmpty(fixedAmountStr) ? 0 : Double.valueOf(fixedAmountStr);
+        double purchase = TextUtils.isEmpty(purchaseStr) ? 0 : Double.valueOf(purchaseStr);
+        double p = TextUtils.isEmpty(pStr) ? 0 : Double.valueOf(pStr);
+        double c = TextUtils.isEmpty(cStr) ? 0 : Double.valueOf(cStr);
+        double r = TextUtils.isEmpty(rStr) ? 0 : Double.valueOf(rStr);
+        double percentage = TextUtils.isEmpty(percentageStr) ? 0 : Double.valueOf(percentageStr);
+        double commission = TextUtils.isEmpty(commissionStr) ? 0 : Double.valueOf(commissionStr);
         boolean isTaxIn = false;
         if ("Y".equals(taxMethod.getIs_tax_included())) {
             isTaxIn = true;
@@ -210,8 +209,8 @@ public class CalculateUtils {
      * @param fixedAmount 定额
      * @return
      */
-    private static double getTaxByITEM(String taxTypeCode, String amtQtyMode, boolean isTaxIn, float price, float quantity, float purchase, float p, float c, float r, float percentage, float commission, float fixedAmount) {
-        float tax = 0;
+    private static double getTaxByITEM(String taxTypeCode, String amtQtyMode, boolean isTaxIn, double price, double quantity, double purchase, double p, double c, double r, double percentage, double commission, double fixedAmount) {
+        double tax = 0;
         switch (amtQtyMode) {
             case AMT:
                 switch (taxTypeCode) {

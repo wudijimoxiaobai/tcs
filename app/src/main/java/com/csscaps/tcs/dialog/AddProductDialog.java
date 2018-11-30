@@ -1,7 +1,9 @@
 package com.csscaps.tcs.dialog;
 
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -72,7 +74,9 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
         mFixedAmount.setFilters(inputFilter);
         mPurchase.setFilters(inputFilter);
         mCommission.setFilters(inputFilter);
+        mPercentage.setFilters(inputFilter);
         mUnitDiscountAmount.setFilters(inputFilter);
+        mUnitDiscountPercentage.setFilters(inputFilter);
 
         if (t == null) t = new Product();
         ObserverActionUtils.addAction(this);
@@ -84,6 +88,39 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
             call(relatedTaxItem);
         }
 
+        mUnitDiscountAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(!TextUtils.isEmpty(charSequence.toString().trim())){
+                    mUnitDiscountPercentage.setText(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        mUnitDiscountPercentage.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(!TextUtils.isEmpty(charSequence.toString().trim())){
+                    mUnitDiscountAmount.setText(null);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
     }
 
     @Override
