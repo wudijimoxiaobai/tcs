@@ -1,8 +1,10 @@
 package com.csscaps.tcs;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -46,6 +48,8 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        mPassword.setTypeface(Typeface.DEFAULT);
+        mPassword.setTransformationMethod(new PasswordTransformationMethod());
         mSpinner.setDropDownVerticalOffset(DeviceUtils.dip2Px(this, 50));
         mSpinner.setSelection(AppSP.getInt("language", 0));
         mSpinner.setOnItemSelectedListener(this);
