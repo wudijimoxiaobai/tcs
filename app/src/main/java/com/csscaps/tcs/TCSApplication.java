@@ -54,9 +54,9 @@ public class TCSApplication extends BaseApplication {
         addOfdTemplate();
         SecurityRequestBodyConverter.mClass = SecurityResponseBodyConverter.mClass = PSAMUtil.class;
         FMUtil.init();
+        Logger.i(" ******application onCreate******");
         SdcardUtil.sdcardSetPassword();
 //        registerActivityLifecycleCallbacks();
-        unlockSdcard();
     }
 
     /**

@@ -66,6 +66,7 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        TCSApplication.unlockSdcard();
         initSdDB();
         mUser.setText(name);
         mHandler.sendEmptyMessage(0);
@@ -159,6 +160,7 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
             @Override
             public void handleMessage(Message msg) {
                 SdcardUtil.lockSdcard();
+                ObserverActionUtils.removeAction(MainActivity.this);
                 finish();
                 System.exit(0);
             }

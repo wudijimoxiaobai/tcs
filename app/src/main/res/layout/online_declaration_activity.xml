@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:drawableStart="@mipmap/declare"
-            android:layout_toStartOf="@+id/upload"
+            android:layout_alignParentEnd="true"
             android:gravity="center"
             android:text="@string/declare"
             android:paddingEnd="15dp"
@@ -56,6 +56,7 @@
             android:layout_height="match_parent"
             android:layout_toStartOf="@+id/upload"
             android:background="#7a95b3"
+            android:visibility="gone"
             />
         <TextView
             style="@style/text"
@@ -68,12 +69,14 @@
             android:text="@string/upload"
             android:paddingEnd="15dp"
             android:paddingStart="5dp"
+            android:visibility="gone"
             />
         <View
             android:layout_width="1px"
             android:layout_height="match_parent"
             android:layout_toStartOf="@+id/synchronize"
             android:background="#7a95b3"
+            android:visibility="gone"
             />
 
         <TextView
@@ -86,6 +89,7 @@
             android:gravity="center"
             android:paddingStart="5dp"
             android:text="@string/synchronize"
+            android:visibility="gone"
             />
 
     </RelativeLayout>
