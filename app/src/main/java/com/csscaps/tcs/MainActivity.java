@@ -20,7 +20,10 @@ import com.csscaps.tcs.activity.OnlineDeclarationActivity;
 import com.csscaps.tcs.activity.SystemManagementActivity;
 import com.csscaps.tcs.dialog.ExitDialog;
 import com.csscaps.tcs.dialog.SynDataDialog;
+import com.csscaps.tcs.service.InvoiceNoService;
+import com.csscaps.tcs.service.ReportDataService;
 import com.csscaps.tcs.service.SynchronizeService;
+import com.csscaps.tcs.service.UploadInvoiceService;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.tax.fcr.library.network.Api;
 
@@ -160,7 +163,12 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
             @Override
             public void handleMessage(Message msg) {
                 SdcardUtil.lockSdcard();
-                ObserverActionUtils.removeAction(MainActivity.this);
+                ObserverActionUtils.mapAction.clear();
+                ((TCSApplication)TCSApplication.getAppContext()).cancelTimer();
+                stopService(new Intent(TCSApplication.getAppContext(), SynchronizeService.class));
+                stopService(new Intent(TCSApplication.getAppContext(), UploadInvoiceService.class));
+                stopService(new Intent(TCSApplication.getAppContext(), InvoiceNoService.class));
+                stopService(new Intent(TCSApplication.getAppContext(), ReportDataService.class));
                 finish();
                 System.exit(0);
             }

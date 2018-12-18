@@ -107,6 +107,10 @@ public class TCSApplication extends BaseApplication {
         timer.schedule(new MyTimerTask(), 500, (long) (DateUtils.HOUR_OF_MILLISECOND * 0.5));
     }
 
+    public void cancelTimer() {
+        timer.cancel();
+    }
+
     /**
      * 添加ofd模板
      */
@@ -213,7 +217,6 @@ public class TCSApplication extends BaseApplication {
     }
 
 
-
     private int mFinalCount;
 
     private void registerActivityLifecycleCallbacks() {
@@ -269,7 +272,7 @@ public class TCSApplication extends BaseApplication {
     }
 
 
-    public static void unlockSdcard(){
+    public static void unlockSdcard() {
 
         //说明从后台回到了前台
         SdcardDBUtil.cachedThreadPool.execute(new Runnable() {
@@ -298,4 +301,6 @@ public class TCSApplication extends BaseApplication {
             }
         });
     }
+
+
 }
