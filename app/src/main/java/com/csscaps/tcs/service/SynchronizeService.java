@@ -94,7 +94,9 @@ public class SynchronizeService extends Service implements IPresenter {
      * 同步纳税人
      */
     private void synTaxpayer() {
+        RequestData.sellerid = null;
         synData(ServerConstants.ATCS002);
+        RequestData.sellerid = AppSP.getString("sellerid");
     }
 
     /**
