@@ -17,6 +17,7 @@ import com.csscaps.tcs.R;
 import com.csscaps.tcs.RTCUtil;
 import com.csscaps.tcs.ServerConstants;
 import com.csscaps.tcs.Util;
+import com.csscaps.tcs.database.TaxpayerDatabase;
 import com.csscaps.tcs.database.TcsDatabase;
 import com.csscaps.tcs.database.table.ControlData;
 import com.csscaps.tcs.database.table.InvoiceTaxType;
@@ -24,13 +25,16 @@ import com.csscaps.tcs.database.table.InvoiceType;
 import com.csscaps.tcs.database.table.TaxItem;
 import com.csscaps.tcs.database.table.TaxMethod;
 import com.csscaps.tcs.database.table.TaxType;
+import com.csscaps.tcs.database.table.Taxpayer;
 import com.csscaps.tcs.model.MyTaxpayer;
+import com.csscaps.tcs.model.ReceiveAllTaxpayer;
 import com.csscaps.tcs.model.ReceiveInvoiceTaxType;
 import com.csscaps.tcs.model.ReceiveInvoiceType;
 import com.csscaps.tcs.model.ReceiveTaxItem;
 import com.csscaps.tcs.model.ReceiveTaxMethod;
 import com.csscaps.tcs.model.ReceiveTaxType;
 import com.csscaps.tcs.model.ReportDataModel;
+import com.csscaps.tcs.model.RequestAllTaxpayer;
 import com.csscaps.tcs.model.RequestData;
 import com.csscaps.tcs.model.RequestReportData;
 import com.raizlabs.android.dbflow.config.FlowManager;
@@ -85,6 +89,7 @@ public class SynchronizeService extends Service implements IPresenter {
         synTaxItem();
         synInvoiceTaxType();
         synTaxMethod();
+        synAllTaxpayer();
         if (!AppSP.getBoolean("ControlData")) synControlData();
         new MyTimerTask().run();
     }
@@ -144,6 +149,18 @@ public class SynchronizeService extends Service implements IPresenter {
         requestModel.setFuncid(requestReportData.getFuncid());
         requestReportData.setDevicesn(requestModel.getDevicesn());
         requestModel.setData(JSON.toJSONString(requestReportData));
+        Api.post(this, requestModel);
+    }
+
+    /*全国纳税人信息同步*/
+    private void synAllTaxpayer() {
+        RequestAllTaxpayer requestAllTaxpayer = new RequestAllTaxpayer();
+        requestAllTaxpayer.setData(AppSP.getString("synAllTaxpayerDate"));
+        requestAllTaxpayer.setFuncid(ServerConstants.ATCS021);
+        RequestModel requestModel = new RequestModel();
+        requestModel.setFuncid(requestAllTaxpayer.getFuncid());
+        requestAllTaxpayer.setDevicesn(requestModel.getDevicesn());
+        requestModel.setData(JSON.toJSONString(requestAllTaxpayer));
         Api.post(this, requestModel);
     }
 
@@ -251,6 +268,28 @@ public class SynchronizeService extends Service implements IPresenter {
                         .execute();
 
                 break;
+            case ServerConstants.ATCS021:
+                final ReceiveAllTaxpayer receiveAllTaxpayer = JSON.parseObject(objectString, ReceiveAllTaxpayer.class);
+                List<Taxpayer> data = receiveAllTaxpayer.getData();
+                if (data != null && data.size() > 0) {
+                    FlowManager.getDatabase(TaxpayerDatabase.class)
+                            .beginTransactionAsync(new ProcessModelTransaction.Builder<>(
+                                    new ProcessModelTransaction.ProcessModel<Taxpayer>() {
+                                        @Override
+                                        public void processModel(Taxpayer model, DatabaseWrapper wrapper) {
+                                            model.save();
+                                        }
+                                    }).addAll(data).build())
+                            .success(new Transaction.Success() {
+                                @Override
+                                public void onSuccess(@NonNull Transaction transaction) {
+                                    AppSP.putString("synAllTaxpayerDate", receiveAllTaxpayer.getLast_update_time());
+                                }
+                            })
+                            .build()
+                            .execute();
+                }
+                break;
             case ServerConstants.ATCS023:
                 RequestReportData requestReportData = JSON.parseObject(objectString, RequestReportData.class);
                 List<ControlData> list = new ArrayList<>();
@@ -297,12 +336,12 @@ public class SynchronizeService extends Service implements IPresenter {
             }
         }
         c++;
-        if (requestPath.equals(ServerConstants.ATCS002)) c = 6;
+        if (requestPath.equals(ServerConstants.ATCS002)) c = 8;
         complete();
     }
 
     private void complete() {
-        if (c == 6 && !autoSyn) {
+        if (c == 8 && !autoSyn) {
             Subscription subscription = ObserverActionUtils.subscribe(0, MainActivity.class);
             if (subscription != null) subscription.unsubscribe();
             c = 0;

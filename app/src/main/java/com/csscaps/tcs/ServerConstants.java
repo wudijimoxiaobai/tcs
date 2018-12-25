@@ -35,6 +35,8 @@ public interface ServerConstants {
     final String ATCS018 = "ATCS018";
     /*负数发票申请结果下载*/
     final String ATCS019 = "ATCS019";
+    /*全国纳税人同步*/
+    final String ATCS021 = "ATCS021";
     /*抄报*/
     final String ATCS023 = "ATCS023";
     /*psam卡外部认证*/

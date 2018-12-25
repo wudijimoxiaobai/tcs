@@ -56,6 +56,9 @@ public class TCSApplication extends BaseApplication {
         FMUtil.init();
         Logger.i(" ******application onCreate******");
         SdcardUtil.sdcardSetPassword();
+        if(TextUtils.isEmpty( AppSP.getString("synAllTaxpayerDate"))){
+            AppSP.putString("synAllTaxpayerDate",BuildConfig.initAllTaxpayerDate );
+        }
 //        registerActivityLifecycleCallbacks();
     }
 
