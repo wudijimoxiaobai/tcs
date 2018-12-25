@@ -179,7 +179,7 @@ public class GeneratingXMLFileUtils {
         sb.append(str);
 
         //设备sn号
-        str = "80249001000048";
+        str = RequestModel.devicesn;
         str = AppTools.fillZero(str, 14);
         sb.append(str);
 
@@ -203,16 +203,6 @@ public class GeneratingXMLFileUtils {
 //        decode(content);
         Bitmap bitmap = QRCodeUtil.createQRCodeBitmap(content, 200, 200);
         bytes = BitmapUtil.Bitmap2Bytes(bitmap);
-//        File f=new File("/sdcard/qr.jpg");
-//        try {
-//           if(!f.exists()) f.createNewFile();
-//            FileOutputStream fos=new FileOutputStream(f);
-//            fos.write(bytes);
-//            fos.flush();
-//            fos.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         return SecurityUtil.base64Encode2String(bytes);
     }
 
