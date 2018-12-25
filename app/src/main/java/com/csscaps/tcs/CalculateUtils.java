@@ -63,7 +63,7 @@ public class CalculateUtils {
         RelatedTaxItem relatedTaxItem = JSON.parseObject(relateTaxItemString, RelatedTaxItem.class);
         List<TaxItem> mTaxItemList = relatedTaxItem.getTaxItemList();
         StringBuffer sb = new StringBuffer();
-        StringBuffer sb1 = new StringBuffer();
+//        StringBuffer sb1 = new StringBuffer();
         String priceStr = item.getPrice();
         String quantityStr = item.getQuantity();
         double price = TextUtils.isEmpty(priceStr) ? 0 : Double.valueOf(priceStr);
@@ -72,7 +72,7 @@ public class CalculateUtils {
         double totalTax = 0;
         for (TaxItem taxItem : mTaxItemList) {
             String taxTypeUid = taxItem.getTaxtype_uid();
-            String taxableItemUid = taxItem.getTaxable_item_uid();
+//            String taxableItemUid = taxItem.getTaxable_item_uid();
             String invoiceTypeUid = InvoiceIssuingActivity.mInvoice.getInvoice_type_uid();
             InvoiceTaxType invoiceTaxType = select().from(InvoiceTaxType.class).where(InvoiceTaxType_Table.invoice_type_uid.eq(invoiceTypeUid)).and(InvoiceTaxType_Table.taxtype_uid.eq(taxTypeUid)).querySingle();
             if (invoiceTaxType == null) continue;
@@ -84,7 +84,7 @@ public class CalculateUtils {
             tax = Double.valueOf(String.format("%.2f", tax));
             totalTax += tax;
             sb.append("," + taxTypeUid);
-            sb1.append("," + taxableItemUid);
+//            sb1.append("," + taxableItemUid);
 
             switch (taxTypeCode) {
                 case VAT:
@@ -137,11 +137,11 @@ public class CalculateUtils {
         productModel.setE_tax(Double.valueOf(String.format("%.2f", Math.round((amount) * 100) * 0.01d)));
         productModel.setI_tax(Double.valueOf(String.format("%.2f", Math.round((amount + totalTax) * 100) * 0.01d)));
         sb.delete(0, 1);
-        sb1.delete(0, 1);
+//        sb1.delete(0, 1);
         productModel.setQty(item.getQuantity());
         productModel.setUnit_price(String.valueOf(price));
         productModel.setTaxtype(sb.toString());
-        productModel.setTaxable_item_uid(sb1.toString());
+//        productModel.setTaxable_item_uid(sb1.toString());
         productModel.setItem_name(item.getProductName());
         productModel.setUnit(item.getUnit());
         productModel.setTax_due(String.format("%.2f", Math.round((totalTax) * 100) * 0.01d));

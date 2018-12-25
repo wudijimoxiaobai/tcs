@@ -340,6 +340,8 @@
                         android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
+                        android:lines="1"
+                        android:ellipsize="end"
                         />
 
                 </LinearLayout>
@@ -426,6 +428,9 @@
                         android:background="@drawable/bg2"
                         android:gravity="center_vertical|start"
                         android:padding="10dp"
+                        android:lines="1"
+                        android:ellipsize="end"
+
                         />
 
                     <TextView

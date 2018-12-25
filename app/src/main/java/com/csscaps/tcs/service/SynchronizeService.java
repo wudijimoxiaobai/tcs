@@ -336,12 +336,12 @@ public class SynchronizeService extends Service implements IPresenter {
             }
         }
         c++;
-        if (requestPath.equals(ServerConstants.ATCS002)) c = 8;
+        if (requestPath.equals(ServerConstants.ATCS002)) c = 7;
         complete();
     }
 
     private void complete() {
-        if (c == 8 && !autoSyn) {
+        if (c == 7 && !autoSyn) {
             Subscription subscription = ObserverActionUtils.subscribe(0, MainActivity.class);
             if (subscription != null) subscription.unsubscribe();
             c = 0;
