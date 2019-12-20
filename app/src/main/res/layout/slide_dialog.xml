@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/slide_layout_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnpre"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:background="@null" />
+
+        <TextView
+            android:id="@+id/tvmonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_toRightOf="@id/tvmonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <ImageButton
+            android:id="@+id/btngo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@null" />
+    </RelativeLayout>
+
+    <com.csscaps.tcs.utils.MyCalendar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/mycalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:dateformat="MM yyyy"
+        app:dayInMonthColor="#FFFFFF"
+        app:dayOutMonthcolor="#00A05f"
+        app:titleColor="@color/colorAccent"
+        app:titleSize="18sp"
+        app:todayColor="#0fefef"
+        app:todayEmptycircleColor="#ffa0e0"
+        app:todayFillcircleColor="#ffa0e0">
+
+    </com.csscaps.tcs.utils.MyCalendar>
+
+</LinearLayout>

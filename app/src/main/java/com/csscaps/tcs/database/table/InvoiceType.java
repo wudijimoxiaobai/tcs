@@ -11,6 +11,32 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 @Table(database = TcsDatabase.class)
 public class InvoiceType extends BaseModel {
+    @Override
+    public String toString() {
+        return "InvoiceType{" +
+                "invoice_type_uid='" + invoice_type_uid + '\'' +
+                ", invoice_type_name='" + invoice_type_name + '\'' +
+                ", invoice_type_code='" + invoice_type_code + '\'' +
+                ", invioce_template_uid='" + invioce_template_uid + '\'' +
+                ", specification='" + specification + '\'' +
+                ", suite_qty='" + suite_qty + '\'' +
+                ", copies='" + copies + '\'' +
+                ", price='" + price + '\'' +
+                ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
+                ", all_industries='" + all_industries + '\'' +
+                ", all_scales='" + all_scales + '\'' +
+                ", all_categories='" + all_categories + '\'' +
+                ", release_date='" + release_date + '\'' +
+                ", release_user_id='" + release_user_id + '\'' +
+                ", crt_datetime='" + crt_datetime + '\'' +
+                ", insert_user_id='" + insert_user_id + '\'' +
+                ", last_mod_datetime='" + last_mod_datetime + '\'' +
+                ", last_mod_user_id='" + last_mod_user_id + '\'' +
+                ", calculate_method='" + calculate_method + '\'' +
+                ", invoiceObject=" + invoiceObject +
+                '}';
+    }
 
     /**
      * invoice_type_uid : xxx

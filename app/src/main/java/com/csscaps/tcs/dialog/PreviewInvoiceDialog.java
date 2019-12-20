@@ -3,6 +3,7 @@ package com.csscaps.tcs.dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,7 @@ public class PreviewInvoiceDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.preview_invoice_dialog, null);
         ButterKnife.bind(this, view);
+        Log.e("iss",invoice.toString());
         ShowOfdUtil.showOfd(invoice,mOfdView,null);
         return view;
     }
@@ -54,10 +56,11 @@ public class PreviewInvoiceDialog extends DialogFragment {
     public void onResume() {
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
-        dialogWindow.setGravity(Gravity.END);
-        int width =  (int)(DeviceUtils.getScreenWidth(getContext())*2f/5f);
-        dialogWindow.setLayout(width, -1);
-        dialogWindow.setWindowAnimations(R.style.dialog_right_anim);
+        dialogWindow.setGravity(Gravity.CENTER);
+        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 1f);
+        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 1f);
+        dialogWindow.setLayout(width, height);
+        dialogWindow.setWindowAnimations(R.style.scale_anim);
     }
 
     @OnClick({R.id.back, R.id.cancel})

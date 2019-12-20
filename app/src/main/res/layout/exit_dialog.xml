@@ -33,7 +33,7 @@
             android:background="@drawable/bg17"
             android:gravity="center"
             android:text="@string/cancel"
-            android:textColor="@color/white"
+            android:textColor="@color/new_text4"
             android:textSize="@dimen/text"
             />
 

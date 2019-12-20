@@ -1,6 +1,7 @@
 package com.csscaps.tcs.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.widget.CheckBox;
@@ -15,11 +16,7 @@ import com.csscaps.tcs.database.table.TaxType;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by tl on 2018/5/10.
- */
-
-public class TaxTypeSelectAdapter extends QuickAdapter<TaxType> {
+public class TaxTypeSelectAdapter  extends QuickAdapter<TaxType> {
 
     private int mSelectedPosition = -1;
     private CheckBox mCheckBox;
@@ -37,6 +34,7 @@ public class TaxTypeSelectAdapter extends QuickAdapter<TaxType> {
         final TextView textView = helper.getView(R.id.text);
         final CheckBox checkBox = helper.getView(R.id.checkbox);
         textView.setText(item.getTaxtype_name());
+        textView.setTextColor(Color.WHITE);
         if ("N".equals(item.getIs_taxable_item_related())) {
             helper.setVisible(R.id.checkbox, true);
             checkBox.setEnabled(true);
@@ -73,7 +71,7 @@ public class TaxTypeSelectAdapter extends QuickAdapter<TaxType> {
         });
 
         if (position == mSelectedPosition) {
-            textView.setTextColor(ContextCompat.getColor(context, R.color.blue1));
+            textView.setTextColor(ContextCompat.getColor(context, R.color.new_text2));
 //            mCheckBox = checkBox;
 //            mTextView = textView;
         } else {

@@ -11,7 +11,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  * 税种
  */
 @Table(database = TcsDatabase.class)
-public class TaxType extends BaseModel {
+public class  TaxType extends BaseModel {
 
     /**
      * taxtype_uid : xxx
@@ -161,5 +161,22 @@ public class TaxType extends BaseModel {
         this.i18n_code = i18n_code;
     }
 
-
+    @Override
+    public String toString() {
+        return "TaxType{" +
+                "taxtype_uid='" + taxtype_uid + '\'' +
+                ", taxtype_name='" + taxtype_name + '\'' +
+                ", taxtype_code='" + taxtype_code + '\'' +
+                ", taxtype_cycle='" + taxtype_cycle + '\'' +
+                ", is_taxable_item_related='" + is_taxable_item_related + '\'' +
+                ", taxed_method='" + taxed_method + '\'' +
+                ", description='" + description + '\'' +
+                ", period_start='" + period_start + '\'' +
+                ", effective_date='" + effective_date + '\'' +
+                ", expire_date='" + expire_date + '\'' +
+                ", crt_datetime='" + crt_datetime + '\'' +
+                ", status='" + status + '\'' +
+                ", i18n_code='" + i18n_code + '\'' +
+                '}';
+    }
 }

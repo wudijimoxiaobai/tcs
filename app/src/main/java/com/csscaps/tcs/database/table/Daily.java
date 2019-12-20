@@ -11,6 +11,43 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 @Table(database = DailyDatabase.class)
 public class Daily extends BaseModel implements  Cloneable {
+    @Override
+    public String toString() {
+        return "Daily{" +
+                "id=" + id +
+                ", date='" + date + '\'' +
+                ", invoice_type_code='" + invoice_type_code + '\'' +
+                ", s_invoice_no='" + s_invoice_no + '\'' +
+                ", invoice_count=" + invoice_count +
+                ", total_taxable_amount=" + total_taxable_amount +
+                ", total_all=" + total_all +
+                ", total_final=" + total_final +
+                ", total_vat=" + total_vat +
+                ", total_stamp=" + total_stamp +
+                ", total_bpt=" + total_bpt +
+                ", total_bpt_preypayment=" + total_bpt_preypayment +
+                ", total_fee=" + total_fee +
+                ", n_invoice_count=" + n_invoice_count +
+                ", n_total_taxable_amount=" + n_total_taxable_amount +
+                ", n_total_all=" + n_total_all +
+                ", n_total_final=" + n_total_final +
+                ", n_total_vat=" + n_total_vat +
+                ", n_total_stamp=" + n_total_stamp +
+                ", n_total_bpt=" + n_total_bpt +
+                ", n_total_bpt_preypayment=" + n_total_bpt_preypayment +
+                ", n_total_fee=" + n_total_fee +
+                ", c_invoice_count=" + c_invoice_count +
+                ", c_total_tax_due=" + c_total_tax_due +
+                ", c_total_all=" + c_total_all +
+                ", c_total_final=" + c_total_final +
+                ", c_total_vat=" + c_total_vat +
+                ", c_total_stamp=" + c_total_stamp +
+                ", c_total_bpt=" + c_total_bpt +
+                ", c_total_bpt_preypayment=" + c_total_bpt_preypayment +
+                ", c_total_fee=" + c_total_fee +
+                ", addr=" + addr +
+                '}';
+    }
 
     @PrimaryKey(autoincrement = true)
     @Column

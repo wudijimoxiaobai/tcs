@@ -1,163 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-    >
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/top_bg">
 
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="74dp"
-        android:background="@drawable/bg10"
-        android:padding="15dp"
-        >
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@mipmap/back">
 
         <TextView
-            android:id="@+id/cancel"
-            style="@style/text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:drawableStart="@mipmap/cancel"
-            android:gravity="center_vertical"
-            android:text="@string/cancel"
-            android:textColor="@color/text2"
-            />
-
-        <TextView
-            style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:text="@string/select_product"
-            android:textColor="@color/text2"
-            android:textSize="@dimen/text_title"
-            />
+            android:textColor="@color/white"
+            android:textSize="18dp" />
 
-        <TextView
+        <ImageView
             android:id="@+id/confirm"
-            style="@style/text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"
             android:gravity="center"
-            android:text="@string/confirm"
-            android:textColor="@color/text2"
-            />
+            android:src="@mipmap/trueyes" />
 
-    </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
 
-    <View
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cc_01"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg12"
-        android:orientation="vertical"
-        android:paddingTop="36dp"
-        >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/top_bg"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            >
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.27"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/product_name"
-                style="@style/list_tile_text"
-                
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/specification"
-                style="@style/list_tile_text"
-                
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.22"
-                android:gravity="center"
-                android:text="@string/unit"
-                style="@style/list_tile_text"
-                
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/quantity"
-                style="@style/list_tile_text"
-                
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/price"
-                style="@style/list_tile_text"
-                
-                />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/divider"/>
+        android:layout_height="0dp"
+        android:background="@color/new_text2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <ListView
             android:id="@+id/list_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/top_bg"
-            android:divider="@color/divider"
-            android:dividerHeight="1dp"
-            android:listSelector="@android:color/transparent"
-            android:layout_marginBottom="36dp"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/divider"/>
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:divider="@null"
+            android:dividerHeight="10dp"
+            android:fadingEdge="none"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:scrollbars="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cc_01"></ListView>
 
-        <TextView
-            android:id="@+id/add_product"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:text="@string/add_product"
-            android:textSize="@dimen/text_title"
-            android:textColor="@color/text2"
-            android:background="@drawable/bg13"
-            />
-    </LinearLayout>
-</LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/add"-->
+    <!--android:layout_width="80dp"-->
+    <!--android:layout_height="80dp"-->
+    <!--android:layout_marginRight="30dp"-->
+    <!--android:layout_marginBottom="30dp"-->
+    <!--android:clickable="true"-->
+    <!--app:backgroundTint="@color/fabbg"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent">-->
+
+    <!--</android.support.design.widget.FloatingActionButton>-->
+
+</android.support.constraint.ConstraintLayout>

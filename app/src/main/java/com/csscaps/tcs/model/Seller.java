@@ -4,9 +4,36 @@ public class Seller {
 
     private String TIN;
     private String NAME;
-    private String ADDRESS;
+    private String Cashier;
+    private String Change;
+    private String ADDRESSONE;
+    private String ADDRESSTWO;
     private String PHONENO;
     private String BRANCH;
+
+    public String getADDRESSONE() {
+        return ADDRESSONE;
+    }
+
+    public void setADDRESSONE(String ADDRESSONE) {
+        this.ADDRESSONE = ADDRESSONE;
+    }
+
+    public String getADDRESSTWO() {
+        return ADDRESSTWO;
+    }
+
+    public void setADDRESSTWO(String ADDRESSTWO) {
+        this.ADDRESSTWO = ADDRESSTWO;
+    }
+
+    public String getChange() {
+        return Change;
+    }
+
+    public void setChange(String change) {
+        Change = change;
+    }
 
     public Seller() {
     }
@@ -17,7 +44,7 @@ public class Seller {
         super();
         TIN = tIN;
         NAME = nAME;
-        ADDRESS = aDDRESS;
+        ADDRESSONE = aDDRESS;
         PHONENO = pHONENO;
         BRANCH = bRANCH;
     }
@@ -39,11 +66,11 @@ public class Seller {
     }
 
     public String getADDRESS() {
-        return ADDRESS;
+        return ADDRESSONE;
     }
 
     public void setADDRESS(String aDDRESS) {
-        ADDRESS = aDDRESS;
+        ADDRESSONE = aDDRESS;
     }
 
     public String getPHONENO() {
@@ -58,8 +85,16 @@ public class Seller {
         return BRANCH;
     }
 
-    public void setBRANCH(String bRANCH) {
-        BRANCH = bRANCH;
+//    public void setBRANCH(String bRANCH) {
+//        BRANCH = bRANCH;
+//    }
+
+    public String getCashier() {
+        return Cashier;
+    }
+
+    public void setCashier(String cashier) {
+        Cashier = cashier;
     }
 
 }

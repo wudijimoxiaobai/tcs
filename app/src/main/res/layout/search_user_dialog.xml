@@ -1,212 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="570dp"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-    >
-
-
-    <TextView
-        android:id="@+id/title"
-        style="@style/text"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/bg10"
-        android:gravity="center"
-        android:text="@string/search"
-        android:textColor="@color/text2"
-        android:textSize="25sp"
-        />
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider"
-        />
+        android:id="@+id/connect"
+        android:layout_width="0.1dp"
+        android:layout_height="0.1dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tltle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg11"
-        android:orientation="vertical"
-        android:padding="20dp"
-        >
+        android:layout_marginTop="20dp"
+        android:text="@string/search"
+        android:textColor="@color/text1"
+        android:textSize="18dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/tin_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            >
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:text="@string/name"
+        android:textColor="@color/text1"
+        android:textSize="18dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tltle" />
 
-            <TextView
-                style="@style/list_tile_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:padding="10dp"
-                android:text="@string/name"
-                />
+    <EditText
+        android:id="@+id/name"
+        style="@style/list_item_text"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg2"
+        android:gravity="start|center_vertical"
+        android:hint="@string/please_input"
+        android:maxLines="1"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv1"
+        app:layout_constraintLeft_toRightOf="@id/tv1"
+        app:layout_constraintRight_toRightOf="parent" />
 
-            <EditText
-                android:id="@+id/name"
-                style="@style/list_item_text"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="0.34"
-                android:background="@drawable/bg2"
-                android:gravity="start|center_vertical"
-                android:hint="@string/please_input"
-                android:maxLines="1"
-                android:padding="10dp"
-                />
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/role"
+        android:textColor="@color/text1"
+        android:textSize="18dp"
+        app:layout_constraintLeft_toLeftOf="@id/tv1"
+        app:layout_constraintTop_toBottomOf="@id/tv1" />
 
-        </LinearLayout>
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/user_role_spinner"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:background="@drawable/bg2"
+        android:entries="@array/role_condition"
+        android:gravity="start"
+        android:spinnerMode="dropdown"
+        android:textAlignment="viewStart"
+        android:textDirection="locale"
+        android:theme="@style/myDropTheme"
+        app:layout_constraintBottom_toBottomOf="@id/tv2"
+        app:layout_constraintLeft_toLeftOf="@id/name"
+        app:layout_constraintLeft_toRightOf="@id/tv2"
+        app:layout_constraintRight_toRightOf="@id/name" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:background="@mipmap/arrow_down"
+        app:layout_constraintBottom_toBottomOf="@id/user_role_spinner"
+        app:layout_constraintRight_toRightOf="@id/user_role_spinner"
+        app:layout_constraintTop_toTopOf="@id/user_role_spinner" />
 
-            <TextView
-                style="@style/list_tile_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:padding="10dp"
-                android:text="@string/role"
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/status"
+        android:textColor="@color/text1"
+        android:textSize="18dp"
+        app:layout_constraintLeft_toLeftOf="@id/tv2"
+        app:layout_constraintTop_toBottomOf="@id/tv2" />
 
-                />
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/user_status_spinner"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:background="@drawable/bg2"
+        android:entries="@array/role_condition"
+        android:gravity="start"
+        android:spinnerMode="dropdown"
+        android:textAlignment="viewStart"
+        android:textDirection="locale"
+        android:theme="@style/myDropTheme"
+        app:layout_constraintBottom_toBottomOf="@id/tv3"
+        app:layout_constraintLeft_toLeftOf="@id/name"
+        app:layout_constraintLeft_toRightOf="@id/tv3"
+        app:layout_constraintRight_toRightOf="@id/name" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="0.34"
-                >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:background="@mipmap/arrow_down"
+        app:layout_constraintBottom_toBottomOf="@id/user_status_spinner"
+        app:layout_constraintRight_toRightOf="@id/user_status_spinner"
+        app:layout_constraintTop_toTopOf="@id/user_status_spinner" />
 
-                <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/user_role_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/bg2"
-                    android:entries="@array/role_condition"
-                    android:gravity="start"
-                    android:spinnerMode="dropdown"
-                    android:textAlignment="viewStart"
-                    android:textDirection="locale"
-                    android:theme="@style/myDropTheme"
-                    />
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg17"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text"
+        app:layout_constraintLeft_toRightOf="@id/connect"
+        app:layout_constraintTop_toBottomOf="@id/user_status_spinner" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@mipmap/arrow_down"
-                    />
-            </RelativeLayout>
+    <TextView
+        android:id="@+id/confirm"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/bg18"
+        android:gravity="center"
+        android:text="@string/confirm"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text"
+        app:layout_constraintRight_toLeftOf="@id/connect"
+        app:layout_constraintTop_toBottomOf="@id/user_status_spinner" />
 
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                style="@style/list_tile_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:padding="10dp"
-                android:text="@string/status"
-
-                />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="0.34"
-                >
-
-                <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/user_status_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/bg2"
-                    android:entries="@array/status"
-                    android:gravity="start"
-                    android:spinnerMode="dropdown"
-                    android:textAlignment="viewStart"
-                    android:textDirection="locale"
-                    android:theme="@style/myDropTheme"
-                    />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@mipmap/arrow_down"
-                    />
-            </RelativeLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="30dp"
-            >
-
-            <TextView
-                android:id="@+id/cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg17"
-                android:gravity="center"
-                android:text="@string/cancel"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text"
-                />
-
-            <TextView
-                android:id="@+id/confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginStart="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg18"
-                android:gravity="center"
-                android:text="@string/confirm"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text"
-                />
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

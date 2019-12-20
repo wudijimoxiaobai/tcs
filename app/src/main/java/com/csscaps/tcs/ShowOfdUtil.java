@@ -19,7 +19,6 @@ public class ShowOfdUtil {
     public static final String LOCK = "lock";
     public static ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
-
     public static void showOfd(final Invoice showInvoice, final OFDView mOfdView, final OnLoadCompleteListener onLoadCompleteListener) {
         cachedThreadPool.execute(new Runnable() {
             @Override

@@ -1,6 +1,5 @@
 package com.csscaps.tcs.dialog;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -22,11 +21,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * Created by tl on 2018/6/6.
- */
-
-@SuppressLint("ValidFragment")
 public class SearchUserDialog extends DialogFragment implements AdapterView.OnItemSelectedListener {
 
     @BindView(R.id.name)
@@ -58,14 +52,14 @@ public class SearchUserDialog extends DialogFragment implements AdapterView.OnIt
         return view;
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
         dialogWindow.setGravity(Gravity.CENTER);
-        int width = DeviceUtils.dip2Px(getContext(), 570);
-        dialogWindow.setLayout(width, -2);
+        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 0.4f);
+        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 1f);
+        dialogWindow.setLayout(width, height);
         dialogWindow.setWindowAnimations(R.style.scale_anim);
     }
 
@@ -105,5 +99,6 @@ public class SearchUserDialog extends DialogFragment implements AdapterView.OnIt
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {}
+    public void onNothingSelected(AdapterView<?> adapterView) {
+    }
 }

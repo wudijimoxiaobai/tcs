@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.csscaps.tcs">
+    package="com.csscaps.tcs"
+    android:installLocation="auto">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
         android:name=".TCSApplication"
@@ -20,35 +21,47 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LaunchActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/SplashTheme"
-            >
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <service android:name=".service.SynchronizeService"/>
-        <service android:name=".service.InvoiceNoService"/>
-        <service android:name=".service.UploadInvoiceService"/>
-        <service android:name=".service.ReportDataService"/>
+        <service android:name=".service.SynchronizeService" />
+        <service android:name=".service.InvoiceNoService" />
+        <service android:name=".service.UploadInvoiceService" />
+        <service android:name=".service.ReportDataService" />
 
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".activity.ProductDetailsActivity"/>
-        <activity android:name=".activity.CustomerDetailsActivity"/>
-        <activity android:name=".activity.InvoiceIssuingActivity"/>
-        <activity android:name=".activity.InvoiceManagementActivity"/>
-        <activity android:name=".activity.ProductListActivity"/>
-        <activity android:name=".activity.SystemManagementActivity"/>
-        <activity android:name=".activity.UserDetailsActivity"/>
-        <activity android:name=".activity.ChangePasswordActivity"/>
-        <activity android:name=".activity.InvoiceDetailsActivity"/>
-        <activity android:name=".activity.ApplicationListActivity"/>
-        <activity android:name=".activity.OnlineDeclarationActivity"/>
-        <activity android:name=".activity.InvoiceInformationManagementActivity"/>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".activity.NotworkConfigActivity" />
+        <activity android:name=".activity.NewInvoiceActivity" />
+        <activity android:name=".activity.CustomerMgtActivity" />
+        <activity android:name=".activity.CustomerDetailsActivity" />
+        <activity android:name=".activity.ProductDetailsActivity" />
+        <activity android:name=".activity.ProductMgtActivity" />
+        <activity android:name=".activity.TaxItemActivity" />
+        <activity android:name=".activity.ProductListActivity" />
+        <activity android:name=".activity.InvoiceApplicationActivity" />
+        <activity android:name=".activity.InvoiceQueryActivity" />
+        <activity android:name=".dialog.RequestInvoiceActivity" />
+        <activity android:name=".activity.ApproveInvoiceActivity" />
+        <activity android:name=".activity.UserManagerActivity" />
+        <activity android:name=".activity.ChangePasswordActivity" />
+        <activity android:name=".activity.UserDetailsActivity" />
+        <activity android:name=".activity.OnlineDeclarationActivity" />
+        <activity android:name=".activity.TaxpayerInfoActivity" />
+        <activity android:name=".activity.StatisticsActivity" />
+        <activity android:name=".activity.PeriodReportActivity" android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.CancelAndNegativeActivity"/>
+        <activity android:name=".activity.TaxReportActivity"/>
+        <activity android:name=".activity.GoodsServicesReportActivity"/>
+        <activity android:name=".activity.OperatorReportActivity"/>
+        <activity android:name=".activity.DailyInvoiceDialogActivity"/>
+        <activity android:name=".activity.DailyReportActivity"/>
     </application>
 
 </manifest>

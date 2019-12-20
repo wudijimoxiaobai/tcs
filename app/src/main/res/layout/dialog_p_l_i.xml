@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/top_bg">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@mipmap/back">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/product_list"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cc_01"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/new_text2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cc_02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/new_text"
+            app:layout_constraintTop_toTopOf="@id/cc_01">
+
+            <TextView
+                android:id="@+id/tv_01"
+                style="@style/text_24_83"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/product_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cc_02" />
+
+            <TextView
+                android:id="@+id/product_name"
+                style="@style/text_24_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_01"
+                app:layout_constraintLeft_toRightOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/tv_02"
+                style="@style/text_24_83"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/specification"
+                app:layout_constraintLeft_toLeftOf="@id/tv_01"
+                app:layout_constraintTop_toBottomOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/specification"
+                style="@style/text_24_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_02"
+                app:layout_constraintLeft_toRightOf="@id/tv_02" />
+
+            <TextView
+                android:id="@+id/tv_03"
+                style="@style/text_24_83"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/unit"
+                app:layout_constraintLeft_toLeftOf="@id/tv_02"
+                app:layout_constraintTop_toBottomOf="@id/tv_02" />
+
+            <TextView
+                android:id="@+id/unit"
+                style="@style/text_24_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_03"
+                app:layout_constraintLeft_toRightOf="@id/tv_03" />
+
+            <TextView
+                android:id="@+id/tv_04"
+                style="@style/text_24_83"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/quantity"
+                app:layout_constraintLeft_toLeftOf="@id/tv_03"
+                app:layout_constraintTop_toBottomOf="@id/tv_03" />
+
+            <TextView
+                android:id="@+id/quantity"
+                style="@style/text_24_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_04"
+                app:layout_constraintLeft_toRightOf="@id/tv_04" />
+
+            <TextView
+                android:id="@+id/tv_05"
+                style="@style/text_24_83"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/price"
+                app:layout_constraintLeft_toLeftOf="@id/tv_04"
+                app:layout_constraintTop_toBottomOf="@id/tv_04" />
+
+            <TextView
+                android:id="@+id/price"
+                style="@style/text_24_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_05"
+                app:layout_constraintLeft_toRightOf="@id/tv_05" />
+
+            <TextView
+                android:id="@+id/tv_06"
+                style="@style/text_24_83"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/t_a"
+                app:layout_constraintLeft_toLeftOf="@id/tv_05"
+                app:layout_constraintTop_toBottomOf="@id/tv_05" />
+
+            <TextView
+                android:id="@+id/e_tax"
+                style="@style/text_24_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_06"
+                app:layout_constraintLeft_toRightOf="@id/tv_06" />
+
+            <TextView
+                android:id="@+id/tv_07"
+                style="@style/text_24_83"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/tax_Amount"
+                app:layout_constraintLeft_toLeftOf="@id/tv_06"
+                app:layout_constraintTop_toBottomOf="@id/tv_06" />
+
+            <TextView
+                android:id="@+id/tax_Amount"
+                style="@style/text_24_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_07"
+                app:layout_constraintLeft_toRightOf="@id/tv_07" />
+
+            <TextView
+                android:id="@+id/tv_08"
+                style="@style/text_24_83"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/i_t"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/tv_07"
+                app:layout_constraintTop_toBottomOf="@id/tv_07" />
+
+            <TextView
+                android:id="@+id/i_tax"
+                style="@style/text_24_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_08"
+                app:layout_constraintLeft_toRightOf="@id/tv_08" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

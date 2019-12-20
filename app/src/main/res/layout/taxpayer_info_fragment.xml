@@ -1,599 +1,368 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/top_bg">
 
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@mipmap/top_bg"
-        android:paddingStart="15dp"
-        >
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@mipmap/back">
 
         <TextView
-            android:id="@+id/back"
-            style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@mipmap/back"
-            android:gravity="center_vertical"
-            />
-
-        <TextView
-            style="@style/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:text="@string/taxpayer_info"
-            android:textSize="@dimen/text_title"
-            />
+            android:textColor="@color/white"
+            android:textSize="18dp" />
 
-    </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@mipmap/bg"
-        android:padding="30dp"
-        >
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cc_01"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/new_text2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cc_02"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/new_text"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cc_01">
 
             <TextView
-                android:id="@+id/hit"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg1"
-
-                android:textSize="@dimen/text_title"
-                />
-
-            <ScrollView
-                android:id="@+id/scrollView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg1"
-                android:paddingBottom="10dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-
-                    >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            style="@style/list_tile_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="@string/tin"
-                            />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/divider"
-                            />
-
-                        <TextView
-                            android:id="@+id/tin"
-                            style="@style/list_item_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="0.3"
-                            android:gravity="start|center_vertical"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/divider"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            style="@style/list_tile_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="@string/name"
-
-                            />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/divider"
-                            />
-
-                        <TextView
-                            android:id="@+id/name"
-                            style="@style/list_item_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="0.3"
-                            android:gravity="start|center_vertical"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/divider"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            style="@style/list_tile_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="@string/local_name"
-
-                            />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/divider"
-                            />
-
-                        <TextView
-                            android:id="@+id/local_name"
-                            style="@style/list_item_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="0.3"
-                            android:gravity="start|center_vertical"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/divider"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            style="@style/list_tile_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="@string/id_type"
-
-                            />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/divider"
-                            />
-
-                        <TextView
-                            android:id="@+id/id_type"
-                            style="@style/list_item_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="0.3"
-                            android:gravity="start|center_vertical"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/divider"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            style="@style/list_tile_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="@string/id_no"
-
-                            />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/divider"
-                            />
-
-                        <TextView
-                            android:id="@+id/id_no"
-                            style="@style/list_item_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="0.3"
-                            android:gravity="start|center_vertical"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/divider"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            style="@style/list_tile_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="@string/tel"
-
-                            />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/divider"
-                            />
-
-                        <TextView
-                            android:id="@+id/tel"
-                            style="@style/list_item_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="0.3"
-                            android:gravity="start|center_vertical"
-                            android:inputType="number"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/divider"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            style="@style/list_tile_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="@string/preferred_language"
-
-                            />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/divider"
-                            />
-
-                        <TextView
-                            android:id="@+id/preferred_language"
-                            style="@style/list_item_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="0.3"
-                            android:gravity="start|center_vertical"
-                            android:inputType="textEmailAddress"
-                            android:maxLines="1"
-                            android:padding="10dp"
-
-                            />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/divider"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            style="@style/list_tile_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="@string/physical_address"
-
-                            />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/divider"
-                            />
-
-                        <TextView
-                            android:id="@+id/physical_address"
-                            style="@style/list_item_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="0.3"
-                            android:gravity="start|center_vertical"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/divider"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            style="@style/list_tile_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="@string/status"
-
-                            />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/divider"
-                            />
-
-                        <TextView
-                            android:id="@+id/state"
-                            style="@style/list_item_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="0.3"
-                            android:gravity="start|center_vertical"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/divider"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            style="@style/list_tile_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="@string/business_activities"
-
-                            />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/divider"
-                            />
-
-                        <TextView
-                            android:id="@+id/business_activities"
-                            style="@style/list_item_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="0.3"
-                            android:gravity="start|center_vertical"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/divider"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            style="@style/list_tile_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="@string/main_taxable_activity"
-
-                            />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/divider"
-                            />
-
-                        <TextView
-                            android:id="@+id/main_taxable_activity"
-                            style="@style/list_item_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="0.3"
-                            android:gravity="start|center_vertical"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            />
-
-                    </LinearLayout>
-
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/divider"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            style="@style/list_tile_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:padding="10dp"
-                            android:text="@string/remarks"
-
-                            />
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/divider"
-                            />
-
-                        <TextView
-                            android:id="@+id/remarks"
-                            style="@style/list_item_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_weight="0.3"
-                            android:gravity="start|top"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/divider"
-                        />
-                </LinearLayout>
-            </ScrollView>
-
-        </FrameLayout>
-    </LinearLayout>
-</LinearLayout>
+                android:id="@+id/tv_01"
+                style="@style/text_30_83"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/tin"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cc_02" />
+
+            <TextView
+                android:id="@+id/tin"
+                style="@style/text_30_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/tv_01"
+                app:layout_constraintLeft_toRightOf="@id/tv_01" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/new_text2"
+                app:layout_constraintBottom_toBottomOf="@id/tv_01"
+                app:layout_constraintLeft_toLeftOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/tv_02"
+                style="@style/text_30_83"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="@string/name"
+                app:layout_constraintLeft_toLeftOf="@id/tv_01"
+                app:layout_constraintTop_toBottomOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/name"
+                style="@style/text_30_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/tv_02"
+                app:layout_constraintLeft_toRightOf="@id/tv_02" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/new_text2"
+                app:layout_constraintBottom_toBottomOf="@id/tv_02"
+                app:layout_constraintLeft_toLeftOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/tv_03"
+                style="@style/text_30_83"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="@string/local_name"
+                app:layout_constraintLeft_toLeftOf="@id/tv_02"
+                app:layout_constraintTop_toBottomOf="@id/tv_02" />
+
+            <TextView
+                android:id="@+id/local_name"
+                style="@style/text_30_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/tv_03"
+                app:layout_constraintLeft_toRightOf="@id/tv_03" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/new_text2"
+                app:layout_constraintBottom_toBottomOf="@id/tv_03"
+                app:layout_constraintLeft_toLeftOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/tv_04"
+                style="@style/text_30_83"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="@string/id_type"
+                app:layout_constraintLeft_toLeftOf="@id/tv_03"
+                app:layout_constraintTop_toBottomOf="@id/tv_03" />
+
+            <TextView
+                android:id="@+id/id_type"
+                style="@style/text_30_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/tv_04"
+                app:layout_constraintLeft_toRightOf="@id/tv_04" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/new_text2"
+                app:layout_constraintBottom_toBottomOf="@id/tv_04"
+                app:layout_constraintLeft_toLeftOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/tv_05"
+                style="@style/text_30_83"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="@string/id_no"
+                app:layout_constraintLeft_toLeftOf="@id/tv_04"
+                app:layout_constraintTop_toBottomOf="@id/tv_04" />
+
+            <TextView
+                android:id="@+id/id_no"
+                style="@style/text_30_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/tv_05"
+                app:layout_constraintLeft_toRightOf="@id/tv_05" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/new_text2"
+                app:layout_constraintBottom_toBottomOf="@id/tv_05"
+                app:layout_constraintLeft_toLeftOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/tv_06"
+                style="@style/text_30_83"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="@string/tel"
+                app:layout_constraintLeft_toLeftOf="@id/tv_05"
+                app:layout_constraintTop_toBottomOf="@id/tv_05" />
+
+            <TextView
+                android:id="@+id/tel"
+                style="@style/text_30_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/tv_06"
+                app:layout_constraintLeft_toRightOf="@id/tv_06" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/new_text2"
+                app:layout_constraintBottom_toBottomOf="@id/tv_06"
+                app:layout_constraintLeft_toLeftOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/tv_07"
+                style="@style/text_30_83"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="@string/preferred_l"
+                app:layout_constraintLeft_toLeftOf="@id/tv_06"
+                app:layout_constraintTop_toBottomOf="@id/tv_06" />
+
+            <TextView
+                android:id="@+id/preferred_language"
+                style="@style/text_30_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/tv_07"
+                app:layout_constraintLeft_toRightOf="@id/tv_07" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/new_text2"
+                app:layout_constraintBottom_toBottomOf="@id/tv_07"
+                app:layout_constraintLeft_toLeftOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/tv_08"
+                style="@style/text_30_83"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="@string/physical_site"
+                app:layout_constraintLeft_toLeftOf="@id/tv_07"
+                app:layout_constraintTop_toBottomOf="@id/tv_07" />
+
+            <TextView
+                android:id="@+id/physical_address"
+                style="@style/text_30_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/tv_08"
+                app:layout_constraintLeft_toRightOf="@id/tv_08" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/new_text2"
+                app:layout_constraintBottom_toBottomOf="@id/tv_08"
+                app:layout_constraintLeft_toLeftOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/tv_09"
+                style="@style/text_30_83"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="@string/status"
+                app:layout_constraintLeft_toLeftOf="@id/tv_08"
+                app:layout_constraintTop_toBottomOf="@id/tv_08" />
+
+            <TextView
+                android:id="@+id/state"
+                style="@style/text_30_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/tv_09"
+                app:layout_constraintLeft_toRightOf="@id/tv_09" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/new_text2"
+                app:layout_constraintBottom_toBottomOf="@id/tv_09"
+                app:layout_constraintLeft_toLeftOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/tv_10"
+                style="@style/text_30_83"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="@string/business_act"
+                app:layout_constraintLeft_toLeftOf="@id/tv_09"
+                app:layout_constraintTop_toBottomOf="@id/tv_09" />
+
+            <TextView
+                android:id="@+id/business_activities"
+                style="@style/text_30_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/tv_10"
+                app:layout_constraintLeft_toRightOf="@id/tv_10" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/new_text2"
+                app:layout_constraintBottom_toBottomOf="@id/tv_10"
+                app:layout_constraintLeft_toLeftOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/tv_11"
+                style="@style/text_30_83"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="@string/main_t_act"
+                app:layout_constraintLeft_toLeftOf="@id/tv_10"
+                app:layout_constraintTop_toBottomOf="@id/tv_10" />
+
+            <TextView
+                android:id="@+id/main_taxable_activity"
+                style="@style/text_30_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/tv_11"
+                app:layout_constraintLeft_toRightOf="@id/tv_11" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/new_text2"
+                app:layout_constraintBottom_toBottomOf="@id/tv_11"
+                app:layout_constraintLeft_toLeftOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/tv_12"
+                style="@style/text_30_83"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:text="@string/remarks"
+                app:layout_constraintLeft_toLeftOf="@id/tv_11"
+                app:layout_constraintTop_toBottomOf="@id/tv_11" />
+
+            <TextView
+                android:id="@+id/remarks"
+                style="@style/text_30_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/tv_12"
+                app:layout_constraintLeft_toRightOf="@id/tv_12" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

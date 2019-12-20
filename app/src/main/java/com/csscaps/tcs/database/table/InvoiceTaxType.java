@@ -12,6 +12,21 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 @Table(database = TcsDatabase.class)
 public class InvoiceTaxType extends BaseModel {
 
+    @Override
+    public String toString() {
+        return "InvoiceTaxType{" +
+                "invoice_type_taxtype_uid='" + invoice_type_taxtype_uid + '\'' +
+                ", invoice_type_uid='" + invoice_type_uid + '\'' +
+                ", taxtype_uid='" + taxtype_uid + '\'' +
+                ", taxed_method='" + taxed_method + '\'' +
+                ", is_tax_included='" + is_tax_included + '\'' +
+                ", crt_datetime='" + crt_datetime + '\'' +
+                ", insert_user_id='" + insert_user_id + '\'' +
+                ", last_mod_datetime='" + last_mod_datetime + '\'' +
+                ", last_mod_user_id='" + last_mod_user_id + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 
     /**
      * invoice_type_taxtype_uid : xxx

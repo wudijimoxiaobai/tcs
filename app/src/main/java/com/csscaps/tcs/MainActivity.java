@@ -4,22 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.csscaps.common.base.BaseActivity;
-import com.csscaps.common.utils.DateUtils;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
-import com.csscaps.tcs.activity.InvoiceInformationManagementActivity;
-import com.csscaps.tcs.activity.InvoiceIssuingActivity;
-import com.csscaps.tcs.activity.InvoiceManagementActivity;
-import com.csscaps.tcs.activity.OnlineDeclarationActivity;
-import com.csscaps.tcs.activity.SystemManagementActivity;
 import com.csscaps.tcs.dialog.ExitDialog;
 import com.csscaps.tcs.dialog.SynDataDialog;
+import com.csscaps.tcs.fragment.HomeFragment;
+import com.csscaps.tcs.fragment.MeFragment;
+import com.csscaps.tcs.fragment.MgtFragment;
 import com.csscaps.tcs.service.InvoiceNoService;
 import com.csscaps.tcs.service.ReportDataService;
 import com.csscaps.tcs.service.SynchronizeService;
@@ -30,6 +31,8 @@ import com.tax.fcr.library.network.Api;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -39,17 +42,13 @@ import rx.functions.Action1;
 import static com.csscaps.common.base.BaseApplication.getAppContext;
 
 public class MainActivity extends BaseActivity implements Action1<Object> {
+    @BindView(R.id.navigation)
+    BottomNavigationView mNavigation;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
-    @BindView(R.id.user)
-    TextView mUser;
-    @BindView(R.id.time_date)
-    TextView mTimeDate;
-    @BindView(R.id.first_row)
-    LinearLayout mFirstRow;
-    @BindView(R.id.second_row)
-    LinearLayout mSecondRow;
-
-    private String name;
+    List<Fragment> mFragments;
+    private int lastIndex;
     private SynDataDialog mSynDataDialog = new SynDataDialog();
 
     @Override
@@ -63,57 +62,68 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
     }
 
     @Override
-    protected void parseArgumentsFromIntent(Intent argIntent) {
-        name = argIntent.getStringExtra("name");
-    }
-
-    @Override
     public void initView(Bundle savedInstanceState) {
-        TCSApplication.unlockSdcard();
-        initSdDB();
-        mUser.setText(name);
-        mHandler.sendEmptyMessage(0);
         ObserverActionUtils.addAction(this);
-      /*  int w= (int) (DeviceUtils.getScreenWidth(this)*2f/3f);
-        int h= (int) ((DeviceUtils.getScreenHeight(this)-DeviceUtils.dip2Px(this,85)-DeviceUtils.getScreenStatusBarHeight(this))*1f/3f);
-        mFirstRow.getLayoutParams().width=w;
-        mFirstRow.getLayoutParams().height=h;
-        mSecondRow.getLayoutParams().width=w;
-        mSecondRow.getLayoutParams().height=h;*/
+        mNavigation.setItemIconTintList(null);
+        mNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        TCSApplication.unlockSdcard();
+        initData();
+        initSdDB();
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exit();
+            }
+        });
     }
 
-    Handler mHandler = new Handler() {
+    public void initData() {
+        mFragments = new ArrayList<>();
+        mFragments.add(new HomeFragment());
+        mFragments.add(new MgtFragment());
+        mFragments.add(new MeFragment());
+        // 初始化展示MessageFragment
+        setFragmentPosition(0);
+    }
+
+    private void setFragmentPosition(int position) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment currentFragment = mFragments.get(position);
+        Fragment lastFragment = mFragments.get(lastIndex);
+        lastIndex = position;
+        ft.hide(lastFragment);
+        if (!currentFragment.isAdded()) {
+            getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
+            ft.add(R.id.FramePage, currentFragment);
+        }
+        ft.show(currentFragment);
+        ft.commitAllowingStateLoss();
+    }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
         @Override
-        public void handleMessage(Message msg) {
-//            String time = DateUtils.getDateToString_HH_MM_SS_EN(DateUtils.getDateNow());
-            String date = DateUtils.getDateToString_YYYY_MM_DD_EN(DateUtils.getDateNow());
-            int mWeekday = DateUtils.getDayOfWeek(DateUtils.getDateNow());
-            String week = getResources().getStringArray(R.array.weekday)[mWeekday - 1];
-//            String format = getResources().getString(R.string.date_time);
-//            mTimeDate.setText(String.format(format, time, date, week));
-            mTimeDate.setText(date + " " + week);
-            sendEmptyMessageDelayed(0, 1000);
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    setFragmentPosition(0);
+                    return true;
+                case R.id.navigation_mgt:
+                    setFragmentPosition(1);
+                    return true;
+                case R.id.navigation_me:
+                    setFragmentPosition(2);
+                    return true;
+            }
+            return false;
         }
     };
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mHandler.removeMessages(0);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mHandler.sendEmptyMessage(0);
-    }
-
-    @OnClick({R.id.syn, R.id.exit, R.id.invoice_information_management, R.id.invoice_issuing, R.id.invoice_management, R.id.statistics, R.id.declaration, R.id.system_management})
-    public void onClick(View view) {
+    @OnClick(R.id.syn)
+    public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.exit:
-                exit();
-                break;
             case R.id.syn:
                 if (TextUtils.isEmpty(Api.getBaseUrl())) {
                     ToastUtil.showShort(getString(R.string.hit56));
@@ -122,30 +132,17 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
                 startService(new Intent(this, SynchronizeService.class));
                 mSynDataDialog.show(getSupportFragmentManager(), "SynDataDialog");
                 break;
-            case R.id.invoice_issuing:
-                startActivity(new Intent(this, InvoiceIssuingActivity.class));
-                break;
-            case R.id.invoice_management:
-                startActivity(new Intent(this, InvoiceManagementActivity.class));
-                break;
-            case R.id.declaration:
-                startActivity(new Intent(this, OnlineDeclarationActivity.class));
-                break;
-            case R.id.statistics:
-//                byte b[] = new byte[170];
-//                FMUtil.readFM(0, b);
-//                Logger.i(0 + " ---readFM---  " + ConvertUtils.bytes2HexString(b));
-//                Invoice invoice=new Invoice();
-//                invoice.setInvoice_no(String.valueOf(1));
-//                SdcardDBUtil.saveSDDB(invoice, SDInvoiceDatabase.class);
-                break;
-            case R.id.system_management:
-                startActivity(new Intent(this, SystemManagementActivity.class));
-                break;
-            case R.id.invoice_information_management:
-                startActivity(new Intent(this, InvoiceInformationManagementActivity.class));
-                break;
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -164,11 +161,11 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
             public void handleMessage(Message msg) {
                 SdcardUtil.lockSdcard();
                 ObserverActionUtils.mapAction.clear();
-                ((TCSApplication)TCSApplication.getAppContext()).cancelTimer();
-                stopService(new Intent(TCSApplication.getAppContext(), SynchronizeService.class));
-                stopService(new Intent(TCSApplication.getAppContext(), UploadInvoiceService.class));
-                stopService(new Intent(TCSApplication.getAppContext(), InvoiceNoService.class));
-                stopService(new Intent(TCSApplication.getAppContext(), ReportDataService.class));
+                ((TCSApplication) getAppContext()).cancelTimer();
+                stopService(new Intent(getAppContext(), SynchronizeService.class));
+                stopService(new Intent(getAppContext(), UploadInvoiceService.class));
+                stopService(new Intent(getAppContext(), InvoiceNoService.class));
+                stopService(new Intent(getAppContext(), ReportDataService.class));
                 finish();
                 System.exit(0);
             }
@@ -176,7 +173,7 @@ public class MainActivity extends BaseActivity implements Action1<Object> {
         ExitDialog exitDialog = new ExitDialog(handler);
         exitDialog.show(getSupportFragmentManager(), "ExitDialog");
     }
-
+ 
     //初始化sd卡备份数据库
     private void initSdDB() {
         //sd卡数据库文件夹

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,17 +36,19 @@ public class PrintInvoiceDialog extends DialogFragment implements OnLoadComplete
 
     @BindView(R.id.ofd_view)
     OFDView mOfdView;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     private Invoice invoice;
     private InvoiceIssuingPresenter presenter;
     private PrintUtil mPrintUtil;
-    private boolean printing,loadComplete;
+    private boolean printing, loadComplete;
     IInvoiceIssuingAction issuingAction;
 
     public PrintInvoiceDialog(Invoice invoice, IInvoiceIssuingAction issuingAction) {
         this.invoice = invoice;
         presenter = new InvoiceIssuingPresenter(issuingAction, getContext());
-        this.issuingAction=issuingAction;
+        this.issuingAction = issuingAction;
     }
 
 
@@ -63,7 +66,17 @@ public class PrintInvoiceDialog extends DialogFragment implements OnLoadComplete
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.print_invoice_dialog, null);
         ButterKnife.bind(this, view);
-        ShowOfdUtil.showOfd(invoice, mOfdView,this);
+        ShowOfdUtil.showOfd(invoice, mOfdView, this);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (printing) {
+                    ToastUtil.showLong(getString(R.string.hit58));
+                } else {
+                    dismiss();
+                }
+            }
+        });
         return view;
     }
 
@@ -73,16 +86,16 @@ public class PrintInvoiceDialog extends DialogFragment implements OnLoadComplete
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
         dialogWindow.setGravity(Gravity.END);
-        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 2f / 5f);
-        dialogWindow.setLayout(width, -1);
+        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 1f);
+        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 1f);
+        dialogWindow.setLayout(width, height);
         dialogWindow.setWindowAnimations(R.style.dialog_right_anim);
         mPrintUtil.optPrinter(true);
     }
 
-    @OnClick({R.id.back, R.id.cancel, R.id.confirm})
+    @OnClick({R.id.cancel, R.id.confirm})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.back:
             case R.id.cancel:
                 if (printing) {
                     ToastUtil.showLong(getString(R.string.hit58));
@@ -91,7 +104,7 @@ public class PrintInvoiceDialog extends DialogFragment implements OnLoadComplete
                 }
                 break;
             case R.id.confirm:
-                if (mPrintUtil.checkPaper()&&loadComplete) {
+                if (mPrintUtil.checkPaper() && loadComplete) {
                     mPrintUtil.setHandler(mHandler);
                     float dpi = (PrintUtil.DotLineWidth * 25.4f / mOfdView.getMapPagesWH().get(0)[0]);
                     Bitmap bitmap = mOfdView.mOFDParseCore.renderPageBitmap(0, dpi);
@@ -131,6 +144,7 @@ public class PrintInvoiceDialog extends DialogFragment implements OnLoadComplete
 
     @Override
     public void loadComplete(int i) {
-        loadComplete=true;
+        loadComplete = true;
     }
+
 }

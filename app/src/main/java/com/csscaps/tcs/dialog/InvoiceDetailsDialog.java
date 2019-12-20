@@ -7,6 +7,8 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +26,7 @@ import com.csscaps.tcs.SdcardDBUtil;
 import com.csscaps.tcs.ShowOfdUtil;
 import com.csscaps.tcs.Util;
 import com.csscaps.tcs.action.IInvoiceIssuingAction;
-import com.csscaps.tcs.activity.ApplicationListActivity;
+import com.csscaps.tcs.activity.ApproveInvoiceActivity;
 import com.csscaps.tcs.database.SDInvoiceDatabase;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.InvoiceNo;
@@ -55,6 +57,8 @@ import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
 public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssuingAction {
 
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.approve)
     TextView mApprove;
     @BindView(R.id.reject)
@@ -97,8 +101,8 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
         dialogWindow.setGravity(Gravity.CENTER);
-        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 0.9f);
-        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 0.9f);
+        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 1f);
+        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 1f);
         dialogWindow.setLayout(width, height);
         dialogWindow.setWindowAnimations(R.style.scale_anim);
 //        LinearLayout.LayoutParams lp= (LinearLayout.LayoutParams) mOfdView.getLayoutParams();
@@ -110,6 +114,12 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
     }
 
     private void initView() {
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
         switch (flag) {
             case 0:
                 mApprove.setVisibility(View.GONE);
@@ -151,12 +161,9 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         ShowOfdUtil.showOfd(showInvoice, mOfdView,null);
     }
 
-    @OnClick({R.id.back, R.id.approve, R.id.reject, R.id.issue, R.id.confirm, R.id.upload})
+    @OnClick({R.id.approve, R.id.reject, R.id.issue, R.id.confirm, R.id.upload})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.back:
-                dismiss();
-                break;
             case R.id.approve:
                 approve();
                 break;
@@ -202,7 +209,7 @@ public class InvoiceDetailsDialog extends DialogFragment implements IInvoiceIssu
         dismiss();
         Subscription subscription = ObserverActionUtils.subscribe(0, RequestInvoiceFragment.class);
         if (subscription != null) subscription.unsubscribe();
-        startActivity(new Intent(getContext(), ApplicationListActivity.class));
+        startActivity(new Intent(getContext(), ApproveInvoiceActivity.class));
     }
 
     private void upload() {

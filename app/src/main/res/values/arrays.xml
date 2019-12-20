@@ -100,4 +100,12 @@
         <item>Network Configuration</item>
         <item>User Management</item>
     </string-array>
+    <string-array name="tab4">
+        <item>Pepiod Report</item>
+        <item>Daily Report</item>
+        <item>Cancel Negative</item>
+        <item>Tax Report</item>
+        <item>Goods Services</item>
+        <item>Operator Report</item>
+    </string-array>
 </resources>

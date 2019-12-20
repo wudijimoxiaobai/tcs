@@ -6,13 +6,11 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.alibaba.fastjson.JSON;
-import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.tcs.ServerConstants;
 import com.csscaps.tcs.database.table.Invoice;
 import com.csscaps.tcs.database.table.Invoice_Table;
 import com.csscaps.tcs.database.table.ProductModel;
 import com.csscaps.tcs.database.table.ProductModel_Table;
-import com.csscaps.tcs.fragment.InvoiceQueryFragment;
 import com.csscaps.tcs.model.ReceiveUploadInvoiceResult;
 import com.csscaps.tcs.model.RequestResultModel;
 import com.csscaps.tcs.model.RequestUploadInvoice;
@@ -21,8 +19,6 @@ import com.tax.fcr.library.network.IPresenter;
 import com.tax.fcr.library.network.RequestModel;
 
 import java.util.List;
-
-import rx.Subscription;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
@@ -77,8 +73,8 @@ public class UploadInvoiceService extends Service implements IPresenter {
             invoice.setUploadStatus("1");
             invoice.update();
         }
-        Subscription subscription = ObserverActionUtils.subscribe(new Invoice(), InvoiceQueryFragment.class);
-        if (subscription != null) subscription.unsubscribe();
+       // Subscription subscription = ObserverActionUtils.subscribe(new Invoice(), InvoiceQueryFragment.class);
+       // if (subscription != null) subscription.unsubscribe();
     }
 
     @Override

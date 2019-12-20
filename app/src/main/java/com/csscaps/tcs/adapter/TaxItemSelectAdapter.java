@@ -1,6 +1,7 @@
 package com.csscaps.tcs.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.widget.CheckBox;
@@ -48,7 +49,7 @@ public class TaxItemSelectAdapter extends QuickAdapter<TaxItem> {
 
                 if (b && position != getSelectedPosition()) {
                     setSelectedPosition(position);
-                    textView.setTextColor(ContextCompat.getColor(context, R.color.blue1));
+                    textView.setTextColor(ContextCompat.getColor(context, R.color.new_text2));
                     if (mCheckBox != null) mCheckBox.setChecked(false);
                     if (mTextView != null)
                         mTextView.setTextColor(ContextCompat.getColor(context, R.color.text1));
@@ -67,12 +68,12 @@ public class TaxItemSelectAdapter extends QuickAdapter<TaxItem> {
 
         if (position == mSelectedPosition) {
             checkBox.setChecked(true);
-            textView.setTextColor(ContextCompat.getColor(context, R.color.blue1));
+            textView.setTextColor(ContextCompat.getColor(context, R.color.new_text2));
             mCheckBox = checkBox;
             mTextView = textView;
         } else {
             checkBox.setChecked(false);
-            textView.setTextColor(ContextCompat.getColor(context,R.color.text1));
+            textView.setTextColor(ContextCompat.getColor(context, R.color.text1));
         }
 
     }

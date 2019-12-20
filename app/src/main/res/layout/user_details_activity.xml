@@ -1,487 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/top_bg">
 
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@mipmap/top_bg"
-        android:paddingStart="15dp"
-        >
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@mipmap/back">
 
         <TextView
-            android:id="@+id/back"
-            style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@mipmap/back"
-            android:gravity="center_vertical"
-            />
+            android:layout_gravity="center"
+            android:text="@string/product_list"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
 
+    </android.support.v7.widget.Toolbar>
 
-        <TextView
-            style="@style/text"
-            android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cc_01"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/new_text2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cc_02"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/user_details"
-            android:textSize="25sp"
-            />
-    </RelativeLayout>
+            android:layout_marginTop="10dp"
+            android:background="@color/new_text"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cc_01">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@mipmap/bg"
-        android:padding="30dp"
-        >
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg1"
-            android:paddingBottom="10dp"
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_01"
+                style="@style/text_30_1d"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        style="@style/list_tile_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:padding="10dp"
-                        android:text="@string/user_name"
-
-                        />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/divider"
-                        />
-
-                    <TextView
-                        android:id="@+id/user_name"
-                        style="@style/list_item_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_weight="0.3"
-                        android:gravity="start|center_vertical"
-                        android:maxLines="1"
-                        android:padding="10dp"
-                        />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/divider"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        style="@style/list_tile_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:padding="10dp"
-                        android:text="@string/real_name"
-                        />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/divider"
-                        />
-
-                    <TextView
-                        android:id="@+id/real_name"
-                        style="@style/list_item_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_weight="0.3"
-                        android:gravity="start|center_vertical"
-                        android:maxLines="1"
-                        android:padding="10dp"
-                        />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/divider"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        style="@style/list_tile_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:padding="10dp"
-                        android:text="@string/code"
-
-                        />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/divider"
-                        />
-
-                    <TextView
-                        android:id="@+id/code"
-                        style="@style/list_item_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_weight="0.3"
-                        android:gravity="start|center_vertical"
-                        android:maxLines="1"
-                        android:padding="10dp"
-                        />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/divider"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        style="@style/list_tile_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:padding="10dp"
-                        android:text="@string/gender"
-
-                        />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/divider"
-                        />
-
-                    <TextView
-                        android:id="@+id/gender"
-                        style="@style/list_item_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_weight="0.3"
-                        android:gravity="start|center_vertical"
-                        android:maxLines="1"
-                        android:padding="10dp"
-                        />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/divider"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        style="@style/list_tile_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:padding="10dp"
-                        android:text="@string/role"
-
-                        />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/divider"
-                        />
-
-                    <TextView
-                        android:id="@+id/role"
-                        style="@style/list_item_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_weight="0.3"
-                        android:gravity="start|center_vertical"
-                        android:maxLines="1"
-                        android:padding="10dp"
-                        />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/divider"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        style="@style/list_tile_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:padding="10dp"
-                        android:text="@string/tel"
-
-                        />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/divider"
-                        />
-
-                    <TextView
-                        android:id="@+id/tel"
-                        style="@style/list_item_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_weight="0.3"
-                        android:gravity="start|center_vertical"
-                        android:maxLines="1"
-                        android:padding="10dp"
-                        />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/divider"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        style="@style/list_tile_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:padding="10dp"
-                        android:text="@string/email"
-
-                        />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/divider"
-                        />
-
-                    <TextView
-                        android:id="@+id/email"
-                        style="@style/list_item_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_weight="0.3"
-                        android:gravity="start|center_vertical"
-                        android:maxLines="1"
-                        android:padding="10dp"
-                        />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/divider"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        style="@style/list_tile_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:padding="10dp"
-                        android:text="@string/status"
-
-                        />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/divider"
-                        />
-
-                    <TextView
-                        android:id="@+id/status"
-                        style="@style/list_item_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_weight="0.3"
-                        android:gravity="start|center_vertical"
-                        android:maxLines="1"
-                        android:padding="10dp"
-                        />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/divider"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        style="@style/list_tile_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:padding="10dp"
-                        android:text="@string/address"
-
-                        />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/divider"
-                        />
-
-                    <TextView
-                        android:id="@+id/address"
-                        style="@style/list_item_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_weight="0.3"
-                        android:gravity="start|center_vertical"
-                        android:maxLines="1"
-                        android:padding="10dp"
-                        />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/divider"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        style="@style/list_tile_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:padding="10dp"
-                        android:text="@string/remarks"
-
-                        />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/divider"
-                        />
-
-                    <TextView
-                        android:id="@+id/remarks"
-                        style="@style/list_item_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:gravity="start|center_vertical"
-                        android:maxLines="1"
-                        android:minHeight="100dp"
-                        android:padding="10dp"
-                        />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/divider"
-                    />
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
-</LinearLayout>
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/user_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cc_02" />
+
+            <TextView
+                android:id="@+id/user_name"
+                style="@style/text_30_83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_01"
+                app:layout_constraintLeft_toRightOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/tv_02"
+                style="@style/text_30_1d"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/real_name"
+                app:layout_constraintLeft_toLeftOf="@id/tv_01"
+                app:layout_constraintTop_toBottomOf="@id/tv_01" />
+
+            <TextView
+                android:id="@+id/real_name"
+                style="@style/text_30_83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_02"
+                app:layout_constraintLeft_toRightOf="@id/tv_02" />
+
+            <TextView
+                android:id="@+id/tv_03"
+                style="@style/text_30_1d"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/code"
+                app:layout_constraintLeft_toLeftOf="@id/tv_02"
+                app:layout_constraintTop_toBottomOf="@id/tv_02" />
+
+            <TextView
+                android:id="@+id/code"
+                style="@style/text_30_83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_03"
+                app:layout_constraintLeft_toRightOf="@id/tv_03" />
+
+            <TextView
+                android:id="@+id/tv_04"
+                style="@style/text_30_1d"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/gender"
+                app:layout_constraintLeft_toLeftOf="@id/tv_03"
+                app:layout_constraintTop_toBottomOf="@id/tv_03" />
+
+            <TextView
+                android:id="@+id/gender"
+                style="@style/text_30_83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_04"
+                app:layout_constraintLeft_toRightOf="@id/tv_04" />
+
+            <TextView
+                android:id="@+id/tv_05"
+                style="@style/text_30_1d"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/role"
+                app:layout_constraintLeft_toLeftOf="@id/tv_04"
+                app:layout_constraintTop_toBottomOf="@id/tv_04" />
+
+            <TextView
+                android:id="@+id/role"
+                style="@style/text_30_83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_05"
+                app:layout_constraintLeft_toRightOf="@id/tv_05" />
+
+            <TextView
+                android:id="@+id/tv_06"
+                style="@style/text_30_1d"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/tel"
+                app:layout_constraintLeft_toLeftOf="@id/tv_05"
+                app:layout_constraintTop_toBottomOf="@id/tv_05" />
+
+            <TextView
+                android:id="@+id/tel"
+                style="@style/text_30_83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_06"
+                app:layout_constraintLeft_toRightOf="@id/tv_06" />
+
+            <TextView
+                android:id="@+id/tv_07"
+                style="@style/text_30_1d"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/email"
+                app:layout_constraintLeft_toLeftOf="@id/tv_06"
+                app:layout_constraintTop_toBottomOf="@id/tv_06" />
+
+            <TextView
+                android:id="@+id/email"
+                style="@style/text_30_83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_07"
+                app:layout_constraintLeft_toRightOf="@id/tv_07" />
+
+            <TextView
+                android:id="@+id/tv_08"
+                style="@style/text_30_1d"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/status"
+                app:layout_constraintLeft_toLeftOf="@id/tv_07"
+                app:layout_constraintTop_toBottomOf="@id/tv_07" />
+
+            <TextView
+                android:id="@+id/status"
+                style="@style/text_30_83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_08"
+                app:layout_constraintLeft_toRightOf="@id/tv_08" />
+
+            <TextView
+                android:id="@+id/tv_09"
+                style="@style/text_30_1d"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/address"
+                app:layout_constraintLeft_toLeftOf="@id/tv_08"
+                app:layout_constraintTop_toBottomOf="@id/tv_08" />
+
+            <TextView
+                android:id="@+id/address"
+                style="@style/text_30_83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_09"
+                app:layout_constraintLeft_toRightOf="@id/tv_09" />
+
+            <TextView
+                android:id="@+id/tv_10"
+                style="@style/text_30_1d"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/remark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/tv_09"
+                app:layout_constraintTop_toBottomOf="@id/tv_09" />
+
+            <TextView
+                android:id="@+id/remarks"
+                style="@style/text_30_83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_10"
+                app:layout_constraintLeft_toRightOf="@id/tv_10" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

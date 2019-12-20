@@ -2,13 +2,15 @@ package com.csscaps.tcs.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.database.table.Customer;
 
 import butterknife.BindView;
-import butterknife.OnClick;
+import butterknife.ButterKnife;
 
 /**
  * Created by tl on 2018/5/21.
@@ -38,6 +40,8 @@ public class CustomerDetailsActivity extends BaseDetailsActivity<Customer> {
     TextView mState;
     @BindView(R.id.remarks)
     TextView mRemarks;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     private Customer mCustomer;
 
     @Override
@@ -57,20 +61,18 @@ public class CustomerDetailsActivity extends BaseDetailsActivity<Customer> {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         tIntoTextView(mCustomer);
-        if(mCustomer.isRegistered()){
+        if (mCustomer.isRegistered()) {
             mRegistered.setText(getString(R.string.registered));
-        }else{
+        } else {
             mRegistered.setText(getString(R.string.unregistered));
         }
 
     }
-
-
-    @OnClick(R.id.back)
-    public void onClick() {
-        finish();
-    }
-
-
 }

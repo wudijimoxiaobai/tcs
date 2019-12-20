@@ -1,5 +1,8 @@
 package com.csscaps.tcs.dialog;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -16,9 +19,10 @@ import com.csscaps.tcs.R;
 import com.csscaps.tcs.database.table.Product;
 import com.csscaps.tcs.database.table.TaxItem;
 import com.csscaps.tcs.database.table.TaxType;
-import com.csscaps.tcs.fragment.ProductManagementFragment;
+import com.csscaps.tcs.fragment.ProductMgtFragment;
 import com.csscaps.tcs.model.RelatedTaxItem;
 
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -32,7 +36,6 @@ import rx.functions.Action1;
  */
 
 public class AddProductDialog extends BaseAddDialog<Product> implements Action1<RelatedTaxItem> {
-
 
     @BindView(R.id.product_name)
     EditText mProductName;
@@ -52,8 +55,6 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
     EditText mAdjustment;
     @BindView(R.id.related_tax_items)
     TextView mRelatedTaxItems;
-    @BindView(R.id.title)
-    TextView mTitle;
     @BindView(R.id.commission)
     EditText mCommission;
     @BindView(R.id.specification)
@@ -62,6 +63,8 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
     EditText mUnitDiscountPercentage;
     @BindView(R.id.unit_discount_amount)
     EditText mUnitDiscountAmount;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     @Override
     protected int getLayoutId() {
@@ -78,10 +81,16 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
         mUnitDiscountAmount.setFilters(inputFilter);
         mUnitDiscountPercentage.setFilters(inputFilter);
 
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
         if (t == null) t = new Product();
         ObserverActionUtils.addAction(this);
         if (edit) {
-            mTitle.setText(getString(R.string.edit_product));
             tIntoEditText();
             String str = t.getRelatedTaxItemString();
             RelatedTaxItem relatedTaxItem = JSON.parseObject(str, RelatedTaxItem.class);
@@ -166,17 +175,16 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
         if (edit) {
             if (t.update()) {
                 dismiss();
-                Subscription subscription = ObserverActionUtils.subscribe(t, ProductManagementFragment.class);
+                Subscription subscription = ObserverActionUtils.subscribe(t, ProductMgtFragment.class);
                 if (subscription != null) subscription.unsubscribe();
             } else {
                 ToastUtil.showShort(getString(R.string.hit9));
             }
-
         } else {
             if (t.save()) {
                 dismiss();
                 Subscription subscription = ObserverActionUtils.subscribe(t, SelectProductDialog.class);
-                Subscription subscription1 = ObserverActionUtils.subscribe(t, ProductManagementFragment.class);
+                Subscription subscription1 = ObserverActionUtils.subscribe(t, ProductMgtFragment.class);
                 if (subscription != null) subscription.unsubscribe();
                 if (subscription1 != null) subscription1.unsubscribe();
             } else {
@@ -204,6 +212,5 @@ public class AddProductDialog extends BaseAddDialog<Product> implements Action1<
         }
         mRelatedTaxItems.setText(stringBuffer.delete(0, 1).toString());
     }
-
 
 }

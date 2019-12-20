@@ -5,9 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.csscaps.common.utils.ToastUtil;
@@ -32,19 +37,16 @@ import butterknife.OnClick;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
-/**
- * Created by tl on 2018/6/1.
- */
-
 public class UserManagementFragment extends BaseManagementListFragment<User> {
 
-    @BindView(R.id.add_line)
-    View mAddLine;
-    @BindView(R.id.select_line)
-    View mSelectLine;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.search)
-    TextView mSearch;
-
+    ImageView mSearch;
+    @BindView(R.id.list_view)
+    ListView mListView;
+    @BindView(R.id.customer_add)
+    FloatingActionButton mAddLine;
     private User user;
 
     @Override
@@ -55,11 +57,17 @@ public class UserManagementFragment extends BaseManagementListFragment<User> {
     @Override
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
         if (TCSApplication.currentUser.getRole() == 1) {
             mAdd.setVisibility(View.GONE);
-            mSelect.setVisibility(View.GONE);
+            //  mSelect.setVisibility(View.GONE);
             mAddLine.setVisibility(View.GONE);
-            mSelectLine.setVisibility(View.GONE);
+            // mSelectLine.setVisibility(View.GONE);
             mSearch.setVisibility(View.GONE);
         }
     }
@@ -196,4 +204,7 @@ public class UserManagementFragment extends BaseManagementListFragment<User> {
         }
     };
 
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+    }
 }

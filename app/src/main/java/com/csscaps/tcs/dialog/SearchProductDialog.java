@@ -1,6 +1,5 @@
 package com.csscaps.tcs.dialog;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -12,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 
+import com.csscaps.common.utils.DeviceUtils;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.model.SearchProductCondition;
 
@@ -19,13 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * Created by tl on 2018/6/6.
- */
-
-@SuppressLint("ValidFragment")
 public class SearchProductDialog extends DialogFragment {
-
     @BindView(R.id.product_name)
     EditText mProductName;
     @BindView(R.id.local_name)
@@ -53,17 +47,19 @@ public class SearchProductDialog extends DialogFragment {
         return view;
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
         dialogWindow.setGravity(Gravity.CENTER);
-        dialogWindow.setLayout(-2, -2);
+        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 0.3f);
+        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 1f);
+        dialogWindow.setLayout(width, height);
         dialogWindow.setWindowAnimations(R.style.scale_anim);
     }
 
-    private void initView() {}
+    private void initView() {
+    }
 
     @OnClick({R.id.cancel, R.id.confirm})
     public void onClick(View view) {
@@ -75,7 +71,7 @@ public class SearchProductDialog extends DialogFragment {
                 dismiss();
                 mSearchProductCondition.setProductName(mProductName.getText().toString().trim());
                 mSearchProductCondition.setLocalName(mLocalName.getText().toString().trim());
-                mHandler.sendMessage(mHandler.obtainMessage(0,mSearchProductCondition));
+                mHandler.sendMessage(mHandler.obtainMessage(0, mSearchProductCondition));
                 break;
         }
     }

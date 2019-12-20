@@ -1,11 +1,16 @@
 package com.csscaps.tcs.fragment;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -14,6 +19,7 @@ import android.widget.TextView;
 import com.csscaps.common.base.BaseFragment;
 import com.csscaps.common.utils.AppSP;
 import com.csscaps.common.utils.DeviceUtils;
+import com.csscaps.common.widget.MyListView;
 import com.csscaps.tcs.R;
 import com.csscaps.tcs.adapter.TaxItemAdapter;
 import com.csscaps.tcs.adapter.TaxTypeAdapter;
@@ -25,33 +31,14 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
-/**
- * Created by tl on 2018/5/8.
- * 税目展示
- */
-
 public class TaxItemFragment extends BaseFragment implements AdapterView.OnItemClickListener {
-
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.h_scroll_view)
     HorizontalScrollView mHScrollView;
-    @BindView(R.id.name_title)
-    TextView mNameTitle;
-    @BindView(R.id.code_title)
-    TextView mCodeTitle;
-    @BindView(R.id.description_title)
-    TextView mDescriptionTitle;
-    @BindView(R.id.parameter_title)
-    TextView mParameterTitle;
-    @BindView(R.id.tax_rate_title)
-    TextView mTaxRateTitle;
-    @BindView(R.id.formula_description_title)
-    TextView mFormulaDescriptionTitle;
-    @BindView(R.id.unit_title)
-    TextView mUnitTitle;
     @BindView(R.id.name)
     TextView mName;
     @BindView(R.id.code)
@@ -77,7 +64,7 @@ public class TaxItemFragment extends BaseFragment implements AdapterView.OnItemC
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.tax_item_fragment;
+        return R.layout.fragment_tax_itam;
     }
 
     @Override
@@ -90,24 +77,17 @@ public class TaxItemFragment extends BaseFragment implements AdapterView.OnItemC
         listViewW = DeviceUtils.dip2Px(getContext(), 250);
         mTaxTypeList = select().from(TaxType.class).queryList();
         mTaxItemList = select().from(TaxItem.class).queryList();
-        if(mTaxTypeList.size()>0){
+        if (mTaxTypeList.size() > 0) {
             addTaxTypeList();
-        }else{
+        } else {
             mHScrollView.setVisibility(View.GONE);
         }
-
-    }
-
-
-    @OnClick({R.id.back, R.id.search})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 getActivity().finish();
-                break;
-            case R.id.search:
-                break;
-        }
+            }
+        });
     }
 
     /**
@@ -120,14 +100,15 @@ public class TaxItemFragment extends BaseFragment implements AdapterView.OnItemC
         View view1 = new View(mContext);
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(2, LinearLayout.LayoutParams.MATCH_PARENT);
         view1.setLayoutParams(lp2);
-        view1.setBackgroundColor(ContextCompat.getColor(mContext,R.color.divider));
+        view1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.new_text2));
         mListLayout.addView(listView);
         mListLayout.addView(view1);
+        listView.setDivider(new ColorDrawable(0x99f2f2f2));
+        listView.setDividerHeight(2);
         TaxTypeAdapter taxTypeAdapter = new TaxTypeAdapter(mContext, R.layout.tax_item_layout, mTaxTypeList);
         listView.setAdapter(taxTypeAdapter);
         listView.setOnItemClickListener(this);
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -177,6 +158,8 @@ public class TaxItemFragment extends BaseFragment implements AdapterView.OnItemC
         mTaxRate.setText(taxItem.getTax_rate());
         mFormulaDescription.setText(taxItem.getFormula_desc());
         mUnit.setText(taxItem.getUnit());
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        mTaxItemDetailsLayout.setLayoutParams(params);
         mTaxItemDetailsLayout.setVisibility(View.VISIBLE);
     }
 
@@ -192,7 +175,7 @@ public class TaxItemFragment extends BaseFragment implements AdapterView.OnItemC
         View view = new View(mContext);
         LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(2, LinearLayout.LayoutParams.MATCH_PARENT);
         view.setLayoutParams(lp1);
-        view.setBackgroundColor(ContextCompat.getColor(mContext,R.color.divider));
+        view.setBackgroundColor(ContextCompat.getColor(mContext, R.color.new_text2));
         mListLayout.addView(listView);
         mListLayout.addView(view);
         TaxItemAdapter taxItemAdapter = new TaxItemAdapter(mContext, R.layout.tax_item_layout, list);
@@ -219,6 +202,4 @@ public class TaxItemFragment extends BaseFragment implements AdapterView.OnItemC
         });
 
     }
-
-
 }

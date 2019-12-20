@@ -24,10 +24,6 @@ import rx.Subscription;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
-/**
- * Created by tl on 2018/6/4.
- */
-
 public class AddUserDialog extends BaseAddDialog<User> implements AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener {
 
     @BindView(R.id.user_name)
@@ -58,8 +54,6 @@ public class AddUserDialog extends BaseAddDialog<User> implements AdapterView.On
     EditText mAddress;
     @BindView(R.id.remarks)
     EditText mRemarks;
-    @BindView(R.id.title)
-    TextView mTitle;
 
     @Override
     protected int getLayoutId() {
@@ -72,18 +66,18 @@ public class AddUserDialog extends BaseAddDialog<User> implements AdapterView.On
         mRoleSpinner.setDropDownVerticalOffset(offset);
         if (t == null) t = new User();
         if (edit) {
-            if (t.getId()==1) {
+            if (t.getId() == 1) {
                 mUserName.setEnabled(false);
                 mRoleSpinner.setEnabled(false);
                 mNo.setVisibility(View.GONE);
             }
-            if(t.getId()==TCSApplication.currentUser.getId()){
+            if (t.getId() == TCSApplication.currentUser.getId()) {
                 mRoleSpinner.setEnabled(false);
                 mYes.setEnabled(false);
                 mNo.setEnabled(false);
             }
 
-            mTitle.setText(getString(R.string.edit_user));
+            //  mTitle.setText(getString(R.string.edit_user));
             tIntoEditText();
             mRoleSpinner.setSelection(t.getRole());
             switch (t.getGender()) {
@@ -107,6 +101,7 @@ public class AddUserDialog extends BaseAddDialog<User> implements AdapterView.On
         mRoleSpinner.setOnItemSelectedListener(this);
         mGenderGroup.setOnCheckedChangeListener(this);
         mStatusGroup.setOnCheckedChangeListener(this);
+
     }
 
     @Override
@@ -120,12 +115,12 @@ public class AddUserDialog extends BaseAddDialog<User> implements AdapterView.On
             return;
         }
         editTextsIntoT();
-        User user= select().from(User.class).where(User_Table.userName.eq(t.getUserName())).querySingle();
+        User user = select().from(User.class).where(User_Table.userName.eq(t.getUserName())).querySingle();
         if (edit) {
-             if(user!=null&&t.getId()!=user.getId()){
-                 ToastUtil.showShort(getString(R.string.hit37));
-                 return;
-             }
+            if (user != null && t.getId() != user.getId()) {
+                ToastUtil.showShort(getString(R.string.hit37));
+                return;
+            }
             if (t.update()) {
                 if (TCSApplication.currentUser.getId() == t.getId()) {
                     TCSApplication.currentUser = t;
@@ -138,7 +133,7 @@ public class AddUserDialog extends BaseAddDialog<User> implements AdapterView.On
             }
 
         } else {
-            if(user!=null){
+            if (user != null) {
                 ToastUtil.showShort(getString(R.string.hit37));
                 return;
             }

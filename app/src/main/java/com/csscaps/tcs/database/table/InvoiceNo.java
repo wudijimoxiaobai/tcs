@@ -11,6 +11,15 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 @Table(database = TcsDatabase.class)
 public class InvoiceNo extends BaseModel {
+    @Override
+    public String toString() {
+        return "InvoiceNo{" +
+                "id=" + id +
+                ", invoice_type_code='" + invoice_type_code + '\'' +
+                ", segment_cipher='" + segment_cipher + '\'' +
+                ", invoice_num='" + invoice_num + '\'' +
+                '}';
+    }
 
     @PrimaryKey(autoincrement = true)
     @Column

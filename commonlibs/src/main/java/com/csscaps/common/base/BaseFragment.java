@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.csscaps.common.utils.HandleBackInterface;
+import com.csscaps.common.utils.HandleBackUtil;
 import com.csscaps.common.utils.ObserverActionUtils;
+import com.csscaps.common.utils.ToolbarUtils;
 
 import java.util.ArrayList;
 
@@ -21,7 +24,7 @@ import rx.functions.Action1;
  * Created by tanglei on 16/6/17.
  * Fragment基类
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements HandleBackInterface {
     protected ArrayList<BasePresenter> mPresenters = new ArrayList<>();
     protected ArrayList<Action1> mAction1s = new ArrayList<>();
     protected View mView;
@@ -109,5 +112,8 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public void addAction1(Action1 action1) {mAction1s.add(action1);}
-
+    @Override
+    public boolean onBackPressed() {
+        return HandleBackUtil.handleBackPress(this);
+    }
 }

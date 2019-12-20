@@ -45,7 +45,7 @@ public class HttpsUtils {
     /**
      * 参数全为null 信任所有证书，全不为null 双向认证
      *
-     * @param certificates 服务器证书  不为null 单向认证服务器
+     * @param certificates 服9务器证书  不为null 单向认证服务器
      * @param bksFile      客户端秘钥库
      * @param password     秘钥库密码
      * @return
@@ -55,14 +55,12 @@ public class HttpsUtils {
         try {
             TrustManager[] trustManagers = prepareTrustManager(certificates);
             KeyManager[] keyManagers = prepareKeyManager(bksFile, password);
-
             X509TrustManager trustManager = null;
             if (trustManagers != null) {
                 trustManager = new MyTrustManager(chooseTrustManager(trustManagers));
             } else {
                 trustManager = new UnSafeTrustManager();
             }
-
             sslParams.sSLSocketFactory = new SSL(keyManagers, trustManager);
             sslParams.trustManager = trustManager;
             return sslParams;
@@ -175,7 +173,6 @@ public class HttpsUtils {
         return null;
     }
 
-
     private static class MyTrustManager implements X509TrustManager {
         private X509TrustManager defaultTrustManager;
         private X509TrustManager localTrustManager;
@@ -202,7 +199,6 @@ public class HttpsUtils {
             }
         }
 
-
         @Override
         public X509Certificate[] getAcceptedIssuers() {
             return new X509Certificate[0];
@@ -217,7 +213,7 @@ public class HttpsUtils {
             try {
                 SSLSocket socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket();
                 if (socket != null) {
-                /* set reasonable protocol versions */
+                    /* set reasonable protocol versions */
                     // - enable all supported protocols (enables TLSv1.1 and TLSv1.2 on Android <5.0)
                     // - remove all SSL versions (especially SSLv3) because they‘re insecure now
                     List<String> protocols = new LinkedList<>();
@@ -225,7 +221,7 @@ public class HttpsUtils {
                         if (!protocol.toUpperCase().contains("SSL"))
                             protocols.add(protocol);
                     SSL.protocols = protocols.toArray(new String[protocols.size()]);
-                /* set up reasonable cipher suites */
+                    /* set up reasonable cipher suites */
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                         // choose known secure cipher suites
                         List<String> allowedCiphers = Arrays.asList(
@@ -250,10 +246,10 @@ public class HttpsUtils {
                         // take all allowed ciphers that are available and put them into preferredCiphers
                         HashSet<String> preferredCiphers = new HashSet<>(allowedCiphers);
                         preferredCiphers.retainAll(availableCiphers);
-                    /* For maximum security, preferredCiphers should *replace* enabled ciphers (thus disabling
-                     * ciphers which are enabled by default, but have become unsecure), but I guess for
-                     * the security level of DAVdroid and maximum compatibility, disabling of insecure
-                     * ciphers should be a server-side task */
+                        /* For maximum security, preferredCiphers should *replace* enabled ciphers (thus disabling
+                         * ciphers which are enabled by default, but have become unsecure), but I guess for
+                         * the security level of DAVdroid and maximum compatibility, disabling of insecure
+                         * ciphers should be a server-side task */
                         // add preferred ciphers to enabled ciphers
                         HashSet<String> enabledCiphers = preferredCiphers;
                         enabledCiphers.addAll(new HashSet<>(Arrays.asList(socket.getEnabledCipherSuites())));

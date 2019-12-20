@@ -11,6 +11,35 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 @Table(database = TcsDatabase.class)
 public class ReportData extends BaseModel {
+    @Override
+    public String toString() {
+        return "ReportData{" +
+                "reportId=" + reportId +
+                ", invoice_type_code='" + invoice_type_code + '\'' +
+                ", date='" + date + '\'' +
+                ", report_date='" + report_date + '\'' +
+                ", total_all=" + total_all +
+                ", total_final=" + total_final +
+                ", total_vat=" + total_vat +
+                ", total_stamp=" + total_stamp +
+                ", total_bpt=" + total_bpt +
+                ", total_bpt_preypayment=" + total_bpt_preypayment +
+                ", total_fee=" + total_fee +
+                ", total_taxable_amount=" + total_taxable_amount +
+                ", n_total_all=" + n_total_all +
+                ", n_total_final=" + n_total_final +
+                ", n_total_vat=" + n_total_vat +
+                ", n_total_stamp=" + n_total_stamp +
+                ", n_total_bpt=" + n_total_bpt +
+                ", n_total_bpt_preypayment=" + n_total_bpt_preypayment +
+                ", n_total_fee=" + n_total_fee +
+                ", n_total_taxable_amount=" + n_total_taxable_amount +
+                ", invoice_number=" + invoice_number +
+                ", c_invoice_number=" + c_invoice_number +
+                ", n_invoice_number=" + n_invoice_number +
+                ", report_status='" + report_status + '\'' +
+                '}';
+    }
 
     @PrimaryKey(autoincrement = true)
     @Column

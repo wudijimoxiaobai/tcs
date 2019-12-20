@@ -1,6 +1,5 @@
 package com.csscaps.tcs.dialog;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.csscaps.common.utils.AppTools;
 import com.csscaps.common.utils.DateUtils;
@@ -27,26 +25,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * Created by tl on 2018/6/6.
- */
-
-@SuppressLint("ValidFragment")
 public class SearchApproveInvoiceDialog extends DialogFragment implements AdapterView.OnItemSelectedListener {
 
     @BindView(R.id.invoice_code)
     EditText mInvoiceCode;
-    @BindView(R.id.invoice_no)
-    EditText mInvoiceNo;
-    @BindView(R.id.date_from)
-    TextView mDateFrom;
-    @BindView(R.id.date_to)
-    TextView mDateTo;
-    @BindView(R.id.request_type_spinner)
+    @BindView(R.id.request_type)
     AppCompatSpinner mRequestTypeSpinner;
-    @BindView(R.id.approve_status_spinner)
+    @BindView(R.id.status)
     AppCompatSpinner mApproveStatusSpinner;
-
+    @BindView(R.id.date_from)
+    EditText mDateFrom;
+    @BindView(R.id.date_to)
+    EditText mDateTo;
 
     private Handler mHandler;
     private SearchApproveInvoiceCondition mSearchApproveInvoiceCondition = new SearchApproveInvoiceCondition();
@@ -70,14 +60,14 @@ public class SearchApproveInvoiceDialog extends DialogFragment implements Adapte
         return view;
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
-        dialogWindow.setGravity(Gravity.CENTER);
-        int width = DeviceUtils.dip2Px(getContext(), 570);
-        dialogWindow.setLayout(width, -2);
+        dialogWindow.setGravity(Gravity.BOTTOM);
+        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 0.5f);
+        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 1f);
+        dialogWindow.setLayout(width, height);
         dialogWindow.setWindowAnimations(R.style.scale_anim);
     }
 
@@ -88,7 +78,6 @@ public class SearchApproveInvoiceDialog extends DialogFragment implements Adapte
         mRequestTypeSpinner.setOnItemSelectedListener(this);
         mApproveStatusSpinner.setOnItemSelectedListener(this);
     }
-
 
     @OnClick({R.id.date_from, R.id.date_to, R.id.cancel, R.id.confirm})
     public void onClick(View view) {
@@ -105,16 +94,14 @@ public class SearchApproveInvoiceDialog extends DialogFragment implements Adapte
             case R.id.confirm:
                 mSearchApproveInvoiceCondition.setDateFrom((String) mDateFrom.getTag());
                 mSearchApproveInvoiceCondition.setDateTo((String) mDateTo.getTag());
-                if(!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getDateFrom())&&!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getDateTo())){
-                    if(DateUtils.compareDate(mSearchApproveInvoiceCondition.getDateFrom(),mSearchApproveInvoiceCondition.getDateTo(),DateUtils.format_yyyy_MM_dd_EN)==1) {
+                if (!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getDateFrom()) && !TextUtils.isEmpty(mSearchApproveInvoiceCondition.getDateTo())) {
+                    if (DateUtils.compareDate(mSearchApproveInvoiceCondition.getDateFrom(), mSearchApproveInvoiceCondition.getDateTo(), DateUtils.format_yyyy_MM_dd_EN) == 1) {
                         ToastUtil.showShort(getString(R.string.hit48));
                         return;
                     }
                 }
-
                 dismiss();
                 mSearchApproveInvoiceCondition.setInvoiceCode(mInvoiceCode.getText().toString().trim());
-                mSearchApproveInvoiceCondition.setInvoiceNo(mInvoiceNo.getText().toString().trim());
                 mHandler.sendMessage(mHandler.obtainMessage(0, mSearchApproveInvoiceCondition));
                 break;
         }
@@ -123,15 +110,14 @@ public class SearchApproveInvoiceDialog extends DialogFragment implements Adapte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         switch (adapterView.getId()) {
-            case R.id.request_type_spinner:
+            case R.id.request_type:
                 if (i == 1) {
                     mSearchApproveInvoiceCondition.setRequestType("DISA");
                 } else if (i == 2) {
                     mSearchApproveInvoiceCondition.setRequestType("NEG");
                 }
-
                 break;
-            case R.id.approve_status_spinner:
+            case R.id.status:
                 if (i > 0) mSearchApproveInvoiceCondition.setStatus(String.valueOf(i - 1));
                 break;
         }
@@ -141,4 +127,5 @@ public class SearchApproveInvoiceDialog extends DialogFragment implements Adapte
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
 }

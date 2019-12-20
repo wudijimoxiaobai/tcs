@@ -18,6 +18,20 @@
     <color name="top_bg">#fafafa</color>
     <color name="bg">#eff2f4</color>
     <color name="bg1">#d2d2d2</color>
-    <color name="divider">#c0c5c6</color>
+    <color name="divider">#FFFFFF</color>
     <color name="red">#fd745d</color>
+    <color name="com_ycuwq_datepicker_selectedTextColor">#33aaff</color>
+    <color name="com_ycuwq_datepicker_divider">#cccccc</color>
+
+    <color name="new_text">#fefefe</color>
+    <color name="new_text2">#f2f2f2</color>
+    <color name="new_text3">#dcdcdc</color>
+    <color name="new_text4">#1d1d1d</color>
+    <color name="new_text5">#838383</color>
+    <color name="new_invoice">#508ce3</color>
+    <color name="statistics">#019eff</color>
+    <color name="invoice_query">#7579fd</color>
+    <color name="invoice_request">#1dbdf1</color>
+    <color name="invoice_approve">#298ffe</color>
+    <color name="invoice_application">#009eff</color>
 </resources>

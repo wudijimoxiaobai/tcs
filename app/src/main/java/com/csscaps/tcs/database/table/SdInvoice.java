@@ -19,6 +19,79 @@ public class SdInvoice extends BaseModel implements Serializable, Cloneable {
     public static final String SUCCESS = "1";
     public static final String FAILURE = "0";
 
+    @Override
+    public String toString() {
+        return "SdInvoice{" +
+                "invoice_no='" + invoice_no + '\'' +
+                ", invoice_short_code='" + invoice_short_code + '\'' +
+                ", fiscal_long_code='" + fiscal_long_code + '\'' +
+                ", invoice_made_by='" + invoice_made_by + '\'' +
+                ", invoice_from='" + invoice_from + '\'' +
+                ", invoice_type_code='" + invoice_type_code + '\'' +
+                ", invoice_type_name='" + invoice_type_name + '\'' +
+                ", drawer_name='" + drawer_name + '\'' +
+                ", client_invoice_datetime='" + client_invoice_datetime + '\'' +
+                ", purchaser_tin='" + purchaser_tin + '\'' +
+                ", purchaser_name='" + purchaser_name + '\'' +
+                ", purchaser_address='" + purchaser_address + '\'' +
+                ", purchaser_phone='" + purchaser_phone + '\'' +
+                ", purchaser_id_type='" + purchaser_id_type + '\'' +
+                ", purchaser_id_number='" + purchaser_id_number + '\'' +
+                ", seller_tin='" + seller_tin + '\'' +
+                ", seller_name='" + seller_name + '\'' +
+                ", seller_address='" + seller_address + '\'' +
+                ", seller_phone='" + seller_phone + '\'' +
+                ", seller_branch_addr='" + seller_branch_addr + '\'' +
+                ", is_local_currency='" + is_local_currency + '\'' +
+                ", currency_code='" + currency_code + '\'' +
+                ", exchange_rate='" + exchange_rate + '\'' +
+                ", total_final='" + total_final + '\'' +
+                ", total_vat='" + total_vat + '\'' +
+                ", total_stamp='" + total_stamp + '\'' +
+                ", total_bpt='" + total_bpt + '\'' +
+                ", total_bpt_preypayment='" + total_bpt_preypayment + '\'' +
+                ", total_fee='" + total_fee + '\'' +
+                ", total_tax1='" + total_tax1 + '\'' +
+                ", total_tax2='" + total_tax2 + '\'' +
+                ", total_tax3='" + total_tax3 + '\'' +
+                ", total_tax4='" + total_tax4 + '\'' +
+                ", total_tax5='" + total_tax5 + '\'' +
+                ", total_taxable_amount_org='" + total_taxable_amount_org + '\'' +
+                ", total_taxable_amount='" + total_taxable_amount + '\'' +
+                ", total_tax_due='" + total_tax_due + '\'' +
+                ", total_all='" + total_all + '\'' +
+                ", remark='" + remark + '\'' +
+                ", negative_flag='" + negative_flag + '\'' +
+                ", deduction_status='" + deduction_status + '\'' +
+                ", applied_negative_total_amount='" + applied_negative_total_amount + '\'' +
+                ", org_invoice_uid='" + org_invoice_uid + '\'' +
+                ", original_invoice_type_code='" + original_invoice_type_code + '\'' +
+                ", original_invoice_no='" + original_invoice_no + '\'' +
+                ", invalid_flag='" + invalid_flag + '\'' +
+                ", invalid_datetime='" + invalid_datetime + '\'' +
+                ", invalid_user_name='" + invalid_user_name + '\'' +
+                ", invalid_remark='" + invalid_remark + '\'' +
+                ", sign='" + sign + '\'' +
+                ", print_flag='" + print_flag + '\'' +
+                ", is_deductable='" + is_deductable + '\'' +
+                ", file_name='" + file_name + '\'' +
+                ", file_content='" + file_content + '\'' +
+                ", uploadStatus='" + uploadStatus + '\'' +
+                ", status='" + status + '\'' +
+                ", approveFlag='" + approveFlag + '\'' +
+                ", reason='" + reason + '\'' +
+                ", requestType='" + requestType + '\'' +
+                ", requestBy='" + requestBy + '\'' +
+                ", requestDate='" + requestDate + '\'' +
+                ", requestStatus='" + requestStatus + '\'' +
+                ", negative_approval_remark='" + negative_approval_remark + '\'' +
+                ", invalid='" + invalid + '\'' +
+                ", goods=" + goods +
+                ", invoice_type_uid='" + invoice_type_uid + '\'' +
+                ", mProducts=" + mProducts +
+                '}';
+    }
+
     @Column
     @PrimaryKey
     String invoice_no;

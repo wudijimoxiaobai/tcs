@@ -2,19 +2,27 @@ package com.csscaps.tcs.model;
 
 public class Buyer {
 
-    private String TIN;
+    private String BUYERTIN;
     private String NAME;
     private String ADDRESS;
     private String PHONENO;
     private String NATIONALID;
+    private String Money;
 
+    public String getMoney() {
+        return Money;
+    }
+
+    public void setMoney(String money) {
+        Money = money;
+    }
     public Buyer() {
     }
 
 
     public Buyer(String tIN, String nAME, String aDDRESS, String pHONENO, String nATIONALID) {
         super();
-        TIN = tIN;
+        BUYERTIN = tIN;
         NAME = nAME;
         ADDRESS = aDDRESS;
         PHONENO = pHONENO;
@@ -22,11 +30,11 @@ public class Buyer {
     }
 
     public String getTIN() {
-        return TIN;
+        return BUYERTIN;
     }
 
     public void setTIN(String tIN) {
-        TIN = tIN;
+        BUYERTIN = tIN;
     }
 
     public String getNAME() {
@@ -57,8 +65,8 @@ public class Buyer {
         return NATIONALID;
     }
 
-    public void setNATIONALID(String nATIONALID) {
-        NATIONALID = nATIONALID;
-    }
+   // public void setNATIONALID(String nATIONALID) {
+   //     NATIONALID = nATIONALID;
+    //}
 
 }

@@ -65,8 +65,9 @@ public class SearchCustomerDialog extends DialogFragment implements AdapterView.
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
         dialogWindow.setGravity(Gravity.CENTER);
-        int width = DeviceUtils.dip2Px(getContext(), 570);
-        dialogWindow.setLayout(width, -2);
+        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 0.4f);
+        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 1f);
+        dialogWindow.setLayout(width, height);
         dialogWindow.setWindowAnimations(R.style.scale_anim);
     }
 

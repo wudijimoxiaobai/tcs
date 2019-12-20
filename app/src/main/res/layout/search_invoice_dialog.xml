@@ -1,366 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="600dp"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-    >
-
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/new_text">
 
     <TextView
-        style="@style/text"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/bg10"
-        android:gravity="center"
+        android:id="@+id/tv_01"
+        style="@style/text_30_1d"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
         android:text="@string/search"
-        android:textColor="@color/text2"
-        android:textSize="25sp"
-        />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/divider"
-        />
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        android:background="@color/new_text2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_01" />
 
+    <TextView
+        android:id="@+id/tv_02"
+        style="@style/text_24_1d"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:text="@string/invoice_code"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_01" />
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/invoice_code"
+        style="@style/text_24_83"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/bg2"
+        android:gravity="start|center_vertical"
+        android:hint="@string/please_input"
+        android:inputType="number"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/tv_02"
+        app:layout_constraintLeft_toRightOf="@id/tv_02"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_03"
+        style="@style/text_24_1d"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:text="@string/invoice_no"
+        app:layout_constraintLeft_toLeftOf="@id/tv_02"
+        app:layout_constraintTop_toBottomOf="@id/tv_02" />
+
+    <EditText
+        android:id="@+id/invoice_no"
+        style="@style/text_24_83"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/bg2"
+        android:gravity="start|center_vertical"
+        android:hint="@string/please_input"
+        android:inputType="number"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/tv_03"
+        app:layout_constraintLeft_toRightOf="@id/tv_03"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_04"
+        style="@style/text_24_1d"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:text="@string/issued_by"
+        app:layout_constraintLeft_toLeftOf="@id/tv_03"
+        app:layout_constraintTop_toBottomOf="@id/tv_03" />
+
+    <EditText
+        android:id="@+id/issued_by"
+        style="@style/text_24_83"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/bg2"
+        android:gravity="start|center_vertical"
+        android:hint="@string/please_input"
+        android:inputType="number"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/tv_04"
+        app:layout_constraintLeft_toRightOf="@id/tv_04"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/upload_status_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg11"
+        android:layout_height="45dp"
         android:orientation="vertical"
-        android:padding="20dp"
-        >
+        app:layout_constraintLeft_toLeftOf="@id/tv_04"
+        app:layout_constraintTop_toBottomOf="@id/tv_04">
 
-        <LinearLayout
-            android:id="@+id/tin_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+        <TextView
+            android:id="@+id/tv_05"
+            style="@style/text_24_1d"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            >
+            android:text="@string/status"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
-            <TextView
-                style="@style/list_tile_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:padding="10dp"
-                android:text="@string/invoice_code"
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/status_spinner"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/bg2"
+            android:gravity="start"
+            android:spinnerMode="dropdown"
+            android:textAlignment="viewStart"
+            android:textDirection="locale"
+            android:theme="@style/myDropTheme"
+            app:layout_constraintBottom_toBottomOf="@id/tv_05"
+            app:layout_constraintLeft_toRightOf="@id/tv_05"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_05" />
 
-                />
-
-            <EditText
-                android:id="@+id/invoice_code"
-                style="@style/list_item_text"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="0.5"
-                android:background="@drawable/bg2"
-                android:gravity="start|center_vertical"
-                android:hint="@string/please_input"
-                android:inputType="number"
-                android:maxLines="1"
-                android:padding="10dp"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            >
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/arrow_down"
+            app:layout_constraintBottom_toBottomOf="@id/status_spinner"
+            app:layout_constraintRight_toRightOf="@id/status_spinner"
+            app:layout_constraintTop_toTopOf="@id/status_spinner" />
 
-            <TextView
-                style="@style/list_tile_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:padding="10dp"
-                android:text="@string/invoice_no"
+    </android.support.constraint.ConstraintLayout>
 
-                />
+    <TextView
+        android:id="@+id/tv_06"
+        style="@style/text_24_1d"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:text="@string/upload_status"
+        app:layout_constraintLeft_toLeftOf="@id/tv_04"
+        app:layout_constraintTop_toBottomOf="@id/upload_status_layout" />
 
-            <EditText
-                android:id="@+id/invoice_no"
-                style="@style/list_item_text"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="0.5"
-                android:background="@drawable/bg2"
-                android:gravity="start|center_vertical"
-                android:hint="@string/please_input"
-                android:inputType="number"
-                android:maxLines="1"
-                android:padding="10dp"
-                />
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/upload_status_spinner"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/bg2"
+        android:gravity="start"
+        android:spinnerMode="dropdown"
+        android:textAlignment="viewStart"
+        android:textDirection="locale"
+        android:theme="@style/myDropTheme"
+        app:layout_constraintBottom_toBottomOf="@id/tv_06"
+        app:layout_constraintLeft_toRightOf="@id/tv_06"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_06" />
 
-        </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="@mipmap/arrow_down"
+        app:layout_constraintBottom_toBottomOf="@id/upload_status_spinner"
+        app:layout_constraintRight_toRightOf="@id/upload_status_spinner"
+        app:layout_constraintTop_toTopOf="@id/upload_status_spinner" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            >
+    <TextView
+        android:id="@+id/tv_07"
+        style="@style/text_24_1d"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:text="@string/issuing_date_from"
+        app:layout_constraintLeft_toLeftOf="@id/tv_06"
+        app:layout_constraintTop_toBottomOf="@id/tv_06" />
 
-            <TextView
-                style="@style/list_tile_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:padding="10dp"
-                android:text="@string/issued_by"
+    <EditText
+        android:id="@+id/issuing_date_from"
+        style="@style/text_24_83"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/bg2"
+        android:gravity="start|center_vertical"
+        android:hint="@string/please_input"
+        android:inputType="number"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/tv_07"
+        app:layout_constraintLeft_toRightOf="@id/tv_07"
+        app:layout_constraintRight_toRightOf="parent" />
 
-                />
+    <TextView
+        android:id="@+id/tv_08"
+        style="@style/text_24_1d"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:text="@string/issuing_date_to"
+        app:layout_constraintLeft_toLeftOf="@id/tv_07"
+        app:layout_constraintTop_toBottomOf="@id/tv_07" />
 
-            <EditText
-                android:id="@+id/issued_by"
-                style="@style/list_item_text"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="0.5"
-                android:background="@drawable/bg2"
-                android:gravity="start|center_vertical"
-                android:hint="@string/please_input"
-                android:imeActionLabel="@string/verify"
-                android:imeOptions="actionDone"
-                android:maxLines="1"
-                android:padding="10dp"
-                />
+    <EditText
+        android:id="@+id/issuing_date_to"
+        style="@style/text_24_83"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/bg2"
+        android:gravity="start|center_vertical"
+        android:hint="@string/please_input"
+        android:inputType="number"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/tv_08"
+        app:layout_constraintLeft_toRightOf="@id/tv_08"
+        app:layout_constraintRight_toRightOf="parent" />
 
-        </LinearLayout>
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/new_text2"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textColor="@color/new_text4"
+        android:textSize="@dimen/text_30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_08" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            >
+    <TextView
+        android:id="@+id/confirm"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg18"
+        android:gravity="center"
+        android:text="@string/confirm"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_08" />
 
-            <TextView
-                style="@style/list_tile_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:padding="10dp"
-                android:text="@string/status"
-
-                />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="0.5"
-                >
-
-                <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/status_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/bg2"
-                    android:entries="@array/invoice_status"
-                    android:gravity="start"
-                    android:spinnerMode="dropdown"
-                    android:textAlignment="viewStart"
-                    android:textDirection="locale"
-                    android:theme="@style/myDropTheme"
-                    />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@mipmap/arrow_down"
-                    />
-            </RelativeLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/upload_status_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                style="@style/list_tile_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:padding="10dp"
-                android:text="@string/upload_status"
-
-                />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="0.5"
-                >
-
-                <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/upload_status_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/bg2"
-                    android:entries="@array/upload_status"
-                    android:gravity="start"
-                    android:spinnerMode="dropdown"
-                    android:textAlignment="viewStart"
-                    android:textDirection="locale"
-                    android:theme="@style/myDropTheme"
-                    />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@mipmap/arrow_down"
-                    />
-            </RelativeLayout>
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                style="@style/list_tile_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:padding="10dp"
-                android:text="@string/issuing_date_from"
-
-                />
-
-            <TextView
-                android:id="@+id/issuing_date_from"
-                style="@style/list_item_text"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="0.5"
-                android:background="@drawable/bg2"
-                android:gravity="start|center_vertical"
-                android:hint="@string/please_select"
-                android:maxLines="1"
-                android:padding="10dp"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                style="@style/list_tile_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:padding="10dp"
-                android:text="@string/issuing_date_to"
-
-                />
-
-            <TextView
-                android:id="@+id/issuing_date_to"
-                style="@style/list_item_text"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_weight="0.5"
-                android:background="@drawable/bg2"
-                android:gravity="start|center_vertical"
-                android:hint="@string/please_select"
-                android:maxLines="1"
-                android:padding="10dp"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="30dp"
-            >
-
-            <TextView
-                android:id="@+id/cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg17"
-                android:gravity="center"
-                android:text="@string/cancel"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text"
-                />
-
-            <TextView
-                android:id="@+id/confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginStart="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg18"
-                android:gravity="center"
-                android:text="@string/confirm"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text"
-                />
-        </LinearLayout>
-
-    </LinearLayout>
-</ScrollView>
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

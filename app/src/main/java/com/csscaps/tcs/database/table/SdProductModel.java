@@ -11,6 +11,46 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 @Table(database = SDInvoiceDatabase.class, name = "ProductModel")
 public class SdProductModel extends BaseModel implements Cloneable {
+    @Override
+    public String toString() {
+        return "SdProductModel{" +
+                "id=" + id +
+                ", invoice_no='" + invoice_no + '\'' +
+                ", category='" + category + '\'' +
+                ", line_no='" + line_no + '\'' +
+                ", taxable_item_uid='" + taxable_item_uid + '\'' +
+                ", product_code='" + product_code + '\'' +
+                ", currency_code='" + currency_code + '\'' +
+                ", exchange_rate='" + exchange_rate + '\'' +
+                ", item_name='" + item_name + '\'' +
+                ", item_desc='" + item_desc + '\'' +
+                ", unit='" + unit + '\'' +
+                ", unit_price='" + unit_price + '\'' +
+                ", unit_price_tax_rate='" + unit_price_tax_rate + '\'' +
+                ", taxtype='" + taxtype + '\'' +
+                ", qty='" + qty + '\'' +
+                ", taxable_amount='" + taxable_amount + '\'' +
+                ", taxable_amount_org='" + taxable_amount_org + '\'' +
+                ", tax_due='" + tax_due + '\'' +
+                ", amount_inc='" + amount_inc + '\'' +
+                ", unit_price_after_tax='" + unit_price_after_tax + '\'' +
+                ", vat_amount='" + vat_amount + '\'' +
+                ", specification='" + specification + '\'' +
+                ", vat=" + vat +
+                ", bpt_final=" + bpt_final +
+                ", bpt_prepayment=" + bpt_prepayment +
+                ", stamp_duty_federal=" + stamp_duty_federal +
+                ", stamp_duty_local=" + stamp_duty_local +
+                ", fees=" + fees +
+                ", e_tax=" + e_tax +
+                ", i_tax=" + i_tax +
+                ", bptf_amount='" + bptf_amount + '\'' +
+                ", bptp_amount='" + bptp_amount + '\'' +
+                ", sdf_amount='" + sdf_amount + '\'' +
+                ", sdl_amount='" + sdl_amount + '\'' +
+                ", fees_amount='" + fees_amount + '\'' +
+                '}';
+    }
 
     @PrimaryKey(autoincrement = true)
     @Column
@@ -83,6 +123,8 @@ public class SdProductModel extends BaseModel implements Cloneable {
     String sdl_amount;
     @Column
     String fees_amount;
+    @Column
+    String tax_rate;
 
     @Override
     public Object clone() throws CloneNotSupportedException {
@@ -363,5 +405,12 @@ public class SdProductModel extends BaseModel implements Cloneable {
 
     public void setFees_amount(String fees_amount) {
         this.fees_amount = fees_amount;
+    }
+    public String getTax_rate() {
+        return tax_rate;
+    }
+
+    public void setTax_rate(String tax_rate) {
+        this.tax_rate = tax_rate;
     }
 }

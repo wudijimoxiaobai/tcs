@@ -10,10 +10,6 @@ import com.csscaps.tcs.database.table.TaxType;
 
 import java.util.List;
 
-/**
- * Created by tl on 2018/5/10.
- */
-
 public class TaxTypeAdapter extends QuickAdapter<TaxType> {
 
     private int selectedPosition=-1;
@@ -26,7 +22,7 @@ public class TaxTypeAdapter extends QuickAdapter<TaxType> {
     protected void convert(BaseAdapterHelper helper, TaxType item, int position) {
         helper.setText(R.id.text, item.getTaxtype_name());
         if(position==selectedPosition){
-            helper.setTextColor(R.id.text, ContextCompat.getColor(context,R.color.blue1));
+            helper.setTextColor(R.id.text, ContextCompat.getColor(context,R.color.new_text2));
         }else{
             helper.setTextColor(R.id.text, ContextCompat.getColor(context,R.color.text1));
         }

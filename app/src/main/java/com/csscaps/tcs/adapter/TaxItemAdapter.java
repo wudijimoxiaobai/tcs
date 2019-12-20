@@ -10,13 +10,9 @@ import com.csscaps.tcs.database.table.TaxItem;
 
 import java.util.List;
 
-/**
- * Created by tl on 2018/5/10.
- */
-
 public class TaxItemAdapter extends QuickAdapter<TaxItem> {
 
-    private int selectedPosition=-1;
+    private int selectedPosition = -1;
 
     public TaxItemAdapter(Context context, int layoutResId, List<TaxItem> data) {
         super(context, layoutResId, data);
@@ -24,10 +20,10 @@ public class TaxItemAdapter extends QuickAdapter<TaxItem> {
 
     @Override
     protected void convert(BaseAdapterHelper helper, TaxItem item, final int position) {
-        helper.setText(R.id.text,item.getItem_name_in_english());
+        helper.setText(R.id.text, item.getItem_name_in_english());
 
         if(position==selectedPosition){
-            helper.setTextColor(R.id.text, ContextCompat.getColor(context,R.color.blue1));
+            helper.setTextColor(R.id.text, ContextCompat.getColor(context,R.color.new_text2));
         }else{
             helper.setTextColor(R.id.text, ContextCompat.getColor(context,R.color.text1));
         }

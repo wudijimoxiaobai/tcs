@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_windows"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ll_back_me"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/customer_delete"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="@string/delete"
+        android:textColor="@color/text1"
+        android:textSize="15dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/new_text2" />
+
+    <TextView
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="@string/edit"
+        android:textColor="@color/text1"
+        android:textSize="15dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/new_text2" />
+
+    <TextView
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="@string/details"
+        android:textColor="@color/text1"
+        android:textSize="15dp" />
+
+</LinearLayout>

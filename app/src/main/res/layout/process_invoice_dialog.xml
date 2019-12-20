@@ -1,129 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/top_bg">
 
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="74dp"
-        android:background="@drawable/bg10"
-        android:paddingEnd="15dp"
-        android:paddingStart="15dp"
-        >
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@mipmap/back">
 
         <TextView
-            android:id="@+id/back"
-            style="@style/text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:drawableStart="@mipmap/cancel"
-            android:gravity="center_vertical"
-            android:text="@string/cancel"
-            android:textColor="@color/text2"
-            />
-
-        <TextView
-            style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/invoice_details"
-            android:textColor="@color/text2"
-            android:textSize="25sp"
-            />
+            android:layout_gravity="center"
+            android:text="@string/select_invoice"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
 
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/issue"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:orientation="horizontal"
-            >
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginRight="15dp"
+            android:text="@string/issue"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
 
-            <TextView
-                android:id="@+id/approve"
-                style="@style/text"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:drawableStart="@mipmap/approve"
-                android:gravity="center"
-                android:text="@string/approve"
-                android:textColor="@color/text2"
-                />
+        <TextView
+            android:id="@+id/reject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginRight="15dp"
+            android:drawableStart="@mipmap/reject"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
 
-            <TextView
-                android:id="@+id/reject"
-                style="@style/text"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="15dp"
-                android:drawableStart="@mipmap/reject"
-                android:gravity="center"
-                android:text="@string/reject"
-                android:textColor="@color/text2"
-                />
+        <TextView
+            android:id="@+id/approve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginRight="15dp"
+            android:drawableStart="@mipmap/approve"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
 
-            <TextView
-                android:id="@+id/issue"
-                style="@style/text"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="15dp"
-                android:drawableStart="@mipmap/issue"
-                android:gravity="center"
-                android:text="@string/issue"
-                android:textColor="@color/text2"/>
+        <TextView
+            android:id="@+id/confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginRight="15dp"
+           android:text="@string/confirm"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
 
-            <TextView
-                android:id="@+id/confirm"
-                style="@style/text"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingEnd="15dp"
-                android:paddingStart="15dp"
-                android:text="@string/confirm"
-                android:textColor="@color/text2"
-                />
+        <TextView
+            android:id="@+id/upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginRight="15dp"
+            android:text="@string/upload"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
 
-            <TextView
-                android:id="@+id/upload"
-                style="@style/text"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingEnd="15dp"
-                android:paddingStart="15dp"
-                android:text="@string/upload"
-                android:textColor="@color/text2"
-                />
-        </LinearLayout>
-    </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/divider"/>
-
-
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <LinearLayout
         android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@drawable/bg12"
-        android:orientation="vertical"
         android:gravity="center_horizontal"
-        >
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <com.suwell.to.ofd.ofdviewer.OFDView
             android:id="@+id/ofd_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
 
     </LinearLayout>
-</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

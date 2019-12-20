@@ -2,6 +2,8 @@ package com.csscaps.tcs.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -14,16 +16,8 @@ import com.csscaps.tcs.model.RelatedTaxItem;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
-
-/**
- * Created by tl on 2018/5/17.
- */
 
 public class ProductDetailsActivity extends BaseDetailsActivity<Product> {
-
-    @BindView(R.id.back)
-    TextView mBack;
     @BindView(R.id.product_name)
     TextView mProductName;
     @BindView(R.id.local_name)
@@ -50,6 +44,8 @@ public class ProductDetailsActivity extends BaseDetailsActivity<Product> {
     TextView mUnitDiscountPercentage;
     @BindView(R.id.unit_discount_amount)
     TextView mUnitDiscountAmount;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     private Product mProduct;
 
@@ -86,11 +82,11 @@ public class ProductDetailsActivity extends BaseDetailsActivity<Product> {
             stringBuffer.append("," + name);
         }
         mRelatedTaxItems.setText(stringBuffer.delete(0, 1).toString());
-    }
-
-
-    @OnClick(R.id.back)
-    public void onClick() {
-        finish();
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

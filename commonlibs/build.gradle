@@ -39,4 +39,5 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.google.zxing:core:3.3.0'
     compile project(':library')
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 }

@@ -2,6 +2,7 @@ package com.csscaps.tcs.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,10 +28,6 @@ import rx.functions.Action1;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
-/**
- * Created by tl on 2018/5/22.
- */
-
 public class RequestInvoiceFragment extends BaseFragment implements AdapterView.OnItemSelectedListener, Action1 {
 
     @BindView(R.id.application_type)
@@ -41,6 +38,8 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
     EditText mInvoiceNo;
     @BindView(R.id.reason)
     EditText mReason;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     private int status;
     private final String AVL = "AVL";
@@ -50,7 +49,7 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.request_invoice_fragment;
+        return R.layout.fragment_request_invoice;
     }
 
     @Override
@@ -63,15 +62,17 @@ public class RequestInvoiceFragment extends BaseFragment implements AdapterView.
         mApplicationType.setDropDownVerticalOffset(offset);
         mApplicationType.setOnItemSelectedListener(this);
         ObserverActionUtils.addAction(this);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
     }
 
-
-    @OnClick({R.id.back, R.id.search})
+    @OnClick({R.id.search})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.back:
-                getActivity().finish();
-                break;
             case R.id.search:
                 search();
                 break;

@@ -13,6 +13,11 @@ public class QD {
     private String AMOUNT;
     private String VAT;
 
+    @XStreamAlias("ITEMNAME")
+
+    private ItemName mItemName;
+
+
     public QD() {
     }
 
@@ -83,6 +88,14 @@ public class QD {
 
     public void setVAT(String vAT) {
         VAT = vAT;
+    }
+
+    public ItemName getItemName() {
+        return mItemName;
+    }
+
+    public void setItemName(ItemName itemName) {
+        mItemName = itemName;
     }
 
 }

@@ -1,31 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="200dp"
-              android:layout_height="wrap_content"
-              android:background="@drawable/popupwindow_bg"
-    >
+    android:layout_width="160dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ll_back_me"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/p_delete"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_weight="1"
-        android:gravity="center"
+        android:gravity="left"
         android:text="@string/delete"
-        android:textColor="@android:color/white"
-        />
+        android:textColor="@color/text1"
+        android:textSize="15dp"/>
+
+    <View
+        android:background="@color/new_text2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
     <TextView
         android:id="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_weight="1"
-        android:gravity="center"
+        android:gravity="left"
         android:text="@string/edit"
-        android:textColor="@android:color/white"
-        />
-
+        android:textColor="@color/text1"
+        android:textSize="15dp"/>
 
 </LinearLayout>

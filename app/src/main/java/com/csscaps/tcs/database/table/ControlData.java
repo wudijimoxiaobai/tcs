@@ -11,6 +11,29 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 @Table(database = TcsDatabase.class)
 public class ControlData extends BaseModel {
+    @Override
+    public String toString() {
+        return "ControlData{" +
+                "invoice_type_code='" + invoice_type_code + '\'' +
+                ", total_amount_perinvoice=" + total_amount_perinvoice +
+                ", total_all=" + total_all +
+                ", n_total_all=" + n_total_all +
+                ", new_date='" + new_date + '\'' +
+                ", issuing_last_date='" + issuing_last_date + '\'' +
+                ", report_flag='" + report_flag + '\'' +
+                ", tcs_pwd_flag='" + tcs_pwd_flag + '\'' +
+                ", s_report_date='" + s_report_date + '\'' +
+                ", e_report_date='" + e_report_date + '\'' +
+                ", invoice_type='" + invoice_type + '\'' +
+                ", rfu='" + rfu + '\'' +
+                ", check_tax_control_panel='" + check_tax_control_panel + '\'' +
+                ", check_tax_control_panel_n_invoice='" + check_tax_control_panel_n_invoice + '\'' +
+                ", invoice_number_permonth=" + invoice_number_permonth +
+                ", tax_type_item_index=" + tax_type_item_index +
+                ", issuing_invoice_type='" + issuing_invoice_type + '\'' +
+                ", issuing_n_invoice_days=" + issuing_n_invoice_days +
+                '}';
+    }
 
     @PrimaryKey
     @Column

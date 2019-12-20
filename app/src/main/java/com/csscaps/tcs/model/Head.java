@@ -7,6 +7,24 @@ public class Head {
     private String OBJECT;
     private String INVOICENUMBER;
     private String ISSUANCEDATE;
+    private String PRINTINGN;
+    private String ADMIN;
+
+    public String getADMIN() {
+        return ADMIN;
+    }
+
+    public void setADMIN(String ADMIN) {
+        this.ADMIN = ADMIN;
+    }
+
+    public String getPRINTINGN() {
+        return PRINTINGN;
+    }
+
+    public void setPRINTINGN(String PRINTINGN) {
+        this.PRINTINGN = PRINTINGN;
+    }
 
     public Head() {
     }

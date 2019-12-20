@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,7 @@ import com.csscaps.common.utils.FastDoubleClickUtil;
 import com.csscaps.common.utils.ObserverActionUtils;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.R;
-import com.csscaps.tcs.activity.InvoiceIssuingActivity;
+import com.csscaps.tcs.activity.NewInvoiceActivity;
 import com.csscaps.tcs.adapter.SelectCustomerListAdapter;
 import com.csscaps.tcs.database.table.Customer;
 import com.csscaps.tcs.database.table.Customer_Table;
@@ -41,6 +42,8 @@ public class SelectCustomerDialog extends DialogFragment implements AdapterView.
 
     @BindView(R.id.list_view)
     ListView mListView;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     SelectCustomerListAdapter adapter;
     List<Customer> data;
@@ -63,36 +66,38 @@ public class SelectCustomerDialog extends DialogFragment implements AdapterView.
         View view = inflater.inflate(R.layout.select_customer_dialog, null);
         ButterKnife.bind(this, view);
         initView();
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
         return view;
     }
-
 
     @Override
     public void onResume() {
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
         dialogWindow.setGravity(Gravity.CENTER);
-        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 0.7f);
-        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 0.8f);
+        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 1f);
+        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 1f);
         dialogWindow.setLayout(width, height);
         dialogWindow.setWindowAnimations(R.style.scale_anim);
     }
 
-    @OnClick({R.id.cancel, R.id.select, R.id.add_customer})
+    @OnClick({R.id.customer_add, R.id.customer_select})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.cancel:
-                dismiss();
-                break;
-            case R.id.add_customer:
+            case R.id.customer_add:
                 if (FastDoubleClickUtil.isFastDoubleClick()) break;
                 AddCustomerDialog addCustomerDialog = new AddCustomerDialog();
                 addCustomerDialog.setInvoiceObject(invoiceObject);
                 addCustomerDialog.show(getFragmentManager(), "AddCustomerDialog");
                 break;
-            case R.id.select:
+            case R.id.customer_select:
                 if (customer != null) {
-                    Subscription subscription = ObserverActionUtils.subscribe(customer, InvoiceIssuingActivity.class);
+                    Subscription subscription = ObserverActionUtils.subscribe(customer, NewInvoiceActivity.class);
                     if (subscription != null) subscription.unsubscribe();
                     dismiss();
                 } else {
@@ -115,7 +120,6 @@ public class SelectCustomerDialog extends DialogFragment implements AdapterView.
                 data = select().from(Customer.class).queryList();
                 break;
         }
-
         adapter = new SelectCustomerListAdapter(getContext(), R.layout.select_customer_list_item, data);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(this);

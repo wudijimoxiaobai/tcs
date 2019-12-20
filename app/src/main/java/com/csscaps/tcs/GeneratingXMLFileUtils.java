@@ -3,6 +3,8 @@ package com.csscaps.tcs;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 
+import com.alibaba.fastjson.JSON;
+import com.csscaps.common.utils.AppSP;
 import com.csscaps.common.utils.AppTools;
 import com.csscaps.common.utils.DateUtils;
 import com.csscaps.common.utils.QRCodeUtil;
@@ -13,9 +15,9 @@ import com.csscaps.tcs.database.table.ProductModel_Table;
 import com.csscaps.tcs.model.Buyer;
 import com.csscaps.tcs.model.Head;
 import com.csscaps.tcs.model.InvoiceData;
-import com.csscaps.tcs.model.NQD;
-import com.csscaps.tcs.model.QD1;
-import com.csscaps.tcs.model.QUA;
+import com.csscaps.tcs.model.ItemName;
+import com.csscaps.tcs.model.MyTaxpayer;
+import com.csscaps.tcs.model.QD;
 import com.csscaps.tcs.model.Seller;
 import com.suwell.ofd.render.util.BitmapUtil;
 import com.tax.fcr.library.network.RequestModel;
@@ -27,6 +29,8 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
@@ -37,7 +41,6 @@ import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
  */
 
 public class GeneratingXMLFileUtils {
-
     private static final String HEADER = "<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>";
 
     public static void generatingXmlFile(Invoice showInvoice, String dataXmlPath) {
@@ -47,15 +50,27 @@ public class GeneratingXMLFileUtils {
         head.setINVOICECODE(showInvoice.getInvoice_type_code());
         head.setDEVICENO(RequestModel.devicesn);
         head.setINVOICENUMBER(showInvoice.getInvoice_no());
+        head.setPRINTINGN("hp14320001");
+        head.setADMIN(showInvoice.getDrawer_name());
         head.setISSUANCEDATE(DateUtils.dateToStr(DateUtils.getStringToDate(showInvoice.getClient_invoice_datetime(), DateUtils.format_yyyyMMddHHmmss_24_EN), DateUtils.format_yyyy_MM_dd_HH_mm_ss_24_EN));
         invoiceData.setHead(head);
 
         Seller seller = new Seller();
         seller.setTIN(showInvoice.getSeller_tin());
         seller.setNAME(showInvoice.getSeller_name());
-        seller.setADDRESS(showInvoice.getSeller_address());
-        seller.setBRANCH(showInvoice.getSeller_branch_addr());
+        if (showInvoice.getSeller_address().length() > 15) {
+            seller.setADDRESS(showInvoice.getSeller_address().substring(0, 15));
+            if (showInvoice.getSeller_address().substring(15).length() > 15) {
+                seller.setADDRESSTWO(showInvoice.getSeller_address().substring(15, 30));
+            } else {
+                seller.setADDRESSTWO(showInvoice.getSeller_address().substring(15));
+            }
+        } else {
+            seller.setADDRESS(showInvoice.getSeller_address());
+        }
+        // seller.setBRANCH(showInvoice.getSeller_branch_addr());
         seller.setPHONENO(showInvoice.getSeller_phone());
+        //  seller.setCashier(showInvoice.getDrawer_name());
         invoiceData.setSeller(seller);
 
         Buyer buyer = new Buyer();
@@ -63,21 +78,32 @@ public class GeneratingXMLFileUtils {
         buyer.setPHONENO(showInvoice.getPurchaser_phone());
         buyer.setNAME(showInvoice.getPurchaser_name());
         buyer.setADDRESS(showInvoice.getPurchaser_address());
-        buyer.setNATIONALID(showInvoice.getPurchaser_id_number());
+        buyer.setMoney(String.format("%.2f", (Double.valueOf(showInvoice.getTotal_all()) - Double.valueOf(showInvoice.getTotal_fee()))));
+        //    buyer.setNATIONALID(showInvoice.getPurchaser_id_number());
         invoiceData.setBuyer(buyer);
 
         //总税
-        invoiceData.setTotalofVAT(String.format("%.2f",(Double.valueOf(showInvoice.getTotal_tax_due())- Double.valueOf(showInvoice.getTotal_fee()))));
-        invoiceData.setTotalofBPTFinal(showInvoice.getTotal_bpt());
+        // invoiceData.setTotalofVAT(String.format("%.2f", (Double.valueOf(showInvoice.getTotal_tax_due()) - Double.valueOf(showInvoice.getTotal_fee()))));
+        invoiceData.setTotalofVAT(String.format("%.2f", Double.valueOf(showInvoice.getTotal_vat())));
+        //invoiceData.setTotasetTotalofVATlofBPTFinal(showInvoice.getTotal_bpt());
         invoiceData.setTotalofBPTPrepayment(showInvoice.getTotal_bpt_preypayment());
         invoiceData.setTotalofStampDuty_Local(showInvoice.getTotal_stamp());
         invoiceData.setTotalofStamDuty_Federal(showInvoice.getTotal_final());
         invoiceData.setTotalofFees(showInvoice.getTotal_fee());
         invoiceData.setTotalAmountExcl(showInvoice.getTotal_taxable_amount());
-        invoiceData.setTotalAmountExclIncl(String.format("%.2f",(Double.valueOf(showInvoice.getTotal_all())- Double.valueOf(showInvoice.getTotal_fee()))));
+        //invoiceData.setTotalAmountOtherTax(showInvoice.);todo
+        invoiceData.setTotalAmountExclIncl(String.format("%.2f", (Double.valueOf(showInvoice.getTotal_all()) - Double.valueOf(showInvoice.getTotal_fee()))));
         invoiceData.setRemark(showInvoice.getRemark());
         invoiceData.setIssuedby(showInvoice.getDrawer_name());
         invoiceData.setRWM(getQRCodeToString(showInvoice));
+        invoiceData.setTitle(showInvoice.getSeller_name());
+        invoiceData.setTotalAmountOtherTax(String.format("%.2f", Double.valueOf(showInvoice.getTotal_final()) + Double.valueOf(showInvoice.getTotal_stamp()) + Double.valueOf(showInvoice.getTotal_bpt()) + Double.valueOf(showInvoice.getTotal_bpt_preypayment()) + Double.valueOf(showInvoice.getTotal_fee())));
+
+        String myTaxpayerString = AppSP.getString("MyTaxpayer");
+        if (!TextUtils.isEmpty(myTaxpayerString)) {
+            MyTaxpayer myTaxpayer = JSON.parseObject(myTaxpayerString, MyTaxpayer.class);
+            invoiceData.setTips(myTaxpayer.getInvoice_tips());
+        }
 
         String invoiceNo = showInvoice.getInvoice_no();
         List<ProductModel> productModels = select().from(ProductModel.class).where(ProductModel_Table.invoice_no.eq(invoiceNo)).queryList();
@@ -90,32 +116,49 @@ public class GeneratingXMLFileUtils {
                 productModels.add(productModel);
             }
         }
+        invoiceData.setItemNumber(String.valueOf(productModels.size()));
 
-        NQD nqd = new NQD();
-        QD1 qd1 = new QD1();
-        invoiceData.setQD(nqd);
-        invoiceData.setQD1(qd1);
+
+        String rStr = productModels.get(0).getTax_rate();
+        float r = TextUtils.isEmpty(rStr) ? 0 : Float.valueOf(rStr);
+        DecimalFormat df = new DecimalFormat("0.00");
+        DecimalFormat df2 = new DecimalFormat("0");
+        List<QD> QDs = new ArrayList<>();
+        invoiceData.setQDs(QDs);
+
         for (int i = 0; i < productModels.size(); i++) {
             ProductModel productModel = productModels.get(i);
-            nqd.getItemNames().add(productModel.getItem_name());
-            QUA qua = new QUA(productModel.getQty(), productModel.getUnit_price(), productModel.getTaxable_amount());
-            qd1.getQUAs().add(qua);
+            String name = productModel.getItem_name();
+//            if (name.length() > 17) {
+//                QD qd1 = new QD();
+//                ItemName itemName = new ItemName();
+//                itemName.setName(name);
+//                itemName.setExtendSize("true");
+//                qd1.setItemName(itemName);
+//                qd1.setUNITPRICE("");
+//                qd1.setQTY("");
+//                qd1.setAMOUNT("");
+//                QDs.add(qd1);
+//            }
 
-        }
-       /* List<QD> QDs = new ArrayList<>();
-        invoiceData.setQDs(QDs);
-        for (int i = 0; i < productModels.size(); i++) {
-            SdProductModel productModel = productModels.get(i);
             QD qd = new QD();
-            qd.setITEMNAME(productModel.getItem_name());
-            qd.setDESCRIPTION(productModel.getSpecification());
-            qd.setUNIT(productModel.getUnit());
+            ItemName itemName = new ItemName();
+            itemName.setName(name);
+            itemName.setExtendSize("false");
+            if (name.length() < 7) {
+                itemName.setName(name);
+            } else {
+                itemName.setName(name.substring(0, 7) + "...");
+            }
+            qd.setItemName(itemName);
             qd.setUNITPRICE(productModel.getUnit_price());
             qd.setQTY(productModel.getQty());
             qd.setAMOUNT(productModel.getTaxable_amount());
-            qd.setVAT(String.format("%.2f", Math.round((productModel.getVat()) * 100) * 0.01d));
+            // qd.setVAT(String.format("%s%%", productModel.getVat()));
+            // qd.setVAT(String.format("%s%%", df2.format(productModel.getVat())));
+            //todo  VAT税率
             QDs.add(qd);
-        }*/
+        }
 
         XStream xStream = new XStream(new DomDriver());
         xStream.processAnnotations(InvoiceData.class);
@@ -129,8 +172,8 @@ public class GeneratingXMLFileUtils {
                     + System.getProperty("line.separator")
                     + xStream.toXML(invoiceData);
             FileWriter fileWriter = new FileWriter(dataXmlFile);
-            xmlData = xmlData.replaceAll("\\<QUA\\>", "");
-            xmlData = xmlData.replaceAll("\\</QUA\\>", "");
+            xmlData = xmlData.replaceAll("\\<name\\>", "");
+            xmlData = xmlData.replaceAll("\\</name\\>", "");
             fileWriter.write(xmlData);
             fileWriter.flush();
             fileWriter.close();
@@ -277,6 +320,5 @@ public class GeneratingXMLFileUtils {
         }
 
     }
-
 
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.csscaps.common.utils.DeviceUtils;
@@ -29,10 +31,10 @@ import butterknife.OnClick;
 
 public abstract class BaseAddDialog<T> extends AppCompatDialogFragment {
 
-    @BindView(R.id.cancel)
-    TextView mCancel;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.save)
-    TextView mSave;
+    ImageView mSave;
 
     protected T t;
     protected boolean edit;
@@ -54,6 +56,12 @@ public abstract class BaseAddDialog<T> extends AppCompatDialogFragment {
         View view = inflater.inflate(getLayoutId(), null);
         ButterKnife.bind(this, view);
         initView();
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
         return view;
     }
 
@@ -62,18 +70,15 @@ public abstract class BaseAddDialog<T> extends AppCompatDialogFragment {
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
         dialogWindow.setGravity(Gravity.CENTER);
-//        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 0.8f);
-        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 0.618f);
-        dialogWindow.setLayout(width, -2);
+       int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 1f);
+        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 1f);
+        dialogWindow.setLayout(width, height);
         dialogWindow.setWindowAnimations(R.style.scale_anim);
     }
 
-    @OnClick({R.id.cancel, R.id.save})
+    @OnClick({R.id.save})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.cancel:
-                dismiss();
-                break;
             case R.id.save:
                 save();
                 break;
@@ -81,7 +86,7 @@ public abstract class BaseAddDialog<T> extends AppCompatDialogFragment {
     }
 
 
-    protected void tIntoEditText( ) {
+    protected void tIntoEditText() {
         Class thisClass = this.getClass();
         Class tClass = t.getClass();
         Class editTextClass = EditText.class;
@@ -99,7 +104,7 @@ public abstract class BaseAddDialog<T> extends AppCompatDialogFragment {
                     Object str = method.invoke(t);
                     Method setText = editTextClass.getMethod("setText", CharSequence.class);
                     Object object = field.get(this);
-                    setText.invoke(object, String.valueOf(str.equals("null")?"":str));
+                    setText.invoke(object, String.valueOf(str.equals("null") ? "" : str));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -125,7 +130,7 @@ public abstract class BaseAddDialog<T> extends AppCompatDialogFragment {
                     Object object = field.get(this);
                     Editable editatle = (Editable) getText.invoke(object);
                     String str = editatle.toString().trim();
-                    Method method = tClass.getMethod(methodName,String.class);
+                    Method method = tClass.getMethod(methodName, String.class);
                     method.invoke(t, str);
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -1,6 +1,9 @@
 package com.csscaps.tcs.dialog;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,6 +11,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +39,7 @@ import com.csscaps.tcs.database.table.TaxType_Table;
 import com.csscaps.tcs.model.RelatedTaxItem;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,13 +60,10 @@ import static com.tax.fcr.library.utils.NetworkUtils.mContext;
 @SuppressLint("ValidFragment")
 public class SelectTaxItemDialog extends AppCompatDialogFragment implements AdapterView.OnItemClickListener {
 
-
-    @BindView(R.id.cancel)
-    TextView mCancel;
     @BindView(R.id.select)
     TextView mSelect;
-    @BindView(R.id.search)
-    EditText mSearch;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.list_layout)
     LinearLayout mListLayout;
     @BindView(R.id.h_scroll_view)
@@ -88,24 +91,29 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
         return view;
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
         dialogWindow.setGravity(Gravity.CENTER);
-        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 0.7f);
-        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 0.8f);
+        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 1f);
+        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 1f);
         dialogWindow.setLayout(width, height);
         dialogWindow.setWindowAnimations(R.style.scale_anim);
     }
-
 
     private void initView() {
         listViewW = DeviceUtils.dip2Px(getContext(), 250);
         mTaxTypeList = select().from(TaxType.class).queryList();
         mTaxItemList = select().from(TaxItem.class).queryList();
         addTaxTypeList();
+
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
     }
 
     /**
@@ -113,12 +121,14 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
      */
     private void addTaxTypeList() {
         ListView listView = (ListView) LayoutInflater.from(getContext()).inflate(R.layout.tax_list_view, null);
+        listView.setDivider(new ColorDrawable(0x99f2f2f2));
+        listView.setDividerHeight(2);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(listViewW, LinearLayout.LayoutParams.MATCH_PARENT);
         listView.setLayoutParams(lp);
         View view1 = new View(getContext());
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(2, LinearLayout.LayoutParams.MATCH_PARENT);
         view1.setLayoutParams(lp2);
-        view1.setBackgroundColor(ContextCompat.getColor(mContext,R.color.divider));
+        view1.setBackgroundColor(ContextCompat.getColor(mContext, R.color.new_text2));
         mListLayout.addView(listView);
         mListLayout.addView(view1);
         TaxTypeSelectAdapter taxTypeAdapter = new TaxTypeSelectAdapter(getContext(), R.layout.tax_item_select_layout, mTaxTypeList, mHandler);
@@ -140,6 +150,7 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
                 taxTypeAdapter.setSelectedPosition(i);
                 taxTypeAdapter.notifyDataSetChanged();
                 TaxType taxType = mTaxTypeList.get(i);
+                Log.e("taxtype", taxType.toString());
                 String taxTypeId = taxType.getTaxtype_uid();
                 List<TaxItem> list = SQLite.select().from(TaxItem.class).where(TaxItem_Table.taxtype_uid.eq(taxTypeId)).and(TaxItem_Table.node_level.eq("1")).queryList();
                 addTaxItemList(list, taxTypeId);
@@ -149,7 +160,9 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
                 taxItemAdapter.setSelectedPosition(i);
                 taxItemAdapter.notifyDataSetChanged();
                 List<TaxItem> data = taxItemAdapter.getData();
+                Log.e("data", data.toString());
                 TaxItem taxItem = data.get(i);
+                Log.e("TaxItem", taxItem.toString());
                 if ("N".equals(taxItem.getIs_leaf())) {
                     String taxItemId = taxItem.getTaxable_item_uid();
                     List<TaxItem> list1 = SQLite.select().from(TaxItem.class).where(TaxItem_Table.parent_item_uidinteger.eq(taxItemId)).queryList();
@@ -159,7 +172,6 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
                 break;
         }
     }
-
 
     /**
      * 添加税目
@@ -174,7 +186,7 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
         View view = new View(getContext());
         LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(2, LinearLayout.LayoutParams.MATCH_PARENT);
         view.setLayoutParams(lp1);
-        view.setBackgroundColor(ContextCompat.getColor(mContext,R.color.divider));
+        view.setBackgroundColor(ContextCompat.getColor(mContext, R.color.divider));
         mListLayout.addView(listView);
         mListLayout.addView(view);
         TaxItemSelectAdapter taxItemAdapter = new TaxItemSelectAdapter(getContext(), R.layout.tax_item_select_layout, list, mHandler);
@@ -243,13 +255,9 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
         }
     };
 
-
-    @OnClick({R.id.cancel, R.id.select})
+    @OnClick({R.id.select})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.cancel:
-                dismiss();
-                break;
             case R.id.select:
                 if (listTax.size() > map.keySet().size()) {
                     ToastUtil.showShort(getString(R.string.hit25));
@@ -272,7 +280,7 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
             String strs[] = str.split(",");
             int length = strs.length;
             if (length > 2) {
-                TaxItem taxItem = select().from(TaxItem.class).where(TaxItem_Table.taxable_item_uid.eq(strs[length-2])).querySingle();
+                TaxItem taxItem = select().from(TaxItem.class).where(TaxItem_Table.taxable_item_uid.eq(strs[length - 2])).querySingle();
                 mTaxItemList.add(taxItem);
             } else {
                 TaxType taxType = select().from(TaxType.class).where(TaxType_Table.taxtype_uid.eq(strs[0])).querySingle();
@@ -281,7 +289,7 @@ public class SelectTaxItemDialog extends AppCompatDialogFragment implements Adap
         }
         relate.setTaxItemList(mTaxItemList);
         relate.setTaxTypeList(mTaxTypeList);
-        ObserverActionUtils.subscribe(relate,AddProductDialog.class);
+        ObserverActionUtils.subscribe(relate, AddProductDialog.class);
     }
 
 

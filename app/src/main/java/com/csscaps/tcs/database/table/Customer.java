@@ -14,6 +14,23 @@ import java.io.Serializable;
  */
 @Table(database = TcsDatabase.class)
 public class Customer extends BaseModel implements Serializable {
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId=" + customerId +
+                ", tin='" + tin + '\'' +
+                ", name='" + name + '\'' +
+                ", nationalId='" + nationalId + '\'' +
+                ", passport='" + passport + '\'' +
+                ", tel='" + tel + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", registered=" + registered +
+                '}';
+    }
 
     @Column
     @PrimaryKey(autoincrement = true)

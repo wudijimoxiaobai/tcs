@@ -1,155 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg"
-    android:gravity="center"
-    android:orientation="vertical"
-    >
+    android:background="@mipmap/top_bg"
+    android:padding="30dp">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="100dp"
+        android:background="@mipmap/logo_bg"
+        android:padding="30dp"
+        android:src="@drawable/logo"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="792dp"
+    <TextView
+        android:id="@+id/logo_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg1"
+        android:layout_below="@id/imageView"
+        android:layout_marginTop="10dp"
+        android:text="@string/e_invoice"
+        android:textColor="@color/white"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+    <EditText
+        android:id="@+id/user"
+        style="@style/list_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg2"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        >
+        android:hint="@string/please_input"
+        android:imeOptions="flagNavigateNext"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="50dp"
+        android:paddingEnd="5dp"
+        android:textColorHint="@color/hit"
+        android:textCursorDrawable="@null"
+        app:layout_constraintTop_toBottomOf="@id/logo_text" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.57"
-            android:orientation="vertical"
-            >
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/user"
+        app:layout_constraintBottom_toBottomOf="@id/user"
+        app:layout_constraintLeft_toLeftOf="@id/user"
+        app:layout_constraintTop_toTopOf="@id/user" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="100dp"
-                android:background="@mipmap/logo_bg"
-                android:padding="30dp"
-                android:src="@drawable/logo"/>
+    <EditText
+        android:id="@+id/password"
+        style="@style/list_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg2"
+        android:gravity="center_vertical"
+        android:hint="@string/please_input"
+        android:inputType="number"
+        android:maxLines="1"
+        android:paddingStart="50dp"
+        android:paddingEnd="5dp"
+        android:textColorHint="@color/hit"
+        android:textCursorDrawable="@null"
+        app:layout_constraintTop_toBottomOf="@id/user" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/imageView"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="@string/e_invoice"
-                android:textColor="@color/blue1"
-                android:textSize="@dimen/text_title"
-                android:textStyle="bold"
-                />
-        </RelativeLayout>
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/pwd"
+        app:layout_constraintBottom_toBottomOf="@id/password"
+        app:layout_constraintLeft_toLeftOf="@id/password"
+        app:layout_constraintTop_toTopOf="@id/password" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.43"
-            android:orientation="vertical"
-            android:paddingBottom="60dp"
-            android:paddingEnd="74dp"
-            android:paddingStart="74dp"
-            android:paddingTop="60dp"
-            >
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg2"
+        android:entries="@array/language"
+        android:gravity="start"
+        android:paddingStart="45dp"
+        android:spinnerMode="dropdown"
+        android:textAlignment="viewStart"
+        android:textDirection="locale"
+        android:theme="@style/myDropTheme"
+        app:layout_constraintTop_toBottomOf="@id/password" />
 
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:background="@mipmap/language"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/spinner"
+        app:layout_constraintLeft_toLeftOf="@id/spinner"
+        app:layout_constraintTop_toTopOf="@id/spinner" />
 
-            <EditText
-                android:id="@+id/user"
-                style="@style/list_item_text"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/bg2"
-                android:drawableStart="@mipmap/user"
-                android:gravity="center_vertical"
-                android:hint="@string/please_input"
-                android:imeOptions="flagNavigateNext"
-                android:inputType="text"
-                android:maxLines="1"
-                android:paddingEnd="5dp"
-                android:paddingStart="5dp"
-                android:textColorHint="@color/hit"
-                android:textCursorDrawable="@null"
-                />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:background="@mipmap/arrow_down"
+        app:layout_constraintBottom_toBottomOf="@id/spinner"
+        app:layout_constraintRight_toRightOf="@id/spinner"
+        app:layout_constraintTop_toTopOf="@id/spinner" />
 
-            <EditText
-                android:id="@+id/password"
-                style="@style/list_item_text"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/bg2"
-                android:drawableStart="@mipmap/pwd"
-                android:gravity="center_vertical"
-                android:hint="@string/please_input"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:paddingEnd="5dp"
-                android:paddingStart="5dp"
-                android:textColorHint="@color/hit"
-                android:textCursorDrawable="@null"
-                />
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg3"
+        android:gravity="center"
+        android:text="@string/login"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_title"
+        app:layout_constraintTop_toBottomOf="@id/spinner" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/bg2"
-                    android:entries="@array/language"
-                    android:gravity="start"
-                    android:paddingStart="30dp"
-                    android:spinnerMode="dropdown"
-                    android:textAlignment="viewStart"
-                    android:textDirection="locale"
-                    android:theme="@style/myDropTheme"
-                    />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="5dp"
-                    android:background="@mipmap/language"
-                    />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:background="@mipmap/arrow_down"
-                    />
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/login"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/bg3"
-                android:gravity="center"
-                android:text="@string/login"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_title"
-                />
-
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

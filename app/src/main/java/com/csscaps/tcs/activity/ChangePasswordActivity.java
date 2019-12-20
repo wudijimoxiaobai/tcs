@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.csscaps.common.base.BaseActivity;
 import com.csscaps.common.utils.ToastUtil;
@@ -15,11 +16,9 @@ import com.csscaps.tcs.TCSApplication;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-/**
- * Created by tl on 2018/6/4.
- */
-
 public class ChangePasswordActivity extends BaseActivity {
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.old_password)
     EditText mOldPassword;
     @BindView(R.id.new_password)
@@ -49,6 +48,12 @@ public class ChangePasswordActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         if (TCSApplication.currentUser.getRole() == 1) {
             mResetPassword.setVisibility(View.GONE);
         } else {
@@ -58,12 +63,9 @@ public class ChangePasswordActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.back, R.id.save, R.id.reset_password})
+    @OnClick({R.id.save, R.id.reset_password})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
             case R.id.save:
                 String oldPassword = mOldPassword.getText().toString().trim();
                 String newPassword = mNewPassword.getText().toString().trim();

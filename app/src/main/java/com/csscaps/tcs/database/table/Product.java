@@ -18,6 +18,31 @@ public class Product extends BaseModel implements Serializable {
     @Column
     int productId;
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", localName='" + localName + '\'' +
+                ", unit='" + unit + '\'' +
+                ", price='" + price + '\'' +
+                ", percentage='" + percentage + '\'' +
+                ", fixedAmount='" + fixedAmount + '\'' +
+                ", purchase='" + purchase + '\'' +
+                ", adjustment='" + adjustment + '\'' +
+                ", specification='" + specification + '\'' +
+                ", relatedTaxItemString='" + relatedTaxItemString + '\'' +
+                ", unitDiscountPercentage='" + unitDiscountPercentage + '\'' +
+                ", unitDiscountAmount='" + unitDiscountAmount + '\'' +
+                ", commission='" + commission + '\'' +
+                ", quantity='" + quantity + '\'' +
+                ", totalTax='" + totalTax + '\'' +
+                ", eTax='" + eTax + '\'' +
+                ", iTax='" + iTax + '\'' +
+                ", mProductModel=" + mProductModel +
+                '}';
+    }
+
     @Column
     String productName;
 

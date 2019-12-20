@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@mipmap/back"
+        app:popupTheme="@style/ToolbarPopupTheme">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/application_list"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cc_01"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/new_text2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <TextView
+            android:id="@+id/data_to_data"
+            style="@style/text_30_83"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cc_01" />
+
+        <TextView
+            android:id="@+id/data_02"
+            style="@style/text_30_1d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="@string/date_to"
+            app:layout_constraintBottom_toBottomOf="@id/data_to_data"
+            app:layout_constraintRight_toLeftOf="@id/data_to_data"
+            app:layout_constraintTop_toTopOf="@id/data_to_data" />
+
+        <TextView
+            android:id="@+id/data_from_date"
+            style="@style/text_30_83"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/data_02"
+            app:layout_constraintRight_toLeftOf="@id/data_02"
+            app:layout_constraintTop_toTopOf="@id/data_02" />
+
+        <TextView
+            style="@style/text_30_1d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="@string/date_from"
+            app:layout_constraintBottom_toBottomOf="@id/data_from_date"
+            app:layout_constraintRight_toLeftOf="@id/data_from_date"
+            app:layout_constraintTop_toTopOf="@id/data_from_date" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/c_period"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/new_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/data_to_data">
+
+            <LinearLayout
+                android:id="@+id/ll_01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    style="@style/text_30_1d"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/type" />
+
+                <TextView
+                    style="@style/text_30_1d"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Amout" />
+
+                <TextView
+                    style="@style/text_30_1d"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Qty" />
+
+                <TextView
+                    style="@style/text_30_1d"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Percentage" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/v_01"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/new_text2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_01" />
+
+            <ListView
+                android:id="@+id/list_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/bg11"
+                android:divider="@color/new_text2"
+                android:dividerHeight="1dp"
+                android:listSelector="@android:color/transparent"
+                android:paddingBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_01" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

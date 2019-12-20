@@ -5,6 +5,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 import java.util.List;
 
+
 @XStreamAlias("Root")
 public class InvoiceData {
 
@@ -30,6 +31,16 @@ public class InvoiceData {
     private String TotalofFees;
     private String TotalAmountExcl;
     private String TotalAmountExclIncl;
+    private String TotalAmountOtherTax;
+
+    public String getTotalAmountOtherTax() {
+        return TotalAmountOtherTax;
+    }
+
+    public void setTotalAmountOtherTax(String totalAmountOtherTax) {
+        TotalAmountOtherTax = totalAmountOtherTax;
+    }
+
     private String Remark;
     private String Issuedby;
 
@@ -37,12 +48,14 @@ public class InvoiceData {
     private List<QD> QDs;
     private String RWM;
     private String title;
+    private String Tips;
+    private String ItemNumber;
 
     //*************************
-    @XStreamAlias("QD")
+   /* @XStreamAlias("QD")
     private NQD QD;
     @XStreamAlias("QD1")
-    private QD1 QD1;
+    private QD1 QD1;*/
 
     public InvoiceData() {
     }
@@ -195,7 +208,7 @@ public class InvoiceData {
         TotalofFees = totalofFees;
     }
 
-    public NQD getQD() {
+  /*  public NQD getQD() {
         return QD;
     }
 
@@ -209,5 +222,21 @@ public class InvoiceData {
 
     public void setQD1(com.csscaps.tcs.model.QD1 QD1) {
         this.QD1 = QD1;
+    }*/
+
+    public String getTips() {
+        return Tips;
+    }
+
+    public void setTips(String tips) {
+        Tips = tips;
+    }
+
+    public String getItemNumber() {
+        return ItemNumber;
+    }
+
+    public void setItemNumber(String itemNumber) {
+        ItemNumber = itemNumber;
     }
 }

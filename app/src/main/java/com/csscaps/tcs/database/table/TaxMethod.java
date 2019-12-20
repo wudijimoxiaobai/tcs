@@ -11,6 +11,23 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 @Table(database = TcsDatabase.class)
 public class TaxMethod extends BaseModel {
+    @Override
+    public String toString() {
+        return "TaxMethod{" +
+                "tax_calc_rule_uid='" + tax_calc_rule_uid + '\'' +
+                ", invoice_type_taxtype_uid='" + invoice_type_taxtype_uid + '\'' +
+                ", taxed_method='" + taxed_method + '\'' +
+                ", amt_qty_mode='" + amt_qty_mode + '\'' +
+                ", taxable_item_uid='" + taxable_item_uid + '\'' +
+                ", is_tax_included='" + is_tax_included + '\'' +
+                ", adjusted_value='" + adjusted_value + '\'' +
+                ", tax_amount_ratio='" + tax_amount_ratio + '\'' +
+                ", tax_rate='" + tax_rate + '\'' +
+                ", remark='" + remark + '\'' +
+                ", crt_datetime='" + crt_datetime + '\'' +
+                ", last_update_time='" + last_update_time + '\'' +
+                '}';
+    }
 
     /**
      * tax_calc_rule_uid : xxx

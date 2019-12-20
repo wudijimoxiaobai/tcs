@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.csscaps.common.utils.ObserverActionUtils;
+import com.csscaps.common.utils.ToolbarUtils;
 
 import java.util.ArrayList;
 
@@ -35,25 +36,33 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private void initialize(Bundle savedInstanceState) {
+
         setContentView(getLayoutResId());
         if (getIntent() != null) {
             parseArgumentsFromIntent(getIntent());
         }
-        unbinder=ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
+        setStatusBar();
         onInitPresenters();
         initView(savedInstanceState);
+    }
+    protected void setStatusBar() {
+        //这里做了两件事情，1.使状态栏透明并使contentView填充到状态栏 2.预留出状态栏的位置，防止界面上的控件离顶部靠的太近。这样就可以实现开头说的第二种情况的沉浸式状态栏了
+        ToolbarUtils.setTransparent(this);
     }
 
     public void addPresenter(BasePresenter presenter) {
         mPresenters.add(presenter);
     }
 
-    public void addAction1(Action1 action1) {mAction1s.add(action1);}
+    public void addAction1(Action1 action1) {
+        mAction1s.add(action1);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         initialize(savedInstanceState);
     }
 
@@ -75,7 +84,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             ObserverActionUtils.removeAction((Action1) this);
         }
 
-        for (Action1 action1:mAction1s) {
+        for (Action1 action1 : mAction1s) {
             ObserverActionUtils.removeAction(action1);
         }
     }

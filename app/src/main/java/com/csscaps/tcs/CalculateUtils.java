@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.csscaps.common.utils.AppSP;
-import com.csscaps.tcs.activity.InvoiceIssuingActivity;
+import com.csscaps.tcs.activity.NewInvoiceActivity;
 import com.csscaps.tcs.database.table.InvoiceTaxType;
 import com.csscaps.tcs.database.table.InvoiceTaxType_Table;
 import com.csscaps.tcs.database.table.Product;
@@ -27,7 +27,6 @@ import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
  */
 
 public class CalculateUtils {
-
     private static final String ITEM = "ITEM";
     private static final String AMT = "AMT";
     private static final String FIXED = "FIXED";
@@ -58,10 +57,11 @@ public class CalculateUtils {
     public static ProductModel calculateProductTax(Product item) {
         ProductModel productModel = new ProductModel();
         productModel.setSpecification(item.getSpecification());
-        productModel.setInvoice_no(InvoiceIssuingActivity.mInvoice.getInvoice_no());
+        productModel.setInvoice_no(NewInvoiceActivity.mInvoice.getInvoice_no());
         String relateTaxItemString = item.getRelatedTaxItemString();
         RelatedTaxItem relatedTaxItem = JSON.parseObject(relateTaxItemString, RelatedTaxItem.class);
         List<TaxItem> mTaxItemList = relatedTaxItem.getTaxItemList();
+        productModel.setTax_rate(mTaxItemList.get(0).getTax_rate());
         StringBuffer sb = new StringBuffer();
 //        StringBuffer sb1 = new StringBuffer();
         String priceStr = item.getPrice();
@@ -73,7 +73,7 @@ public class CalculateUtils {
         for (TaxItem taxItem : mTaxItemList) {
             String taxTypeUid = taxItem.getTaxtype_uid();
 //            String taxableItemUid = taxItem.getTaxable_item_uid();
-            String invoiceTypeUid = InvoiceIssuingActivity.mInvoice.getInvoice_type_uid();
+            String invoiceTypeUid = NewInvoiceActivity.mInvoice.getInvoice_type_uid();
             InvoiceTaxType invoiceTaxType = select().from(InvoiceTaxType.class).where(InvoiceTaxType_Table.invoice_type_uid.eq(invoiceTypeUid)).and(InvoiceTaxType_Table.taxtype_uid.eq(taxTypeUid)).querySingle();
             if (invoiceTaxType == null) continue;
             String invoice_type_taxtype_uid = invoiceTaxType.getInvoice_type_taxtype_uid();
@@ -118,19 +118,19 @@ public class CalculateUtils {
         MyTaxpayer myTaxpayer = JSON.parseObject(myTaxpayerString, MyTaxpayer.class);
         //如果纳税人  withholding 等于Y
         // BPTPrepayment= BPTPrepayment+ (item.StampDutyLocal + item.stampDutyFederal + item.Fee + item.BPTFinal + item.VatAmount) * 0.01；
-        if ("Y".equals(myTaxpayer.getWithholding())) {
-            totalTax -= productModel.getBpt_prepayment();
-            double bptp = productModel.getBpt_prepayment() + (productModel.getBpt_final() + productModel.getFees() + productModel.getStamp_duty_local() + productModel.getStamp_duty_federal() + productModel.getVat()) * 0.01d;
-            bptp = Math.round(bptp * 100) * 0.01d;
-            bptp = Double.valueOf(String.format("%.2f", bptp));
-            totalTax = totalTax + bptp;
-            productModel.setBpt_prepayment(bptp);
-            productModel.setBptp_amount(String.format("%.2f", bptp));
-        } else {
-            totalTax -= productModel.getBpt_prepayment();
-            productModel.setBpt_prepayment(0);
-            productModel.setBptp_amount(String.format("%.2f", 0));
-        }
+//        if ("Y".equals(myTaxpayer.getWithholding())) {
+//            totalTax -= productModel.getBpt_prepayment();
+//            double bptp = productModel.getBpt_prepayment() + (productModel.getBpt_final() + productModel.getFees() + productModel.getStamp_duty_local() + productModel.getStamp_duty_federal() + productModel.getVat()) * 0.01d;
+//            bptp = Math.round(bptp * 100) * 0.01d;
+//            bptp = Double.valueOf(String.format("%.2f", bptp));
+//            totalTax = totalTax + bptp;
+//            productModel.setBpt_prepayment(bptp);
+//            productModel.setBptp_amount(String.format("%.2f", bptp));
+//        } else {
+//            totalTax -= productModel.getBpt_prepayment();
+//            productModel.setBpt_prepayment(0);
+//            productModel.setBptp_amount(String.format("%.2f", 0));
+//        }
 
         totalTax = Double.valueOf(String.format("%.2f", totalTax));
 
@@ -147,9 +147,11 @@ public class CalculateUtils {
         productModel.setTax_due(String.format("%.2f", Math.round((totalTax) * 100) * 0.01d));
         productModel.setTaxable_amount(String.format("%.2f", Math.round((amount) * 100) * 0.01d));
         productModel.setAmount_inc(String.format("%.2f", Math.round((amount + totalTax) * 100) * 0.01d));
-        item.setTotalTax(String.format("%.2f", Math.round((totalTax - productModel.getFees()) * 100) * 0.01d));
+        // item.setTotalTax(String.format("%.2f", Math.round((totalTax - productModel.getFees()) * 100) * 0.01d));
+        item.setTotalTax(String.format("%.2f", Math.round((totalTax) * 100) * 0.01d));
         item.seteTax(productModel.getTaxable_amount());
-        item.setiTax(String.format("%.2f", Math.round((amount + totalTax - productModel.getFees()) * 100) * 0.01d));
+        //item.setiTax(String.format("%.2f", Math.round((amount + totalTax - productModel.getFees()) * 100) * 0.01d));
+        item.setiTax(String.format("%.2f", Math.round((amount + totalTax) * 100) * 0.01d));
         return productModel;
     }
 

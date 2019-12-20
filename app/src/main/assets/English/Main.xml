@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FileRoot Type="wenjian.tongyong">
-	<Metadata>/ID.xml</Metadata>
-	<Permissions>
-		<Print Value="true"/>
-	</Permissions>
-	<DocBody>
-		<Component ID="1">
-			<Data TempType="ofd">
-				<Template>/Sing.ofd</Template>
-				<FileLoc>/data.xml</FileLoc>
-			</Data>
-		</Component>
-	</DocBody>
+    <Metadata>/ID.xml</Metadata>
+    <Permissions>
+        <Print Value="true" />
+    </Permissions>
+    <DocBody>
+        <Component ID="1">
+            <Data TempType="ofd">
+                <Template>/Sing.ofd</Template>
+                <FileLoc>/data.xml</FileLoc>
+            </Data>
+        </Component>
+    </DocBody>
 </FileRoot>

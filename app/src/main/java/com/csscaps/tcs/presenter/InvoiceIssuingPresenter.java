@@ -9,7 +9,6 @@ import com.csscaps.common.base.BasePresenter;
 import com.csscaps.tcs.SdcardDBUtil;
 import com.csscaps.tcs.ServerConstants;
 import com.csscaps.tcs.action.IInvoiceIssuingAction;
-import com.csscaps.tcs.activity.InvoiceIssuingActivity;
 import com.csscaps.tcs.database.SDInvoiceDatabase;
 import com.csscaps.tcs.database.TcsDatabase;
 import com.csscaps.tcs.database.table.Invoice;
@@ -55,7 +54,7 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
 
 
     public void issuingInvoice(List<Product> products) {
-        Invoice invoice = InvoiceIssuingActivity.mInvoice;
+     //   Invoice invoice = InvoiceIssuingActivity.mInvoice;
         List<ProductModel> productModels = new ArrayList<>();
         for (int i = 0; i < products.size(); i++) {
             Product p = products.get(i);
@@ -63,8 +62,8 @@ public class InvoiceIssuingPresenter extends BasePresenter<IInvoiceIssuingAction
             productModel.setLine_no(String.valueOf(i + 1));
             productModels.add(productModel);
         }
-        invoice.setGoods(productModels);
-        issuingInvoice(invoice);
+//        invoice.setGoods(productModels);
+//        issuingInvoice(invoice);
     }
 
     public void issuingInvoice(Invoice invoice) {

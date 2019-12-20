@@ -45,6 +45,7 @@ public class MyTaxpayer {
     private String invoice_property;
     private String tin_office_code;
     private String tin_office_name;
+    private String invoice_tips;
 
     public String getFuncid() {
         return funcid;
@@ -356,5 +357,13 @@ public class MyTaxpayer {
 
     public void setTin_office_name(String tin_office_name) {
         this.tin_office_name = tin_office_name;
+    }
+
+    public String getInvoice_tips() {
+        return invoice_tips;
+    }
+
+    public void setInvoice_tips(String invoice_tips) {
+        this.invoice_tips = invoice_tips;
     }
 }

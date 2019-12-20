@@ -1,7 +1,10 @@
 package com.csscaps.tcs.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 
 import com.csscaps.common.baseadapter.BaseAdapterHelper;
 import com.csscaps.common.baseadapter.QuickAdapter;
@@ -23,17 +26,12 @@ public class SelectCustomerListAdapter extends QuickAdapter<Customer> {
 
     @Override
     protected void convert(BaseAdapterHelper helper, Customer item, int position) {
-        helper.setText(R.id.no, String.valueOf(position + 1));
-        helper.setText(R.id.tin, item.getTin());
-        helper.setText(R.id.name, item.getName());
-        helper.setText(R.id.tel, item.getTel());
-        helper.setText(R.id.address, item.getAddress());
-        helper.setText(R.id.national_id, item.getNationalId());
-        helper.setText(R.id.passport, item.getPassport());
+        helper.setText(R.id.customer_add_name, item.getName())
+                .setText(R.id.customer_add_region, item.getState());
         if (position == selectedPosition) {
-            helper.setBackgroundColor(R.id.layout, ContextCompat.getColor(context,R.color.bg));
+            helper.setBackgroundColor(R.id.layout, ContextCompat.getColor(context, R.color.new_text2));
         } else {
-            helper.setBackgroundColor(R.id.layout, ContextCompat.getColor(context,R.color.top_bg));
+            helper.setBackgroundColor(R.id.layout, ContextCompat.getColor(context, R.color.new_text));
         }
     }
 

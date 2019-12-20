@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <bitmap
-            android:src="@mipmap/bg"></bitmap>
+            android:src="@mipmap/top_bg"></bitmap>
     </item>
     <item>
         <bitmap

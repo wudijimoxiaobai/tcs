@@ -1,219 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:background="@mipmap/top_bg"
+    tools:context=".style1.Style1Activity">
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:background="@mipmap/top_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        >
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:layout_marginStart="20dp"
-            android:background="@mipmap/logo_bg"
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher"
-            />
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
+            android:layout_gravity="center"
             android:text="@string/e_invoice"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_title"
-            />
-
-        <TextView
-            android:id="@+id/time_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text"
-            />
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="#7a95b3"
-            />
-
-        <TextView
-            android:id="@+id/user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@mipmap/c_user"
-            android:gravity="center_vertical"
-            android:minWidth="188dp"
-            android:padding="20dp"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text"
-            />
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="#7a95b3"
-            />
+            android:textSize="18dp" />
 
         <ImageView
             android:id="@+id/syn"
             android:layout_width="96dp"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/synchronize"
-            />
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:src="@mipmap/synchronize" />
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="#7a95b3"
-            />
+    </android.support.v7.widget.Toolbar>
 
-        <ImageView
-            android:id="@+id/exit"
-            android:layout_width="96dp"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/exit"
-            android:textColor="@android:color/white"
-            />
-    </LinearLayout>
-
-    <LinearLayout
+    <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@mipmap/bg"
-        android:gravity="center"
-        android:orientation="vertical"
-        >
+        android:layout_height="1dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+    <FrameLayout
+        android:id="@+id/FramePage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/new_text"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintLeft_toLeftOf="@id/toolbar"
+        app:layout_constraintRight_toRightOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/view"></FrameLayout>
 
-            <LinearLayout
-                android:id="@+id/first_row"
-                android:layout_width="800dp"
-                android:layout_height="204dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                >
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:background="@color/new_text2"
+        app:itemTextColor="@color/navigation_iten_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/navigation" />
 
-                <TextView
-                    android:id="@+id/invoice_issuing"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="0.25"
-                    android:background="@drawable/bg4"
-                    android:gravity="center_horizontal|bottom"
-                    android:paddingBottom="30dp"
-                    android:text="@string/invoice_issuing"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text"
-                    />
-
-                <TextView
-                    android:id="@+id/statistics"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="0.375"
-                    android:background="@drawable/bg5"
-                    android:gravity="center_horizontal|bottom"
-                    android:paddingBottom="30dp"
-                    android:text="@string/statistics"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text"
-                    />
-
-                <TextView
-                    android:id="@+id/invoice_information_management"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="0.375"
-                    android:background="@drawable/bg6"
-                    android:gravity="center_horizontal|bottom"
-                    android:paddingBottom="20dp"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="10dp"
-                    android:text="@string/invoice_information_management"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text"
-                    />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/second_row"
-                android:layout_width="800dp"
-                android:layout_height="204dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                >
-
-                <TextView
-                    android:id="@+id/invoice_management"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="0.35"
-                    android:background="@drawable/bg7"
-                    android:gravity="center_horizontal|bottom"
-                    android:paddingBottom="30dp"
-                    android:text="@string/invoice_management"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text"
-                    />
-
-                <TextView
-                    android:id="@+id/declaration"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="0.325"
-                    android:background="@drawable/bg8"
-                    android:gravity="center_horizontal|bottom"
-                    android:paddingBottom="30dp"
-                    android:text="@string/declaration"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text"
-                    />
-
-                <TextView
-                    android:id="@+id/system_management"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="0.35"
-                    android:background="@drawable/bg9"
-                    android:gravity="center_horizontal|bottom"
-                    android:paddingBottom="30dp"
-                    android:text="@string/system_management"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text"
-                    />
-            </LinearLayout>
-
-        </LinearLayout>
-    </LinearLayout>
-
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

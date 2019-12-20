@@ -21,11 +21,9 @@ public class ProductListAdapter extends BaseManagementListAdapter<Product> {
     @Override
     protected void convert(BaseAdapterHelper helper, Product item, int position) {
         super.convert(helper, item, position);
-        helper.setText(R.id.product_name, item.getProductName());
-        helper.setText(R.id.local_name, item.getLocalName());
-        helper.setText(R.id.specification, item.getSpecification());
-        helper.setText(R.id.unit, item.getUnit());
-        helper.setText(R.id.price, item.getPrice());
+        helper.setText(R.id.product_list_product, item.getProductName())
+                .setText(R.id.unit, item.getUnit())
+                .setText(R.id.price, item.getPrice());
     }
 
 }

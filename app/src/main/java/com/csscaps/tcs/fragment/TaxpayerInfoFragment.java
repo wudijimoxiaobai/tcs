@@ -1,9 +1,10 @@
 package com.csscaps.tcs.fragment;
 
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -13,13 +14,10 @@ import com.csscaps.tcs.R;
 import com.csscaps.tcs.model.MyTaxpayer;
 
 import butterknife.BindView;
-import butterknife.OnClick;
-
-/**
- * Created by tl on 2018/5/21.
- */
 
 public class TaxpayerInfoFragment extends BaseFragment {
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.tin)
     TextView mTin;
     @BindView(R.id.name)
@@ -44,10 +42,8 @@ public class TaxpayerInfoFragment extends BaseFragment {
     TextView mIdType;
     @BindView(R.id.id_no)
     TextView mIdNo;
-    @BindView(R.id.hit)
-    TextView mHit;
-    @BindView(R.id.scrollView)
-    ScrollView mScrollView;
+    @BindView(R.id.cc_02)
+    ConstraintLayout mLl;
 
     @Override
     protected int getLayoutResId() {
@@ -61,6 +57,12 @@ public class TaxpayerInfoFragment extends BaseFragment {
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
         String myTaxpayerString = AppSP.getString("MyTaxpayer");
         if (!TextUtils.isEmpty(myTaxpayerString)) {
             MyTaxpayer myTaxpayer = JSON.parseObject(myTaxpayerString, MyTaxpayer.class);
@@ -77,16 +79,7 @@ public class TaxpayerInfoFragment extends BaseFragment {
             mRemarks.setText(myTaxpayer.getRemark());
             mBusinessActivities.setText(myTaxpayer.getTaxpayer_category());
         } else {
-            mScrollView.setVisibility(View.GONE);
+            mLl.setVisibility(View.GONE);
         }
     }
-
-
-    @OnClick(R.id.back)
-    public void onClick() {
-        getActivity().finish();
-    }
-
-
-
 }

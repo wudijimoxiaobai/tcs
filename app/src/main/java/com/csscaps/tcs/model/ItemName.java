@@ -1,5 +1,7 @@
 package com.csscaps.tcs.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+
 /**
  * Created by tl on 2018/7/18.
  */
@@ -7,17 +9,24 @@ package com.csscaps.tcs.model;
 public class ItemName {
 
 
-    private String ITEMNAME;
+    private String name;
 
-    public ItemName(String ITEMNAME) {
-        this.ITEMNAME = ITEMNAME;
+    @XStreamAsAttribute()
+    private String extendSize = "false";
+
+    public String getName() {
+        return name;
     }
 
-    public String getITEMNAME() {
-        return ITEMNAME;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setITEMNAME(String ITEMNAME) {
-        this.ITEMNAME = ITEMNAME;
+    public String getExtendSize() {
+        return extendSize;
+    }
+
+    public void setExtendSize(String extendSize) {
+        this.extendSize = extendSize;
     }
 }

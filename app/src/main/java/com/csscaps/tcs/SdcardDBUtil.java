@@ -146,6 +146,7 @@ public class SdcardDBUtil {
             sm.setSpecification(productModel.getSpecification());
             sm.setTaxtype(productModel.getTaxtype());
             sm.setTaxtype(productModel.getTaxtype());
+            sm.setTax_rate(productModel.getTax_rate());
             goods.add(sm);
         }
 

@@ -12,6 +12,27 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 @Table(database = TcsDatabase.class)
 public class TaxItem extends BaseModel {
+    @Override
+    public String toString() {
+        return "TaxItem{" +
+                "taxable_item_uid='" + taxable_item_uid + '\'' +
+                ", taxtype_uid='" + taxtype_uid + '\'' +
+                ", item_codechar='" + item_codechar + '\'' +
+                ", item_name_in_english='" + item_name_in_english + '\'' +
+                ", descriptionchar='" + descriptionchar + '\'' +
+                ", adjusted_value='" + adjusted_value + '\'' +
+                ", tax_amount_ratio='" + tax_amount_ratio + '\'' +
+                ", tax_rate='" + tax_rate + '\'' +
+                ", formula_desc='" + formula_desc + '\'' +
+                ", unit='" + unit + '\'' +
+                ", parent_item_uidinteger='" + parent_item_uidinteger + '\'' +
+                ", is_leaf='" + is_leaf + '\'' +
+                ", node_level='" + node_level + '\'' +
+                ", statuschar='" + statuschar + '\'' +
+                ", crt_datetime='" + crt_datetime + '\'' +
+                ", i18n_codechar='" + i18n_codechar + '\'' +
+                '}';
+    }
 
     /**
      * taxable_item_uid : xxx

@@ -49,6 +49,15 @@ android {
             jniLibs.srcDirs = ['src/jniLibs']
         }
     }
+    android {
+
+        dexOptions {
+
+            jumboMode true
+
+        }
+
+    }
 }
 
 def dbflow_version = "4.0.3"
@@ -62,9 +71,14 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
 //    compile 'com.android.support:support-v4:26.0.0-alpha1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
     compile(name: 'ofd_view', ext: 'aar')
+    compile 'net.sourceforge.jexcelapi:jxl:2.6.12'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile 'com.android.support:design:26.1.0'
+    compile 'com.android.support:cardview-v7:26.1.0'
 }

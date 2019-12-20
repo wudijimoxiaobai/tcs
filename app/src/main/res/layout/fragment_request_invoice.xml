@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/top_bg">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@mipmap/back">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/select_invoice"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/new_text2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/cc_02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/new_text"
+                app:layout_constraintTop_toTopOf="@id/cc">
+
+                <TextView
+                    android:id="@+id/type"
+                    style="@style/text_24_1d"
+                    android:layout_width="150dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/application_type"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/cc_02" />
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/application_type"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/bg2"
+                    android:gravity="start"
+                    android:spinnerMode="dropdown"
+                    android:textAlignment="viewStart"
+                    android:textDirection="locale"
+                    android:theme="@style/myDropTheme"
+                    app:layout_constraintBottom_toBottomOf="@id/type"
+                    app:layout_constraintLeft_toRightOf="@id/type"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/type" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/new_text2"
+                    app:layout_constraintLeft_toLeftOf="@id/type"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/type" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:background="@mipmap/arrow_down"
+                    app:layout_constraintBottom_toBottomOf="@id/application_type"
+                    app:layout_constraintRight_toRightOf="@id/application_type"
+                    app:layout_constraintTop_toTopOf="@id/application_type" />
+
+                <TextView
+                    android:id="@+id/from"
+                    style="@style/text_24_1d"
+                    android:layout_width="150dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/invoice_code"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/type" />
+
+
+                <EditText
+                    android:id="@+id/invoice_code"
+                    style="@style/text_24_1d"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/bg2"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="@id/from"
+                    app:layout_constraintLeft_toRightOf="@id/from"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/new_text2"
+                    app:layout_constraintLeft_toLeftOf="@id/type"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/from" />
+
+                <TextView
+                    android:id="@+id/remaining"
+                    style="@style/text_24_1d"
+                    android:layout_width="150dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/invoice_no"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/from" />
+
+                <EditText
+                    android:id="@+id/invoice_no"
+                    style="@style/text_24_1d"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/bg2"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="@id/remaining"
+                    app:layout_constraintLeft_toRightOf="@id/remaining"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/cc_03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/new_text"
+                app:layout_constraintTop_toBottomOf="@id/cc_02">
+
+                <TextView
+                    android:id="@+id/object_01"
+                    style="@style/text_24_1d"
+                    android:layout_width="150dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/reason"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+
+                <EditText
+                    android:id="@+id/reason"
+                    style="@style/text_24_1d"
+                    android:layout_width="0dp"
+                    android:layout_height="130dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/bg2"
+                    android:padding="10dp"
+                    app:layout_constraintLeft_toRightOf="@id/object_01"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/object_01" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/search"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/bg18"
+        android:gravity="center"
+        android:text="@string/search"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

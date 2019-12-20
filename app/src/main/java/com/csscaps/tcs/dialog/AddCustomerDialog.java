@@ -4,8 +4,8 @@ import android.support.annotation.IdRes;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -17,21 +17,19 @@ import com.csscaps.tcs.R;
 import com.csscaps.tcs.database.table.Customer;
 import com.csscaps.tcs.database.table.Taxpayer;
 import com.csscaps.tcs.database.table.Taxpayer_Table;
-import com.csscaps.tcs.fragment.CustomerManagementFragment;
+import com.csscaps.tcs.fragment.CustomerMgtFragment;
 
 import butterknife.BindView;
 import rx.Subscription;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
-/**
- * Created by tl on 2018/5/17.
- */
-
 public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioGroup.OnCheckedChangeListener {
 
-    @BindView(R.id.title)
-    TextView mTitle;
+    @BindView(R.id.registered)
+    RadioButton mRegistered;
+    @BindView(R.id.unregistered)
+    RadioButton mUnregistered;
     @BindView(R.id.radio_group)
     RadioGroup mRadioGroup;
     @BindView(R.id.tin)
@@ -54,18 +52,14 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
     EditText mState;
     @BindView(R.id.remarks)
     EditText mRemarks;
-    @BindView(R.id.tin_layout)
-    LinearLayout mTinLayout;
-    @BindView(R.id.registered)
-    RadioButton mRegistered;
-    @BindView(R.id.unregistered)
-    RadioButton mUnregistered;
+    @BindView(R.id.tv1)
+    TextView mTv1;
 
     int invoiceObject = -1;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.add_customer_dialog;
+        return R.layout.activity_customer_add;
     }
 
     @Override
@@ -74,7 +68,6 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
         mRadioGroup.setOnCheckedChangeListener(this);
         setEditTextEnable(false);
         if (edit) {
-            mTitle.setText(getString(R.string.edit_customer));
             if (t.isRegistered()) {
                 mRadioGroup.check(R.id.registered);
             } else {
@@ -86,10 +79,10 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
         mTin.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-//                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    String tin = mTin.getText().toString().trim();
-                     verify(tin);
-//                }
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                String tin = mTin.getText().toString().trim();
+                verify(tin);
+                }
                 return false;
             }
         });
@@ -106,7 +99,7 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
         }
     }
 
-    private boolean verify( String tin){
+    private boolean verify(String tin) {
         try {
             boolean initData = AppSP.getBoolean("initData", false);
             if (initData) {
@@ -135,12 +128,14 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
     public void onCheckedChanged(RadioGroup radioGroup, @IdRes int checkedId) {
         switch (checkedId) {
             case R.id.registered:
-                mTinLayout.setVisibility(View.VISIBLE);
+                mTv1.setVisibility(View.VISIBLE);
+                mTin.setVisibility(View.VISIBLE);
                 t.setRegistered(true);
                 setEditTextEnable(false);
                 break;
             case R.id.unregistered:
-                mTinLayout.setVisibility(View.GONE);
+                mTv1.setVisibility(View.GONE);
+                mTin.setVisibility(View.GONE);
                 t.setRegistered(false);
                 setEditTextEnable(true);
                 break;
@@ -172,31 +167,31 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
             return;
         }
 
-        if(t.isRegistered()&&TextUtils.isEmpty(t.getName())){
-            if(!verify(tin)) return;
+        if (t.isRegistered() && TextUtils.isEmpty(t.getName())) {
+            if (!verify(tin)) return;
         }
 
 
         editTextsIntoT();
 
-        if(!t.isRegistered()&&TextUtils.isEmpty(t.getName())){
+        if (!t.isRegistered() && TextUtils.isEmpty(t.getName())) {
             ToastUtil.showShort(getString(R.string.hit17));
             return;
         }
-        if(!t.isRegistered()&&TextUtils.isEmpty(t.getNationalId())&&TextUtils.isEmpty(t.getPassport())){
+        if (!t.isRegistered() && TextUtils.isEmpty(t.getNationalId()) && TextUtils.isEmpty(t.getPassport())) {
             ToastUtil.showShort(getString(R.string.hit18));
             return;
         }
 
-        if (TextUtils.isEmpty(tin)||!t.isRegistered()) {
+        if (TextUtils.isEmpty(tin) || !t.isRegistered()) {
             t.setTin(null);
         }
 
         if (edit) {
             if (t.update()) {
                 dismiss();
-                Subscription subscription =ObserverActionUtils.subscribe(t, CustomerManagementFragment.class);
-                if(subscription!=null)subscription.unsubscribe();
+                Subscription subscription = ObserverActionUtils.subscribe(t, CustomerMgtFragment.class);
+                if (subscription != null) subscription.unsubscribe();
             } else {
                 ToastUtil.showShort(getString(R.string.hit9));
             }
@@ -204,10 +199,10 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
         } else {
             if (t.save()) {
                 dismiss();
-                Subscription subscription =ObserverActionUtils.subscribe(t, CustomerManagementFragment.class);
-                Subscription subscription1 =ObserverActionUtils.subscribe(t, SelectCustomerDialog.class);
-                if(subscription!=null)subscription.unsubscribe();
-                if(subscription1!=null)subscription1.unsubscribe();
+                Subscription subscription = ObserverActionUtils.subscribe(t, CustomerMgtFragment.class);
+                Subscription subscription1 = ObserverActionUtils.subscribe(t, SelectCustomerDialog.class);
+                if (subscription != null) subscription.unsubscribe();
+                if (subscription1 != null) subscription1.unsubscribe();
             } else {
                 ToastUtil.showShort(getString(R.string.hit10));
             }
@@ -217,5 +212,4 @@ public class AddCustomerDialog extends BaseAddDialog<Customer> implements RadioG
     public void setInvoiceObject(int invoiceObject) {
         this.invoiceObject = invoiceObject;
     }
-
 }

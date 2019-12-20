@@ -32,6 +32,7 @@
     </RelativeLayout>
 
     <com.suwell.to.ofd.ofdviewer.OFDView
+        android:background="@color/new_text"
         android:id="@+id/ofd_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -43,14 +44,14 @@
         android:layout_height="wrap_content"
         android:background="@color/bg1"
         android:gravity="center"
-        android:paddingBottom="15dp"
+        android:paddingBottom="40dp"
         android:paddingTop="15dp"
         >
 
         <TextView
             android:id="@+id/cancel"
             android:layout_width="300dp"
-            android:layout_height="60dp"
+            android:layout_height="45dp"
             android:background="@drawable/bg18"
             android:gravity="center"
             android:text="@string/back"

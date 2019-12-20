@@ -1,16 +1,22 @@
 package com.csscaps.tcs.fragment;
 
+import android.app.Activity;
+import android.content.Context;
+import android.support.design.widget.CoordinatorLayout;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CompoundButton;
 
 import com.csscaps.common.utils.FastDoubleClickUtil;
 import com.csscaps.common.utils.ToastUtil;
 import com.csscaps.tcs.CalculateUtils;
 import com.csscaps.tcs.R;
-import com.csscaps.tcs.activity.InvoiceIssuingActivity;
+import com.csscaps.tcs.activity.NewInvoiceActivity;
 import com.csscaps.tcs.adapter.BaseManagementListAdapter;
 import com.csscaps.tcs.adapter.InvoiceProductListAdapter;
 import com.csscaps.tcs.database.table.Product;
 import com.csscaps.tcs.dialog.BaseAddDialog;
+import com.csscaps.tcs.dialog.ProductListItemDialog;
 import com.csscaps.tcs.dialog.PurchaseInformationDialog;
 import com.csscaps.tcs.dialog.SelectProductDialog;
 
@@ -18,10 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.OnClick;
-
-/**
- * Created by tl on 2018/5/24.
- */
 
 public class InvoiceProductListFragment extends BaseManagementListFragment<Product> {
 
@@ -40,10 +42,9 @@ public class InvoiceProductListFragment extends BaseManagementListFragment<Produ
 
     @Override
     protected List getData() {
-        data.addAll(InvoiceIssuingActivity.mInvoice.getProducts());
+        data.addAll(NewInvoiceActivity.mInvoice.getProducts());
         return data;
     }
-
 
     @Override
     protected BaseManagementListAdapter getAdapter(List data) {
@@ -68,16 +69,16 @@ public class InvoiceProductListFragment extends BaseManagementListFragment<Produ
     public void onClick(View view) {
         super.onClick(view);
         switch (view.getId()) {
-            case R.id.add:
+            case R.id.customer_add:
                 ((InvoiceProductListAdapter) mBaseManagementListAdapter).setEditPosition(-1);
                 SelectProductDialog selectProductDialog = new SelectProductDialog();
                 selectProductDialog.show(getChildFragmentManager(), "SelectProductDialog");
                 break;
             case R.id.edit:
+                data.addAll(NewInvoiceActivity.mInvoice.getProducts());
                 Product product = (Product) view.getTag();
-                int i = data.indexOf(product);
-                ((InvoiceProductListAdapter) mBaseManagementListAdapter).setEditPosition(i);
-                mBaseManagementListAdapter.notifyDataSetChanged();
+                ProductListItemDialog listItemDialog = new ProductListItemDialog(data, data.indexOf(product));
+                listItemDialog.show(getChildFragmentManager(), "ProductListItemDialog");
                 break;
             case R.id.calculate:
                 if (FastDoubleClickUtil.isFastDoubleClick(R.id.calculate)) break;
@@ -91,15 +92,19 @@ public class InvoiceProductListFragment extends BaseManagementListFragment<Produ
         }
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         try {
-            InvoiceIssuingActivity.mInvoice.getProducts().clear();
-            InvoiceIssuingActivity.mInvoice.getProducts().addAll(data);
+            NewInvoiceActivity.mInvoice.getProducts().clear();
+            NewInvoiceActivity.mInvoice.getProducts().addAll(data);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
     }
 }

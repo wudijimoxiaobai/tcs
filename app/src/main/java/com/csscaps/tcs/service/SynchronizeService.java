@@ -26,6 +26,7 @@ import com.csscaps.tcs.database.table.TaxItem;
 import com.csscaps.tcs.database.table.TaxMethod;
 import com.csscaps.tcs.database.table.TaxType;
 import com.csscaps.tcs.database.table.Taxpayer;
+import com.csscaps.tcs.fragment.HomeFragment;
 import com.csscaps.tcs.model.MyTaxpayer;
 import com.csscaps.tcs.model.ReceiveAllTaxpayer;
 import com.csscaps.tcs.model.ReceiveInvoiceTaxType;
@@ -171,6 +172,7 @@ public class SynchronizeService extends Service implements IPresenter {
         RequestModel requestModel = new RequestModel();
         requestModel.setFuncid(requestData.getFuncid());
         requestData.setDevicesn(requestModel.getDevicesn());
+       // ToastUtil.showLong(requestModel.getDevicesn());
         requestData.setSystime(DateUtils.dateToStr(RTCUtil.getRTC(), DateUtils.format_yyyyMMddHHmmss_24_EN));
         requestModel.setData(JSON.toJSONString(requestData));
         Api.post(this, requestModel);
@@ -183,7 +185,7 @@ public class SynchronizeService extends Service implements IPresenter {
                 AppSP.putString("MyTaxpayer", objectString);
                 MyTaxpayer myTaxpayer = JSON.parseObject(objectString, MyTaxpayer.class);
                 RequestData.sellerid = myTaxpayer.getSellerid();
-                AppSP.putString("sellerid",  RequestData.sellerid);
+                AppSP.putString("sellerid", RequestData.sellerid);
                 synData();
                 break;
             case ServerConstants.ATCS004:
@@ -266,7 +268,6 @@ public class SynchronizeService extends Service implements IPresenter {
                                 }).addAll(calc_rule_info).build())
                         .build()
                         .execute();
-
                 break;
             case ServerConstants.ATCS021:
                 final ReceiveAllTaxpayer receiveAllTaxpayer = JSON.parseObject(objectString, ReceiveAllTaxpayer.class);
@@ -316,7 +317,6 @@ public class SynchronizeService extends Service implements IPresenter {
                         .build()
                         .execute();
                 break;
-
         }
         c++;
         complete();
@@ -347,6 +347,4 @@ public class SynchronizeService extends Service implements IPresenter {
             c = 0;
         }
     }
-
-
 }

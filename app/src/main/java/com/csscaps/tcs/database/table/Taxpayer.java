@@ -11,6 +11,19 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
  */
 @Table(database = TaxpayerDatabase.class)
 public class Taxpayer extends BaseModel {
+    @Override
+    public String toString() {
+        return "Taxpayer{" +
+                "tin='" + tin + '\'' +
+                ", ename='" + ename + '\'' +
+                ", aname='" + aname + '\'' +
+                ", address='" + address + '\'' +
+                ", tel='" + tel + '\'' +
+                ", state='" + state + '\'' +
+                ", type='" + type + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
 
     @Column
     @PrimaryKey

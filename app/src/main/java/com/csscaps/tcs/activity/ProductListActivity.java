@@ -1,14 +1,9 @@
 package com.csscaps.tcs.activity;
 
-
 import android.os.Bundle;
 
 import com.csscaps.common.base.BaseActivity;
 import com.csscaps.tcs.R;
-
-/**
- * Created by tl on 2018/5/24.
- */
 
 public class ProductListActivity extends BaseActivity {
 

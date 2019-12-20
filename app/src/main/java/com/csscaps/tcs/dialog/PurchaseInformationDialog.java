@@ -1,10 +1,11 @@
 package com.csscaps.tcs.dialog;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,36 +37,24 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.csscaps.tcs.activity.InvoiceIssuingActivity.mInvoice;
+import static com.csscaps.tcs.activity.NewInvoiceActivity.mInvoice;
 
-/**
- * Created by tl on 2018/5/29.
- */
-
-@SuppressLint("ValidFragment")
 public class PurchaseInformationDialog extends DialogFragment implements IInvoiceIssuingAction {
 
-    @BindView(R.id.list_view)
-    ListView mListView;
-    @BindView(R.id.total_vat)
-    TextView mTotalVat;
-    @BindView(R.id.total_bpt_f)
-    TextView mTotalBptF;
-    @BindView(R.id.total_bpt_p)
-    TextView mTotalBptP;
-    @BindView(R.id.total_sdl)
-    TextView mTotalSdl;
-    @BindView(R.id.total_sdf)
-    TextView mTotalSdf;
-    @BindView(R.id.total_fees)
-    TextView mTotalFees;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.e_tax)
     TextView mETax;
     @BindView(R.id.i_tax)
     TextView mITax;
+    @BindView(R.id.total_vat)
+    TextView mTotalVat;
+    @BindView(R.id.total_other)
+    TextView mTotalOther;
+    @BindView(R.id.list_view)
+    ListView mListView;
 
     protected List<Product> data;
-    private PreviewInvoiceDialog previewInvoiceDialog;
     private PrintInvoiceDialog printInvoiceDialog;
     private InvoiceIssuingPresenter presenter;
 
@@ -84,38 +73,33 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.purchase_information_dialog, null);
         ButterKnife.bind(this, view);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
         initView();
         return view;
     }
-
 
     @Override
     public void onResume() {
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
         dialogWindow.setGravity(Gravity.CENTER);
-        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 0.9f);
-        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 0.9f);
+        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 1f);
+        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 1f);
         dialogWindow.setLayout(width, height);
         dialogWindow.setWindowAnimations(R.style.scale_anim);
     }
 
-    @OnClick({R.id.back, R.id.preview, R.id.print})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                dismiss();
-                break;
-            case R.id.preview:
-                if (previewInvoiceDialog == null)
-                    previewInvoiceDialog = new PreviewInvoiceDialog(mInvoice);
-                previewInvoiceDialog.show(getFragmentManager(), "PreviewInvoiceDialog");
-                break;
+    @OnClick(R.id.print)
+    public void onViewClicked(View mView) {
+        switch (mView.getId()) {
             case R.id.print:
                 PrintInvoiceDialog printInvoiceDialog = new PrintInvoiceDialog(mInvoice, this);
                 printInvoiceDialog.show(getFragmentManager(), "PrintInvoiceDialog");
-//                presenter = new InvoiceIssuingPresenter(this, getContext());
-//                presenter.issuingInvoice(data);
                 break;
         }
     }
@@ -149,13 +133,16 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
         invoice.setClient_invoice_datetime(DateUtils.dateToStr(RTCUtil.getRTC(), DateUtils.format_yyyyMMddHHmmss_24_EN));
 
         mTotalVat.setText(invoice.getTotal_vat());
-        mTotalBptF.setText(invoice.getTotal_bpt());
-        mTotalBptP.setText(invoice.getTotal_bpt_preypayment());
-        mTotalSdl.setText(invoice.getTotal_stamp());
-        mTotalSdf.setText(invoice.getTotal_final());
-        mTotalFees.setText(invoice.getTotal_fee());
+        // mTotalBptF.setText(invoice.getTotal_bpt());
+        // mTotalBptP.setText(invoice.getTotal_bpt_preypayment());
+        //  mTotalSdl.setText(invoice.getTotal_stamp());
+        // mTotalSdf.setText(invoice.getTotal_final());
+        // mTotalFees.setText(invoice.getTotal_fee());
+        mTotalOther.setText(String.format("%.2f", bptf+sdf+sdl+bptp+fees));
+        Log.e("other",String.format("%.2f", bptf+sdf+sdl+bptp+fees));
         mETax.setText(String.format("%.2f", etax));
-        mITax.setText(String.format("%.2f", itax-fees));
+       // mITax.setText(String.format("%.2f", itax - fees));
+        mITax.setText(String.format("%.2f", itax));
         Util.signInvoice(mInvoice);
 
         List<ProductModel> productModels = new ArrayList<>();
@@ -185,7 +172,4 @@ public class PurchaseInformationDialog extends DialogFragment implements IInvoic
         ToastUtil.showShort(getString(R.string.hit5));
         Util.updateReportDataDaily(mInvoice);
     }
-
-
-
 }

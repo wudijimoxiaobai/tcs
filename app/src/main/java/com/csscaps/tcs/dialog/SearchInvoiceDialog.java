@@ -3,6 +3,7 @@ package com.csscaps.tcs.dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.TextUtils;
@@ -27,10 +28,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * Created by tl on 2018/6/25.
- */
-
 public class SearchInvoiceDialog extends DialogFragment implements AdapterView.OnItemSelectedListener {
 
     @BindView(R.id.invoice_code)
@@ -48,8 +45,7 @@ public class SearchInvoiceDialog extends DialogFragment implements AdapterView.O
     @BindView(R.id.issuing_date_to)
     TextView mIssuingDateTo;
     @BindView(R.id.upload_status_layout)
-    LinearLayout mUploadStatusLayout;
-
+    ConstraintLayout mUploadStatusLayout;
 
     private Handler mHandler;
     private SearchInvoiceCondition mSearchInvoiceCondition = new SearchInvoiceCondition();
@@ -75,14 +71,14 @@ public class SearchInvoiceDialog extends DialogFragment implements AdapterView.O
         return view;
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
         Window dialogWindow = getDialog().getWindow();
-        dialogWindow.setGravity(Gravity.CENTER);
-        int width = DeviceUtils.dip2Px(getContext(), 600);
-        dialogWindow.setLayout(width, -2);
+        dialogWindow.setGravity(Gravity.BOTTOM);
+        int height = (int) (DeviceUtils.getScreenHeight(getContext()) * 0.6f);
+        int width = (int) (DeviceUtils.getScreenWidth(getContext()) * 1f);
+        dialogWindow.setLayout(width, height);
         dialogWindow.setWindowAnimations(R.style.scale_anim);
     }
 
@@ -150,4 +146,6 @@ public class SearchInvoiceDialog extends DialogFragment implements AdapterView.O
     public void setSelect(boolean select) {
         this.select = select;
     }
+
 }
+

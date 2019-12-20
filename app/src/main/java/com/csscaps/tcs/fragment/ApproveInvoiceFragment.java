@@ -3,6 +3,7 @@ package com.csscaps.tcs.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,14 +37,12 @@ import rx.functions.Action1;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
-/**
- * Created by tl on 2018/5/22.
- */
-
 public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.OnItemClickListener, View.OnClickListener, Action1 {
 
     @BindView(R.id.list_view)
     ListView mListView;
+    @BindView(R.id.toolbar)
+    Toolbar mToollbar;
 
     private final String DISA = "DISA";
     private final String NEG = "NEG";
@@ -67,23 +66,25 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
 
     @Override
     public void initView(Bundle savedInstanceState) {
+        mToollbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
         ObserverActionUtils.addAction(this);
         data = select().from(Invoice.class).where(Invoice_Table.requestType.eq(DISA)).or(Invoice_Table.requestType.eq(NEG)).orderBy(Invoice_Table.requestDate, false).queryList();
         mAdapter = new ApproveInvoiceListAdapter(mContext, R.layout.approve_invoice_list_item, data);
-        mListView.setAdapter(mAdapter);
+         mListView.setAdapter(mAdapter);
         if (process/*&& TCSApplication.currentUser.getRole()==0*/) {
             mListView.setOnItemClickListener(this);
         }
 
     }
 
-
-    @OnClick({R.id.back, R.id.search})
+    @OnClick({R.id.search})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.back:
-                getActivity().finish();
-                break;
             case R.id.search:
                 if (FastDoubleClickUtil.isFastDoubleClick(R.id.search)) break;
                 SearchApproveInvoiceDialog searchApproveInvoiceDialog = new SearchApproveInvoiceDialog(mHandler);
@@ -97,10 +98,12 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
                 break;
             case R.id.process:
                 popupWindow.dismiss();
-                InvoiceDetailsDialog invoiceDetailsDialog1 = new InvoiceDetailsDialog(invoice);
+                InvoiceDetailsDialog invoiceDetailsDialog1;
                 if (invoice.getRequestType().equals(NEG) && invoice.getApproveFlag().equals("0")) {
+                    invoiceDetailsDialog1 = new InvoiceDetailsDialog(invoice);
                     invoiceDetailsDialog1.setFlag(2);
                 } else {
+                    invoiceDetailsDialog1 = new InvoiceDetailsDialog(invoice);
                     invoiceDetailsDialog1.setFlag(4);
                 }
                 invoiceDetailsDialog1.show(getFragmentManager(), "InvoiceDetailsDialog1");
@@ -167,7 +170,7 @@ public class ApproveInvoiceFragment extends BaseFragment implements AdapterView.
         @Override
         public void handleMessage(Message msg) {
             SearchApproveInvoiceCondition mSearchApproveInvoiceCondition = (SearchApproveInvoiceCondition) msg.obj;
-            Where where = select().from(Invoice.class).where(Invoice_Table.requestType.in(NEG,DISA)).orderBy(Invoice_Table.requestDate, false);
+            Where where = select().from(Invoice.class).where(Invoice_Table.requestType.in(NEG, DISA)).orderBy(Invoice_Table.requestDate, false);
             if (!TextUtils.isEmpty(mSearchApproveInvoiceCondition.getInvoiceCode())) {
                 where = where.and(Invoice_Table.invoice_type_code.eq(mSearchApproveInvoiceCondition.getInvoiceCode()));
             }

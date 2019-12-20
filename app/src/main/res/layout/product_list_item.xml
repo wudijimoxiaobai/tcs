@@ -1,75 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="58dp"
-              android:gravity="center_vertical"
-              android:orientation="horizontal"
-              android:padding="10dp">
-
-    <CheckBox
-        android:id="@+id/no"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_weight="1.2"
-        android:button="@null"
-        android:focusable="false"
-        android:gravity="start|center_vertical"
-        android:paddingStart="5dp"
-        style="@style/list_item_text"
-        />
-
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/new_text"
+    android:padding="10dp">
 
     <TextView
-        android:id="@+id/product_name"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_01"
+        style="@style/text_24_83"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        style="@style/list_item_text"
-        android:ellipsize="end"
-        android:lines="1"
-        />
+        android:layout_marginLeft="10dp"
+        android:text="@string/name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/local_name"
-        android:layout_width="match_parent"
+        android:id="@+id/product_list_product"
+        style="@style/text_24_1d"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        style="@style/list_item_text"
-        android:ellipsize="end"
-        android:lines="1"
-        />
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_01"
+        app:layout_constraintLeft_toRightOf="@id/tv_01" />
 
     <TextView
-        android:id="@+id/specification"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_02"
+        style="@style/text_24_83"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="1"
-        style="@style/list_item_text"
-        />
+        android:layout_marginTop="10dp"
+        android:text="Item :"
+        app:layout_constraintLeft_toLeftOf="@id/tv_01"
+        app:layout_constraintTop_toBottomOf="@id/tv_01" />
 
     <TextView
         android:id="@+id/unit"
-        android:layout_width="match_parent"
+        style="@style/text_24_1d"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1.2"
-        android:gravity="center"
-        style="@style/list_item_text"
-        />
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_02"
+        app:layout_constraintLeft_toRightOf="@id/tv_02" />
+
+    <TextView
+        android:id="@+id/tv_03"
+        style="@style/text_24_83"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/price"
+        app:layout_constraintLeft_toLeftOf="@id/tv_02"
+        app:layout_constraintTop_toBottomOf="@id/tv_02" />
 
     <TextView
         android:id="@+id/price"
-        android:layout_width="match_parent"
+        style="@style/text_24_1d"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1.1"
-        android:gravity="center"
-        style="@style/list_item_text"
-        />
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_03"
+        app:layout_constraintLeft_toRightOf="@id/tv_03" />
 
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

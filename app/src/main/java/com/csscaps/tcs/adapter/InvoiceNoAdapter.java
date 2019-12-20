@@ -14,10 +14,6 @@ import java.util.List;
 
 import static com.raizlabs.android.dbflow.sql.language.SQLite.select;
 
-/**
- * Created by tl on 2018/5/22.
- */
-
 public class InvoiceNoAdapter extends QuickAdapter<InvoiceType> {
     public InvoiceNoAdapter(Context context, int layoutResId, List<InvoiceType> data) {
         super(context, layoutResId, data);
@@ -25,24 +21,18 @@ public class InvoiceNoAdapter extends QuickAdapter<InvoiceType> {
 
     @Override
     protected void convert(BaseAdapterHelper helper, InvoiceType item, int position) {
-        String code=item.getInvoice_type_code();
+        String code = item.getInvoice_type_code();
         helper.setText(R.id.invoice_code, code);
         helper.setText(R.id.invoice_type, item.getInvoice_type_name());
-        helper.setText(R.id.safety_value, AppSP.getInt(code)+"");
+        helper.setText(R.id.tax_Amount, AppSP.getInt(code) + "");
         long count = select().from(InvoiceNo.class).where(InvoiceNo_Table.invoice_type_code.eq(code)).query().getCount();
-        helper.setText(R.id.remaining_qty,count+"");
-        switch (item.getInvoiceObject()) {
-            case 0:
-                helper.setText(R.id.object,"B");
-                break;
-            case 1:
-                helper.setText(R.id.object,"A");
-                break;
-            case 2:
-                helper.setText(R.id.object,"C");
-                break;
+        helper.setText(R.id.remaining_qty, count + "");
+        if (item.getInvoiceObject() == 1) {
+            helper.setText(R.id.object, "Business");
+        } else if (item.getInvoiceObject() == 0) {
+            helper.setText(R.id.object, "Special Consumer");
+        } else if (item.getInvoiceObject() == 2) {
+            helper.setText(R.id.object, "General Consumer");
         }
-
-
     }
 }

@@ -1,55 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="58dp"
-              android:background="@android:color/white"
-              android:gravity="center_vertical"
-              android:orientation="horizontal"
-              android:padding="10dp"
-    >
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/new_text">
+
+    <TextView
+        android:id="@+id/tv_01"
+        style="@style/text_24_83"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/invoice_code"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/invoice_code"
-        style="@style/list_item_text"
-        android:layout_width="match_parent"
+        style="@style/text_24_83"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        />
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_01"
+        app:layout_constraintLeft_toRightOf="@id/tv_01" />
+
+    <TextView
+        android:id="@+id/tv_02"
+        style="@style/text_24_83"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/invoice_type"
+        app:layout_constraintLeft_toLeftOf="@id/tv_01"
+        app:layout_constraintRight_toRightOf="@id/tv_01"
+        app:layout_constraintTop_toBottomOf="@id/tv_01" />
 
     <TextView
         android:id="@+id/invoice_type"
-        style="@style/list_item_text"
-        android:layout_width="match_parent"
+        style="@style/text_24_83"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        />
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_02"
+        app:layout_constraintLeft_toRightOf="@id/tv_02" />
+
+    <TextView
+        android:id="@+id/tv_03"
+        style="@style/text_24_83"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/object"
+        app:layout_constraintLeft_toLeftOf="@id/tv_02"
+        app:layout_constraintRight_toRightOf="@id/tv_02"
+        app:layout_constraintTop_toBottomOf="@id/tv_02" />
 
     <TextView
         android:id="@+id/object"
-        style="@style/list_item_text"
-        android:layout_width="match_parent"
+        style="@style/text_24_83"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        />
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_03"
+        app:layout_constraintLeft_toRightOf="@id/tv_03" />
 
     <TextView
-        android:id="@+id/safety_value"
-        style="@style/list_item_text"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_04"
+        style="@style/text_24_1d"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        />
+        android:layout_marginTop="10dp"
+        android:text="@string/remaining"
+        app:layout_constraintLeft_toLeftOf="@id/tv_03"
+        app:layout_constraintRight_toRightOf="@id/tv_03"
+        app:layout_constraintTop_toBottomOf="@id/tv_03" />
+
+    <TextView
+        android:id="@+id/tax_Amount"
+        style="@style/text_24_1d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_04"
+        app:layout_constraintLeft_toRightOf="@id/tv_04" />
+
+    <TextView
+        android:id="@+id/tv_05"
+        style="@style/text_24_1d"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/safety_value"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/tv_04"
+        app:layout_constraintRight_toRightOf="@id/tv_04"
+        app:layout_constraintTop_toBottomOf="@id/tv_04" />
 
     <TextView
         android:id="@+id/remaining_qty"
-        style="@style/list_item_text"
-        android:layout_width="match_parent"
+        style="@style/text_24_1d"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        />
-</LinearLayout>
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_05"
+        app:layout_constraintLeft_toRightOf="@id/tv_05" />
+
+</android.support.constraint.ConstraintLayout>

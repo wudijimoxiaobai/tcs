@@ -1,10 +1,13 @@
 package com.csscaps.tcs;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -68,6 +71,14 @@ public class LoginActivity extends BaseActivity implements AdapterView.OnItemSel
                 ToastUtil.showShort(getString(R.string.hit35));
                 return;
             }
+            SharedPreferences sharedPreferences= getSharedPreferences("login_name", Context.MODE_PRIVATE);
+            //步骤2： 实例化SharedPreferences.Editor对象
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            //步骤3：将获取过来的值放入文件
+            editor.putString("name", name);
+            //步骤4：提交
+            editor.commit();
+
             TCSApplication.currentUser = user;
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("name", name);

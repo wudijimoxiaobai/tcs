@@ -1,242 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/top_bg">
 
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@mipmap/top_bg"
-        android:paddingStart="15dp"
-        >
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@mipmap/back">
 
         <TextView
-            android:id="@+id/back"
-            style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@mipmap/back"
-            android:gravity="center"
-            />
+            android:layout_gravity="center"
+            android:text="@string/product_management"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
 
-
-        <TextView
-            style="@style/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/product_list"
-            android:textSize="25sp"
-            />
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_toStartOf="@+id/calculate"
-            android:background="#7a95b3"
-            />
-
-        <TextView
+        <ImageView
             android:id="@+id/calculate"
-            style="@style/text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/add"
-            android:drawableStart="@mipmap/calculate"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"
             android:gravity="center"
-            android:paddingEnd="15dp"
-            android:paddingStart="10dp"
-            android:text="@string/calculate"
-            />
+            android:src="@mipmap/calculate" />
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_toStartOf="@+id/add"
-            android:background="#7a95b3"
-            />
+    </android.support.v7.widget.Toolbar>
 
-        <TextView
-            android:id="@+id/add"
-            style="@style/text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/select"
-            android:drawableStart="@mipmap/add"
-            android:gravity="center"
-            android:paddingEnd="15dp"
-            android:paddingStart="10dp"
-            android:text="@string/add"/>
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_toStartOf="@+id/select"
-            android:background="#7a95b3"
-            />
-
-        <TextView
-            android:id="@+id/select"
-            style="@style/text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:drawableStart="@mipmap/select"
-            android:gravity="center"
-            android:paddingEnd="15dp"
-            android:paddingStart="10dp"
-            android:text="@string/select"
-            />
-
-    </RelativeLayout>
-
-
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cc_01"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@mipmap/bg"
-        android:padding="30dp"
-        >
+        android:layout_height="0dp"
+        android:background="@color/new_text2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <LinearLayout
+        <ListView
+            android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+            android:layout_marginTop="10dp"
+            android:divider="@null"
+            android:dividerHeight="10dp"
+            android:fadingEdge="none"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:scrollbars="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cc_01"></ListView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="74dp"
-                android:background="@drawable/bg10"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                >
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/customer_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:clickable="true"
+            android:src="@mipmap/add_02"
+            app:backgroundTint="@color/fabbg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
+        </android.support.design.widget.FloatingActionButton>
 
-                <CheckBox
-                    android:id="@+id/all_select"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1.3"
-                    android:button="@null"
-                    android:gravity="start|center_vertical"
-                    android:paddingStart="5dp"
-                    android:text="@string/no"
-                    style="@style/list_tile_text"
-                    />
+    </android.support.constraint.ConstraintLayout>
 
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
-                    android:gravity="center"
-                    android:text="@string/product_name"
-                    style="@style/list_tile_text"
-                    
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.1"
-                    android:gravity="center"
-                    android:text="@string/specification"
-                    style="@style/list_tile_text"
-                    
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.25"
-                    android:gravity="center"
-                    android:text="@string/unit"
-                    style="@style/list_tile_text"
-                    />
-
-                <TextView
-                    android:id="@+id/textView"
-                    style="@style/list_tile_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.25"
-                    android:gravity="center"
-                    android:text="@string/quantity"/>
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
-                    android:gravity="center"
-                    android:text="@string/price"
-                    style="@style/list_tile_text"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.18"
-                    android:gravity="center"
-                    android:text="@string/e_tax"
-                    style="@style/list_tile_text"
-                    
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
-                    android:gravity="center"
-                    android:text="@string/tax_rate"
-                    style="@style/list_tile_text"
-                    
-                    android:visibility="gone"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
-                    android:gravity="center"
-                    android:text="@string/tax_Amount"
-                    style="@style/list_tile_text"
-                    
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.18"
-                    android:gravity="center"
-                    android:text="@string/i_tax"
-                    style="@style/list_tile_text"
-                    
-                    />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider"/>
-
-            <ListView
-                android:id="@+id/list_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg11"
-                android:divider="@color/divider"
-                android:dividerHeight="1dp"
-                android:listSelector="@android:color/transparent"
-                android:paddingBottom="10dp"
-                />
-        </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
